@@ -36,6 +36,8 @@ const PreviewTestimonialScreen = (props) => {
           <h2 className="heading">Preview Audio Testimonial </h2>
           <audio
 					controls
+          controlsList="nodownload"
+          
 					// onPlay={() => setAudioPlaying(true)}
 					// onPause={() => setAudioPlaying(false)}
 					// onStop={() => setAudioPlaying(false)}

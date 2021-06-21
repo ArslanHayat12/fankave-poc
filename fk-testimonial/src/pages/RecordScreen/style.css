@@ -83,3 +83,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.record-screen .timer {
+  margin: 15px 0;
+}

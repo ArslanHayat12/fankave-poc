@@ -11,16 +11,6 @@ const RecordingCard = (props) => {
   const icon = recordingType === "video" ? <CameraIcon /> : <MicIcon />;
   const { state, dispatch } = useContext(TestimonialContext);
 
-  useEffect(() => {
-    console.log("type", recordingType);
-
-    dispatch({
-      type: SET_TYPE,
-      payload: { type: recordingType },
-    });
-  }, []);
-
-  console.log("record card");
 
   return (
     <a className="card-wrapper" href="/TestimonialScreen">

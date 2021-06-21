@@ -4,7 +4,7 @@ import { Visualizer } from "./Visualizer";
 import { PauseIcon, PlayIcon, StopIcon } from "../../assets";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { useContext } from "react";
-import { setTestimonialUrl, SET_URL } from "../../actions/action";
+import { setTestimonialUrl, setStatus } from "../../actions/action";
 
 import "./style.css";
 
@@ -27,13 +27,15 @@ export const AudioRecorder = () => {
   const onStop = useCallback((blob, blobUrl) => {
     setUrl(blobUrl);
     setAudioPlaying(false);
+	dispatch(setStatus(false))
   }, []);
 
   useEffect(() => {
-    console.log("url in recorder", url);
     if (url) {
       dispatch(setTestimonialUrl(url));
     }
+
+	
   }, [url]);
 
   const onInitialStart = useCallback(() => {
@@ -60,6 +62,7 @@ export const AudioRecorder = () => {
         //first time click on start: initialize stream & recorder, then start recording
         onInitialStart();
         setAudioPlaying(true);
+		dispatch(setStatus(true))
         break;
       case "idle":
         urlObjectCleanUp();
@@ -67,16 +70,19 @@ export const AudioRecorder = () => {
         //second time recording an audio i.e. stream & recorder already initialized
         startRecording();
         setAudioPlaying(true);
+		dispatch(setStatus(true))
         break;
       case "recording":
         // pause recording
         pauseRecording();
         setAudioPlaying(false);
+		dispatch(setStatus(false))
         break;
       case "paused":
         //resume recording
         resumeRecording();
         setAudioPlaying(true);
+		dispatch(setStatus(true))
         break;
       default:
         break;
