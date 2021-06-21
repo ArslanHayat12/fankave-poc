@@ -66,6 +66,7 @@
     padding: 8px 20px;
     outline: none;
     border: none;
+    cursor: pointer;
 }
 
 .preview-testimonial-sreen .button-wrapper{

@@ -5,7 +5,7 @@ import { TestimonialContext } from "../../context/TestimonialContext";
 import { SET_TYPE } from "../../actions/action";
 
 const RecordingCard = (props) => {
-  const { recordingType } = props;
+  const { recordingType ,handleClick} = props;
   const description =
     recordingType === "video" ? "RECORD VIDEO" : "RECORD AUDIO";
   const icon = recordingType === "video" ? <CameraIcon /> : <MicIcon />;
@@ -13,7 +13,7 @@ const RecordingCard = (props) => {
 
 
   return (
-    <a className="card-wrapper" href="/TestimonialScreen">
+    <a className="card-wrapper" onClick={handleClick}>
       {icon}
       <p className="card-description">{description}</p>
     </a>

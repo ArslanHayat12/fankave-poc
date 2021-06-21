@@ -8,6 +8,7 @@
   border-radius: 10px;
   text-decoration: none;
   color: #000;
+  cursor: pointer;
 }
 
 .card-wrapper .card-description {
