@@ -1,0 +1,26 @@
+.notificarion-wrapper {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.notificarion-wrapper .description {
+  font-size: 16px;
+  font-weight: normal;
+  color: #828282;
+}
+
+.notificarion-wrapper .button {
+  padding: 8px 22px;
+  border-radius: 18px;
+  color: #35a4ff;
+  border: 1px solid #35a4ff;
+}
+
+.notificarion-wrapper .button:first-child {
+  margin-right: 10px;
+}
+
+.notificarion-wrapper .button .selected {
+  background-color: #35a4ff;
+}

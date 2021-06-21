@@ -1,0 +1,11 @@
+.video-recording-container .record-button {
+  display: flex;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  margin: 15px auto 0;
+}
+
+.video-recording-container {
+  z-index: 2;
+}

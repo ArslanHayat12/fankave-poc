@@ -1,0 +1,20 @@
+.client-details-wrapper {
+  width: 100%;
+}
+
+.client-details-wrapper .client-name {
+  font-size: 27px;
+  margin: 0;
+}
+
+.client-details-wrapper .client-name-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.client-details-wrapper .client-details {
+  font-size: 16px;
+  margin: 0;
+}

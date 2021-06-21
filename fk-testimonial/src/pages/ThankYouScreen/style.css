@@ -1,0 +1,23 @@
+.thankyou-screen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.thankyou-screen .heading {
+  font-size: 27px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.thankyou-screen .description {
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 1.28;
+  text-align: center;
+  color: #828282;
+  margin-top: 0;
+}
