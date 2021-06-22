@@ -39,7 +39,11 @@ export const AudioRecorder = () => {
   const onInitialStart = useCallback(() => {
     setUrl("");
     //setup stream & recorder then start recording
-    register(startRecording);
+    register(() => {
+      startRecording();
+      setAudioPlaying(true);
+      dispatch(setStatus(true));
+    });
   }, [url]);
 
   const urlObjectCleanUp = useCallback(() => {
@@ -59,8 +63,7 @@ export const AudioRecorder = () => {
       case "init":
         //first time click on start: initialize stream & recorder, then start recording
         onInitialStart();
-        setAudioPlaying(true);
-        dispatch(setStatus(true));
+
         break;
       case "idle":
         urlObjectCleanUp();
@@ -91,7 +94,7 @@ export const AudioRecorder = () => {
     return status === "recording" ? (
       <PauseIcon />
     ) : status === "paused" ? (
-      <PlayIcon  customClass="play-icon" />
+      <PlayIcon customClass="play-icon" />
     ) : (
       <PlayIcon customClass="play-icon" />
     );

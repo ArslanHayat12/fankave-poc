@@ -50,13 +50,11 @@
 
 .preview-testimonial-sreen .edit-testimonial > svg path {
   fill: #fff;
-  width: 12px;
-  height: 12px;
 }
 
 .preview-testimonial-sreen .edit-testimonial > svg {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
 }
 
 .preview-testimonial-sreen .approve-button{
@@ -72,4 +70,8 @@
 .preview-testimonial-sreen .button-wrapper{
     width: 100%;
     margin-top: 25px;
+}
+
+.preview-testimonial-sreen .hide-icon{
+  display: none;
 }

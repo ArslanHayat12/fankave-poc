@@ -363,24 +363,30 @@ export const PlayIcon = (props) => {
 };
 
 export const PlayFilledIcon = () => {
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="10"
-    height="12"
-    viewBox="0 0 10 12"
-  >
-    <path
-      id="Polygon_3"
-      data-name="Polygon 3"
-      d="M6,0l6,10H0Z"
-      transform="translate(10) rotate(90)"
-      fill="#000"
-    />
-  </svg>;
+  return (
+    <svg width="30" height="35" viewBox="0 0 30 35">
+      <g
+        id="Polygon_1"
+        data-name="Polygon 1"
+        transform="translate(30) rotate(90)"
+        fill="#fff"
+      >
+        <path
+          d="M 33.25896072387695 29 L 1.741037487983704 29 L 17.5 1.984635710716248 L 33.25896072387695 29 Z"
+          stroke="none"
+        />
+        <path
+          d="M 17.5 3.969270706176758 L 3.482074737548828 28 L 31.51792526245117 28 L 17.5 3.969270706176758 M 17.5 0 L 35 30 L 0 30 L 17.5 0 Z"
+          stroke="none"
+          fill="#000"
+        />
+      </g>
+    </svg>
+  );
 };
 
 export const StopIcon = (props) => {
-  const {customClass}=props
+  const { customClass } = props;
 
   return (
     <svg

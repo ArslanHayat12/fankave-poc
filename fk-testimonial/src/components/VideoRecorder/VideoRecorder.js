@@ -1,9 +1,12 @@
-import { useState, useRef, useCallback, useEffect } from "react"
+import { useState, useRef, useCallback, useEffect, useContext } from "react"
 import Webcam from "react-webcam"
-import { RecordingIcon } from "../../assets"
+import { RecordingIcon ,StopIcon} from "../../assets"
+import {TestimonialContext} from '../../context/TestimonialContext'
+import { setTestimonialUrl } from "../../actions/action"
 import './style.css'
 
 export const VideoRecorder = () => {
+	const { state, dispatch } = useContext(TestimonialContext);
 	const webcamRef = useRef(null)
 	const mediaRecorderRef = useRef(null)
 	const [capturing, setCapturing] = useState(false)
@@ -55,6 +58,7 @@ export const VideoRecorder = () => {
 			})
 			const url = window.URL.createObjectURL(blob)
 			setVideoURl(url)
+			dispatch(setTestimonialUrl(url));
 		}
 	}, [recordedChunks])
 
@@ -87,13 +91,13 @@ export const VideoRecorder = () => {
                         onUserMediaError={showAccessBlocked}
                     />
 					{capturing ? (
-						<button onClick={handleStopCaptureClick} className="record-button"><RecordingIcon /></button>
+						<button onClick={handleStopCaptureClick} className="stop-button"><StopIcon /></button>
 					) : (
 						<button onClick={handleStartCaptureClick}  className="record-button"><RecordingIcon /></button>
 					)}
 				</>
 			)}
-			{videoURL && (
+			{/* {videoURL && (
                 <><video
 					controls
 					width="100%"
@@ -106,7 +110,7 @@ export const VideoRecorder = () => {
                 <button onClick={handleRecordAgain}>Record Again</button>
                 </>
 				
-			)}
+			)} */}
             {error && <p>{error}</p>}
 		</div>
 	)
