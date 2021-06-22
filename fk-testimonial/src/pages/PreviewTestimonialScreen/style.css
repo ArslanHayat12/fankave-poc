@@ -23,6 +23,8 @@
   margin: auto;
   top: 45%;
   background-color: transparent;
+  cursor: pointer;
+  transform: translate(10px, 0px);
 }
 
 .preview-testimonial-sreen .video {
@@ -46,6 +48,7 @@
   border-radius: 50%;
   width: 24px;
   height: 24px;
+  cursor: pointer;
 }
 
 .preview-testimonial-sreen .edit-testimonial > svg path {

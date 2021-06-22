@@ -1,5 +1,5 @@
 import React from "react";
-// import { PencilIcon } from "../../assets";
+import { PencilIcon } from "../../assets";
 import { getQueryStringValue } from "../../utils/";
 import "./style.css";
 
@@ -11,7 +11,7 @@ const ClientDetails = () => {
     <article className="client-details-wrapper">
       <article className="client-name-wrapper">
         <h3 className="client-name">{name || "Brandy Estrada"}</h3>
-        {/* <span><PencilIcon/></span> */}
+        <span><PencilIcon/></span>
       </article>
       <p className="client-details">{email || "brandy.estrada@mail.com"}</p>
       <p className="client-details">{companyName || "XYZ Corporation"}</p>
