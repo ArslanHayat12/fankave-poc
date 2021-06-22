@@ -28,7 +28,6 @@ const PreviewTestimonialScreen = (props) => {
   };
 
   const onEdit = () => {
-    console.log("hhh");
     dispatch(setTestimonialUrl(""));
   };
 
