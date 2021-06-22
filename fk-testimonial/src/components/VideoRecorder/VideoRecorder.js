@@ -75,14 +75,17 @@ export const VideoRecorder = () => {
 			{!videoURL && (
 				<>
 					<Webcam
-						ref={webcamRef}
-						mirrored
-						videoConstraints={{
-							width: 335,
-							height: 524,
-						}}
+                        ref={webcamRef}
+                        mirrored
+                        videoConstraints={{
+                            width: 335,
+                            height: 524,
+                        }}
+                        width={335}
+                        height={524}
+                        style={{ objectFit: "cover"}}
                         onUserMediaError={showAccessBlocked}
-					/>
+                    />
 					{capturing ? (
 						<button onClick={handleStopCaptureClick} className="record-button"><RecordingIcon /></button>
 					) : (
