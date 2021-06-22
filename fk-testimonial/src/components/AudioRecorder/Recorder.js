@@ -27,15 +27,13 @@ export const AudioRecorder = () => {
   const onStop = useCallback((blob, blobUrl) => {
     setUrl(blobUrl);
     setAudioPlaying(false);
-	dispatch(setStatus(false))
+    dispatch(setStatus(false));
   }, []);
 
   useEffect(() => {
     if (url) {
       dispatch(setTestimonialUrl(url));
     }
-
-	
   }, [url]);
 
   const onInitialStart = useCallback(() => {
@@ -62,7 +60,7 @@ export const AudioRecorder = () => {
         //first time click on start: initialize stream & recorder, then start recording
         onInitialStart();
         setAudioPlaying(true);
-		dispatch(setStatus(true))
+        dispatch(setStatus(true));
         break;
       case "idle":
         urlObjectCleanUp();
@@ -70,19 +68,19 @@ export const AudioRecorder = () => {
         //second time recording an audio i.e. stream & recorder already initialized
         startRecording();
         setAudioPlaying(true);
-		dispatch(setStatus(true))
+        dispatch(setStatus(true));
         break;
       case "recording":
         // pause recording
         pauseRecording();
         setAudioPlaying(false);
-		dispatch(setStatus(false))
+        dispatch(setStatus(false));
         break;
       case "paused":
         //resume recording
         resumeRecording();
         setAudioPlaying(true);
-		dispatch(setStatus(true))
+        dispatch(setStatus(true));
         break;
       default:
         break;
@@ -93,7 +91,7 @@ export const AudioRecorder = () => {
     return status === "recording" ? (
       <PauseIcon />
     ) : status === "paused" ? (
-      <PauseIcon />
+      <PlayIcon  customClass="play-icon" />
     ) : (
       <PlayIcon customClass="play-icon" />
     );
