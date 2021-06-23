@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-const ThankYouScreen = () => {
+export const ThankYouScreen = () => {
   return (
     <article className="thankyou-screen">
       <h2 className="heading">Thank you</h2>
@@ -11,5 +11,3 @@ const ThankYouScreen = () => {
     </article>
   );
 };
-
-export default ThankYouScreen;

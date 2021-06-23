@@ -1,22 +1,21 @@
 import React, { useContext } from "react";
 import RecordingCard from "../../components/RecordingCard/RecordingCard";
 import { TestimonialContext } from "../../context/TestimonialContext";
-import { setTestimonialType } from "../../actions/action";
-import { useHistory } from "react-router-dom";
+import { setTestimonialType, setScreen } from "../../actions/action";
+import { TESTIMONIAL_SCREEN } from '../../constants'
 import "./style.css";
 
-const HomeScreen = () => {
-  const { state, dispatch } = useContext(TestimonialContext);
-  const history = useHistory();
+export const HomeScreen = () => {
+  const { dispatch } = useContext(TestimonialContext);
 
   const onVideoClick = () => {
     dispatch(setTestimonialType("video"));
-    history.push("/TestimonialScreen");
+    dispatch(setScreen(TESTIMONIAL_SCREEN))
   };
 
   const onAudioClick = () => {
     dispatch(setTestimonialType("audio"));
-    history.push("/TestimonialScreen");
+    dispatch(setScreen(TESTIMONIAL_SCREEN))
   };
 
   return (
@@ -29,5 +28,3 @@ const HomeScreen = () => {
     </article>
   );
 };
-
-export default HomeScreen;

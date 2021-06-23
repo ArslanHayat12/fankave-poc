@@ -2,19 +2,18 @@ import React, { useContext, useRef, useState } from "react";
 import { PlayFilledIcon, PencilIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { TestimonialContext } from "../../context/TestimonialContext";
-import { useHistory } from "react-router-dom";
+import { setTestimonialUrl, setScreen } from "../../actions/action";
+import { THANK_YOU_SCREEN } from "../../constants";
 import "./style.css";
-import { setTestimonialUrl } from "../../actions/action";
 
 const PreviewTestimonialScreen = (props) => {
   const { state, dispatch } = useContext(TestimonialContext);
   const [playVideo, setPlayVideo] = useState(false);
   const { testimonialType } = props;
-  const history = useHistory();
   const videoRef = useRef(null);
 
   const onApproveClick = () => {
-    history.push("/ThankYouScreen");
+    dispatch(setScreen(THANK_YOU_SCREEN));
   };
 
   const onPlayClick = () => {
@@ -38,7 +37,7 @@ const PreviewTestimonialScreen = (props) => {
           <h2 className="heading">Preview Video Testimonial </h2>
           <figure className="video-wrapper">
             <button className="edit-testimonial" onClick={onEdit}>
-              <PencilIcon  />
+              <PencilIcon />
             </button>
             <video
               ref={videoRef}
@@ -62,9 +61,14 @@ const PreviewTestimonialScreen = (props) => {
       ) : (
         <>
           <h2 className="heading">Preview Audio Testimonial </h2>
-          <audio controls controlsList="nodownload">
-            <source src={state.url} />
-          </audio>
+          <article className="audio-wrapper">
+            <audio controls controlsList="nodownload">
+              <source src={state.url} />
+            </audio>
+            <button className="audio-edit-button" onClick={onEdit}>
+              <PencilIcon customClass="edit-icon" />
+            </button>
+          </article>
         </>
       )}
 

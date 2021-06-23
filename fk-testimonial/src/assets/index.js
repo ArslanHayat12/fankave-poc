@@ -1,12 +1,14 @@
 import React from "react";
 
-export const PencilIcon = () => {
+export const PencilIcon = (props) => {
+  const { customClass } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="12.073"
       height="12.014"
       viewBox="0 0 12.073 12.014"
+      className={customClass}
     >
       <g id="draw_1_" data-name="draw (1)" transform="translate(-0.001 -1.289)">
         <path

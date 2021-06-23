@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import RecordScreen from "../RecordScreen/RecordScreen";
 import PreviewTestimonialScreen from "../PreviewTestimonialScreen/PreviewTestimonialScreen";
 import { TestimonialContext } from "../../context/TestimonialContext";
 
-const TestimonialScreen = () => {
-  const { state, dispatch } = useContext(TestimonialContext);
+export const TestimonialScreen = () => {
+  const { state } = useContext(TestimonialContext);
   
   return (
     <>
@@ -20,5 +20,3 @@ const TestimonialScreen = () => {
     </>
   );
 };
-
-export default TestimonialScreen;

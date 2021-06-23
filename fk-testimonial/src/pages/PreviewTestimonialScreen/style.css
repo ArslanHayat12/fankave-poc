@@ -11,10 +11,9 @@
   border: 1px solid #c9c9c9;
   border-radius: 8px;
   height: 412px;
-
 }
 
-.preview-testimonial-sreen .play-button  {
+.preview-testimonial-sreen .play-button {
   outline: none;
   border: none;
   position: absolute;
@@ -60,21 +59,94 @@
   height: 10px;
 }
 
-.preview-testimonial-sreen .approve-button{
-    background-color: #35a4ff;
-    color: #fff;
-    border-radius: 18px;
-    padding: 8px 20px;
-    outline: none;
-    border: none;
-    cursor: pointer;
+.preview-testimonial-sreen .approve-button {
+  background-color: #35a4ff;
+  color: #fff;
+  border-radius: 18px;
+  padding: 8px 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
 
-.preview-testimonial-sreen .button-wrapper{
-    width: 100%;
-    margin-top: 25px;
+.preview-testimonial-sreen .button-wrapper {
+  width: 100%;
+  margin-top: 25px;
 }
 
-.preview-testimonial-sreen .hide-icon{
+.preview-testimonial-sreen .hide-icon {
   display: none;
+}
+
+.preview-testimonial-sreen audio::-webkit-media-controls-panel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* We use flex-start here to ensure that the play button is visible even
+   * if we are too small to show all controls.
+   */
+  justify-content: flex-start;
+  -webkit-user-select: none;
+  position: relative;
+  width: 100%;
+  z-index: 0;
+  overflow: hidden;
+  text-align: right;
+  bottom: auto;
+  height: 30px;
+  background-color: #35a4ff;
+  color: #fff;
+  border-radius: 5px;
+  /* The duration is also specified in MediaControlElements.cpp and LayoutTests/media/media-controls.js */
+  transition: opacity 0.3s;
+}
+
+/* .preview-testimonial-sreen audio::-webkit-media-controls-enclosure {
+  width: 100%;
+  max-width: 800px;
+  height: 30px;
+  flex-shrink: 0;
+  bottom: 0;
+  text-indent: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+.preview-testimonial-sreen audio::-webkit-media-controls {
+  width: inherit;
+  height: inherit;
+  position: relative;
+  direction: ltr;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  color: #fff;
+} */
+
+.preview-testimonial-sreen audio {
+  width: 100%;
+  height: 30px;
+  color: #fff;
+  margin: 30px 0 28px 0;
+}
+
+.preview-testimonial-sreen .audio-wrapper {
+  position: relative;
+}
+
+.preview-testimonial-sreen .edit-icon {
+  position: absolute;
+}
+
+.preview-testimonial-sreen .edit-icon path {
+  /* fill: #fff; */
+}
+
+.audio-edit-button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
 }
