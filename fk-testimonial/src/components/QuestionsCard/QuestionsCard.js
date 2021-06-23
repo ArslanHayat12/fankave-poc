@@ -1,8 +1,12 @@
-import React , {useState} from "react";
+import React, { useReducer, useMemo } from "react";
+import { questionReducer } from "../../reducers/reducers";
+import { initialState, QuestionContext } from "../../context/QuestionContext";
+import { setQuestionIndex } from "../../actions/action";
 import "./style.css";
 
 const QuestionsCard = () => {
-  const [questionIndex, setQuestionIndex] = useState(0);
+  const [state, dispatch] = useReducer(questionReducer, initialState);
+  const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
 
   const questionArray = [
     "What is your name, title and company?",
@@ -12,32 +16,40 @@ const QuestionsCard = () => {
   ];
 
   const gotToPrevQuestion = () => {
-    if (questionIndex === 0) {
+    if (state.questionIndex === 0) {
     } else {
-      setQuestionIndex(questionIndex - 1);
+      dispatch(setQuestionIndex(state.questionIndex - 1));
     }
   };
 
   const gotToNextvQuestion = () => {
-    if (questionIndex === questionArray.length - 1) {
+    if (state.questionIndex === questionArray.length - 1) {
     } else {
-      setQuestionIndex(questionIndex + 1);
+      dispatch(setQuestionIndex(state.questionIndex + 1));
     }
   };
 
   return (
-    <article className="question-card">
-      <p className="questions">{questionArray[questionIndex]}</p>
+    <QuestionContext.Provider value={value}>
+      <article className="question-card">
+        <p className="questions">{questionArray[state.questionIndex]}</p>
 
-      <article className="question-buttons-wrapper">
-        <button className="question-button prev-button" onClick={gotToPrevQuestion}>
-          {`< Prev`} 
-        </button>
-        <button className="question-button next-button" onClick={gotToNextvQuestion}>
-          {`Next >`} 
-        </button>
+        <article className="question-buttons-wrapper">
+          <button
+            className="question-button prev-button"
+            onClick={gotToPrevQuestion}
+          >
+            {`< Prev`}
+          </button>
+          <button
+            className="question-button next-button"
+            onClick={gotToNextvQuestion}
+          >
+            {`Next >`}
+          </button>
+        </article>
       </article>
-    </article>
+    </QuestionContext.Provider>
   );
 };
 

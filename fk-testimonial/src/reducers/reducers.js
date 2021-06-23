@@ -1,4 +1,4 @@
-import { SET_TYPE, SET_URL,SET_STATUS } from "../actions/action";
+import { SET_TYPE, SET_URL,SET_STATUS, SET_INDEX } from "../actions/action";
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -9,6 +9,17 @@ export const reducer = (state, action) => {
       return { ...state, ...action.payload };
 
     case SET_STATUS:
+      return { ...state, ...action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const questionReducer = (state, action) => {
+  switch (action.type) {
+    
+    case SET_INDEX:
       return { ...state, ...action.payload };
 
     default:
