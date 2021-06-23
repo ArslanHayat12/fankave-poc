@@ -5,7 +5,7 @@ import { TestimonialContext } from "../../context/TestimonialContext";
 
 export const TestimonialScreen = () => {
   const { state } = useContext(TestimonialContext);
-  
+
   return (
     <>
       {!state.url ? (

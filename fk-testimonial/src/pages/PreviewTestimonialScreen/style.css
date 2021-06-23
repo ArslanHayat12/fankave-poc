@@ -134,6 +134,8 @@
 
 .preview-testimonial-sreen .audio-wrapper {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .preview-testimonial-sreen .edit-icon {
@@ -141,12 +143,24 @@
 }
 
 .preview-testimonial-sreen .edit-icon path {
-  /* fill: #fff; */
+  fill: #000;
 }
 
-.audio-edit-button {
+.preview-testimonial-sreen .audio-edit-button {
   cursor: pointer;
-  background: none;
   border: none;
   outline: none;
+
+  background: #35a4ff;
+  height: 31px;
+  border-radius: 0 20px 20px 0;
+  width: 53px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 12px;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  top: 1px;
 }
