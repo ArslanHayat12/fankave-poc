@@ -55,18 +55,6 @@ export const AudioRecorder = () => {
     });
   }, [url]);
 
-  const urlObjectCleanUp = useCallback(() => {
-    //let browser discard reference to previous audio file
-    url && window.URL.revokeObjectURL(url);
-  }, [url]);
-
-  //clean up audio file on unmount
-  useEffect(() => {
-    return () => {
-      urlObjectCleanUp();
-    };
-  }, []);
-
   const playButtonHandle = useCallback(() => {
     switch (status) {
       case "init":
@@ -74,7 +62,6 @@ export const AudioRecorder = () => {
         onInitialStart();
         break;
       case "idle":
-        urlObjectCleanUp();
         setUrl("");
         //second time recording an audio i.e. stream & recorder already initialized
         startRecording();

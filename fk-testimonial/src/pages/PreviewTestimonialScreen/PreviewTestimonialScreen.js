@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState, useCallback, useEffect } from "react";
 import { PlayFilledIcon, PencilIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { TestimonialContext } from "../../context/TestimonialContext";
@@ -51,6 +51,18 @@ const PreviewTestimonialScreen = (props) => {
       payload: false,
     });
   };
+
+  const urlObjectCleanUp = useCallback(() => {
+    //let browser discard reference to previous recorded file
+    url && window.URL.revokeObjectURL(url);
+  }, [url]);
+
+  //clean up recorded file on unmount
+  useEffect(() => {
+    return () => {
+      urlObjectCleanUp();
+    };
+  }, []);
 
   return (
     <article className="preview-testimonial-sreen">

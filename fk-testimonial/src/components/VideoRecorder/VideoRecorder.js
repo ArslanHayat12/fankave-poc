@@ -43,12 +43,6 @@ export const VideoRecorder = () => {
     setCapturing(false);
   }, [mediaRecorderRef, webcamRef, setCapturing]);
 
-  const handleRecordAgain = useCallback(() => {
-    urlObjectCleanUp();
-    setRecordedChunks([]);
-    setVideoURl("");
-  }, []);
-
   const showAccessBlocked = useCallback((err) => {
     typeof err === "object"
       ? setError("Access Blocked") && setShowNotification(true)
@@ -69,23 +63,6 @@ export const VideoRecorder = () => {
       });
     }
   }, [recordedChunks]);
-
-  const urlObjectCleanUp = useCallback(() => {
-    //let browser discard video file reference
-    videoURL && window.URL.revokeObjectURL(videoURL);
-  }, [videoURL]);
-
-  //clean up video file reference on unmount
-  useEffect(() => {
-    return () => {
-      urlObjectCleanUp();
-    };
-  }, []);
-
-  //   const allowCameraPermission = () => {
-  //     console.log("perm");
-  //     setError("");
-  //   };
 
   return (
     <div className="video-recording-container">
