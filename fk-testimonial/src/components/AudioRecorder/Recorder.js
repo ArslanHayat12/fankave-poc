@@ -9,7 +9,7 @@ import { SET_URL, SET_STATUS } from "../../constants";
 import "./style.css";
 
 export const AudioRecorder = () => {
-  const { state, dispatch } = useContext(TestimonialContext);
+  const { dispatch } = useContext(TestimonialContext);
   const [url, setUrl] = useState("");
   const [isAudioPlaying, setAudioPlaying] = useState(false); // state to show/hide visualizer canvas
   const {
@@ -140,7 +140,7 @@ export const AudioRecorder = () => {
           <source src={url} />
         </audio>
       )}
-      <Visualizer stream={stream} isAudioPlaying={isAudioPlaying} />
+      {isAudioPlaying && <Visualizer stream={stream} isAudioPlaying={isAudioPlaying} />}
       {error && <p>{error}</p>}
     </div>
   );

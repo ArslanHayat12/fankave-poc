@@ -9,16 +9,16 @@ import {convertSecondsToHourMinute} from './../../utils/index'
 import "./style.css";
 
 const RecordScreen = () => {
-  const { state, dispatch } = useContext(TestimonialContext);
+  const { state: { type, status } } = useContext(TestimonialContext);
   const [remainingTime, setRemaining] = useState(0)
 
   useInterval(() => {
-    state.status && setRemaining(remainingTime + 1)
+    status && setRemaining(remainingTime + 1)
 }, 1000)
 
   return (
     <article className="record-screen">
-      {state.type === "video" ? (
+      {type === "video" ? (
         <>
           <h2 className="heading">Record Video Testimonial</h2>
           <figure className="video-wrapper">

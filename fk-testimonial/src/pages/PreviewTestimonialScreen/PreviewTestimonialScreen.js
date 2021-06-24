@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { PlayFilledIcon, PencilIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { TestimonialContext } from "../../context/TestimonialContext";
@@ -8,7 +8,7 @@ import "./style.css";
 import { SoundWave } from "../../components/AudioRecorder/SoundWave";
 
 const PreviewTestimonialScreen = (props) => {
-  const { state, dispatch } = useContext(TestimonialContext);
+  const { state: { url }, dispatch } = useContext(TestimonialContext);
   const [playVideo, setPlayVideo] = useState(false);
   const { testimonialType } = props;
   const videoRef = useRef(null);
@@ -70,7 +70,7 @@ const PreviewTestimonialScreen = (props) => {
               controlsList="nodownload nofullscreen noremoteplayback"
               onClick={onPlayClick}
             >
-              <source src={state.url} />
+              <source src={url} />
             </video>
             <button
               className={`play-button ${playVideo ? "hide-icon" : ""}`}
@@ -92,7 +92,7 @@ const PreviewTestimonialScreen = (props) => {
               onPlay={handlePlayAudio}
               onPause={handlePauseAudio}
             >
-              <source src={state.url} />
+              <source src={url} />
             </audio>
             <button className="audio-edit-button" onClick={onEdit}>
               <PencilIcon customClass="edit-icon" />
