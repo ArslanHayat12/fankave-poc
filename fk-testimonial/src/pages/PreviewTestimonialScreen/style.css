@@ -1,3 +1,8 @@
+.preview-testimonial-sreen {
+  position: relative;
+  height: 100%;
+}
+
 .preview-testimonial-sreen .heading {
   margin-bottom: 0;
   font-size: 25px;
