@@ -1,4 +1,4 @@
-import React, { useReducer, useMemo } from "react";
+import React, { useReducer, useMemo, useCallback } from "react";
 import { questionReducer } from "../../reducers/reducers";
 import { initialState, QuestionContext } from "../../context/QuestionContext";
 import { SET_INDEX } from '../../constants'
@@ -15,23 +15,23 @@ const QuestionsCard = () => {
     "Q4",
   ];
 
-  const gotToPrevQuestion = () => {
+  const gotToPrevQuestion = useCallback(() => {
     if (state.questionIndex > 0) {
       dispatch({
         type: SET_INDEX,
         payload: state.questionIndex - 1,
       });
     }
-  };
+  }, [state])
 
-  const gotToNextvQuestion = () => {
+  const gotToNextQuestion = useCallback(() => {
     if (state.questionIndex < questionArray.length - 1) {
       dispatch({
         type: SET_INDEX,
         payload: state.questionIndex + 1,
       });
     }
-  };
+  }, [state])
 
   return (
     <QuestionContext.Provider value={value}>
@@ -40,14 +40,14 @@ const QuestionsCard = () => {
 
         <article className="question-buttons-wrapper">
           <button
-            className="question-button prev-button"
-            onClick={gotToPrevQuestion}
+            className={`question-button prev-button${state.questionIndex === 0 ? ' disabled' : ''}`}
+            onClick={state.questionIndex === 0 ? undefined : gotToPrevQuestion}
           >
             {`< Prev`}
           </button>
           <button
-            className="question-button next-button"
-            onClick={gotToNextvQuestion}
+            className={`question-button next-button${state.questionIndex === questionArray.length - 1 ? ' disabled' : ''}`}
+            onClick={state.questionIndex === questionArray.length - 1 ? undefined : gotToNextQuestion}
           >
             {`Next >`}
           </button>
