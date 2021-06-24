@@ -1,79 +1,115 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react";
 
 export const Visualizer = (props) => {
-    //receives stream initialized in useRecorder, and isAudioPlaying to show canvas
-	const { stream, isAudioPlaying } = props
-    //canvas ref required in drawing
-	const canvasRef = useRef(null)
+  //receives stream initialized in useRecorder, and isAudioPlaying to show canvas
+  const { stream, isAudioPlaying } = props;
+  //canvas ref required in drawing
+  const canvasRef = useRef(null);
 
-	useEffect(() => {
-        //analysis and drawing should be done when stream initialized and also when an audio is playing
-        //if isAudioPlaying condition is not added, the analysis will run on stream even when not recording/playing
-		if (stream && isAudioPlaying) {
-			let audioCtx
-			const canvas = canvasRef.current
-			const canvasCtx = canvas.getContext("2d")
+  useEffect(() => {
+    //analysis and drawing should be done when stream initialized and also when an audio is playing
+    //if isAudioPlaying condition is not added, the analysis will run on stream even when not recording/playing
+    if (stream && isAudioPlaying) {
+      let audioCtx;
+      const canvas = canvasRef.current;
+      const canvasCtx = canvas.getContext("2d");
 
-			if (!audioCtx) {
-				audioCtx = new AudioContext()
-			}
+      if (!audioCtx) {
+        audioCtx = new AudioContext();
+      }
 
-			const source = audioCtx.createMediaStreamSource(stream)
+      const source = audioCtx.createMediaStreamSource(stream);
 
-			const analyser = audioCtx.createAnalyser()
-			analyser.fftSize = 2048
-			const bufferLength = analyser.frequencyBinCount
-			const dataArray = new Uint8Array(bufferLength)
+      const analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 2048;
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
 
-			source.connect(analyser)
-			//analyser.connect(audioCtx.destination);
+      source.connect(analyser);
+      //analyser.connect(audioCtx.destination);
 
-			draw()
+      draw();
 
-			function draw() {
-				const WIDTH = canvas.width
-				const HEIGHT = canvas.height
+      function draw() {
+        const WIDTH = canvas.width;
+        const HEIGHT = canvas.height;
 
-				requestAnimationFrame(draw)
+        requestAnimationFrame(draw);
 
-				analyser.getByteTimeDomainData(dataArray)
+        analyser.getByteTimeDomainData(dataArray);
 
-				canvasCtx.fillStyle = "rgb(200, 200, 200)"
-				canvasCtx.fillRect(0, 0, WIDTH, HEIGHT)
+        canvasCtx.fillStyle = "rgb(200, 200, 200)";
+        canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
 
-				canvasCtx.lineWidth = 2
-				canvasCtx.strokeStyle = "rgb(0, 0, 0)"
+        canvasCtx.lineWidth = 2;
+        canvasCtx.strokeStyle = "rgb(0, 0, 0)";
 
-				canvasCtx.beginPath()
+        canvasCtx.beginPath();
 
-				let sliceWidth = (WIDTH * 1.0) / bufferLength
-				let x = 0
+        let sliceWidth = (WIDTH * 1.0) / bufferLength;
+        let x = 0;
 
-				for (let i = 0; i < bufferLength; i++) {
-					let v = dataArray[i] / 128.0
-					let y = (v * HEIGHT) / 2
+        for (let i = 0; i < bufferLength; i++) {
+          let v = dataArray[i] / 128.0;
+          let y = (v * HEIGHT) / 2;
 
-					if (i === 0) {
-						canvasCtx.moveTo(x, y)
-					} else {
-						canvasCtx.lineTo(x, y)
-					}
+          if (i === 0) {
+            canvasCtx.moveTo(x, y);
+          } else {
+            canvasCtx.lineTo(x, y);
+          }
 
-					x += sliceWidth
-				}
+          x += sliceWidth;
+        }
 
-				canvasCtx.lineTo(canvas.width, canvas.height / 2)
-				canvasCtx.stroke()
-			}
-		}
-	}, [stream, isAudioPlaying])
+        canvasCtx.lineTo(canvas.width, canvas.height / 2);
+        canvasCtx.stroke();
+      }
 
-	return isAudioPlaying ? (
-		<canvas
-			ref={canvasRef}
-			className="visualizer"
-			height="60px"
-			style={{ display: "none" }}
-		></canvas>
-	) : null
-}
+      drawCircle();
+      function drawCircle() {
+        const WIDTH = canvas.width;
+        const HEIGHT = canvas.height;
+
+        const CENTERX = canvas.width / 2;
+        const CENTERY = canvas.height / 2;
+
+        analyser.fftSize = 32;
+        let bufferLength = analyser.frequencyBinCount;
+        let dataArray = new Uint8Array(bufferLength);
+
+        canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+
+        let draw = () => {
+          requestAnimationFrame(draw);
+
+          analyser.getByteFrequencyData(dataArray);
+          canvasCtx.fillStyle = "rgb(0, 0, 0)";
+          canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+
+          let radius = dataArray[2] / 2;
+          if (radius < 20) radius = 20;
+          if (radius > 100) radius = 100;
+          console.log("Radius ", radius);
+          canvasCtx.beginPath();
+          canvasCtx.arc(CENTERX, CENTERY, radius, 0, 2 * Math.PI, false);
+          canvasCtx.fillStyle = "rgb(50,50," + (radius + 100) + ")";
+          canvasCtx.fill();
+          canvasCtx.lineWidth = 5;
+          canvasCtx.strokeStyle = "rgb(50,50," + (radius + 100) + ")";
+          canvasCtx.stroke();
+        };
+        draw();
+      }
+    }
+  }, [stream, isAudioPlaying]);
+
+  return isAudioPlaying ? (
+    <canvas
+      ref={canvasRef}
+      className="visualizer"
+      height="60px"
+      // style={{ display: "none" }}
+    ></canvas>
+  ) : null;
+};
