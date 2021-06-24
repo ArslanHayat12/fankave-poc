@@ -107,7 +107,7 @@ const PreviewTestimonialScreen = (props) => {
           Approve
         </button>
       </article>
-      <SoundWave />
+      {testimonialType === "audio" && <SoundWave />}
     </article>
   );
 };
