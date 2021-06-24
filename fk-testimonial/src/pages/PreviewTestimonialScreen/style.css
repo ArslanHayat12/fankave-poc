@@ -106,30 +106,6 @@
   transition: opacity 0.3s;
 }
 
-/* .preview-testimonial-sreen audio::-webkit-media-controls-enclosure {
-  width: 100%;
-  max-width: 800px;
-  height: 30px;
-  flex-shrink: 0;
-  bottom: 0;
-  text-indent: 0;
-  padding: 0;
-  box-sizing: border-box;
-  color: #fff;
-}
-
-.preview-testimonial-sreen audio::-webkit-media-controls {
-  width: inherit;
-  height: inherit;
-  position: relative;
-  direction: ltr;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  color: #fff;
-} */
-
 .preview-testimonial-sreen audio {
   width: 100%;
   height: 30px;

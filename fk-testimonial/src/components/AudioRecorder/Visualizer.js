@@ -38,11 +38,11 @@ export const Visualizer = (props) => {
 
         analyser.getByteTimeDomainData(dataArray);
 
-        canvasCtx.fillStyle = "rgb(200, 200, 200)";
+        canvasCtx.fillStyle = "transparent";
         canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
 
         canvasCtx.lineWidth = 2;
-        canvasCtx.strokeStyle = "rgb(0, 0, 0)";
+        canvasCtx.strokeStyle = "#e85757";
 
         canvasCtx.beginPath();
 
@@ -84,8 +84,25 @@ export const Visualizer = (props) => {
           requestAnimationFrame(draw);
 
           analyser.getByteFrequencyData(dataArray);
-          canvasCtx.fillStyle = "rgb(0, 0, 0)";
+          canvasCtx.fillStyle = "#fff";
           canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+
+          var gradient = canvasCtx.createLinearGradient(
+            0,
+            110,
+            90,
+            30,
+            100,
+            100,
+            70
+          );
+
+          // Add three color stops
+          gradient.addColorStop(0.1, "#e97272");
+          gradient.addColorStop(0.4, "#e77e7e");
+          gradient.addColorStop(0.7, "#e77e7e");
+          gradient.addColorStop(0.9, "#e77e7e");
+          gradient.addColorStop(1, "#e97272");
 
           let radius = dataArray[2] / 2;
           if (radius < 20) radius = 20;
@@ -93,10 +110,10 @@ export const Visualizer = (props) => {
           console.log("Radius ", radius);
           canvasCtx.beginPath();
           canvasCtx.arc(CENTERX, CENTERY, radius, 0, 2 * Math.PI, false);
-          canvasCtx.fillStyle = "rgb(50,50," + (radius + 100) + ")";
+          canvasCtx.fillStyle = gradient;
           canvasCtx.fill();
           canvasCtx.lineWidth = 5;
-          canvasCtx.strokeStyle = "rgb(50,50," + (radius + 100) + ")";
+          canvasCtx.strokeStyle = "#e7a9a9";
           canvasCtx.stroke();
         };
         draw();
@@ -108,8 +125,17 @@ export const Visualizer = (props) => {
     <canvas
       ref={canvasRef}
       className="visualizer"
-      height="60px"
-      // style={{ display: "none" }}
+      height="250px"
+      style={{
+        position: "absolute",
+        top: "14.5%",
+        display: "flex",
+        alignItems: "end",
+        zIndex: "-1",
+        left: " 0",
+        right: "0",
+        margin: "auto",
+      }}
     ></canvas>
   ) : null;
 };
