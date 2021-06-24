@@ -1,16 +1,22 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { PlayFilledIcon, PencilIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { TestimonialContext } from "../../context/TestimonialContext";
-import { setTestimonialUrl, setScreen } from "../../actions/action";
+import {
+  setTestimonialUrl,
+  setScreen,
+  setAudioPlaying,
+} from "../../actions/action";
 import { THANK_YOU_SCREEN } from "../../constants";
 import "./style.css";
+import { SoundWave } from "../../components/AudioRecorder/SoundWave";
 
 const PreviewTestimonialScreen = (props) => {
   const { state, dispatch } = useContext(TestimonialContext);
   const [playVideo, setPlayVideo] = useState(false);
   const { testimonialType } = props;
   const videoRef = useRef(null);
+  const audioRef = useRef(null);
 
   const onApproveClick = () => {
     dispatch(setScreen(THANK_YOU_SCREEN));
@@ -28,6 +34,14 @@ const PreviewTestimonialScreen = (props) => {
 
   const onEdit = () => {
     dispatch(setTestimonialUrl(""));
+  };
+
+  const handlePlayAudio = () => {
+    dispatch(setAudioPlaying(true));
+  };
+
+  const handlePauseAudio = () => {
+    dispatch(setAudioPlaying(false));
   };
 
   return (
@@ -62,7 +76,14 @@ const PreviewTestimonialScreen = (props) => {
         <>
           <h2 className="heading">Preview Audio Testimonial </h2>
           <article className="audio-wrapper">
-            <audio controls controlsList="nodownload">
+            <audio
+              ref={audioRef}
+              controls
+              controlsList="nodownload"
+              id="audion"
+              onPlay={handlePlayAudio}
+              onPause={handlePauseAudio}
+            >
               <source src={state.url} />
             </audio>
             <button className="audio-edit-button" onClick={onEdit}>
@@ -78,6 +99,7 @@ const PreviewTestimonialScreen = (props) => {
           Approve
         </button>
       </article>
+      <SoundWave />
     </article>
   );
 };

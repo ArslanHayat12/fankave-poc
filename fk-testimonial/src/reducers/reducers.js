@@ -4,6 +4,8 @@ import {
   SET_STATUS,
   SET_INDEX,
   SET_SCREEN,
+  SET_STREAM,
+  SET_AUDIO_PLAYING,
 } from "../actions/action";
 
 export const reducer = (state, action) => {
@@ -19,6 +21,12 @@ export const reducer = (state, action) => {
 
     case SET_SCREEN:
       return { ...state, screen: action.payload };
+
+    case SET_STREAM:
+      return { ...state, ...action.payload };
+
+    case SET_AUDIO_PLAYING:
+      return { ...state, ...action.payload };
 
     default:
       return state;
