@@ -12,7 +12,6 @@ const RecordScreen = () => {
   const { state, dispatch } = useContext(TestimonialContext);
   const [remainingTime, setRemaining] = useState(0)
 
-console.log("status",state.status)
   useInterval(() => {
     state.status && setRemaining(remainingTime + 1)
 }, 1000)
