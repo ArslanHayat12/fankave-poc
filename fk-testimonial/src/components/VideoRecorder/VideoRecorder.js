@@ -7,9 +7,10 @@ import NotificationCard from "../NotificationCard/NotificationCard";
 import "./style.css";
 
 export const VideoRecorder = () => {
-  const { state, dispatch } = useContext(TestimonialContext);
+  const { dispatch } = useContext(TestimonialContext);
   const webcamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
+  const [isStreamInit, setIsStreamInit] = useState(false)
   const [capturing, setCapturing] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [videoURL, setVideoURl] = useState("");
@@ -49,7 +50,6 @@ export const VideoRecorder = () => {
   }, []);
 
   const showAccessBlocked = useCallback((err) => {
-    console.log(err);
     typeof err === "object"
       ? setError("Access Blocked") && setShowNotification(true)
       : setError(err);
@@ -101,33 +101,20 @@ export const VideoRecorder = () => {
             width={335}
             height={524}
             style={{ objectFit: "cover" }}
+            onUserMedia={()=>setIsStreamInit(true)}
             onUserMediaError={showAccessBlocked}
           />
           {capturing ? (
             <button onClick={handleStopCaptureClick} className="stop-button">
               <StopIcon />
             </button>
-          ) : (
+          ) : isStreamInit ? (
             <button onClick={handleStartCaptureClick} className="record-button">
               <RecordingIcon />
             </button>
-          )}
+          ) : null}
         </>
       )}
-      {/* {videoURL && (
-                <><video
-					controls
-					width="100%"
-					height="100%"
-					disablePictureInPicture
-					controlsList="nodownload nofullscreen noremoteplayback"
-				>
-					<source src={videoURL} />
-				</video>
-                <button onClick={handleRecordAgain}>Record Again</button>
-                </>
-				
-			)} */}
       {error && (
         <NotificationCard
           openModal={error ? true : false}
