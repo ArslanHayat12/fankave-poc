@@ -133,13 +133,13 @@
   outline: none;
 
   background: #35a4ff;
-  height: 31px;
+  height: 30px;
   border-radius: 0 20px 20px 0;
   width: 53px;
   display: flex;
   justify-content: center;
   align-items: center;
-  right: 12px;
+  right: 14px;
   position: relative;
   padding: 0;
   margin: 0;
