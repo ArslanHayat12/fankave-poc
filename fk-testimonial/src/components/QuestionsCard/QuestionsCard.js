@@ -1,7 +1,7 @@
 import React, { useReducer, useMemo } from "react";
 import { questionReducer } from "../../reducers/reducers";
 import { initialState, QuestionContext } from "../../context/QuestionContext";
-import { setQuestionIndex } from "../../actions/action";
+import { SET_INDEX } from '../../reducers/reducers'
 import "./style.css";
 
 const QuestionsCard = () => {
@@ -16,16 +16,20 @@ const QuestionsCard = () => {
   ];
 
   const gotToPrevQuestion = () => {
-    if (state.questionIndex === 0) {
-    } else {
-      dispatch(setQuestionIndex(state.questionIndex - 1));
+    if (state.questionIndex > 0) {
+      dispatch({
+        type: SET_INDEX,
+        payload: state.questionIndex - 1,
+      });
     }
   };
 
   const gotToNextvQuestion = () => {
-    if (state.questionIndex === questionArray.length - 1) {
-    } else {
-      dispatch(setQuestionIndex(state.questionIndex + 1));
+    if (state.questionIndex < questionArray.length - 1) {
+      dispatch({
+        type: SET_INDEX,
+        payload: state.questionIndex + 1,
+      });
     }
   };
 

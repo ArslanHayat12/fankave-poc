@@ -1,32 +1,31 @@
-import {
-  SET_TYPE,
-  SET_URL,
-  SET_STATUS,
-  SET_INDEX,
-  SET_SCREEN,
-  SET_STREAM,
-  SET_AUDIO_PLAYING,
-} from "../actions/action";
+export const SET_TYPE = "Set_Type";
+export const SET_URL = "Set_Url";
+export const SET_STATUS = "Set_Status";
+export const SET_SCREEN = "SET_SCREEN";
+export const SET_STREAM = "SET_STREAM";
+export const SET_AUDIO_PLAYING = "SET_AUDIO_PLAYING";
+
+export const SET_INDEX = "Set_INDEX";
 
 export const reducer = (state, action) => {
   switch (action.type) {
     case SET_TYPE:
-      return { ...state, ...action.payload };
+      return { ...state, type: action.payload };
 
     case SET_URL:
-      return { ...state, ...action.payload };
+      return { ...state, url: action.payload };
 
     case SET_STATUS:
-      return { ...state, ...action.payload };
+      return { ...state, status: action.payload };
 
     case SET_SCREEN:
       return { ...state, screen: action.payload };
 
     case SET_STREAM:
-      return { ...state, ...action.payload };
+      return { ...state, stream: action.payload };
 
     case SET_AUDIO_PLAYING:
-      return { ...state, ...action.payload };
+      return { ...state, isAudioPlaying: action.payload };
 
     default:
       return state;
@@ -36,7 +35,7 @@ export const reducer = (state, action) => {
 export const questionReducer = (state, action) => {
   switch (action.type) {
     case SET_INDEX:
-      return { ...state, ...action.payload };
+      return { ...state, questionIndex: action.payload };
 
     default:
       return state;

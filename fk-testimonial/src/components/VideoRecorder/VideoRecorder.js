@@ -2,7 +2,7 @@ import { useState, useRef, useCallback, useEffect, useContext } from "react";
 import Webcam from "react-webcam";
 import { RecordingIcon, StopIcon } from "../../assets";
 import { TestimonialContext } from "../../context/TestimonialContext";
-import { setTestimonialUrl } from "../../actions/action";
+import { SET_URL } from "../../reducers/reducers";
 import NotificationCard from "../NotificationCard/NotificationCard";
 import "./style.css";
 
@@ -63,7 +63,10 @@ export const VideoRecorder = () => {
       });
       const url = window.URL.createObjectURL(blob);
       setVideoURl(url);
-      dispatch(setTestimonialUrl(url));
+      dispatch({
+        type: SET_URL,
+        payload: url,
+      });
     }
   }, [recordedChunks]);
 

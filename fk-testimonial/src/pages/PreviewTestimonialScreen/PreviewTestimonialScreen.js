@@ -2,11 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { PlayFilledIcon, PencilIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { TestimonialContext } from "../../context/TestimonialContext";
-import {
-  setTestimonialUrl,
-  setScreen,
-  setAudioPlaying,
-} from "../../actions/action";
+import { SET_URL, SET_SCREEN, SET_AUDIO_PLAYING } from "../../reducers/reducers";
 import { THANK_YOU_SCREEN } from "../../constants";
 import "./style.css";
 import { SoundWave } from "../../components/AudioRecorder/SoundWave";
@@ -19,7 +15,10 @@ const PreviewTestimonialScreen = (props) => {
   const audioRef = useRef(null);
 
   const onApproveClick = () => {
-    dispatch(setScreen(THANK_YOU_SCREEN));
+    dispatch({
+      type: SET_SCREEN,
+      payload: THANK_YOU_SCREEN,
+    });
   };
 
   const onPlayClick = () => {
@@ -33,15 +32,24 @@ const PreviewTestimonialScreen = (props) => {
   };
 
   const onEdit = () => {
-    dispatch(setTestimonialUrl(""));
+    dispatch({
+      type: SET_URL,
+      payload: '',
+    });
   };
 
   const handlePlayAudio = () => {
-    dispatch(setAudioPlaying(true));
+    dispatch({
+      type: SET_AUDIO_PLAYING,
+      payload: true,
+    });
   };
 
   const handlePauseAudio = () => {
-    dispatch(setAudioPlaying(false));
+    dispatch({
+      type: SET_AUDIO_PLAYING,
+      payload: false,
+    });
   };
 
   return (
