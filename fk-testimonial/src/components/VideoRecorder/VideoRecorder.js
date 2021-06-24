@@ -2,7 +2,7 @@ import { useState, useRef, useCallback, useEffect, useContext } from "react";
 import Webcam from "react-webcam";
 import { RecordingIcon, StopIcon } from "../../assets";
 import { TestimonialContext } from "../../context/TestimonialContext";
-import { SET_URL } from "../../reducers/reducers";
+import { SET_URL } from "../../constants";
 import NotificationCard from "../NotificationCard/NotificationCard";
 import "./style.css";
 

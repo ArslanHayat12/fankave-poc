@@ -4,7 +4,7 @@ import { Visualizer } from "./Visualizer";
 import { PauseIcon, PlayIcon, StopIcon } from "../../assets";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { useContext } from "react";
-import { SET_URL, SET_STATUS } from "../../reducers/reducers";
+import { SET_URL, SET_STATUS } from "../../constants";
 
 import "./style.css";
 

@@ -1,11 +1,12 @@
-export const SET_TYPE = "Set_Type";
-export const SET_URL = "Set_Url";
-export const SET_STATUS = "Set_Status";
-export const SET_SCREEN = "SET_SCREEN";
-export const SET_STREAM = "SET_STREAM";
-export const SET_AUDIO_PLAYING = "SET_AUDIO_PLAYING";
-
-export const SET_INDEX = "Set_INDEX";
+import {
+	SET_TYPE,
+	SET_URL,
+	SET_STATUS,
+	SET_SCREEN,
+	SET_STREAM,
+	SET_AUDIO_PLAYING,
+	SET_INDEX,
+} from "../constants"
 
 export const reducer = (state, action) => {
   switch (action.type) {

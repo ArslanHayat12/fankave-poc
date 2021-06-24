@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import RecordingCard from "../../components/RecordingCard/RecordingCard";
 import { TestimonialContext } from "../../context/TestimonialContext";
-import { SET_TYPE, SET_SCREEN } from "../../reducers/reducers";
-import { TESTIMONIAL_SCREEN } from '../../constants'
+import { TESTIMONIAL_SCREEN, SET_TYPE, SET_SCREEN } from '../../constants'
 import "./style.css";
 
 export const HomeScreen = () => {

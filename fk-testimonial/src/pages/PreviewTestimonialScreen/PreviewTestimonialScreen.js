@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { PlayFilledIcon, PencilIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { TestimonialContext } from "../../context/TestimonialContext";
-import { SET_URL, SET_SCREEN, SET_AUDIO_PLAYING } from "../../reducers/reducers";
+import { SET_URL, SET_SCREEN, SET_AUDIO_PLAYING } from "../../constants";
 import { THANK_YOU_SCREEN } from "../../constants";
 import "./style.css";
 import { SoundWave } from "../../components/AudioRecorder/SoundWave";

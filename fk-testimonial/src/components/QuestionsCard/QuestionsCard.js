@@ -1,7 +1,7 @@
 import React, { useReducer, useMemo } from "react";
 import { questionReducer } from "../../reducers/reducers";
 import { initialState, QuestionContext } from "../../context/QuestionContext";
-import { SET_INDEX } from '../../reducers/reducers'
+import { SET_INDEX } from '../../constants'
 import "./style.css";
 
 const QuestionsCard = () => {
