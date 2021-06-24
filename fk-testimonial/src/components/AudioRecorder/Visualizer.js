@@ -1,141 +1,115 @@
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef } from "react"
 
 export const Visualizer = (props) => {
-  //receives stream initialized in useRecorder, and isAudioPlaying to show canvas
-  const { stream, isAudioPlaying } = props;
-  //canvas ref required in drawing
-  const canvasRef = useRef(null);
+	//receives stream initialized in useRecorder, and isAudioPlaying to show canvas
+	const { stream, isAudioPlaying } = props
+	const frameRef = useRef()
+	const sourceRef = useRef()
+	const analyserRef = useRef()
+	//canvas ref required in drawing
+	const canvasRef = useRef(null)
 
-  useEffect(() => {
-    //analysis and drawing should be done when stream initialized and also when an audio is playing
-    //if isAudioPlaying condition is not added, the analysis will run on stream even when not recording/playing
-    if (stream && isAudioPlaying) {
-      let audioCtx;
-      const canvas = canvasRef.current;
-      const canvasCtx = canvas.getContext("2d");
+	const cleanUpFunction = useCallback(() => {
+		cancelAnimationFrame(frameRef.current)
+		analyserRef.current.disconnect()
+		sourceRef.current.disconnect()
+	}, [frameRef, sourceRef, analyserRef])
 
-      if (!audioCtx) {
-        audioCtx = new AudioContext();
-      }
+	useEffect(() => {
+		return () => {
+			cleanUpFunction()
+		}
+	}, [])
 
-      const source = audioCtx.createMediaStreamSource(stream);
+	useEffect(() => {
+		//analysis and drawing should be done when stream initialized and also when an audio is playing
+		//if isAudioPlaying condition is not added, the analysis will run on stream even when not recording/playing
+		if (stream && isAudioPlaying) {
+			let audioCtx
+			const canvas = canvasRef.current
+			const canvasCtx = canvas.getContext("2d")
 
-      const analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 2048;
-      const bufferLength = analyser.frequencyBinCount;
-      const dataArray = new Uint8Array(bufferLength);
+			if (!audioCtx) {
+				audioCtx = new AudioContext()
+			}
 
-      source.connect(analyser);
-      //analyser.connect(audioCtx.destination);
+			const source = audioCtx.createMediaStreamSource(stream)
 
-      draw();
+			const analyser = audioCtx.createAnalyser()
 
-      function draw() {
-        const WIDTH = canvas.width;
-        const HEIGHT = canvas.height;
+			source.connect(analyser)
+      sourceRef.current = source
 
-        requestAnimationFrame(draw);
+			drawCircle()
+			function drawCircle() {
+				const WIDTH = canvas.width
+				const HEIGHT = canvas.height
 
-        analyser.getByteTimeDomainData(dataArray);
+				const CENTERX = canvas.width / 2
+				const CENTERY = canvas.height / 2
 
-        canvasCtx.fillStyle = "transparent";
-        canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+				analyser.fftSize = 32
+        analyserRef.current = analyser
 
-        canvasCtx.lineWidth = 2;
-        canvasCtx.strokeStyle = "#e85757";
+				let bufferLength = analyser.frequencyBinCount
+				let dataArray = new Uint8Array(bufferLength)
 
-        canvasCtx.beginPath();
+				canvasCtx.clearRect(0, 0, WIDTH, HEIGHT)
 
-        let sliceWidth = (WIDTH * 1.0) / bufferLength;
-        let x = 0;
+				let draw = () => {
+					frameRef.current = requestAnimationFrame(draw)
 
-        for (let i = 0; i < bufferLength; i++) {
-          let v = dataArray[i] / 128.0;
-          let y = (v * HEIGHT) / 2;
+					analyser.getByteFrequencyData(dataArray)
+					canvasCtx.fillStyle = "#fff"
+					canvasCtx.fillRect(0, 0, WIDTH, HEIGHT)
 
-          if (i === 0) {
-            canvasCtx.moveTo(x, y);
-          } else {
-            canvasCtx.lineTo(x, y);
-          }
+					var gradient = canvasCtx.createLinearGradient(
+						0,
+						110,
+						90,
+						30,
+						100,
+						100,
+						70
+					)
+					// Add three color stops
+					gradient.addColorStop(0.1, "#e97272")
+					gradient.addColorStop(0.4, "#e77e7e")
+					gradient.addColorStop(0.7, "#e77e7e")
+					gradient.addColorStop(0.9, "#e77e7e")
+					gradient.addColorStop(1, "#e97272")
 
-          x += sliceWidth;
-        }
+					let radius = dataArray[2] / 2
+					if (radius < 20) radius = 20
+					if (radius > 100) radius = 100
+					canvasCtx.beginPath()
+					canvasCtx.arc(CENTERX, CENTERY, radius, 0, 2 * Math.PI, false)
+					canvasCtx.fillStyle = gradient
+					canvasCtx.fill()
+					canvasCtx.lineWidth = 5
+					canvasCtx.strokeStyle = "#e7a9a9"
+					canvasCtx.stroke()
+				}
+				draw()
+			}
+		}
+	}, [stream, isAudioPlaying])
 
-        canvasCtx.lineTo(canvas.width, canvas.height / 2);
-        canvasCtx.stroke();
-      }
-
-      drawCircle();
-      function drawCircle() {
-        const WIDTH = canvas.width;
-        const HEIGHT = canvas.height;
-
-        const CENTERX = canvas.width / 2;
-        const CENTERY = canvas.height / 2;
-
-        analyser.fftSize = 32;
-        let bufferLength = analyser.frequencyBinCount;
-        let dataArray = new Uint8Array(bufferLength);
-
-        canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-
-        let draw = () => {
-          requestAnimationFrame(draw);
-
-          analyser.getByteFrequencyData(dataArray);
-          canvasCtx.fillStyle = "#fff";
-          canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-
-          var gradient = canvasCtx.createLinearGradient(
-            0,
-            110,
-            90,
-            30,
-            100,
-            100,
-            70
-          );
-
-          // Add three color stops
-          gradient.addColorStop(0.1, "#e97272");
-          gradient.addColorStop(0.4, "#e77e7e");
-          gradient.addColorStop(0.7, "#e77e7e");
-          gradient.addColorStop(0.9, "#e77e7e");
-          gradient.addColorStop(1, "#e97272");
-
-          let radius = dataArray[2] / 2;
-          if (radius < 20) radius = 20;
-          if (radius > 100) radius = 100;
-          console.log("Radius ", radius);
-          canvasCtx.beginPath();
-          canvasCtx.arc(CENTERX, CENTERY, radius, 0, 2 * Math.PI, false);
-          canvasCtx.fillStyle = gradient;
-          canvasCtx.fill();
-          canvasCtx.lineWidth = 5;
-          canvasCtx.strokeStyle = "#e7a9a9";
-          canvasCtx.stroke();
-        };
-        draw();
-      }
-    }
-  }, [stream, isAudioPlaying]);
-
-  return isAudioPlaying ? (
-    <canvas
-      ref={canvasRef}
-      className="visualizer"
-      height="250px"
-      style={{
-        position: "absolute",
-        top: "14.5%",
-        display: "flex",
-        alignItems: "end",
-        zIndex: "-1",
-        left: " 0",
-        right: "0",
-        margin: "auto",
-      }}
-    ></canvas>
-  ) : null;
-};
+	return isAudioPlaying ? (
+		<canvas
+			ref={canvasRef}
+			className="visualizer"
+			height="250px"
+			style={{
+				position: "absolute",
+				top: "14.5%",
+				display: "flex",
+				alignItems: "end",
+				zIndex: "-1",
+				left: " 0",
+				right: "0",
+				margin: "auto",
+			}}
+		></canvas>
+	) : null
+}
