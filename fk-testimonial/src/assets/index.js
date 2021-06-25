@@ -93,7 +93,7 @@ export const CameraIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
       id="line_icons"
       data-name="line icons"
-      width="70"
+      width="63"
       height="57.418"
       viewBox="0 0 70 57.418"
     >
