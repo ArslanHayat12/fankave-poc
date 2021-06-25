@@ -4,7 +4,7 @@ import { Visualizer } from "./Visualizer";
 import { PauseIcon, PlayIcon, StopIcon } from "../../assets";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { useContext } from "react";
-import { setTestimonialUrl, setStatus } from "../../actions/action";
+import { setTestimonialUrl, setStatus, setStream } from "../../actions/action";
 
 import "./style.css";
 
@@ -32,6 +32,8 @@ export const AudioRecorder = () => {
 
   useEffect(() => {
     if (url) {
+      dispatch(setStream(stream));
+
       dispatch(setTestimonialUrl(url));
     }
   }, [url]);

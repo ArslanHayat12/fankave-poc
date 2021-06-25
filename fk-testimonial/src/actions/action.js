@@ -45,6 +45,7 @@ export const setScreen = (data) => {
 };
 
 export const setStream = (data) => {
+  console.log("data", data);
   return {
     type: SET_STREAM,
     payload: { stream: data },

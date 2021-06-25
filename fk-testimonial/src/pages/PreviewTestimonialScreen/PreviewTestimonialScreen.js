@@ -10,6 +10,7 @@ import {
 import { THANK_YOU_SCREEN } from "../../constants";
 import "./style.css";
 import { SoundWave } from "../../components/AudioRecorder/SoundWave";
+import { OutputWave } from "../../components/AudioRecorder/OutputWave";
 
 const PreviewTestimonialScreen = (props) => {
   const { state, dispatch } = useContext(TestimonialContext);
@@ -89,6 +90,7 @@ const PreviewTestimonialScreen = (props) => {
             <button className="audio-edit-button" onClick={onEdit}>
               <PencilIcon customClass="edit-icon" />
             </button>
+            <OutputWave />
           </article>
         </>
       )}
