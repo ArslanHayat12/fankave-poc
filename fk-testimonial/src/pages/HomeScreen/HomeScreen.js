@@ -32,7 +32,7 @@ export const HomeScreen = () => {
   return (
     <article className="home-screen">
       <p className="description">
-        Thank you for sharing your testimonial with us
+        Select one to record your testimonial 
       </p>
       <RecordingCard recordingType="video" handleClick={() => onVideoClick()} />
       <RecordingCard recordingType="audio" handleClick={()=>onAudioClick()} />
