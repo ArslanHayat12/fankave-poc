@@ -93,6 +93,7 @@ const PreviewTestimonialScreen = (props) => {
 							disablePictureInPicture
 							controlsList="nodownload nofullscreen noremoteplayback"
 							onClick={onPlayClick}
+              onEnded={() => setPlayVideo(false)}
 						>
 							<source src={url} />
 						</video>
