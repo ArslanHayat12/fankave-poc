@@ -95,7 +95,7 @@ export const Visualizer = (props) => {
 		}
 	}, [stream, isAudioPlaying])
 
-	return isAudioPlaying ? (
+	return (
 		<canvas
 			ref={canvasRef}
 			className="visualizer"
@@ -111,5 +111,5 @@ export const Visualizer = (props) => {
 				margin: "auto",
 			}}
 		></canvas>
-	) : null
+	)
 }

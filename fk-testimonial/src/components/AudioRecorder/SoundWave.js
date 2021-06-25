@@ -3,10 +3,9 @@ import { TestimonialContext } from "../../context/TestimonialContext";
 
 export const SoundWave = () => {
   const canvasRef = useRef(null);
-  const { state, dispatch } = useContext(TestimonialContext);
+  const { state: {isAudioPlaying} } = useContext(TestimonialContext);
 
   useEffect(() => {
-    console.log("isAudioPlaying", state.isAudioPlaying);
     var c = canvasRef.current,
       ctx = c.getContext("2d"),
       cw = c.width,
@@ -127,7 +126,7 @@ export const SoundWave = () => {
       window.requestAnimFrame(loop, c);
       tick++;
       clear();
-      state.isAudioPlaying && updatePoints();
+      isAudioPlaying && updatePoints();
       renderShape();
       //renderPoints();
     };
@@ -156,7 +155,7 @@ export const SoundWave = () => {
       );
     })();
     loop();
-  }, [state.isAudioPlaying]);
+  }, [isAudioPlaying]);
 
   return (
     <canvas
