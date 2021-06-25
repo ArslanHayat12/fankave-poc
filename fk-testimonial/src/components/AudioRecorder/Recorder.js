@@ -4,12 +4,12 @@ import { Visualizer } from "./Visualizer";
 import { PauseIcon, PlayIcon, StopIcon } from "../../assets";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { useContext } from "react";
-import { setTestimonialUrl, setStatus } from "../../actions/action";
+import { SET_URL, SET_STATUS } from "../../constants";
 
 import "./style.css";
 
 export const AudioRecorder = () => {
-  const { state, dispatch } = useContext(TestimonialContext);
+  const { dispatch } = useContext(TestimonialContext);
   const [url, setUrl] = useState("");
   const [isAudioPlaying, setAudioPlaying] = useState(false); // state to show/hide visualizer canvas
   const {
@@ -27,12 +27,18 @@ export const AudioRecorder = () => {
   const onStop = useCallback((blob, blobUrl) => {
     setUrl(blobUrl);
     setAudioPlaying(false);
-    dispatch(setStatus(false));
+    dispatch({
+      type: SET_STATUS,
+      payload: false,
+    });
   }, []);
 
   useEffect(() => {
     if (url) {
-      dispatch(setTestimonialUrl(url));
+      dispatch({
+        type: SET_URL,
+        payload: url,
+      });
     }
   }, [url]);
 
@@ -42,48 +48,46 @@ export const AudioRecorder = () => {
     register(() => {
       startRecording();
       setAudioPlaying(true);
-      dispatch(setStatus(true));
+      dispatch({
+        type: SET_STATUS,
+        payload: true,
+      });
     });
   }, [url]);
-
-  const urlObjectCleanUp = useCallback(() => {
-    //let browser discard reference to previous audio file
-    url && window.URL.revokeObjectURL(url);
-  }, [url]);
-
-  //clean up audio file on unmount
-  useEffect(() => {
-    return () => {
-      urlObjectCleanUp();
-    };
-  }, []);
 
   const playButtonHandle = useCallback(() => {
     switch (status) {
       case "init":
         //first time click on start: initialize stream & recorder, then start recording
         onInitialStart();
-
         break;
       case "idle":
-        urlObjectCleanUp();
         setUrl("");
         //second time recording an audio i.e. stream & recorder already initialized
         startRecording();
         setAudioPlaying(true);
-        dispatch(setStatus(true));
+        dispatch({
+          type: SET_STATUS,
+          payload: true,
+        });
         break;
       case "recording":
         // pause recording
         pauseRecording();
         setAudioPlaying(false);
-        dispatch(setStatus(false));
+        dispatch({
+          type: SET_STATUS,
+          payload: false,
+        });
         break;
       case "paused":
         //resume recording
         resumeRecording();
         setAudioPlaying(true);
-        dispatch(setStatus(true));
+        dispatch({
+          type: SET_STATUS,
+          payload: true,
+        });
         break;
       default:
         break;
@@ -123,7 +127,7 @@ export const AudioRecorder = () => {
           <source src={url} />
         </audio>
       )}
-      <Visualizer stream={stream} isAudioPlaying={isAudioPlaying} />
+      {isAudioPlaying && <Visualizer stream={stream} isAudioPlaying={isAudioPlaying} />}
       {error && <p>{error}</p>}
     </div>
   );

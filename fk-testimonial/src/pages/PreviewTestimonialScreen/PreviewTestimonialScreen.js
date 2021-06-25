@@ -1,25 +1,24 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState, useCallback, useEffect } from "react";
 import { PlayFilledIcon, PencilIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { TestimonialContext } from "../../context/TestimonialContext";
-import {
-  setTestimonialUrl,
-  setScreen,
-  setAudioPlaying,
-} from "../../actions/action";
+import { SET_URL, SET_SCREEN, SET_AUDIO_PLAYING } from "../../constants";
 import { THANK_YOU_SCREEN } from "../../constants";
 import "./style.css";
 import { SoundWave } from "../../components/AudioRecorder/SoundWave";
 
 const PreviewTestimonialScreen = (props) => {
-  const { state, dispatch } = useContext(TestimonialContext);
+  const { state: { url }, dispatch } = useContext(TestimonialContext);
   const [playVideo, setPlayVideo] = useState(false);
   const { testimonialType } = props;
   const videoRef = useRef(null);
   const audioRef = useRef(null);
 
   const onApproveClick = () => {
-    dispatch(setScreen(THANK_YOU_SCREEN));
+    dispatch({
+      type: SET_SCREEN,
+      payload: THANK_YOU_SCREEN,
+    });
   };
 
   const onPlayClick = () => {
@@ -33,16 +32,37 @@ const PreviewTestimonialScreen = (props) => {
   };
 
   const onEdit = () => {
-    dispatch(setTestimonialUrl(""));
+    dispatch({
+      type: SET_URL,
+      payload: '',
+    });
   };
 
   const handlePlayAudio = () => {
-    dispatch(setAudioPlaying(true));
+    dispatch({
+      type: SET_AUDIO_PLAYING,
+      payload: true,
+    });
   };
 
   const handlePauseAudio = () => {
-    dispatch(setAudioPlaying(false));
+    dispatch({
+      type: SET_AUDIO_PLAYING,
+      payload: false,
+    });
   };
+
+  const urlObjectCleanUp = useCallback(() => {
+    //let browser discard reference to previous recorded file
+    url && window.URL.revokeObjectURL(url);
+  }, [url]);
+
+  //clean up recorded file on unmount
+  useEffect(() => {
+    return () => {
+      urlObjectCleanUp();
+    };
+  }, []);
 
   return (
     <article className="preview-testimonial-sreen">
@@ -62,7 +82,7 @@ const PreviewTestimonialScreen = (props) => {
               controlsList="nodownload nofullscreen noremoteplayback"
               onClick={onPlayClick}
             >
-              <source src={state.url} />
+              <source src={url} />
             </video>
             <button
               className={`play-button ${playVideo ? "hide-icon" : ""}`}
@@ -84,7 +104,7 @@ const PreviewTestimonialScreen = (props) => {
               onPlay={handlePlayAudio}
               onPause={handlePauseAudio}
             >
-              <source src={state.url} />
+              <source src={url} />
             </audio>
             <button className="audio-edit-button" onClick={onEdit}>
               <PencilIcon customClass="edit-icon" />

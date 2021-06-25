@@ -2,14 +2,15 @@ import { useState, useRef, useCallback, useEffect, useContext } from "react";
 import Webcam from "react-webcam";
 import { RecordingIcon, StopIcon } from "../../assets";
 import { TestimonialContext } from "../../context/TestimonialContext";
-import { setTestimonialUrl } from "../../actions/action";
+import { SET_URL } from "../../constants";
 import NotificationCard from "../NotificationCard/NotificationCard";
 import "./style.css";
 
 export const VideoRecorder = () => {
-  const { state, dispatch } = useContext(TestimonialContext);
+  const { dispatch } = useContext(TestimonialContext);
   const webcamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
+  const [isStreamInit, setIsStreamInit] = useState(false)
   const [capturing, setCapturing] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [videoURL, setVideoURl] = useState("");
@@ -42,14 +43,7 @@ export const VideoRecorder = () => {
     setCapturing(false);
   }, [mediaRecorderRef, webcamRef, setCapturing]);
 
-  const handleRecordAgain = useCallback(() => {
-    urlObjectCleanUp();
-    setRecordedChunks([]);
-    setVideoURl("");
-  }, []);
-
   const showAccessBlocked = useCallback((err) => {
-    console.log(err);
     typeof err === "object"
       ? setError("Access Blocked") && setShowNotification(true)
       : setError(err);
@@ -63,26 +57,12 @@ export const VideoRecorder = () => {
       });
       const url = window.URL.createObjectURL(blob);
       setVideoURl(url);
-      dispatch(setTestimonialUrl(url));
+      dispatch({
+        type: SET_URL,
+        payload: url,
+      });
     }
   }, [recordedChunks]);
-
-  const urlObjectCleanUp = useCallback(() => {
-    //let browser discard video file reference
-    videoURL && window.URL.revokeObjectURL(videoURL);
-  }, [videoURL]);
-
-  //clean up video file reference on unmount
-  useEffect(() => {
-    return () => {
-      urlObjectCleanUp();
-    };
-  }, []);
-
-  //   const allowCameraPermission = () => {
-  //     console.log("perm");
-  //     setError("");
-  //   };
 
   return (
     <div className="video-recording-container">
@@ -98,33 +78,20 @@ export const VideoRecorder = () => {
             width={335}
             height={524}
             style={{ objectFit: "cover" }}
+            onUserMedia={()=>setIsStreamInit(true)}
             onUserMediaError={showAccessBlocked}
           />
           {capturing ? (
             <button onClick={handleStopCaptureClick} className="stop-button">
               <StopIcon />
             </button>
-          ) : (
+          ) : isStreamInit ? (
             <button onClick={handleStartCaptureClick} className="record-button">
               <RecordingIcon />
             </button>
-          )}
+          ) : null}
         </>
       )}
-      {/* {videoURL && (
-                <><video
-					controls
-					width="100%"
-					height="100%"
-					disablePictureInPicture
-					controlsList="nodownload nofullscreen noremoteplayback"
-				>
-					<source src={videoURL} />
-				</video>
-                <button onClick={handleRecordAgain}>Record Again</button>
-                </>
-				
-			)} */}
       {error && (
         <NotificationCard
           openModal={error ? true : false}
