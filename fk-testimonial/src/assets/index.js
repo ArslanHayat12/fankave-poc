@@ -403,7 +403,7 @@ export const StopIcon = (props) => {
         data-name="Rectangle 20"
         width="8"
         height="8"
-        fill="#e85775"
+        fill="#F55555"
       />
     </svg>
   );
