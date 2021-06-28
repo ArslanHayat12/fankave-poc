@@ -86,11 +86,12 @@ export const OutputWave = (props) => {
       style={{
         display: "block",
         position: "absolute",
-        left: "-33px",
+        left: "-28px",
         right: "0",
         bottom: "-27.5px",
         width: "391px",
         zIndex: 0,
+        border: "0 0 5px 5px",
       }}
     ></canvas>
   );

@@ -1,15 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import useRecorder from "../../utils/useRecorder";
 import { Visualizer } from "./Visualizer";
+import { CustomTooltip } from "../Tooltip/Tooltip";
 import { PauseIcon, PlayIcon, StopIcon } from "../../assets";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { useContext } from "react";
-import {
-  SET_URL,
-  SET_STATUS,
-  SET_STREAM,
-  SET_AUDIO_CTX,
-} from "../../constants";
+import { SET_URL, SET_STATUS } from "../../constants";
 
 import "./style.css";
 
@@ -28,11 +24,6 @@ export const AudioRecorder = () => {
     error,
   } = useRecorder();
 
-  let srcStream;
-  useEffect(() => {
-    srcStream = stream;
-  }, [stream]);
-
   //passed to useRecorder stopRecording, receives recorded blob and url
   const onStop = useCallback((blob, blobUrl) => {
     setUrl(blobUrl);
@@ -45,22 +36,6 @@ export const AudioRecorder = () => {
 
   useEffect(() => {
     if (url) {
-      let audioCtx;
-      if (!audioCtx) {
-        audioCtx = new AudioContext();
-      }
-      const source = audioCtx.createMediaStreamSource(stream);
-
-      dispatch({
-        type: SET_STREAM,
-        payload: srcStream,
-      });
-
-      dispatch({
-        type: SET_AUDIO_CTX,
-        payload: audioCtx,
-      });
-
       dispatch({
         type: SET_URL,
         payload: url,
@@ -120,26 +95,41 @@ export const AudioRecorder = () => {
     }
   }, [status]);
 
-  const getPlayButtonIcon = useCallback(() => {
+  const getPlayButton = useCallback(() => {
     return status === "recording" ? (
-      <PauseIcon />
+      <CustomTooltip content="Pause" placement="bottom">
+        <button className="recording-button" onClick={playButtonHandle}>
+          <PauseIcon customClass="pause-icon" />
+        </button>
+      </CustomTooltip>
     ) : status === "paused" ? (
-      <PlayIcon customClass="play-icon" />
+      <CustomTooltip content="Resume" placement="bottom">
+        <button className="recording-button" onClick={playButtonHandle}>
+          <PlayIcon customClass="play-icon" />
+        </button>
+      </CustomTooltip>
     ) : (
-      <PlayIcon customClass="play-icon" />
+      <CustomTooltip content="Start" placement="bottom">
+        <button className="recording-button" onClick={playButtonHandle}>
+          <PlayIcon customClass="play-icon" />
+        </button>
+      </CustomTooltip>
     );
   }, [status]);
 
   return (
     <div className="recorder-container">
       <article className="buttons-wrapper">
-        <button className="recording-button" onClick={playButtonHandle}>
-          {getPlayButtonIcon()}
-        </button>
+        {getPlayButton()}
         {(status === "recording" || status === "paused") && (
-          <button className="recording-button" onClick={stopRecording(onStop)}>
-            <StopIcon customClass="stop-icon" />
-          </button>
+          <CustomTooltip content="Stop" placement="bottom">
+            <button
+              className="recording-button"
+              onClick={stopRecording(onStop)}
+            >
+              <StopIcon customClass="stop-icon" />
+            </button>
+          </CustomTooltip>
         )}
       </article>
 

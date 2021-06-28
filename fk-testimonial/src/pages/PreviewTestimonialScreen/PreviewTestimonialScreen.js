@@ -5,17 +5,14 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
-
-import ReactAudioPlayer from "react-audio-player";
-
 import { PlayFilledIcon, PencilIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
+import { CustomTooltip } from "../../components/Tooltip/Tooltip";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { SET_URL, SET_SCREEN, SET_AUDIO_PLAYING } from "../../constants";
 import { THANK_YOU_SCREEN } from "../../constants";
-import "./style.css";
-import { SoundWave } from "../../components/AudioRecorder/SoundWave";
 import { OutputWave } from "../../components/AudioRecorder/OutputWave";
+import "./style.css";
 
 const PreviewTestimonialScreen = (props) => {
   const {
@@ -78,13 +75,19 @@ const PreviewTestimonialScreen = (props) => {
   }, []);
 
   return (
-    <article className="preview-testimonial-sreen">
+    <article
+      className={`preview-testimonial-sreen${
+        testimonialType === "audio" ? " audio-preview-screen" : ""
+      }`}
+    >
       {testimonialType === "video" ? (
         <>
           <h2 className="heading">Preview Video Testimonial </h2>
           <figure className="video-wrapper">
             <button className="edit-testimonial" onClick={onEdit}>
-              <PencilIcon />
+              <CustomTooltip content="Retake" placement="left">
+                <PencilIcon />
+              </CustomTooltip>
             </button>
             <video
               ref={videoRef}
@@ -94,6 +97,7 @@ const PreviewTestimonialScreen = (props) => {
               disablePictureInPicture
               controlsList="nodownload nofullscreen noremoteplayback"
               onClick={onPlayClick}
+              onEnded={() => setPlayVideo(false)}
             >
               <source src={url} />
             </video>
@@ -117,13 +121,15 @@ const PreviewTestimonialScreen = (props) => {
               onPlay={handlePlayAudio}
               onPause={handlePauseAudio}
             ></audio>
-
-            <button className="audio-edit-button" onClick={onEdit}>
-              <PencilIcon customClass="edit-icon" />
-            </button>
+            <CustomTooltip content="Retake" placement="bottom">
+              <button className="audio-edit-button" onClick={onEdit}>
+                <PencilIcon customClass="edit-icon" />
+              </button>
+            </CustomTooltip>
           </article>
         </>
       )}
+
       <ClientDetails />
       <article className="button-wrapper">
         <button className="approve-button" onClick={onApproveClick}>

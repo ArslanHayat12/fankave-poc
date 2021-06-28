@@ -37,7 +37,7 @@ export const RecordingIcon = () => {
           data-name="Ellipse 1"
           transform="translate(727 723)"
           fill="#fff"
-          stroke="#f55555"
+          stroke="#e85775"
           stroke-width="1"
         >
           <circle cx="23.5" cy="23.5" r="23.5" stroke="none" />
@@ -50,20 +50,22 @@ export const RecordingIcon = () => {
           cy="7.5"
           r="7.5"
           transform="translate(743 739)"
-          fill="#f55555"
+          fill="#e85775"
         />
       </g>
     </svg>
   );
 };
 
-export const PauseIcon = () => {
+export const PauseIcon = (props) => {
+  const { customClass } = props
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="6"
       height="8"
       viewBox="0 0 6 8"
+      className={customClass}
     >
       <g id="Group_31" data-name="Group 31" transform="translate(-726 -467)">
         <rect
@@ -93,7 +95,7 @@ export const CameraIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
       id="line_icons"
       data-name="line icons"
-      width="70"
+      width="63"
       height="57.418"
       viewBox="0 0 70 57.418"
     >
