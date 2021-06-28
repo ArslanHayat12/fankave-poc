@@ -4,7 +4,12 @@ import { Visualizer } from "./Visualizer";
 import { PauseIcon, PlayIcon, StopIcon } from "../../assets";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { useContext } from "react";
-import { SET_URL, SET_STATUS } from "../../constants";
+import {
+  SET_URL,
+  SET_STATUS,
+  SET_STREAM,
+  SET_AUDIO_CTX,
+} from "../../constants";
 
 import "./style.css";
 
@@ -23,6 +28,11 @@ export const AudioRecorder = () => {
     error,
   } = useRecorder();
 
+  let srcStream;
+  useEffect(() => {
+    srcStream = stream;
+  }, [stream]);
+
   //passed to useRecorder stopRecording, receives recorded blob and url
   const onStop = useCallback((blob, blobUrl) => {
     setUrl(blobUrl);
@@ -35,6 +45,22 @@ export const AudioRecorder = () => {
 
   useEffect(() => {
     if (url) {
+      let audioCtx;
+      if (!audioCtx) {
+        audioCtx = new AudioContext();
+      }
+      const source = audioCtx.createMediaStreamSource(stream);
+
+      dispatch({
+        type: SET_STREAM,
+        payload: srcStream,
+      });
+
+      dispatch({
+        type: SET_AUDIO_CTX,
+        payload: audioCtx,
+      });
+
       dispatch({
         type: SET_URL,
         payload: url,
@@ -117,7 +143,7 @@ export const AudioRecorder = () => {
         )}
       </article>
 
-      {url && (
+      {/* {url && (
         <audio
           controls
           onPlay={() => setAudioPlaying(true)}
@@ -126,7 +152,7 @@ export const AudioRecorder = () => {
         >
           <source src={url} />
         </audio>
-      )}
+      )} */}
       {isAudioPlaying && (
         <Visualizer stream={stream} isAudioPlaying={isAudioPlaying} />
       )}

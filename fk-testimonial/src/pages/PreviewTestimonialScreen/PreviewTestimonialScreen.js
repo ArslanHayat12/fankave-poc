@@ -1,4 +1,13 @@
-import React, { useContext, useRef, useState, useCallback, useEffect } from "react";
+import React, {
+  useContext,
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
+
+import ReactAudioPlayer from "react-audio-player";
+
 import { PlayFilledIcon, PencilIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { TestimonialContext } from "../../context/TestimonialContext";
@@ -9,7 +18,10 @@ import { SoundWave } from "../../components/AudioRecorder/SoundWave";
 import { OutputWave } from "../../components/AudioRecorder/OutputWave";
 
 const PreviewTestimonialScreen = (props) => {
-  const { state: { url }, dispatch } = useContext(TestimonialContext);
+  const {
+    state: { url },
+    dispatch,
+  } = useContext(TestimonialContext);
   const [playVideo, setPlayVideo] = useState(false);
   const { testimonialType } = props;
   const videoRef = useRef(null);
@@ -35,7 +47,7 @@ const PreviewTestimonialScreen = (props) => {
   const onEdit = () => {
     dispatch({
       type: SET_URL,
-      payload: '',
+      payload: "",
     });
   };
 
@@ -101,27 +113,24 @@ const PreviewTestimonialScreen = (props) => {
               ref={audioRef}
               controls
               controlsList="nodownload"
-              id="audion"
+              id="audio"
               onPlay={handlePlayAudio}
               onPause={handlePauseAudio}
-            >
-              <source src={url} />
-            </audio>
+            ></audio>
+
             <button className="audio-edit-button" onClick={onEdit}>
               <PencilIcon customClass="edit-icon" />
             </button>
-            <OutputWave />
           </article>
         </>
       )}
-
       <ClientDetails />
       <article className="button-wrapper">
         <button className="approve-button" onClick={onApproveClick}>
           Approve
         </button>
       </article>
-      {testimonialType === "audio" && <SoundWave />}
+      {testimonialType === "audio" && <OutputWave audioRef={audioRef} />}
     </article>
   );
 };

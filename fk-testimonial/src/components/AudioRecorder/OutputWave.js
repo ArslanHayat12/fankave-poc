@@ -3,82 +3,95 @@ import { TestimonialContext } from "../../context/TestimonialContext";
 
 export const OutputWave = (props) => {
   //receives stream initialized in useRecorder, and isAudioPlaying to show canvas
-  const { isAudioPlaying = true } = props;
+
+  const { audioRef } = props;
   const { state, dispatch } = useContext(TestimonialContext);
-  const stream = state.stream;
   //canvas ref required in drawing
   const canvasRef = useRef(null);
 
-  console.log("stream", state.stream);
-
   useEffect(() => {
-    //analysis and drawing should be done when stream initialized and also when an audio is playing
-    //if isAudioPlaying condition is not added, the analysis will run on stream even when not recording/playing
-    if (stream && isAudioPlaying) {
-      let audioCtx;
-      const canvas = canvasRef.current;
-      const canvasCtx = canvas.getContext("2d");
+    audioRef.current.src = state.url;
+    audioRef.current.load();
+    audioRef.current.play();
 
-      if (!audioCtx) {
-        audioCtx = new AudioContext();
-      }
+    var context = new AudioContext();
 
-      const source = audioCtx.createMediaStreamSource(stream);
+    var src = context.createMediaElementSource(audioRef?.current);
+    var analyser = context.createAnalyser();
 
-      const analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 2048;
-      const bufferLength = analyser.frequencyBinCount;
-      const dataArray = new Uint8Array(bufferLength);
+    const canvas = canvasRef.current;
 
-      source.connect(analyser);
-      //analyser.connect(audioCtx.destination);
+    src.connect(analyser);
 
-      draw();
+    var ctx = canvas.getContext("2d");
 
-      function draw() {
-        const WIDTH = canvas.width;
-        const HEIGHT = canvas.height;
+    analyser.connect(context.destination);
 
-        requestAnimationFrame(draw);
+    analyser.fftSize = 256;
 
-        analyser.getByteTimeDomainData(dataArray);
+    var bufferLength = analyser.frequencyBinCount;
 
-        canvasCtx.fillStyle = "rgb(200, 200, 200)";
-        canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+    var dataArray = new Uint8Array(bufferLength);
 
-        canvasCtx.lineWidth = 2;
-        canvasCtx.strokeStyle = "rgb(0, 0, 0)";
+    draw();
 
-        canvasCtx.beginPath();
+    function draw() {
+      const WIDTH = canvas.width;
+      const HEIGHT = canvas.height;
 
-        let sliceWidth = (WIDTH * 1.0) / bufferLength;
-        let x = 0;
+      requestAnimationFrame(draw);
 
-        for (let i = 0; i < bufferLength; i++) {
-          let v = dataArray[i] / 128.0;
-          let y = (v * HEIGHT) / 2;
+      analyser.getByteFrequencyData(dataArray);
 
-          if (i === 0) {
-            canvasCtx.moveTo(x, y);
-          } else {
-            canvasCtx.lineTo(x, y);
-          }
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(0, 0, WIDTH, HEIGHT);
+      ctx.strokeStyle = "#35a4ff";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
 
-          x += sliceWidth;
+      let sliceWidth = (WIDTH * 5.0) / bufferLength;
+      let x = 0;
+
+      for (let i = 0; i < bufferLength; i++) {
+        let v = dataArray[i] / 128.0;
+        let y = (v * HEIGHT) / 2;
+
+        if (i === 0) {
+          ctx.moveTo(x, y);
+          ctx.fillStyle = "#cce7ff";
+        } else {
+          ctx.lineTo(x, y);
+          ctx.fillStyle = "#cce7ff";
         }
-
-        canvasCtx.lineTo(canvas.width, canvas.height / 2);
-        canvasCtx.stroke();
+        x += sliceWidth;
       }
-    }
-  }, [stream, isAudioPlaying]);
 
-  return isAudioPlaying ? (
+      ctx.lineTo(canvas.width, 100);
+
+      ctx.lineTo(0, 100);
+      ctx.fill();
+
+      ctx.strokeStyle = "#cce7ff";
+      ctx.stroke();
+    }
+
+    audioRef.current.play();
+  }, []);
+
+  return (
     <canvas
       ref={canvasRef}
       className="visualizer"
-      height="160px"
-      style={{ display: "block" }}
+      height="80px"
+      style={{
+        display: "block",
+        position: "absolute",
+        left: "-33px",
+        right: "0",
+        bottom: "-27.5px",
+        width: "391px",
+        zIndex: 0,
+      }}
     ></canvas>
-  ) : null;
+  );
 };
