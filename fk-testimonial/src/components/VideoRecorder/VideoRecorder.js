@@ -19,7 +19,9 @@ export const VideoRecorder = () => {
 	const [error, setError] = useState("")
 	const [showNotification, setShowNotification] = useState(false)
 
-	const videoWidth = (window.innerWidth > 0) ? window.innerWidth : window.screen.width
+	const videoWidth = window.innerWidth > 0 ? window.innerWidth : window.screen.width
+
+	console.log(window.innerWidth || 0, window.screen.width || 0, document.body.clientWidth || 0)
 
 	const handleStartCaptureClick = useCallback(() => {
 		setCapturing(true)
@@ -73,21 +75,20 @@ export const VideoRecorder = () => {
 			<figure className="video-wrapper">
 				<div className="video-recording-container">
 					{!videoURL && (
-						<>
-							<Webcam
-								ref={webcamRef}
-								mirrored
-								videoConstraints={{
-									width: videoWidth > 400 ? 335 : 313,
-									height: 524,
-								}}
-								width={videoWidth > 400 ? 335 : 313}
-								height={524}
-								style={{ objectFit: "cover" }}
-								onUserMedia={() => setIsStreamInit(true)}
-								onUserMediaError={showAccessBlocked}
-							/>
-						</>
+						<Webcam
+							ref={webcamRef}
+							mirrored
+							videoConstraints={{
+								width: videoWidth > 400 ? 333 : 313,
+								height: 524,
+								facingMode: "user"
+							}}
+							width={videoWidth > 400 ? 333 : 313}
+							height={524}
+							style={{ objectFit: "cover" }}
+							onUserMedia={() => setIsStreamInit(true)}
+							onUserMediaError={showAccessBlocked}
+						/>
 					)}
 					{error && (
 						<NotificationCard
