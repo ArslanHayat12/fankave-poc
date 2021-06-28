@@ -1,27 +1,40 @@
 import { useState, useRef, useCallback, useEffect, useContext } from "react"
 import Webcam from "react-webcam"
-import { RecordingIcon, StopIcon } from "../../assets"
 import { TestimonialContext } from "../../context/TestimonialContext"
-import { SET_URL } from "../../constants"
 import NotificationCard from "../NotificationCard/NotificationCard"
 import { CustomTooltip as Tooltip } from "../Tooltip/Tooltip"
 import QuestionsCard from "../QuestionsCard/QuestionsCard"
+import { RecordingIcon, StopIcon } from "../../assets"
+import { useInterval } from "../../hooks/useInterval"
+import { convertSecondsToHourMinute } from "../../utils"
+import { SET_URL } from "../../constants"
 import "./style.css"
 
 export const VideoRecorder = () => {
 	const { dispatch } = useContext(TestimonialContext)
 	const webcamRef = useRef(null)
 	const mediaRecorderRef = useRef(null)
+
 	const [isStreamInit, setIsStreamInit] = useState(false)
 	const [capturing, setCapturing] = useState(false)
 	const [recordedChunks, setRecordedChunks] = useState([])
 	const [videoURL, setVideoURl] = useState("")
 	const [error, setError] = useState("")
 	const [showNotification, setShowNotification] = useState(false)
+	const [recordingTime, setTime] = useState(0)
 
-	const videoWidth = window.innerWidth > 0 ? window.innerWidth : window.screen.width
+	useInterval(() => {
+		capturing && setTime(recordingTime + 1)
+	}, 1000)
 
-	console.log(window.innerWidth || 0, window.screen.width || 0, document.body.clientWidth || 0)
+	const videoWidth =
+		window.innerWidth > 0 ? window.innerWidth : window.screen.width
+
+	console.log(
+		window.innerWidth || 0,
+		window.screen.width || 0,
+		document.body.clientWidth || 0
+	)
 
 	const handleStartCaptureClick = useCallback(() => {
 		setCapturing(true)
@@ -81,7 +94,7 @@ export const VideoRecorder = () => {
 							videoConstraints={{
 								width: videoWidth > 400 ? 333 : 313,
 								height: 524,
-								facingMode: "user"
+								facingMode: "user",
 							}}
 							width={videoWidth > 400 ? 333 : 313}
 							height={524}
@@ -102,24 +115,28 @@ export const VideoRecorder = () => {
 					<QuestionsCard />
 				</article>
 			</figure>
-			{(capturing || isStreamInit) && (
-				<div className="button-container">
-					{capturing ? (
+			{capturing && (
+				<div className="timer-button-container">
+					<article className="video-timer">
+						{" "}
+						{convertSecondsToHourMinute(String(recordingTime))}
+					</article>
+					<div className="stop-button-container">
 						<Tooltip content="Stop" placement="right">
 							<button onClick={handleStopCaptureClick} className="stop-button">
 								<StopIcon />
 							</button>
 						</Tooltip>
-					) : isStreamInit ? (
-						<Tooltip content="Start" placement="right">
-							<button
-								onClick={handleStartCaptureClick}
-								className="record-button"
-							>
-								<RecordingIcon />
-							</button>
-						</Tooltip>
-					) : null}
+					</div>
+				</div>
+			)}
+			{isStreamInit && !capturing && (
+				<div className="button-container">
+					<Tooltip content="Start" placement="right">
+						<button onClick={handleStartCaptureClick} className="record-button">
+							<RecordingIcon />
+						</button>
+					</Tooltip>
 				</div>
 			)}
 		</>
