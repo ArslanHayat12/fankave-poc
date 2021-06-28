@@ -24,7 +24,7 @@
 }
 
 .question-card .disabled {
-	color: #7e7e7e;
+	opacity: 0.3;
 	cursor: default;
 }
 
