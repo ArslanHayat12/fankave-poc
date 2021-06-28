@@ -1,12 +1,13 @@
 import {
-	SET_TYPE,
-	SET_URL,
-	SET_STATUS,
-	SET_SCREEN,
-	SET_STREAM,
-	SET_AUDIO_PLAYING,
-	SET_INDEX,
-} from "../constants"
+  SET_TYPE,
+  SET_URL,
+  SET_STATUS,
+  SET_SCREEN,
+  SET_STREAM,
+  SET_AUDIO_PLAYING,
+  SET_INDEX,
+  SET_AUDIO_CTX,
+} from "../constants";
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -27,6 +28,9 @@ export const reducer = (state, action) => {
 
     case SET_AUDIO_PLAYING:
       return { ...state, isAudioPlaying: action.payload };
+
+    case SET_AUDIO_CTX:
+      return { ...state, audioCtx: action.payload };
 
     default:
       return state;
