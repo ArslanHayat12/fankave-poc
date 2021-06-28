@@ -1,27 +1,33 @@
+.video-recording-container .button-container {
+	display: flex;
+	justify-content: center;
+	margin: 15px auto 0;
+	font-size: 12px;
+}
+
 .video-recording-container .record-button {
-  display: flex;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  margin: 15px auto 0;
+	display: flex;
+	border: none;
+	background: transparent;
+	cursor: pointer;
 }
 
 .video-recording-container {
-  z-index: 2;
+	z-index: 2;
 }
 
 .video-recording-container .stop-button {
-  display: flex;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  margin: 15px auto 0;
-  border: 1px solid #e85775;
-  border-radius: 50%;
-  padding: 16px;
+	display: flex;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	border: 1px solid #e85775;
+	border-radius: 50%;
+	padding: 16px;
+	margin: 1px 6px;
 }
 
 .video-recording-container .stop-button svg {
-  width: 12px;
-  height: 12px;
+	width: 12px;
+	height: 12px;
 }

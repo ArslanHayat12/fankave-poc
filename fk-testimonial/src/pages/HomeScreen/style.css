@@ -1,12 +1,13 @@
 .home-screen {
-  display: grid;
-  grid-row-gap: 15px;
+	display: grid;
+	grid-row-gap: 15px;
 }
 
 .home-screen .description {
-  font-size: 25px;
-  font-weight: 500;
-  color: #000;
-  max-width: 305px;
-  margin-bottom: 0;
+	font-size: 25px;
+	font-weight: 500;
+	color: #000;
+	max-width: 305px;
+	margin-bottom: 0;
+	text-align: center;
 }

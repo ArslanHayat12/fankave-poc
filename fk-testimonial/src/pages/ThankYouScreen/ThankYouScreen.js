@@ -6,7 +6,7 @@ export const ThankYouScreen = () => {
     <article className="thankyou-screen">
       <h2 className="heading">Thank you</h2>
       <p className="description">
-        We will be in touch if we need anything else
+        We will be in touch if we need anything else.
       </p>
     </article>
   );
