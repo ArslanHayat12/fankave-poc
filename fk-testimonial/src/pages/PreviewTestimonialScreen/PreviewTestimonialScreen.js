@@ -75,7 +75,7 @@ const PreviewTestimonialScreen = (props) => {
 	}, [])
 
 	return (
-		<article className="preview-testimonial-sreen">
+		<article className={`preview-testimonial-sreen${testimonialType === "audio" ? ' audio-preview-screen':''}`}>
 			{testimonialType === "video" ? (
 				<>
 					<h2 className="heading">Preview Video Testimonial </h2>

@@ -1,11 +1,11 @@
-.video-recording-container .button-container {
+.button-container {
 	display: flex;
 	justify-content: center;
 	margin: 15px auto 0;
 	font-size: 12px;
 }
 
-.video-recording-container .record-button {
+.button-container .record-button {
 	display: flex;
 	border: none;
 	background: transparent;
@@ -16,7 +16,7 @@
 	z-index: 2;
 }
 
-.video-recording-container .stop-button {
+.button-container .stop-button {
 	display: flex;
 	border: none;
 	background: transparent;
@@ -27,7 +27,7 @@
 	margin: 1px 6px;
 }
 
-.video-recording-container .stop-button svg {
+.button-container .stop-button svg {
 	width: 12px;
 	height: 12px;
 }

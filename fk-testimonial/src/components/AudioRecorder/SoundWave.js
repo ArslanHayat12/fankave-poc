@@ -160,15 +160,8 @@ export const SoundWave = () => {
   return (
     <canvas
       ref={canvasRef}
+      className="preview-audio-canvas"
       height="100px"
-      style={{
-        display: "block",
-        position: "absolute",
-        left: "-33px",
-        right: "-52px",
-        bottom: "-28px",
-        width: "389px",
-      }}
     ></canvas>
   );
 };
