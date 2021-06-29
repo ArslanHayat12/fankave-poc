@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useEffect, useContext } from "react";
 import Webcam from "react-webcam";
+import { isMobile } from "react-device-detect";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import NotificationCard from "../NotificationCard/NotificationCard";
 import { CustomTooltip as Tooltip } from "../Tooltip/Tooltip";
@@ -31,12 +32,6 @@ export const VideoRecorder = () => {
 
   const videoWidth =
     window.innerWidth > 0 ? window.innerWidth : window.screen.width;
-
-  console.log(
-    window.innerWidth || 0,
-    window.screen.width || 0,
-    document.body.clientWidth || 0
-  );
 
   const handleStartCaptureClick = useCallback(() => {
     setCapturing(true);
@@ -107,11 +102,11 @@ export const VideoRecorder = () => {
               ref={webcamRef}
               mirrored
               videoConstraints={{
-                width: videoWidth > 400 ? 333 : 313,
-                height: 524,
+                width: isMobile ? undefined : videoWidth > 400 ? 333 : videoWidth > 360 ? 313 : 298,
+                height: isMobile ? undefined : 524,
                 facingMode: "user",
               }}
-              width={videoWidth > 400 ? 333 : 313}
+              width={videoWidth > 400 ? 333 : videoWidth > 360 ? 313 : 298}
               height={524}
               style={{ objectFit: "cover" }}
               onUserMedia={() => setIsStreamInit(true)}
