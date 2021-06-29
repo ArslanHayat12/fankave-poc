@@ -1,8 +1,48 @@
 .custom-audio-player {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-column-gap: 10px;
+  align-items: center;
 }
 
 .custom-audio-player svg {
   width: 10px;
   height: 10px;
+}
+
+.custom-audio-player .sb-soundplayer-play-btn {
+  background: transparent;
+  border: none;
+}
+
+.custom-audio-player .sb-soundplayer-play-btn svg {
+  fill: #fff;
+}
+
+.custom-audio-player .sb-soundplayer-timer {
+  color: #fff;
+}
+
+.custom-audio-player .edit-icon {
+  margin-right: 10px;
+}
+
+.custom-audio-player .edit-icon path {
+  fill: #fff;
+}
+
+.custom-audio-player .audio-edit-button svg {
+  fill: #fff;
+}
+
+.custom-audio-player .sb-soundplayer-progress-container {
+  width: 150px;
+  background: #ffffff47;
+  height: 1px;
+}
+
+.custom-audio-player .sb-soundplayer-progress-inner {
+  background: #fff;
+  height: 100%;
+  color: #fff;
 }

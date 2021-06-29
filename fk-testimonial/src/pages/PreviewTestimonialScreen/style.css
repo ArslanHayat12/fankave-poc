@@ -128,26 +128,6 @@
   height: 30px;
 }
 
-.preview-testimonial-sreen .edit-icon {
-  margin-right: 10px;
-}
-
-.preview-testimonial-sreen .edit-icon path {
-  fill: #fff;
-}
-
-.preview-testimonial-sreen .audio-edit-button {
-  display: flex;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: transparent;
-}
-
-.preview-testimonial-sreen .audio-edit-button svg {
-  fill: #fff;
-}
-
 .preview-testimonial-sreen .preview-audio-canvas {
   display: block;
   position: absolute;
@@ -157,15 +137,10 @@
   width: 389px;
 }
 
-.preview-testimonial-sreen .sb-soundplayer-play-btn {
-  background: transparent;
+.preview-testimonial-sreen .audio-edit-button {
+  display: flex;
+  cursor: pointer;
   border: none;
-}
-
-.preview-testimonial-sreen .sb-soundplayer-play-btn svg {
-  fill: #fff;
-}
-
-.preview-testimonial-sreen .sb-soundplayer-timer {
-  color: #fff;
+  outline: none;
+  background-color: transparent;
 }
