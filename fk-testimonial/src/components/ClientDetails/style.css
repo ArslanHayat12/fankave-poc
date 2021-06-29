@@ -1,20 +1,45 @@
 .client-details-wrapper {
-  width: 100%;
+	width: 100%;
 }
 
 .client-details-wrapper .client-name {
-  font-size: 27px;
-  margin: 0;
+	font-size: 27px;
+	margin: 0;
 }
 
 .client-details-wrapper .client-name-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 12px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 12px;
+}
+
+.client-details-wrapper .client-email-company-wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .client-details-wrapper .client-details {
-  font-size: 16px;
-  margin: 0;
+	font-size: 16px;
+	margin: 0;
+}
+
+input {
+	font-size: 12px;
+	background-color: rgb(255, 255, 255);
+	width: 90%;
+	display: block;
+	transition: all 0.3s;
+	margin-bottom: 5px;
+	border: 1px solid #ccc;
+	padding: 10px 7px;
+	border-radius: 5px;
+	color: #000;
+	outline: #35a4ff;
+}
+
+:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0px 1000px white inset;
+	background-color: transparent;
 }
