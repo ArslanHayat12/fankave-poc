@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "react-responsive-modal/styles.css";
+import "./style.css";
 import { Modal } from "react-responsive-modal";
 
 const NotificationCard = (props) => {
@@ -23,12 +24,11 @@ const NotificationCard = (props) => {
           overlay: "customOverlay",
           modal: "customModal",
         }}
-        styles={{ width: "300px", height: "200px" }}
-        showCloseIcon={false}
       >
         <p className="description">
           {/* Allow fankave to use camera and microphone */}
-          Access Blocked
+          You do not have camera and microphone permissions. Please enable
+          permissions manually.
         </p>
         {/* <button className="button" onClick={handlePermission}>
           Allow

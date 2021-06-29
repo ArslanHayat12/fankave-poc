@@ -6,7 +6,7 @@ import { PauseIcon, PlayIcon, StopIcon } from "../../assets";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { useContext } from "react";
 import { SET_URL, SET_STATUS } from "../../constants";
-
+import NotificationCard from "../NotificationCard/NotificationCard";
 import "./style.css";
 
 export const AudioRecorder = () => {
@@ -133,20 +133,10 @@ export const AudioRecorder = () => {
         )}
       </article>
 
-      {/* {url && (
-        <audio
-          controls
-          onPlay={() => setAudioPlaying(true)}
-          onPause={() => setAudioPlaying(false)}
-          onStop={() => setAudioPlaying(false)}
-        >
-          <source src={url} />
-        </audio>
-      )} */}
       {isAudioPlaying && (
         <Visualizer stream={stream} isAudioPlaying={isAudioPlaying} />
       )}
-      {error && <p>{error}</p>}
+      {error && <NotificationCard openModal={error ? true : false} />}
     </div>
   );
 };

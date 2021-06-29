@@ -12,7 +12,6 @@ export const OutputWave = (props) => {
   useEffect(() => {
     audioRef.current.src = state.url;
     audioRef.current.load();
-    audioRef.current.play();
 
     var context = new AudioContext();
 
@@ -74,8 +73,6 @@ export const OutputWave = (props) => {
       ctx.strokeStyle = "#cce7ff";
       ctx.stroke();
     }
-
-    audioRef.current.play();
   }, []);
 
   return (
