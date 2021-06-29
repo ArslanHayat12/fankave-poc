@@ -16,7 +16,7 @@ export const CustomAudioPlayer = withCustomAudio((props) => {
       <PlayButton {...props} />
       <Progress {...props} duration={urlDuration} />
       <Timer {...props} duration={urlDuration} />
-      <VolumeControl {...props} />
+      {/* <VolumeControl {...props} /> */}
     </div>
   );
 });
