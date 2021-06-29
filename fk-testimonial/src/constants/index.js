@@ -6,6 +6,7 @@ export const THANK_YOU_SCREEN = "THANK_YOU_SCREEN";
 export const RESET_DATA = "RESET_DATA";
 export const SET_TYPE = "SET_TYPE";
 export const SET_URL = "SET_URL";
+export const SET_URL_DURATION = "SET_URL_DURATION";
 export const SET_STATUS = "SET_STATUS";
 export const SET_SCREEN = "SET_SCREEN";
 export const SET_STREAM = "SET_STREAM";

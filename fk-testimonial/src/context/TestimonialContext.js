@@ -4,6 +4,7 @@ import { HOME_SCREEN } from "../constants";
 export const initialState = {
   type: null,
   url: null,
+  urlDuration: 0,
   status: false,
   screen: HOME_SCREEN,
   stream: null,
