@@ -1,7 +1,7 @@
 import React, { useReducer, useMemo, useCallback } from "react";
 import { questionReducer } from "../../reducers/reducers";
 import { initialState, QuestionContext } from "../../context/QuestionContext";
-import { SET_INDEX } from '../../constants'
+import { SET_INDEX } from "../../constants";
 import "./style.css";
 
 const QuestionsCard = () => {
@@ -10,9 +10,9 @@ const QuestionsCard = () => {
 
   const questionArray = [
     "What is your name, title and company?",
-    "Q2",
-    "Q3",
-    "Q4",
+    "What challenge did you have?",
+    "What made this partner the obvious choice?",
+    "What were the results?",
   ];
 
   const gotToPrevQuestion = useCallback(() => {
@@ -22,7 +22,7 @@ const QuestionsCard = () => {
         payload: state.questionIndex - 1,
       });
     }
-  }, [state])
+  }, [state]);
 
   const gotToNextQuestion = useCallback(() => {
     if (state.questionIndex < questionArray.length - 1) {
@@ -31,7 +31,7 @@ const QuestionsCard = () => {
         payload: state.questionIndex + 1,
       });
     }
-  }, [state])
+  }, [state]);
 
   return (
     <QuestionContext.Provider value={value}>
@@ -40,16 +40,26 @@ const QuestionsCard = () => {
 
         <article className="question-buttons-wrapper">
           <button
-            className={`question-button prev-button${state.questionIndex === 0 ? ' disabled' : ''}`}
+            className={`question-button prev-button${
+              state.questionIndex === 0 ? " disabled" : ""
+            }`}
             onClick={state.questionIndex === 0 ? undefined : gotToPrevQuestion}
           >
-            {`< Prev`}
+            <span>&#8249;</span>{` Prev`}
           </button>
           <button
-            className={`question-button next-button${state.questionIndex === questionArray.length - 1 ? ' disabled' : ''}`}
-            onClick={state.questionIndex === questionArray.length - 1 ? undefined : gotToNextQuestion}
+            className={`question-button next-button${
+              state.questionIndex === questionArray.length - 1
+                ? " disabled"
+                : ""
+            }`}
+            onClick={
+              state.questionIndex === questionArray.length - 1
+                ? undefined
+                : gotToNextQuestion
+            }
           >
-            {`Next >`}
+            {`Next `}<span>&#8250;</span>
           </button>
         </article>
       </article>

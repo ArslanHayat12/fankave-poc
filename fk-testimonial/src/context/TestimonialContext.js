@@ -8,6 +8,7 @@ export const initialState = {
   screen: HOME_SCREEN,
   stream: null,
   isAudioPlaying: false,
+  audioCtx: null,
 };
 
 export const TestimonialContext = createContext({

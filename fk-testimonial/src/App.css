@@ -1,33 +1,75 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
 
 body {
-  background-image: url("./assets/images/background.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  font-family: "Poppins", sans-serif;
+	background-image: url("./assets/images/background.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	font-family: "Poppins", sans-serif;
 }
 
 .main-container {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .widget-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  height: 650px;
-  background-color: #fff;
-  width: 335px;
-  border-radius: 5px;
-  padding: 28px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	height: 650px;
+	background-color: #fff;
+	width: 335px;
+	border-radius: 5px;
+	padding: 28px;
+	margin: 15px;
 }
 
-@media  (max-width: 425px) {
-  .widget-wrapper {
-    height: 550px;
-  }
+::-webkit-scrollbar {
+	width: 3px;
+}
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border-radius: 1rem;
+	border-right: 0.5rem solid transparent;
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	-webkit-border-radius: 1rem;
+	border-radius: 1rem;
+	height: 2rem;
+	background: #a5b0bf;
+}
+
+@media (max-height: 700px) {
+	.widget-wrapper {
+		height: calc(100vh - 100px);
+		overflow: auto;
+	}
+}
+
+@media (max-width: 425px) {
+	.widget-wrapper {
+		height: calc(100vh - 100px);
+		overflow-y: auto;
+		overflow-x: hidden;
+		padding: 28px 14px;
+	}
+
+	.record-screen .heading {
+		font-size: 21px;
+	}
+
+	.preview-testimonial-sreen .heading {
+		font-size: 21px;
+	}
+}
+
+@media (max-width: 375px) {
+	.visualizer {
+		width: 100%;
+	}
 }

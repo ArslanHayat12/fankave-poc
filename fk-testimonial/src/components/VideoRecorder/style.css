@@ -1,11 +1,11 @@
-.video-recording-container .button-container {
+.button-container {
 	display: flex;
 	justify-content: center;
 	margin: 15px auto 0;
 	font-size: 12px;
 }
 
-.video-recording-container .record-button {
+.button-container .record-button {
 	display: flex;
 	border: none;
 	background: transparent;
@@ -16,7 +16,26 @@
 	z-index: 2;
 }
 
-.video-recording-container .stop-button {
+.timer-button-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	justify-content: center;
+	margin: 15px auto 0;
+	font-size: 12px;
+	align-items: center;
+	padding: 0 12px;
+}
+
+.timer-button-container .video-timer {
+	color: #6d6d6d;
+	font-size: 16px;
+}
+
+.timer-button-container .stop-button-container {
+	justify-self: center;
+}
+
+.stop-button-container .stop-button {
 	display: flex;
 	border: none;
 	background: transparent;
@@ -27,7 +46,7 @@
 	margin: 1px 6px;
 }
 
-.video-recording-container .stop-button svg {
+.stop-button-container .stop-button svg {
 	width: 12px;
 	height: 12px;
 }
