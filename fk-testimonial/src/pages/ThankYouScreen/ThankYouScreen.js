@@ -1,13 +1,24 @@
-import React from "react";
-import "./style.css";
+import React, { useContext, useCallback } from "react"
+import { RESET_DATA } from "../../constants"
+import { TestimonialContext } from "../../context/TestimonialContext"
+import "./style.css"
 
 export const ThankYouScreen = () => {
-  return (
-    <article className="thankyou-screen">
-      <h2 className="heading">Thank you</h2>
-      <p className="description">
-        We will be in touch if we need anything else.
-      </p>
-    </article>
-  );
-};
+	const { dispatch } = useContext(TestimonialContext)
+
+	const onBack = useCallback(() => {
+		dispatch({
+			type: RESET_DATA,
+		})
+	}, [])
+
+	return (
+		<article className="thankyou-screen">
+			<h2 className="heading">Thank you</h2>
+			<p className="description">
+				We will be in touch if we need anything else.
+			</p>
+			<span className="back-button" onClick={onBack}>Go To Home</span>
+		</article>
+	)
+}

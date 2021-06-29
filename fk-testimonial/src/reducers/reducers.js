@@ -1,4 +1,5 @@
 import {
+  RESET_DATA,
   SET_TYPE,
   SET_URL,
   SET_STATUS,
@@ -8,6 +9,7 @@ import {
   SET_INDEX,
   SET_AUDIO_CTX,
 } from "../constants";
+import { initialState } from "../context/TestimonialContext";
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -32,6 +34,9 @@ export const reducer = (state, action) => {
     case SET_AUDIO_CTX:
       return { ...state, audioCtx: action.payload };
 
+    case RESET_DATA: 
+      return { ...initialState }
+    
     default:
       return state;
   }

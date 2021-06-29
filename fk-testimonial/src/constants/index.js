@@ -3,6 +3,7 @@ export const TESTIMONIAL_SCREEN = "TESTIMONIAL_SCREEN";
 export const THANK_YOU_SCREEN = "THANK_YOU_SCREEN";
 
 // Dispatch types
+export const RESET_DATA = "RESET_DATA";
 export const SET_TYPE = "SET_TYPE";
 export const SET_URL = "SET_URL";
 export const SET_STATUS = "SET_STATUS";
