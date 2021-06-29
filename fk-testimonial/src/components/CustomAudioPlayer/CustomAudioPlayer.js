@@ -5,7 +5,7 @@ import {
   VolumeControl,
 } from "react-soundplayer/components";
 import { withCustomAudio } from "react-soundplayer/addons";
-import "react-soundplayer/styles/volume.css";
+//import "react-soundplayer/styles/volume.css";
 import "./style.css";
 
 export const CustomAudioPlayer = withCustomAudio((props) => {

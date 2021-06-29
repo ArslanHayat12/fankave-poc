@@ -25,8 +25,8 @@ const RecordScreen = () => {
   recordingTimeRef.current = recordingTime;
 
   useInterval(() => {
-    status && setTime(recordingTime + 0.01);
-  }, 1);
+	status && setTime(recordingTime + 0.5)
+}, 500)
 
   const dispatchURLDuration = useCallback(() => {
     recordingTimeRef &&
