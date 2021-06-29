@@ -27,11 +27,6 @@ export const AudioRecorder = () => {
   //passed to useRecorder stopRecording, receives recorded blob and url
   const onStop = useCallback((blob, blobUrl) => {
     setUrl(blobUrl);
-    setAudioPlaying(false);
-    dispatch({
-      type: SET_STATUS,
-      payload: false,
-    });
   }, []);
 
   useEffect(() => {
@@ -55,6 +50,16 @@ export const AudioRecorder = () => {
       });
     });
   }, [url]);
+
+  const handleStopClick = useCallback(() => {
+    setAudioPlaying(false);
+    dispatch({
+      type: SET_STATUS,
+      payload: false,
+    });
+    const handleRecordingStop = stopRecording(onStop)
+    handleRecordingStop()
+  }, [])
 
   const playButtonHandle = useCallback(() => {
     switch (status) {
@@ -125,7 +130,7 @@ export const AudioRecorder = () => {
           <CustomTooltip content="Stop" placement="bottom">
             <button
               className="recording-button"
-              onClick={stopRecording(onStop)}
+              onClick={handleStopClick}
             >
               <StopIcon customClass="stop-icon" />
             </button>
