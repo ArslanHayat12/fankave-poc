@@ -4,7 +4,9 @@ import React, {
   useState,
   useCallback,
   useEffect,
+  useMemo,
 } from "react";
+import { CustomAudioPlayer } from "../../components/CustomAudioPlayer/CustomAudioPlayer";
 import { PlayFilledIcon, RefreshIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { CustomTooltip } from "../../components/Tooltip/Tooltip";
@@ -74,6 +76,10 @@ const PreviewTestimonialScreen = (props) => {
     };
   }, []);
 
+  const AudioPlayer = useMemo(()=>{
+    return <CustomAudioPlayer ref={audioRef} streamUrl={url} onStartTrack={handlePlayAudio} onPauseTrack={handlePauseAudio} preloadType="none"/>
+  }, [audioRef, url])
+
   return (
     <article
       className={`preview-testimonial-sreen${
@@ -113,14 +119,7 @@ const PreviewTestimonialScreen = (props) => {
         <>
           <h2 className="heading">Preview Audio Testimonial </h2>
           <article className="audio-wrapper">
-            <audio
-              ref={audioRef}
-              controls
-              controlsList="nodownload"
-              id="audio"
-              onPlay={handlePlayAudio}
-              onPause={handlePauseAudio}
-            ></audio>
+            {AudioPlayer}
             <CustomTooltip content="Retake" placement="bottom">
               <button className="audio-edit-button" onClick={onEdit}>
                 <RefreshIcon customClass="edit-icon" />

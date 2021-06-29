@@ -123,6 +123,7 @@
 	display: flex;
 	align-items: center;
 	font-size: 12px;
+	justify-content: space-between;
 }
 
 .preview-testimonial-sreen .edit-icon {

@@ -10,12 +10,9 @@ export const OutputWave = (props) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    audioRef.current.src = state.url;
-    audioRef.current.load();
-
     var context = new AudioContext();
 
-    var src = context.createMediaElementSource(audioRef?.current);
+    var src = context.createMediaElementSource(audioRef?.current.soundCloudAudio.audio);
     var analyser = context.createAnalyser();
 
     const canvas = canvasRef.current;
