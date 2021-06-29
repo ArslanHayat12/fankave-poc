@@ -9,29 +9,29 @@ const ClientDetails = () => {
 	const companyName = getQueryStringValue("company")
 
 	const [nameEdit, setNameEdit] = useState(true)
-  const [emailEdit, setEmailEdit] = useState(true)
-  const [companyEdit, setCompanyEdit] = useState(true)
+	const [emailEdit, setEmailEdit] = useState(true)
+	const [companyEdit, setCompanyEdit] = useState(true)
 	const [clientName, setClientName] = useState("")
 	const [clientEmail, setClientEmail] = useState("")
 	const [clientCompany, setClientCompany] = useState("")
 
-  const handleNameChange = useCallback(e => {
-    if (e.key === 'Enter') {
-      setNameEdit(false)
-    }
-  }, [])
+	const handleNameChange = useCallback((e) => {
+		if (e.key === "Enter") {
+			setNameEdit(false)
+		}
+	}, [])
 
-  const handleEmailChange = useCallback(e => {
-    if (e.key === 'Enter') {
-      setEmailEdit(false)
-    }
-  }, [])
+	const handleEmailChange = useCallback((e) => {
+		if (e.key === "Enter") {
+			setEmailEdit(false)
+		}
+	}, [])
 
-  const handleCompanyChange = useCallback(e => {
-    if (e.key === 'Enter') {
-      setCompanyEdit(false)
-    }
-  }, [])
+	const handleCompanyChange = useCallback((e) => {
+		if (e.key === "Enter") {
+			setCompanyEdit(false)
+		}
+	}, [])
 
 	return (
 		<article className="client-details-wrapper">
@@ -39,11 +39,11 @@ const ClientDetails = () => {
 				nameEdit ? (
 					<input
 						type="text"
-						class="input"
+						className="input-name"
 						id="name"
 						placeholder="Name"
 						value={clientName}
-            onChange={(e) => setClientName(e.target.value)}
+						onChange={(e) => setClientName(e.target.value)}
 						onKeyPress={handleNameChange}
 					/>
 				) : (
@@ -59,15 +59,15 @@ const ClientDetails = () => {
 					<h3 className="client-name">{name}</h3>
 				</article>
 			)}
-      {!email ? (
+			{!email ? (
 				emailEdit ? (
 					<input
 						type="text"
-						class="input"
+						className="input-email"
 						id="email"
 						placeholder="Email Address"
 						value={clientEmail}
-            onChange={(e) => setClientEmail(e.target.value)}
+						onChange={(e) => setClientEmail(e.target.value)}
 						onKeyPress={handleEmailChange}
 					/>
 				) : (
@@ -79,18 +79,18 @@ const ClientDetails = () => {
 					</article>
 				)
 			) : (
-					<p className="client-details">{email}</p>
+				<p className="client-details">{email}</p>
 			)}
-      {!companyName ? (
+			{!companyName ? (
 				companyEdit ? (
 					<input
 						type="text"
-						class="input"
+						className="input-company"
 						id="company"
 						placeholder="Company Name"
 						value={clientCompany}
 						onChange={(e) => setClientCompany(e.target.value)}
-            onKeyPress={handleCompanyChange}
+						onKeyPress={handleCompanyChange}
 					/>
 				) : (
 					<article className="client-email-company-wrapper">
@@ -101,7 +101,7 @@ const ClientDetails = () => {
 					</article>
 				)
 			) : (
-        <p className="client-details">{companyName}</p>
+				<p className="client-details">{companyName}</p>
 			)}
 		</article>
 	)

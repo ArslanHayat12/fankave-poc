@@ -14,6 +14,10 @@
 	margin-top: 12px;
 }
 
+.client-details-wrapper .input-name {
+	margin-top: 12px;
+}
+
 .client-details-wrapper .client-email-company-wrapper {
 	display: flex;
 	justify-content: space-between;
