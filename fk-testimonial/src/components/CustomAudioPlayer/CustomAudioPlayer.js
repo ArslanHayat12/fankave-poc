@@ -3,13 +3,13 @@ import { withCustomAudio } from "react-soundplayer/addons"
 import './style.css'
 
 export const CustomAudioPlayer = withCustomAudio((props) => {
-    const { ref } = props
+    const { ref, urlDuration } = props
 
 	return (
 		<div ref={ref} className="custom-audio-player">
 			<PlayButton {...props} />
-			<Timer {...props} duration={30}/>
-			<Progress {...props} duration={30}/>
+			<Timer {...props} duration={urlDuration}/>
+			<Progress {...props} duration={urlDuration}/>
 		</div>
 	)
 })

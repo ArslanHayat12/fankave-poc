@@ -1,11 +1,7 @@
 import { useEffect, useRef, useContext } from "react";
-import { TestimonialContext } from "../../context/TestimonialContext";
 
 export const OutputWave = (props) => {
-  //receives stream initialized in useRecorder, and isAudioPlaying to show canvas
-
   const { audioRef } = props;
-  const { state, dispatch } = useContext(TestimonialContext);
   //canvas ref required in drawing
   const canvasRef = useRef(null);
 

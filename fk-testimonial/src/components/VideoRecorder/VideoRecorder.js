@@ -7,7 +7,7 @@ import QuestionsCard from "../QuestionsCard/QuestionsCard";
 import { RecordingIcon, StopIcon } from "../../assets";
 import { useInterval } from "../../hooks/useInterval";
 import { convertSecondsToHourMinute } from "../../utils";
-import { SET_URL } from "../../constants";
+import { SET_URL, SET_URL_DURATION } from "../../constants";
 import "./style.css";
 
 export const VideoRecorder = () => {
@@ -22,6 +22,8 @@ export const VideoRecorder = () => {
   const [error, setError] = useState("");
   const [showNotification, setShowNotification] = useState(false);
   const [recordingTime, setTime] = useState(0);
+  const recordingTimeRef = useRef()
+	recordingTimeRef.current = recordingTime
 
   useInterval(() => {
     capturing && setTime(recordingTime + 1);
@@ -82,6 +84,19 @@ export const VideoRecorder = () => {
       });
     }
   }, [recordedChunks]);
+
+  const dispatchURLDuration = useCallback(() => {
+		recordingTimeRef && dispatch({
+			type: SET_URL_DURATION,
+			payload: recordingTimeRef.current
+		})
+	}, [recordingTimeRef])
+
+	useEffect( ()=> {
+		return () => {
+			dispatchURLDuration()
+		}
+	}, [])
 
   return (
     <>

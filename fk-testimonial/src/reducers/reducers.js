@@ -2,6 +2,7 @@ import {
   RESET_DATA,
   SET_TYPE,
   SET_URL,
+  SET_URL_DURATION,
   SET_STATUS,
   SET_SCREEN,
   SET_STREAM,
@@ -18,6 +19,9 @@ export const reducer = (state, action) => {
 
     case SET_URL:
       return { ...state, url: action.payload };
+
+    case SET_URL_DURATION:
+      return { ...state, urlDuration: action.payload };
 
     case SET_STATUS:
       return { ...state, status: action.payload };
