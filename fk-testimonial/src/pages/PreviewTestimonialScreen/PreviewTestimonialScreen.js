@@ -90,11 +90,11 @@ const PreviewTestimonialScreen = (props) => {
 	}, [audioRef, url, urlDuration])
 
   useEffect(()=> {
-    isFinite(audioRef?.current.soundCloudAudio.audio.duration) && dispatch({
+    testimonialType === 'audio' && isFinite(audioRef?.current.soundCloudAudio.audio.duration) && dispatch({
       type: SET_URL_DURATION,
       payload: audioRef?.current.soundCloudAudio.audio.duration
     })
-  }, [audioRef?.current?.soundCloudAudio.audio.duration])
+  }, [testimonialType, audioRef?.current?.soundCloudAudio.audio.duration])
 
 	return (
 		<article
