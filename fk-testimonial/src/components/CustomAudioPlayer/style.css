@@ -4,6 +4,7 @@
   grid-column-gap: 10px;
   align-items: center;
   width: 100%;
+  margin-right: 5px;
 }
 
 .custom-audio-player svg {
@@ -37,7 +38,7 @@
 }
 
 .custom-audio-player .sb-soundplayer-progress-container {
-  width: 150px;
+  width: 152px;
   background: #ffffff47;
   height: 1px;
 }
@@ -46,6 +47,18 @@
   background: #fff;
   height: 100%;
   color: #fff;
+}
+
+@media (max-width: 400px) {
+  .custom-audio-player .sb-soundplayer-progress-container {
+    width: 120px;
+  }
+}
+
+@media (max-width: 350px) {
+  .custom-audio-player .sb-soundplayer-progress-container {
+    width: 70px;
+  }
 }
 
 /* .custom-audio-player .sb-soundplayer-volume {
