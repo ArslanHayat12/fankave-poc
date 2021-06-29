@@ -45,6 +45,7 @@ const ClientDetails = () => {
 						value={clientName}
 						onChange={(e) => setClientName(e.target.value)}
 						onKeyPress={handleNameChange}
+						onBlur={clientName ? ()=>setNameEdit(false) : undefined}
 					/>
 				) : (
 					<article className="client-name-wrapper">
@@ -69,6 +70,7 @@ const ClientDetails = () => {
 						value={clientEmail}
 						onChange={(e) => setClientEmail(e.target.value)}
 						onKeyPress={handleEmailChange}
+						onBlur={clientEmail ? ()=>setEmailEdit(false) : undefined}
 					/>
 				) : (
 					<article className="client-email-company-wrapper">
@@ -91,6 +93,7 @@ const ClientDetails = () => {
 						value={clientCompany}
 						onChange={(e) => setClientCompany(e.target.value)}
 						onKeyPress={handleCompanyChange}
+						onBlur={clientCompany ? ()=>setCompanyEdit(false) : undefined}
 					/>
 				) : (
 					<article className="client-email-company-wrapper">
