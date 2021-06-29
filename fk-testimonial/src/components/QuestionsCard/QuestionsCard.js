@@ -45,7 +45,7 @@ const QuestionsCard = () => {
             }`}
             onClick={state.questionIndex === 0 ? undefined : gotToPrevQuestion}
           >
-            {`< Prev`}
+            <span>&#8249;</span>{` Prev`}
           </button>
           <button
             className={`question-button next-button${
@@ -59,7 +59,7 @@ const QuestionsCard = () => {
                 : gotToNextQuestion
             }
           >
-            {`Next >`}
+            {`Next `}<span>&#8250;</span>
           </button>
         </article>
       </article>

@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
-import { PlayFilledIcon, PencilIcon } from "../../assets/index";
+import { PlayFilledIcon, RefreshIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { CustomTooltip } from "../../components/Tooltip/Tooltip";
 import { TestimonialContext } from "../../context/TestimonialContext";
@@ -86,7 +86,7 @@ const PreviewTestimonialScreen = (props) => {
           <figure className="video-wrapper">
             <button className="edit-testimonial" onClick={onEdit}>
               <CustomTooltip content="Retake" placement="left">
-                <PencilIcon />
+                <RefreshIcon/>
               </CustomTooltip>
             </button>
             <video
@@ -123,7 +123,7 @@ const PreviewTestimonialScreen = (props) => {
             ></audio>
             <CustomTooltip content="Retake" placement="bottom">
               <button className="audio-edit-button" onClick={onEdit}>
-                <PencilIcon customClass="edit-icon" />
+                <RefreshIcon customClass="edit-icon" />
               </button>
             </CustomTooltip>
           </article>
