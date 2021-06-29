@@ -1,163 +1,171 @@
 .preview-testimonial-sreen {
-	position: relative;
-	width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .audio-preview-screen {
-	height: 100%;
+  height: 100%;
 }
 
 .preview-testimonial-sreen .heading {
-	margin-bottom: 0;
-	font-size: 25px;
-	font-weight: normal;
-	margin-top: 0;
-	text-align: center;
+  margin-bottom: 0;
+  font-size: 25px;
+  font-weight: normal;
+  margin-top: 0;
+  text-align: center;
 }
 
 .preview-testimonial-sreen .video-wrapper {
-	position: relative;
-	margin: 15px 0 0;
-	border: 1px solid #c9c9c9;
-	border-radius: 8px;
-	height: 412px;
+  position: relative;
+  margin: 15px 0 0;
+  border: 1px solid #c9c9c9;
+  border-radius: 8px;
+  height: 412px;
 }
 
 .preview-testimonial-sreen .play-button {
-	outline: none;
-	border: none;
-	position: absolute;
-	left: 0;
-	right: 0;
-	margin: auto;
-	top: 45%;
-	background-color: transparent;
-	cursor: pointer;
-	transform: translate(5px, 0px);
+  outline: none;
+  border: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 45%;
+  background-color: transparent;
+  cursor: pointer;
+  transform: translate(5px, 0px);
 }
 
 .preview-testimonial-sreen .video {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	border-radius: 8px;
-	object-fit: cover;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 .preview-testimonial-sreen .edit-testimonial {
-	position: absolute;
-	right: 5px;
-	z-index: 1;
-	top: 5px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border: none;
-	background: #0000009e;
-	border-radius: 50%;
-	width: 24px;
-	height: 24px;
-	cursor: pointer;
-}
-
-.preview-testimonial-sreen .edit-testimonial svg path {
-	fill: #fff;
+  position: absolute;
+  right: 5px;
+  z-index: 1;
+  top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: #0000009e;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }
 
 .preview-testimonial-sreen .edit-testimonial > svg {
-	width: 10px;
-	height: 10px;
+  width: 10px;
+  height: 10px;
 }
 
 .preview-testimonial-sreen .approve-button {
-	background-color: #35a4ff;
-	color: #fff;
-	border-radius: 18px;
-	padding: 8px 20px;
-	outline: none;
-	border: none;
-	cursor: pointer;
+  background-color: #35a4ff;
+  color: #fff;
+  border-radius: 18px;
+  padding: 8px 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
 
 .preview-testimonial-sreen .button-wrapper {
-	width: 100%;
-	margin-top: 25px;
+  width: 100%;
+  margin-top: 25px;
 }
 
 .preview-testimonial-sreen .hide-icon {
-	display: none;
+  display: none;
 }
 
 .preview-testimonial-sreen audio::-webkit-media-controls-panel {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	/* We use flex-start here to ensure that the play button is visible even
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* We use flex-start here to ensure that the play button is visible even
    * if we are too small to show all controls.
    */
-	justify-content: flex-start;
-	-webkit-user-select: none;
-	position: relative;
-	width: 100%;
-	z-index: 0;
-	overflow: hidden;
-	text-align: right;
-	bottom: auto;
-	height: 30px;
-	background-color: #35a4ff;
-	color: #fff;
-	border-radius: 5px;
-	/* The duration is also specified in MediaControlElements.cpp and LayoutTests/media/media-controls.js */
-	transition: opacity 0.3s;
+  justify-content: flex-start;
+  -webkit-user-select: none;
+  position: relative;
+  width: 100%;
+  z-index: 0;
+  overflow: hidden;
+  text-align: right;
+  bottom: auto;
+  height: 30px;
+  background-color: #35a4ff;
+  color: #fff;
+  border-radius: 5px;
+  /* The duration is also specified in MediaControlElements.cpp and LayoutTests/media/media-controls.js */
+  transition: opacity 0.3s;
 }
 
 .preview-testimonial-sreen audio {
-	width: 100%;
-	height: 30px;
-	color: #fff;
-	margin: 30px 0 28px 0;
+  width: 100%;
+  height: 30px;
+  color: #fff;
+  margin: 30px 0 28px 0;
 }
 
 .preview-testimonial-sreen .audio-wrapper {
-	position: relative;
-	display: flex;
-	align-items: center;
-	font-size: 12px;
-	justify-content: space-between;
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  justify-content: space-between;
+
+  background: #35a4ff;
+  border-radius: 25px;
+  padding: 0 15px;
+  margin: 30px 0;
+  height: 30px;
 }
 
 .preview-testimonial-sreen .edit-icon {
-	position: absolute;
+  margin-right: 10px;
 }
 
 .preview-testimonial-sreen .edit-icon path {
-	fill: #000;
+  fill: #fff;
 }
 
 .preview-testimonial-sreen .audio-edit-button {
-	cursor: pointer;
-	border: none;
-	outline: none;
+  display: flex;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
 
-	background: #35a4ff;
-	height: 30px;
-	border-radius: 0 20px 20px 0;
-	width: 53px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	right: 14px;
-	position: relative;
-	padding: 0;
-	margin: 0;
-	top: 1px;
+.preview-testimonial-sreen .audio-edit-button svg {
+  fill: #fff;
 }
 
 .preview-testimonial-sreen .preview-audio-canvas {
-	display: block;
-	position: absolute;
-	left: -26px;
-	right: -52px;
-	bottom: -28px;
-	width: 389px;
+  display: block;
+  position: absolute;
+  left: -26px;
+  right: -52px;
+  bottom: -28px;
+  width: 389px;
+}
+
+.preview-testimonial-sreen .sb-soundplayer-play-btn {
+  background: transparent;
+  border: none;
+}
+
+.preview-testimonial-sreen .sb-soundplayer-play-btn svg {
+  fill: #fff;
+}
+
+.preview-testimonial-sreen .sb-soundplayer-timer {
+  color: #fff;
 }
