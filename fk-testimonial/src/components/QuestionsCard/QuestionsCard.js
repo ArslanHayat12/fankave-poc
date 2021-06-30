@@ -47,6 +47,9 @@ const QuestionsCard = () => {
           >
             <span>&#8249;</span>{` Prev`}
           </button>
+          <span className="question-count">
+            {state.questionIndex + 1}/{questionArray.length}
+          </span>
           <button
             className={`question-button next-button${
               state.questionIndex === questionArray.length - 1
