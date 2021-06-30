@@ -68,9 +68,3 @@ body {
 		font-size: 21px;
 	}
 }
-
-@media (max-width: 375px) {
-	.visualizer {
-		width: 100%;
-	}
-}

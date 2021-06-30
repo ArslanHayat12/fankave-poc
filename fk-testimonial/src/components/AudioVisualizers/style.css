@@ -1,0 +1,21 @@
+.preview-visualizer {
+	display: block;
+	position: absolute;
+	left: -28px;
+	right: 0;
+	bottom: -27.5px;
+	width: 391px;
+	zindex: 0;
+	border: 0 0 5px 5px;
+}
+
+.record-visualizer {
+	position: absolute;
+	top: 14.5%;
+	display: flex;
+	alignitems: end;
+	zindex: -1;
+	left: 0;
+	right: 0;
+	margin: auto;
+}

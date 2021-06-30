@@ -13,7 +13,7 @@ import { CustomTooltip } from "../../components/Tooltip/Tooltip"
 import { TestimonialContext } from "../../context/TestimonialContext"
 import { SET_URL, SET_SCREEN, SET_AUDIO_PLAYING, SET_URL_DURATION } from "../../constants"
 import { THANK_YOU_SCREEN } from "../../constants"
-import { OutputWave } from "../../components/AudioRecorder/OutputWave"
+import { OutputWave } from "../../components/AudioVisualizers/OutputWave"
 import "./style.css"
 
 const PreviewTestimonialScreen = () => {
@@ -50,17 +50,17 @@ const PreviewTestimonialScreen = () => {
 	}
 
 	const handlePlayAudio = () => {
-		dispatch({
-			type: SET_AUDIO_PLAYING,
-			payload: true,
-		})
+		// dispatch({
+		// 	type: SET_AUDIO_PLAYING,
+		// 	payload: true,
+		// })
 	}
 
 	const handlePauseAudio = () => {
-		dispatch({
-			type: SET_AUDIO_PLAYING,
-			payload: false,
-		})
+		// dispatch({
+		// 	type: SET_AUDIO_PLAYING,
+		// 	payload: false,
+		// })
 	}
 
 	const urlObjectCleanUp = useCallback(() => {

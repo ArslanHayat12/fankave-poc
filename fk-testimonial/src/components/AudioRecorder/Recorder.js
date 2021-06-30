@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import useRecorder from "../../utils/useRecorder";
-import { Visualizer } from "./Visualizer";
+import { Visualizer } from "../AudioVisualizers/Visualizer";
 import { CustomTooltip } from "../Tooltip/Tooltip";
 import { PauseIcon, PlayIcon, StopIcon } from "../../assets";
 import { TestimonialContext } from "../../context/TestimonialContext";

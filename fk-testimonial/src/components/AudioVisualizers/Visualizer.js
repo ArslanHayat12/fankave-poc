@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
+import './style.css';
 
 export const Visualizer = (props) => {
   //receives stream initialized in useRecorder, and isAudioPlaying to show canvas
@@ -98,18 +99,8 @@ export const Visualizer = (props) => {
   return (
     <canvas
       ref={canvasRef}
-      className="visualizer"
+      className="record-visualizer"
       height="250px"
-      style={{
-        position: "absolute",
-        top: "14.5%",
-        display: "flex",
-        alignItems: "end",
-        zIndex: "-1",
-        left: " 0",
-        right: "0",
-        margin: "auto",
-      }}
     ></canvas>
   );
 };

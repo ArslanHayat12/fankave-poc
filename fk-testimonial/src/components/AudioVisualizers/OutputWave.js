@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback } from "react";
+import './style.css';
 
 export const OutputWave = (props) => {
   const { audioRef } = props;
@@ -88,18 +89,8 @@ export const OutputWave = (props) => {
   return (
     <canvas
       ref={canvasRef}
-      className="visualizer"
+      className="preview-visualizer"
       height="80px"
-      style={{
-        display: "block",
-        position: "absolute",
-        left: "-28px",
-        right: "0",
-        bottom: "-27.5px",
-        width: "391px",
-        zIndex: 0,
-        border: "0 0 5px 5px",
-      }}
     ></canvas>
   );
 };
