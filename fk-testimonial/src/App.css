@@ -25,6 +25,7 @@ body {
 	border-radius: 5px;
 	padding: 28px;
 	margin: 15px;
+	scrollbar-width: thin !important;
 }
 
 ::-webkit-scrollbar {
