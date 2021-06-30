@@ -1,9 +1,24 @@
-import { useEffect, useRef, useContext } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 export const OutputWave = (props) => {
   const { audioRef } = props;
+  const frameRef = useRef();
+  const sourceRef = useRef();
+  const analyserRef = useRef();
   //canvas ref required in drawing
   const canvasRef = useRef(null);
+
+  const cleanUpFunction = useCallback(() => {
+    cancelAnimationFrame(frameRef.current);
+    analyserRef.current.disconnect();
+    sourceRef.current.disconnect();
+  }, [frameRef, sourceRef, analyserRef]);
+
+  useEffect(() => {
+    return () => {
+      cleanUpFunction();
+    };
+  }, []);
 
   useEffect(() => {
     var context = new AudioContext();
@@ -14,12 +29,14 @@ export const OutputWave = (props) => {
     const canvas = canvasRef.current;
 
     src.connect(analyser);
+    sourceRef.current = src;
 
     var ctx = canvas.getContext("2d");
 
     analyser.connect(context.destination);
 
     analyser.fftSize = 256;
+    analyserRef.current = analyser;
 
     var bufferLength = analyser.frequencyBinCount;
 
@@ -31,7 +48,7 @@ export const OutputWave = (props) => {
       const WIDTH = canvas.width;
       const HEIGHT = canvas.height;
 
-      requestAnimationFrame(draw);
+      frameRef.current = requestAnimationFrame(draw);
 
       analyser.getByteFrequencyData(dataArray);
 
