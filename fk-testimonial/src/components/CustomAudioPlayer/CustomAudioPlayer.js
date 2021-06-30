@@ -1,11 +1,9 @@
 import {
   PlayButton,
   Timer,
-  Progress,
-  VolumeControl,
+  Progress
 } from "react-soundplayer/components";
 import { withCustomAudio } from "react-soundplayer/addons";
-//import "react-soundplayer/styles/volume.css";
 import "./style.css";
 
 export const CustomAudioPlayer = withCustomAudio((props) => {
@@ -16,7 +14,6 @@ export const CustomAudioPlayer = withCustomAudio((props) => {
       <PlayButton {...props} />
       <Progress {...props} duration={urlDuration} />
       <Timer {...props} duration={urlDuration} />
-      {/* <VolumeControl {...props} /> */}
     </div>
   );
 });
