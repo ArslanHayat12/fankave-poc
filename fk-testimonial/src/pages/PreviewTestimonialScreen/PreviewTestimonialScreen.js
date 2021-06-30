@@ -50,17 +50,17 @@ const PreviewTestimonialScreen = () => {
 	}
 
 	const handlePlayAudio = () => {
-		// dispatch({
-		// 	type: SET_AUDIO_PLAYING,
-		// 	payload: true,
-		// })
+		dispatch({
+			type: SET_AUDIO_PLAYING,
+			payload: true,
+		})
 	}
 
 	const handlePauseAudio = () => {
-		// dispatch({
-		// 	type: SET_AUDIO_PLAYING,
-		// 	payload: false,
-		// })
+		dispatch({
+			type: SET_AUDIO_PLAYING,
+			payload: false,
+		})
 	}
 
 	const urlObjectCleanUp = useCallback(() => {
