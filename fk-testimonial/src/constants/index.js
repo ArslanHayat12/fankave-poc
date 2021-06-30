@@ -10,6 +10,5 @@ export const SET_URL_DURATION = "SET_URL_DURATION";
 export const SET_STATUS = "SET_STATUS";
 export const SET_SCREEN = "SET_SCREEN";
 export const SET_AUDIO_PLAYING = "SET_AUDIO_PLAYING";
-export const SET_AUDIO_CTX = "SET_AUDIO_CTX";
 
 export const SET_INDEX = "Set_INDEX";

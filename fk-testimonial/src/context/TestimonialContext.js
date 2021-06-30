@@ -7,8 +7,7 @@ export const initialState = {
   urlDuration: 0,
   status: false,
   screen: HOME_SCREEN,
-  isAudioPlaying: false,
-  audioCtx: null,
+  isAudioPlaying: false
 };
 
 export const TestimonialContext = createContext({

@@ -6,8 +6,7 @@ import {
   SET_STATUS,
   SET_SCREEN,
   SET_AUDIO_PLAYING,
-  SET_INDEX,
-  SET_AUDIO_CTX,
+  SET_INDEX
 } from "../constants";
 import { initialState } from "../context/TestimonialContext";
 
@@ -30,9 +29,6 @@ export const reducer = (state, action) => {
 
     case SET_AUDIO_PLAYING:
       return { ...state, isAudioPlaying: action.payload };
-
-    case SET_AUDIO_CTX:
-      return { ...state, audioCtx: action.payload };
 
     case RESET_DATA: 
       return { ...initialState }
