@@ -16,13 +16,12 @@ import { THANK_YOU_SCREEN } from "../../constants"
 import { OutputWave } from "../../components/AudioRecorder/OutputWave"
 import "./style.css"
 
-const PreviewTestimonialScreen = (props) => {
+const PreviewTestimonialScreen = () => {
 	const {
-		state: { url, urlDuration },
+		state: { url, urlDuration, type: testimonialType },
 		dispatch,
 	} = useContext(TestimonialContext)
 	const [playVideo, setPlayVideo] = useState(false)
-	const { testimonialType } = props
 	const videoRef = useRef(null)
 	const audioRef = useRef(null)
 

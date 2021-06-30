@@ -10,11 +10,11 @@ export const TestimonialScreen = () => {
     <>
       {!url ? (
         <>
-          <RecordScreen recordingType={type} />
+          <RecordScreen />
         </>
       ) : (
         <>
-          <PreviewTestimonialScreen testimonialType={type} />
+          <PreviewTestimonialScreen />
         </>
       )}
     </>
