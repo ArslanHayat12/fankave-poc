@@ -7,7 +7,6 @@ export const initialState = {
   urlDuration: 0,
   status: false,
   screen: HOME_SCREEN,
-  stream: null,
   isAudioPlaying: false,
   audioCtx: null,
 };
