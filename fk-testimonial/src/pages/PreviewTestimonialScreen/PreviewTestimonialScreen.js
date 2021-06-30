@@ -98,7 +98,7 @@ const PreviewTestimonialScreen = (props) => {
 
 	return (
 		<article
-			className={`preview-testimonial-sreen${
+			className={`preview-testimonial-screen${
 				testimonialType === "audio" ? " audio-preview-screen" : ""
 			}`}
 		>
