@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useMemo,
 } from "react";
-import { CustomAudioPlayer } from "../../components/CustomAudioPlayer/CustomAudioPlayer";
+// import { CustomAudioPlayer } from "../../components/CustomAudioPlayer/CustomAudioPlayer";
 import { PlayFilledIcon, RefreshIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { CustomTooltip } from "../../components/Tooltip/Tooltip";
@@ -80,27 +80,27 @@ const PreviewTestimonialScreen = () => {
     };
   }, []);
 
-  const AudioPlayer = useMemo(() => {
-    return (
-      <CustomAudioPlayer
-        ref={audioRef}
-        streamUrl={url}
-        urlDuration={urlDuration}
-        onStartTrack={handlePlayAudio}
-        onPauseTrack={handlePauseAudio}
-        preloadType="none"
-      />
-    );
-  }, [audioRef, url, urlDuration]);
+  // const AudioPlayer = useMemo(() => {
+  //   return (
+  //     <CustomAudioPlayer
+  //       ref={audioRef}
+  //       streamUrl={url}
+  //       urlDuration={urlDuration}
+  //       onStartTrack={handlePlayAudio}
+  //       onPauseTrack={handlePauseAudio}
+  //       preloadType="none"
+  //     />
+  //   );
+  // }, [audioRef, url, urlDuration]);
 
-  useEffect(() => {
-    testimonialType === "audio" &&
-      isFinite(audioRef?.current.soundCloudAudio.audio.duration) &&
-      dispatch({
-        type: SET_URL_DURATION,
-        payload: audioRef?.current.soundCloudAudio.audio.duration,
-      });
-  }, [testimonialType, audioRef?.current?.soundCloudAudio.audio.duration]);
+  // useEffect(() => {
+  //   testimonialType === "audio" &&
+  //     isFinite(audioRef?.current.soundCloudAudio.audio.duration) &&
+  //     dispatch({
+  //       type: SET_URL_DURATION,
+  //       payload: audioRef?.current.soundCloudAudio.audio.duration,
+  //     });
+  // }, [testimonialType, audioRef?.current?.soundCloudAudio.audio.duration]);
 
   return (
     <article
@@ -140,8 +140,12 @@ const PreviewTestimonialScreen = () => {
       ) : (
         <>
           <h2 className="heading">Preview Audio Testimonial </h2>
+
+          <audio controls>
+            <source src={url} type="audio/mp4" />
+          </audio>
           <article className="audio-wrapper">
-            {AudioPlayer}
+            {/* {AudioPlayer} */}
             <CustomTooltip content="Retake" placement="bottom">
               <button className="audio-edit-button" onClick={onEdit}>
                 <RefreshIcon customClass="edit-icon" />
@@ -157,7 +161,7 @@ const PreviewTestimonialScreen = () => {
           Approve
         </button>
       </article>
-      {testimonialType === "audio" && <OutputWave audioRef={audioRef} />}
+      {/* {testimonialType === "audio" && <OutputWave audioRef={audioRef} />} */}
     </article>
   );
 };

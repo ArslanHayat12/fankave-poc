@@ -57,9 +57,9 @@ export const AudioRecorder = () => {
       type: SET_STATUS,
       payload: false,
     });
-    const handleRecordingStop = stopRecording(onStop)
-    handleRecordingStop()
-  }, [])
+    const handleRecordingStop = stopRecording(onStop);
+    handleRecordingStop();
+  }, []);
 
   const playButtonHandle = useCallback(() => {
     switch (status) {
@@ -128,19 +128,16 @@ export const AudioRecorder = () => {
         {getPlayButton()}
         {(status === "recording" || status === "paused") && (
           <CustomTooltip content="Stop" placement="bottom">
-            <button
-              className="recording-button"
-              onClick={handleStopClick}
-            >
+            <button className="recording-button" onClick={handleStopClick}>
               <StopIcon customClass="stop-icon" />
             </button>
           </CustomTooltip>
         )}
       </article>
 
-      {isAudioPlaying && (
+      {/* {isAudioPlaying && (
         <Visualizer stream={stream} isAudioPlaying={isAudioPlaying} />
-      )}
+      )} */}
       {error && <NotificationCard openModal={error ? true : false} />}
     </div>
   );

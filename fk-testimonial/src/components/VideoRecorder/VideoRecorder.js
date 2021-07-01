@@ -35,9 +35,23 @@ export const VideoRecorder = () => {
 
   const handleStartCaptureClick = useCallback(() => {
     setCapturing(true);
-    mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
-      mimeType: "video/webm",
-    });
+    let options = { mimeType: "video/webm" };
+    if (typeof MediaRecorder.isTypeSupported == "function") {
+      if (MediaRecorder.isTypeSupported("video/webm;codecs=vp9")) {
+        options = { mimeType: "video/webm;codecs=vp9" };
+      } else if (MediaRecorder.isTypeSupported("video/webm;codecs=h264")) {
+        options = { mimeType: "video/webm;codecs=h264" };
+      } else if (MediaRecorder.isTypeSupported("video/webm")) {
+        options = { mimeType: "video/webm" };
+      } else if (MediaRecorder.isTypeSupported("video/mp4")) {
+        //Safari 14.0.2 has an EXPERIMENTAL version of MediaRecorder enabled by default
+        options = { mimeType: "video/mp4" };
+      }
+    }
+    mediaRecorderRef.current = new MediaRecorder(
+      webcamRef.current.stream,
+      options
+    );
     mediaRecorderRef.current.addEventListener(
       "dataavailable",
       handleDataAvailable
@@ -68,9 +82,21 @@ export const VideoRecorder = () => {
   useEffect(() => {
     //webm type video file created
     if (recordedChunks.length) {
-      const blob = new Blob(recordedChunks, {
-        type: "video/webm",
-      });
+      let options = { type: "video/webm" };
+      if (typeof MediaRecorder.isTypeSupported == "function") {
+        if (MediaRecorder.isTypeSupported("video/webm;codecs=vp9")) {
+          options = { type: "video/webm;codecs=vp9" };
+        } else if (MediaRecorder.isTypeSupported("video/webm;codecs=h264")) {
+          options = { type: "video/webm;codecs=h264" };
+        } else if (MediaRecorder.isTypeSupported("video/webm")) {
+          options = { type: "video/webm" };
+        } else if (MediaRecorder.isTypeSupported("video/mp4")) {
+          //Safari 14.0.2 has an EXPERIMENTAL version of MediaRecorder enabled by default
+          options = { type: "video/mp4" };
+        }
+      }
+
+      const blob = new Blob(recordedChunks, options);
       const url = window.URL.createObjectURL(blob);
       setVideoURl(url);
       dispatch({
