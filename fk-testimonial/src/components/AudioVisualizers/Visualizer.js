@@ -3,6 +3,8 @@ import "./style.css";
 
 export const Visualizer = (props) => {
   //receives stream initialized in useRecorder, and isAudioPlaying to show canvas
+
+  window.AudioContext = window.AudioContext || window.webkitAudioContext;
   const { stream, isAudioPlaying } = props;
   const frameRef = useRef();
   const sourceRef = useRef();
@@ -38,7 +40,7 @@ export const Visualizer = (props) => {
 
       const analyser = audioCtx.createAnalyser();
 
-      source.connect(analyser);
+      source?.connect(analyser);
       sourceRef.current = source;
 
       drawCircle();

@@ -135,9 +135,9 @@ export const AudioRecorder = () => {
         )}
       </article>
 
-      {/* {isAudioPlaying && (
+      {isAudioPlaying && (
         <Visualizer stream={stream} isAudioPlaying={isAudioPlaying} />
-      )} */}
+      )}
       {error && <NotificationCard openModal={error ? true : false} />}
     </div>
   );

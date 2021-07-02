@@ -1,7 +1,8 @@
 import { useEffect, useRef, useCallback } from "react";
-import './style.css';
+import "./style.css";
 
 export const OutputWave = (props) => {
+  var context = new (window.AudioContext || window.webkitAudioContext)();
   const { audioRef } = props;
   const frameRef = useRef();
   const sourceRef = useRef();
@@ -11,8 +12,8 @@ export const OutputWave = (props) => {
 
   const cleanUpFunction = useCallback(() => {
     cancelAnimationFrame(frameRef.current);
-    analyserRef.current.disconnect();
-    sourceRef.current.disconnect();
+    analyserRef.current?.disconnect();
+    sourceRef.current?.disconnect();
   }, [frameRef, sourceRef, analyserRef]);
 
   useEffect(() => {
@@ -22,9 +23,9 @@ export const OutputWave = (props) => {
   }, []);
 
   useEffect(() => {
-    var context = new AudioContext();
-
-    var src = context.createMediaElementSource(audioRef?.current.soundCloudAudio.audio);
+    var src = context.createMediaElementSource(
+      audioRef.current?.soundCloudAudio?.audio
+    );
     var analyser = context.createAnalyser();
 
     const canvas = canvasRef.current;

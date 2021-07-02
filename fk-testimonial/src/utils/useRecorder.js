@@ -110,7 +110,33 @@ function useRecorder(
         mediaRecorderRef.current.ondataavailable = (e) => {
           let chunks = [];
           chunks.push(e.data);
-          const blob = new Blob(chunks, { type: "audio/mp4" });
+          let options = { type: "audio/aac" };
+          if (typeof MediaRecorder.isTypeSupported == "function") {
+            /*
+				MediaRecorder.isTypeSupported is a function announced in https://developers.google.com/web/updates/2016/01/mediarecorder and later introduced in the MediaRecorder API spec http://www.w3.org/TR/mediastream-recording/
+			*/
+            if (MediaRecorder.isTypeSupported("audio/x-aac")) {
+              options = { type: "audio/x-aac" };
+            } else if (MediaRecorder.isTypeSupported("audio/wav")) {
+              options = { type: "audio/wav" };
+            } else if (MediaRecorder.isTypeSupported("audio/mpeg")) {
+              options = { type: "audio/mpeg" };
+            } else if (MediaRecorder.isTypeSupported("audio/mp4")) {
+              options = { type: "audio/mp4" };
+            } else if (MediaRecorder.isTypeSupported("audio/webm")) {
+              options = { type: "audio/webm" };
+            } else if (MediaRecorder.isTypeSupported("audio/ogg")) {
+              options = { type: "audio/ogg" };
+            } else if (MediaRecorder.isTypeSupported("audio/flac")) {
+              options = { type: "audio/flac" };
+            } else if (MediaRecorder.isTypeSupported("audio/x-caf")) {
+              options = { type: "audio/x-caf" };
+            } else if (MediaRecorder.isTypeSupported("audio/aac")) {
+              //Safari 14.0.2 has an EXPERIMENTAL version of MediaRecorder enabled by default
+              options = { type: "audio/aac" };
+            }
+          }
+          const blob = new Blob(chunks, options);
 
           let audioURL = window.URL.createObjectURL(blob);
           try {
