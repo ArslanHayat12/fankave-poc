@@ -18,7 +18,7 @@ import {
   //SET_URL_DURATION,
 } from "../../constants";
 import { THANK_YOU_SCREEN } from "../../constants";
-import { OutputWave } from "../../components/AudioVisualizers/OutputWave";
+import { SoundWave } from "../../components/AudioVisualizers/SoundWave";
 import "./style.css";
 
 const PreviewTestimonialScreen = () => {
@@ -166,7 +166,7 @@ const PreviewTestimonialScreen = () => {
           Approve
         </button>
       </article>
-      {testimonialType === "audio" && <OutputWave audioRef={audioRef} />}
+      {testimonialType === "audio" && <SoundWave/>}
     </article>
   );
 };
