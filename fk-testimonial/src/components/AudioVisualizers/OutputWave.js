@@ -24,7 +24,7 @@ export const OutputWave = (props) => {
 
   useEffect(() => {
     var src = context.createMediaElementSource(
-      audioRef.current?.soundCloudAudio?.audio
+      audioRef.current
     );
     var analyser = context.createAnalyser();
 
