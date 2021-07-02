@@ -117,8 +117,8 @@
 
 .preview-testimonial-screen .audio-wrapper {
 	position: relative;
-	/* display: flex;
-	align-items: center; */
+	display: flex;
+	align-items: center;
 	font-size: 12px;
 	/* justify-content: space-between; */
 
@@ -144,6 +144,33 @@
 	border: none;
 	outline: none;
 	background-color: transparent;
+}
+
+.preview-testimonial-screen .edit-icon {
+	position: absolute;
+}
+
+.preview-testimonial-screen .edit-icon path {
+	fill: #000;
+}
+
+.preview-testimonial-screen .audio-edit-button {
+	cursor: pointer;
+	border: none;
+	outline: none;
+
+	background: #35a4ff;
+	height: 30px;
+	border-radius: 0 20px 20px 0;
+	width: 53px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	right: 14px;
+	position: relative;
+	padding: 0;
+	margin: 0;
+	top: 1px;
 }
 
 .preview-testimonial-screen .video-retake-icon {
