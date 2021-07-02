@@ -15,7 +15,7 @@ import {
   SET_URL,
   SET_SCREEN,
   SET_AUDIO_PLAYING,
-  //SET_URL_DURATION,
+  SET_URL_DURATION,
 } from "../../constants";
 import { THANK_YOU_SCREEN } from "../../constants";
 import { SoundWave } from "../../components/AudioVisualizers/SoundWave";
@@ -93,14 +93,14 @@ const PreviewTestimonialScreen = () => {
     );
   }, [audioRef, url, urlDuration]);
 
-  // useEffect(() => {
-  //   testimonialType === "audio" &&
-  //     isFinite(audioRef?.current.soundCloudAudio.audio.duration) &&
-  //     dispatch({
-  //       type: SET_URL_DURATION,
-  //       payload: audioRef?.current.soundCloudAudio.audio.duration,
-  //     });
-  //  }, [testimonialType, audioRef?.current?.soundCloudAudio.audio.duration]);
+  useEffect(() => {
+    testimonialType === "audio" &&
+      isFinite(audioRef?.current.soundCloudAudio.audio.duration) &&
+      dispatch({
+        type: SET_URL_DURATION,
+        payload: audioRef?.current.soundCloudAudio.audio.duration,
+      });
+   }, [testimonialType, audioRef?.current?.soundCloudAudio.audio.duration]);
 
   return (
     <article
