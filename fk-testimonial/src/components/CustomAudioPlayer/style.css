@@ -60,6 +60,10 @@
 	.custom-audio-player .sb-soundplayer-progress-container {
 		width: 70px;
 	}
+
+	.custom-audio-player .sb-soundplayer-timer {
+		font-size: 10px;
+	}
 }
 
 /* .custom-audio-player .sb-soundplayer-volume {
