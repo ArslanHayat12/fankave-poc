@@ -101,25 +101,13 @@ export const AudioRecorder = () => {
   }, [status]);
 
   const getPlayButton = useCallback(() => {
-    return status === "recording" ? (
-      <CustomTooltip content="Pause" placement="bottom">
-        <button className="recording-button" onClick={playButtonHandle}>
-          <PauseIcon customClass="pause-icon" />
-        </button>
-      </CustomTooltip>
-    ) : status === "paused" ? (
-      <CustomTooltip content="Resume" placement="bottom">
-        <button className="recording-button" onClick={playButtonHandle}>
-          <PlayIcon customClass="play-icon" />
-        </button>
-      </CustomTooltip>
-    ) : (
+    return status === "init" || status === "idle" ? (
       <CustomTooltip content="Start" placement="bottom">
         <button className="recording-button" onClick={playButtonHandle}>
           <PlayIcon customClass="play-icon" />
         </button>
       </CustomTooltip>
-    );
+    ) : null;
   }, [status]);
 
   return (

@@ -42,6 +42,7 @@ body {
 	padding: 28px;
 	margin: 15px;
 	scrollbar-width: thin !important;
+	overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -65,6 +66,7 @@ body {
 	.widget-wrapper {
 		height: calc(100vh - 155px);
 		overflow: auto;
+		overflow-x: hidden;
 	}
 }
 
@@ -72,6 +74,7 @@ body {
 	.widget-wrapper {
 		height: calc(100vh - 224px);
 		overflow: auto;
+		overflow-x: hidden;
 	}
 }
 
@@ -79,6 +82,7 @@ body {
 	.widget-wrapper {
 		height: calc(100vh - 288px);
 		overflow: auto;
+		overflow-x: hidden;
 	}
 }
 
