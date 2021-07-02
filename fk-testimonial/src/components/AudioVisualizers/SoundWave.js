@@ -167,7 +167,7 @@ export const SoundWave = () => {
         position: "absolute",
         left: "-33px",
         right: "-52px",
-        bottom: "-28px",
+        bottom: "-40px",
         width: "389px",
       }}
     ></canvas>

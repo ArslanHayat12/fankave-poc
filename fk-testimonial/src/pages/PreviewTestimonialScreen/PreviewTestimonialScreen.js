@@ -143,14 +143,6 @@ const PreviewTestimonialScreen = () => {
 
           <article className="audio-wrapper">
             {AudioPlayer}
-            {/* <audio
-              ref={audioRef}
-              controls
-              controlsList="nodownload"
-              id="audio"
-              onPlay={handlePlayAudio}
-              onPause={handlePauseAudio}
-            ><source src={url}/></audio> */}
             <CustomTooltip content="Retake" placement="bottom">
               <button className="audio-edit-button" onClick={onEdit}>
                 <RefreshIcon customClass="edit-icon" />
