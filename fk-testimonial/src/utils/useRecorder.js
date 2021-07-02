@@ -111,8 +111,13 @@ function useRecorder(
           let chunks = [];
           chunks.push(e.data);
           const blob = new Blob(chunks, { type: "audio/mp4" });
-          const audioURL = window.URL.createObjectURL(blob);
-          alert(JSON.stringify(audioURL));
+
+          let audioURL = window.URL.createObjectURL(blob);
+          try {
+            audioURL = window.webkitURL.createObjectURL(blob);
+          } catch {
+            audioURL = window.URL.createObjectURL(blob);
+          }
           callback(blob, audioURL);
         };
         mediaRecorderRef.current?.stop();

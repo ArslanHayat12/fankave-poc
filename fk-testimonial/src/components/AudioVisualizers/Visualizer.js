@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
-import './style.css';
+import "./style.css";
 
 export const Visualizer = (props) => {
   //receives stream initialized in useRecorder, and isAudioPlaying to show canvas
@@ -12,8 +12,8 @@ export const Visualizer = (props) => {
 
   const cleanUpFunction = useCallback(() => {
     cancelAnimationFrame(frameRef.current);
-    analyserRef.current.disconnect();
-    sourceRef.current.disconnect();
+    analyserRef.current?.disconnect();
+    sourceRef.current?.disconnect();
   }, [frameRef, sourceRef, analyserRef]);
 
   useEffect(() => {

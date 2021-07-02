@@ -97,7 +97,13 @@ export const VideoRecorder = () => {
       }
 
       const blob = new Blob(recordedChunks, options);
-      const url = window.URL.createObjectURL(blob);
+
+      let url = window.URL.createObjectURL(blob);
+      try {
+        url = window.webkitURL.createObjectURL(blob);
+      } catch {
+        url = window.URL.createObjectURL(blob);
+      }
       setVideoURl(url);
       dispatch({
         type: SET_URL,
