@@ -18,7 +18,7 @@ export const ThankYouScreen = () => {
 			<p className="description">
 				We will be in touch if we need anything else.
 			</p>
-			<span className="back-button" onClick={onBack}>Go To Home</span>
+			<span className="back-button" onClick={onBack}>Return To Main</span>
 		</article>
 	)
 }

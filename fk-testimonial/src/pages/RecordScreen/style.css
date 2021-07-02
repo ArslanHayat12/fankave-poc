@@ -28,7 +28,7 @@
 
 .record-screen .video-wrapper {
 	position: relative;
-	height: 524px;
+	height: 400px;
 	margin: 15px 0 0;
 	border: 1px solid #c9c9c9;
 	border-radius: 8px;
@@ -47,7 +47,7 @@
 
 .record-screen .audio-wrapper {
 	position: relative;
-	height: 524px;
+	height: 462px;
 	margin: 15px 0 0;
 	border: 1px solid #c9c9c9;
 	border-radius: 8px;
@@ -81,13 +81,14 @@
 	align-items: center;
 	justify-content: center;
 	z-index: 2;
+	margin-top: 84px;
 }
 
 .record-screen .audio-wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: start;
 }
 
 .record-screen .timer {

@@ -142,11 +142,11 @@ export const VideoRecorder = () => {
                   : videoWidth > 360
                   ? 313
                   : 298,
-                height: isMobile ? undefined : 524,
+                height: isMobile ? undefined : 400,
                 facingMode: "user",
               }}
               width={videoWidth > 400 ? 333 : videoWidth > 360 ? 313 : 298}
-              height={524}
+              height={400}
               style={{ objectFit: "cover" }}
               onUserMedia={() => setIsStreamInit(true)}
               onUserMediaError={showAccessBlocked}
