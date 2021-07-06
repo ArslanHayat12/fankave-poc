@@ -68,3 +68,13 @@
   width: 47px;
   height: 47px;
 }
+
+@media (max-width: 420px) {
+  .video-recorder-wrapper .video-recording-container {
+    height: 100%;
+  }
+
+  .video-recorder-wrapper .video-recording-container video {
+    height: 100%;
+  }
+}
