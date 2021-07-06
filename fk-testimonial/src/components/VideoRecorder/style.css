@@ -9,16 +9,17 @@
   display: flex;
   background: transparent;
   cursor: pointer;
-  border: 1px solid #e85775;
-  border-radius: 50%;
-  height: 47px;
-  width: 47px;
+  border: none;
   align-items: center;
   justify-content: center;
 }
 
 .video-recorder-wrapper .video-recording-container {
   z-index: 2;
+}
+
+.video-recorder-wrapper .video-recording-container video {
+  width: 100%;
 }
 
 .video-recorder-wrapper .timer-button-container {
@@ -64,7 +65,6 @@
 }
 
 .video-recorder-wrapper .video-play-icon {
-  width: 16px;
-  height: 16px;
-  transform: translate(2px, 1px);
+  width: 47px;
+  height: 47px;
 }

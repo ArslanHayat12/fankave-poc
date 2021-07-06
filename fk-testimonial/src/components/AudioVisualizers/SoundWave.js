@@ -16,17 +16,17 @@ export const SoundWave = () => {
       opt = {
         count: 15,
         range: {
-          x: 20,
-          y: 55,
+          x: 0,
+          y: 20,
         },
         duration: {
           min: 35,
           max: 40,
         },
         thickness: 1,
-        strokeColor: "#35a4ff61",
+        strokeColor: "#fff",
         level: 0.35,
-        curved: true,
+        // curved: true,
       },
       rand = function (min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
@@ -36,7 +36,7 @@ export const SoundWave = () => {
         return (-c / 2) * (--t * (t - 2) - 1) + b;
       };
 
-    ctx.lineJoin = "round";
+    // ctx.lineJoin = "round";
     ctx.lineWidth = opt.thickness;
     ctx.strokeStyle = opt.strokeColor;
 

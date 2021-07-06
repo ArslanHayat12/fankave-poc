@@ -5,7 +5,7 @@ import { TestimonialContext } from "../../context/TestimonialContext";
 import NotificationCard from "../NotificationCard/NotificationCard";
 import { CustomTooltip as Tooltip } from "../Tooltip/Tooltip";
 import QuestionsCard from "../QuestionsCard/QuestionsCard";
-import { StopIcon, PlayIcon } from "../../assets";
+import { StopIcon, RecordingIcon } from "../../assets";
 import { useInterval } from "../../hooks/useInterval";
 import { convertSecondsToHourMinute } from "../../utils";
 import { SET_URL, SET_URL_DURATION } from "../../constants";
@@ -172,9 +172,9 @@ export const VideoRecorder = () => {
       )}
       {isStreamInit && !capturing && (
         <div className="button-container">
-          <Tooltip content="Start" placement="right">
+          <Tooltip content="Record" placement="right">
             <button onClick={handleStartCaptureClick} className="record-button">
-              <PlayIcon customClass="video-play-icon" />
+              <RecordingIcon customClass="video-play-icon" />
             </button>
           </Tooltip>
         </div>

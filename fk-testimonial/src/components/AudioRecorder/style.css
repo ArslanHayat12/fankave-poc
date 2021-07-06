@@ -1,36 +1,47 @@
 .recorder-container {
-	z-index: 1;
+  z-index: 1;
 }
 
 .recorder-container .recording-button {
-	background-color: transparent;
-	border: 1px solid #e85775;
-	border-radius: 50%;
-	padding: 6px 10px;
-	cursor: pointer;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .recorder-container .pause-icon {
-	width: 9px;
+  width: 9px;
 }
 
 .recorder-container .play-icon {
-	transform: translate(1px, 2px);
-	width: 9px;
+  width: 36px;
+  height: 36px;
 }
 
 .recorder-container .play-icon path {
-	fill: #e85775;
+  fill: #e85775;
+}
+
+.recorder-container .stop-recording-button {
+  background-color: transparent;
+  border: 1px solid #e85775;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+}
+
+.recorder-container .stop-icon {
+  width: 9px;
+  height: 9px;
 }
 
 .recorder-container .stop-icon path {
-	fill: #e85775;
+  fill: #e85775;
 }
 
 .recorder-container .buttons-wrapper {
-	display: flex;
-	column-gap: 7px;
-	width: 100%;
-	justify-content: center;
-	font-size: 12px;
+  display: flex;
+  column-gap: 7px;
+  width: 100%;
+  justify-content: center;
+  font-size: 12px;
 }

@@ -23,20 +23,22 @@ export const PencilIcon = (props) => {
   );
 };
 
-export const RecordingIcon = () => {
+export const RecordingIcon = (props) => {
+  const { customClass } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="47"
       height="47"
       viewBox="0 0 47 47"
+      className={customClass}
     >
       <g id="Group_30" data-name="Group 30" transform="translate(-727 -723)">
         <g
           id="Ellipse_1"
           data-name="Ellipse 1"
           transform="translate(727 723)"
-          fill="#fff"
+          fill="transparent"
           stroke="#e85775"
           stroke-width="1"
         >

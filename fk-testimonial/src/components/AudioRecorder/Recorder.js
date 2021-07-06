@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import useRecorder from "../../utils/useRecorder";
 import { Visualizer } from "../AudioVisualizers/Visualizer";
 import { CustomTooltip } from "../Tooltip/Tooltip";
-import { PauseIcon, PlayIcon, StopIcon } from "../../assets";
+import { RecordingIcon, StopIcon } from "../../assets";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { useContext } from "react";
 import { SET_URL, SET_STATUS } from "../../constants";
@@ -102,9 +102,9 @@ export const AudioRecorder = () => {
 
   const getPlayButton = useCallback(() => {
     return status === "init" || status === "idle" ? (
-      <CustomTooltip content="Start" placement="bottom">
+      <CustomTooltip content="Record" placement="bottom">
         <button className="recording-button" onClick={playButtonHandle}>
-          <PlayIcon customClass="play-icon" />
+          <RecordingIcon customClass="play-icon" />
         </button>
       </CustomTooltip>
     ) : null;
@@ -116,7 +116,7 @@ export const AudioRecorder = () => {
         {getPlayButton()}
         {(status === "recording" || status === "paused") && (
           <CustomTooltip content="Stop" placement="bottom">
-            <button className="recording-button" onClick={handleStopClick}>
+            <button className="stop-recording-button" onClick={handleStopClick}>
               <StopIcon customClass="stop-icon" />
             </button>
           </CustomTooltip>
