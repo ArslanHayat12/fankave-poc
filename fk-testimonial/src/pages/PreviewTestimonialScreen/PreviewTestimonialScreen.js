@@ -167,9 +167,6 @@ const PreviewTestimonialScreen = () => {
         testimonialType === "audio" ? " audio-preview-screen" : ""
       }`}
     >
-      <a href={url} download>
-        Download
-      </a>
       {testimonialType === "video" ? (
         <>
           <h2 className="heading">Preview Video Testimonial </h2>
