@@ -11,4 +11,10 @@ export const SET_STATUS = "SET_STATUS";
 export const SET_SCREEN = "SET_SCREEN";
 export const SET_AUDIO_PLAYING = "SET_AUDIO_PLAYING";
 
+export const SET_CLIENT_NAME = "SET_CLIENT_NAME";
+export const SET_CLIENT_EMAIL = "SET_CLIENT_EMAIL";
+export const SET_CLIENT_COMPANY = "SET_CLIENT_COMPANY";
+
+export const SET_THUMB_URL = "SET_THUMB_URL";
+
 export const SET_INDEX = "Set_INDEX";

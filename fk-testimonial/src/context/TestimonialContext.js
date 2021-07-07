@@ -7,7 +7,11 @@ export const initialState = {
   urlDuration: 0,
   status: false,
   screen: HOME_SCREEN,
-  isAudioPlaying: false
+  isAudioPlaying: false,
+  clientName: "",
+  clientEmail: "",
+  clientCompany: "",
+  thumbUrl: null,
 };
 
 export const TestimonialContext = createContext({

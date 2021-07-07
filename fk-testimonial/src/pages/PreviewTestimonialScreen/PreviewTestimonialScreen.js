@@ -18,13 +18,21 @@ import {
   SET_SCREEN,
   SET_AUDIO_PLAYING,
   SET_URL_DURATION,
+  THANK_YOU_SCREEN,
 } from "../../constants";
-import { THANK_YOU_SCREEN } from "../../constants";
 import "./style.css";
 
 const PreviewTestimonialScreen = () => {
   const {
-    state: { url, urlDuration, type: testimonialType },
+    state: {
+      url,
+      urlDuration,
+      type: testimonialType,
+      clientName,
+      clientEmail,
+      clientCompany,
+      thumbUrl,
+    },
     dispatch,
   } = useContext(TestimonialContext);
   const [playVideo, setPlayVideo] = useState(false);
@@ -41,33 +49,43 @@ const PreviewTestimonialScreen = () => {
         formData.append("media", blob);
         formData.append("type", "video");
 
-        formData.append("story", "Video");
+        formData.append("story", "Video"); //audio for audio
 
         formData.append(
           "author",
           JSON.stringify({
-            name: "Arslan",
-            email: "arslan@fankave.com",
-            company: "Emumba",
+            name: clientName,
+            email: clientEmail,
+            company: clientCompany,
           })
         );
 
         formData.append("hashtags", JSON.stringify(["Testimonial", "POC"]));
 
+        formData.append("thumburl", thumbUrl); //context -- in audio null
+
         fetch("https://dev.api.fankave.com/cmsx/stories/CiscoStore/publish", {
           body: formData,
-
-          method: "post",
+          method: "POST",
         })
           .then((response) => {
+            // check for error response
+            if (!response.ok) {
+              // get error message from body or default to response status
+              const error = response.status;
+              return Promise.reject(error);
+            }
+
             console.log(response);
+
             dispatch({
               type: SET_SCREEN,
               payload: THANK_YOU_SCREEN,
             });
           })
           .catch((err) => {
-            console.log(err);
+            console.log("error", err);
+            alert("Request failed with error code " + err);
           });
       });
   };

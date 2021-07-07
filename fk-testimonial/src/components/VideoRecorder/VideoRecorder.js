@@ -8,7 +8,7 @@ import QuestionsCard from "../QuestionsCard/QuestionsCard";
 import { StopIcon, RecordingIcon } from "../../assets";
 import { useInterval } from "../../hooks/useInterval";
 import { convertSecondsToHourMinute } from "../../utils";
-import { SET_URL, SET_URL_DURATION } from "../../constants";
+import { SET_URL, SET_URL_DURATION, SET_THUMB_URL } from "../../constants";
 import "./style.css";
 
 export const VideoRecorder = () => {
@@ -67,6 +67,10 @@ export const VideoRecorder = () => {
   const handleStopCaptureClick = useCallback(() => {
     mediaRecorderRef.current.stop();
     setCapturing(false);
+    dispatch({
+      type: SET_THUMB_URL,
+      payload: webcamRef?.current?.getScreenshot(),
+    });
   }, [mediaRecorderRef, webcamRef, setCapturing]);
 
   const showAccessBlocked = useCallback((err) => {

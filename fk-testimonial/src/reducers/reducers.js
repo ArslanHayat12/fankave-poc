@@ -6,7 +6,11 @@ import {
   SET_STATUS,
   SET_SCREEN,
   SET_AUDIO_PLAYING,
-  SET_INDEX
+  SET_INDEX,
+  SET_CLIENT_NAME,
+  SET_CLIENT_EMAIL,
+  SET_CLIENT_COMPANY,
+  SET_THUMB_URL,
 } from "../constants";
 import { initialState } from "../context/TestimonialContext";
 
@@ -30,9 +34,21 @@ export const reducer = (state, action) => {
     case SET_AUDIO_PLAYING:
       return { ...state, isAudioPlaying: action.payload };
 
-    case RESET_DATA: 
-      return { ...initialState }
-    
+    case SET_CLIENT_NAME:
+      return { ...state, clientName: action.payload };
+
+    case SET_CLIENT_EMAIL:
+      return { ...state, clientEmail: action.payload };
+
+    case SET_CLIENT_COMPANY:
+      return { ...state, clientCompany: action.payload };
+
+    case SET_THUMB_URL:
+      return { ...state, thumbUrl: action.payload };
+
+    case RESET_DATA:
+      return { ...initialState };
+
     default:
       return state;
   }
