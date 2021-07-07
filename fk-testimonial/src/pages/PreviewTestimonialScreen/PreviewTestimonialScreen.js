@@ -49,7 +49,10 @@ const PreviewTestimonialScreen = () => {
         formData.append("media", blob);
         formData.append("type", "video");
 
-        formData.append("story", "Video"); //audio for audio
+        formData.append(
+          "story",
+          testimonialType === "video" ? "Video" : "Audio"
+        ); //audio for audio
 
         formData.append(
           "author",
@@ -62,7 +65,10 @@ const PreviewTestimonialScreen = () => {
 
         formData.append("hashtags", JSON.stringify(["Testimonial", "POC"]));
 
-        formData.append("thumburl", thumbUrl); //context -- in audio null
+        formData.append(
+          "thumburl",
+          testimonialType === "video" ? thumbUrl : null
+        ); //context -- in audio null
 
         fetch("https://dev.api.fankave.com/cmsx/stories/CiscoStore/publish", {
           body: formData,
