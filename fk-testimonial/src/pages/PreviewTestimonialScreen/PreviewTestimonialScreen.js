@@ -47,7 +47,10 @@ const PreviewTestimonialScreen = () => {
         console.log(blob);
         const formData = new FormData();
         formData.append("media", blob);
-        formData.append("type", "video");
+        formData.append(
+          "type",
+          testimonialType === "video" ? "video" : "audio"
+        );
 
         formData.append(
           "story",
