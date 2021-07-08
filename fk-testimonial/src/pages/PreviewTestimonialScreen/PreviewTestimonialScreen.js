@@ -70,7 +70,9 @@ const PreviewTestimonialScreen = () => {
 
         formData.append(
           "thumburl",
-          testimonialType === "video" ? thumbUrl : null
+          testimonialType === "video"
+            ? thumbUrl
+            : `${window.location.origin}/wave.png`
         ); //context -- in audio null
 
         fetch("https://dev.api.fankave.com/cmsx/stories/CiscoStore/publish", {
