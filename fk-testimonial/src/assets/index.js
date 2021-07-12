@@ -431,3 +431,97 @@ export const RefreshIcon = (props) => {
     </svg>
   );
 };
+
+export const DownloadIcon = (props) => {
+  const { customClass } = props;
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      viewBox="0 0 22 22"
+      className={customClass}
+    >
+      <g id="download_1_" transform="translate(0 -100)">
+        <g id="Group_33" transform="translate(7.334)">
+          <g id="Group_32">
+            <path
+              id="Path_138"
+              d="M177.91 10.59a.918.918 0 0 0-.82-.507h-1.833V.917a.917.917 0 0 0-1.833 0v9.167h-1.834a.916.916 0 0 0-.733 1.467l2.75 3.667c.012.016.03.021.043.036a.9.9 0 0 0 .212.177.945.945 0 0 0 .094.063.86.86 0 0 0 .769 0 .932.932 0 0 0 .094-.063.9.9 0 0 0 .212-.177c.012-.015.031-.02.043-.036l2.75-3.667a.916.916 0 0 0 .086-.961z"
+              class="cls-1"
+              transform="translate(-170.674 100)"
+            />
+          </g>
+        </g>
+        <g id="Group_35" transform="translate(0 13.75)">
+          <g id="Group_34">
+            <path
+              id="Path_139"
+              d="M21.083 320a.916.916 0 0 0-.917.917v2.75a2.753 2.753 0 0 1-2.75 2.75H4.583a2.753 2.753 0 0 1-2.75-2.75v-2.75a.917.917 0 0 0-1.833 0v2.75a4.589 4.589 0 0 0 4.583 4.583h12.834A4.589 4.589 0 0 0 22 323.667v-2.75a.916.916 0 0 0-.917-.917z"
+              class="cls-1"
+              transform="translate(0 -220)"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+export const DeleteIcon = (props) => {
+  const { customClass } = props;
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="24"
+      viewBox="0 0 22 24"
+      className={customClass}
+    >
+      <path
+        fill="#616161"
+        fill-rule="evenodd"
+        d="M1.572 20.941A3.111 3.111 0 0 0 4.714 24h12.572a3.112 3.112 0 0 0 3.143-3.059V6.118H1.572zM22 1.529h-5.5L14.929 0H7.071L5.5 1.529H0v3.059h22z"
+      />
+    </svg>
+  );
+};
+
+export const MenuIcon = (props) => {
+  const { customClass } = props;
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="4.696"
+      height="18.778"
+      viewBox="0 0 4.696 18.778"
+      className={customClass}
+    >
+      <path
+        fill="#707070"
+        fill-rule="evenodd"
+        d="M2.744 12.516a2.348 2.348 0 1 1 2.348-2.348 2.348 2.348 0 0 1-2.348 2.348zm0-7.042A2.347 2.347 0 1 1 5.09 3.127a2.347 2.347 0 0 1-2.346 2.347zm0 9.39A2.347 2.347 0 1 1 .4 17.21a2.347 2.347 0 0 1 2.344-2.346z"
+        transform="translate(-0.396 -0.78)"
+      />
+    </svg>
+  );
+};
+
+export const TickIcon = (props) => {
+  const { customClass } = props;
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="13.997"
+      height="10.998"
+      viewBox="0 0 13.997 10.998"
+      className={customClass}
+    >
+      <path
+        fill-rule="evenodd"
+        d="M13.746 1.519L12.517.26a.857.857 0 0 0-1.228 0L5.366 6.342 2.711 3.611a.83.83 0 0 0-.611-.259.827.827 0 0 0-.614.259L.254 4.87a.91.91 0 0 0 0 1.259l3.269 3.352 1.229 1.259a.857.857 0 0 0 1.228 0l1.228-1.259 6.538-6.7A.867.867 0 0 0 14 2.149a.87.87 0 0 0-.252-.63z"
+        transform="translate(-0.001 -0.001)"
+      />
+    </svg>
+  );
+};
