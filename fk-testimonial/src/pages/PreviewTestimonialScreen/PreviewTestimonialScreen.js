@@ -69,7 +69,7 @@ const PreviewTestimonialScreen = () => {
 
     })
       .then((response) => {
-
+        setIsLoading(false)
         if (!response.ok) {
           // get error message from body or default to response status
           const error = response.status;
@@ -88,6 +88,7 @@ const PreviewTestimonialScreen = () => {
           });
       })
       .catch((err) => {
+        setIsLoading(false)
         console.log("error", err);
         alert("Request failed with error code " + err);
       });
@@ -311,8 +312,7 @@ const PreviewTestimonialScreen = () => {
           {!tweet ? 'Tweet' : 'Share'}
         </button>
       </article>
-      {tweet && isLoading && "Please wait request is processing"}
-      {isApproveLoading && "Please wait request is processing"}
+      {tweet ? isLoading && "Please wait request is processing" : isApproveLoading && "Please wait request is processing"}
       {testimonialType === "audio" && <SoundWave />}
     </article>
   );
