@@ -54,7 +54,7 @@ const PreviewTestimonialScreen = () => {
   }
 
   const openTwitterSiginInTab = () => {
-    window.open(`/twitter/login`, '_blank')
+    window.open(`/testimonial-poc/twitter/login`, '_blank')
     generateRequestData(true)
     generateRequestData()
     setErrorMessage('')
@@ -63,13 +63,13 @@ const PreviewTestimonialScreen = () => {
   const shareAudioVideoToTwitter = (formData) => {
     setErrorMessage('')
     setIsLoading(true)
-    fetch("/tweet", {
+    fetch("/testimonial-poc/tweet", {
       body: formData,
       method: "POST"
 
     })
       .then((response) => {
-
+        setIsLoading(false)
         if (!response.ok) {
           // get error message from body or default to response status
           const error = response.status;
@@ -88,6 +88,7 @@ const PreviewTestimonialScreen = () => {
           });
       })
       .catch((err) => {
+        setIsLoading(false)
         console.log("error", err);
         alert("Request failed with error code " + err);
       });
@@ -311,8 +312,7 @@ const PreviewTestimonialScreen = () => {
           {!tweet ? 'Tweet' : 'Share'}
         </button>
       </article>
-      {tweet && isLoading && "Please wait request is processing"}
-      {isApproveLoading && "Please wait request is processing"}
+      {tweet ? isLoading && "Please wait request is processing" : isApproveLoading && "Please wait request is processing"}
       {testimonialType === "audio" && <SoundWave />}
       {(isLoading || isApproveLoading) && (
         <div className="loader-container">
