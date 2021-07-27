@@ -64,9 +64,9 @@ app.use("/testimonial-poc", express.static(path.join(__dirname, "build")));
 
 app.use(express.static(path.join(__dirname, "build", "static")));
 
-app.get('/twitter/login', passport.authenticate('twitter'))
+app.get('/testimonial-poc/twitter/login', passport.authenticate('twitter'))
 
-app.get('/twitter-callback', passport.authenticate('twitter', {
+app.get('/testimonial-poc/twitter-callback', passport.authenticate('twitter', {
   failureRedirect: '/'
 }), function (req, res) {
   res.redirect('http://localhost:3001/users?close=true')
@@ -86,7 +86,7 @@ var upload = multer({ storage: storage });
 
 var type = upload.single('media');
 
-app.post('/tweet', type, async function (req, res) {
+app.post('/testimonial-poc/tweet', type, async function (req, res) {
   const client = new Twitter({
     consumer_key: process.env.CONSUMER_KEY,
     consumer_secret: process.env.CONSUMER_SECRET,
