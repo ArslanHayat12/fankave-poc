@@ -11,6 +11,7 @@ import {
   SET_CLIENT_EMAIL,
   SET_CLIENT_COMPANY,
   SET_THUMB_URL,
+  SET_RECORD_CHUKS
 } from "../constants";
 import { initialState } from "../context/TestimonialContext";
 
@@ -18,10 +19,10 @@ export const reducer = (state, action) => {
   switch (action.type) {
     case SET_TYPE:
       return { ...state, type: action.payload };
-
     case SET_URL:
       return { ...state, url: action.payload };
-
+    case SET_RECORD_CHUKS:
+      return { ...state, recordedChunks: action.payload };
     case SET_URL_DURATION:
       return { ...state, urlDuration: action.payload };
 

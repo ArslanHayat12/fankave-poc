@@ -32,6 +32,7 @@ const PreviewTestimonialScreen = () => {
       clientEmail,
       clientCompany,
       thumbUrl,
+      recordedChunks
     },
     dispatch,
   } = useContext(TestimonialContext);
@@ -40,66 +41,101 @@ const PreviewTestimonialScreen = () => {
   const videoRef = useRef(null);
   const audioRef = useRef(null);
 
-  const onApproveClick = () => {
+
+  const shareAudioVideoToTwitter = (formData) => {
+    fetch("http://localhost:5000/post-text-tweet", {
+      body: formData,
+      method: "POST",
+    })
+      .then((response) => {
+        // check for error response
+        if (!response.ok) {
+          // get error message from body or default to response status
+          const error = response.status;
+          return Promise.reject(error);
+        }
+        console.log('Shared')
+        dispatch({
+          type: SET_SCREEN,
+          payload: THANK_YOU_SCREEN,
+        });
+      })
+      .catch((err) => {
+        console.log("error", err);
+        alert("Request failed with error code " + err);
+      });
+  }
+
+  const shareAudioVideoToServer = (formData) => {
+    fetch("https://dev.api.fankave.com/cmsx/stories/CiscoStore/publish", {
+      body: formData,
+      method: "POST",
+    })
+      .then((response) => {
+        // check for error response
+        if (!response.ok) {
+          // get error message from body or default to response status
+          const error = response.status;
+          return Promise.reject(error);
+        }
+
+        console.log(response);
+
+        dispatch({
+          type: SET_SCREEN,
+          payload: THANK_YOU_SCREEN,
+        });
+      })
+      .catch((err) => {
+        console.log("error", err);
+        alert("Request failed with error code " + err);
+      });
+  }
+
+  const generateRequestData = (isShare) => {
     fetch(url)
-      .then((res) => res.blob())
+      .then((res) => { console.log(res); return res.blob() })
       .then((blob) => {
-        console.log(blob);
         const formData = new FormData();
-        formData.append("media", blob);
-        formData.append(
-          "type",
-          testimonialType === "video" ? "video" : "audio"
-        );
 
-        formData.append(
-          "story",
-          testimonialType === "video" ? "Video" : "Audio"
-        ); //audio for audio
+        if (isShare) {
+          const blob = new Blob(recordedChunks, { type: "video/mp4" });
+          formData.append("media", blob);
+        } else {
+          formData.append("media", blob);
 
-        formData.append(
-          "author",
-          JSON.stringify({
-            name: clientName,
-            email: clientEmail,
-            company: clientCompany,
-          })
-        );
+          formData.append(
+            "type",
+            testimonialType === "video" ? "video" : "audio"
+          );
 
-        formData.append("hashtags", JSON.stringify(["Testimonial", "POC"]));
+          formData.append(
+            "story",
+            testimonialType === "video" ? "Video" : "Audio"
+          ); //audio for audio
 
-        formData.append(
-          "thumburl",
-          testimonialType === "video"
-            ? thumbUrl
-            : `${window.location.origin}/wave.png`
-        ); //context -- in audio null
+          formData.append(
+            "author",
+            JSON.stringify({
+              name: clientName,
+              email: clientEmail,
+              company: clientCompany,
+            })
+          );
 
-        fetch("https://dev.api.fankave.com/cmsx/stories/CiscoStore/publish", {
-          body: formData,
-          method: "POST",
-        })
-          .then((response) => {
-            // check for error response
-            if (!response.ok) {
-              // get error message from body or default to response status
-              const error = response.status;
-              return Promise.reject(error);
-            }
+          formData.append("hashtags", JSON.stringify(["Testimonial", "POC"]));
 
-            console.log(response);
-
-            dispatch({
-              type: SET_SCREEN,
-              payload: THANK_YOU_SCREEN,
-            });
-          })
-          .catch((err) => {
-            console.log("error", err);
-            alert("Request failed with error code " + err);
-          });
+          formData.append(
+            "thumburl",
+            testimonialType === "video"
+              ? thumbUrl
+              : `${window.location.origin}/wave.png`
+          );
+        } //context -- in audio null
+        isShare ? shareAudioVideoToTwitter(formData) : shareAudioVideoToServer(formData)
       });
   };
+
 
   const onPlayClick = () => {
     if (!playVideo) {
@@ -168,9 +204,8 @@ const PreviewTestimonialScreen = () => {
 
   return (
     <article
-      className={`preview-testimonial-screen${
-        testimonialType === "audio" ? " audio-preview-screen" : ""
-      }`}
+      className={`preview-testimonial-screen${testimonialType === "audio" ? " audio-preview-screen" : ""
+        }`}
     >
       {testimonialType === "video" ? (
         <>
@@ -236,8 +271,11 @@ const PreviewTestimonialScreen = () => {
 
       <ClientDetails />
       <article className="button-wrapper">
-        <button className="approve-button" onClick={onApproveClick}>
+        <button className="approve-button" onClick={generateRequestData}>
           Approve
+        </button>
+        <button className="approve-button" onClick={() => generateRequestData(true)}>
+          Share on Twitter
         </button>
       </article>
       {testimonialType === "audio" && <SoundWave />}

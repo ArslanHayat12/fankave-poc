@@ -8,7 +8,7 @@ import QuestionsCard from "../QuestionsCard/QuestionsCard";
 import { StopIcon, RecordingIcon } from "../../assets";
 import { useInterval } from "../../hooks/useInterval";
 import { convertSecondsToHourMinute } from "../../utils";
-import { SET_URL, SET_URL_DURATION, SET_THUMB_URL } from "../../constants";
+import { SET_URL, SET_URL_DURATION, SET_THUMB_URL, SET_RECORD_CHUKS } from "../../constants";
 import "./style.css";
 
 export const VideoRecorder = () => {
@@ -105,6 +105,11 @@ export const VideoRecorder = () => {
         type: SET_URL,
         payload: url,
       });
+      dispatch({
+        type: SET_RECORD_CHUKS,
+        payload: recordedChunks,
+      });
+
     }
   }, [recordedChunks]);
 
@@ -133,10 +138,10 @@ export const VideoRecorder = () => {
                 width: isMobile
                   ? undefined
                   : videoWidth > 400
-                  ? 333
-                  : videoWidth > 360
-                  ? 313
-                  : 298,
+                    ? 333
+                    : videoWidth > 360
+                      ? 313
+                      : 298,
                 height: isMobile ? undefined : 400,
                 facingMode: "user",
               }}
@@ -150,7 +155,7 @@ export const VideoRecorder = () => {
           {error && (
             <NotificationCard
               openModal={error ? true : false}
-              //   handlePermission={allowCameraPermission}
+            //   handlePermission={allowCameraPermission}
             />
           )}
         </div>

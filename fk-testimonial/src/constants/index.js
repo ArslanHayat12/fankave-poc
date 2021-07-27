@@ -18,3 +18,4 @@ export const SET_CLIENT_COMPANY = "SET_CLIENT_COMPANY";
 export const SET_THUMB_URL = "SET_THUMB_URL";
 
 export const SET_INDEX = "Set_INDEX";
+export const SET_RECORD_CHUKS = "SET_RECORD_CHUKS"
