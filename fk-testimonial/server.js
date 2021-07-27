@@ -69,7 +69,7 @@ app.get('/testimonial-poc/twitter/login', passport.authenticate('twitter'))
 app.get('/testimonial-poc/twitter-callback', passport.authenticate('twitter', {
   failureRedirect: '/'
 }), function (req, res) {
-  res.redirect('/testimonial-poc?close=true')
+  res.redirect('/testimonial-poc/users?close=true')
 })
 // Multer storage options
 var storage = multer.diskStorage({
@@ -207,6 +207,8 @@ app.get("/", function (req, res) {
 app.get("/testimonial-poc", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
-
+app.get("/testimonial-poc/users", function (req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 app.listen(process.env.PORT || 5000);
