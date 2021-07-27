@@ -314,6 +314,11 @@ const PreviewTestimonialScreen = () => {
       </article>
       {tweet ? isLoading && "Please wait request is processing" : isApproveLoading && "Please wait request is processing"}
       {testimonialType === "audio" && <SoundWave />}
+      {(isLoading || isApproveLoading) && (
+        <div className="loader-container">
+          <div className="loader">Loading</div>
+        </div>
+      )}
     </article>
   );
 };
