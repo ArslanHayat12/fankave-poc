@@ -43,7 +43,8 @@ const PreviewTestimonialScreen = () => {
   const [tweet, setTweetAction] = useState(false);
   const [tweetMessage, setTweetMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [isApproveLoading, setIsApproveLoading] = useState(false);
   const handleChangeInput = (event) => {
     const { value } = event.currentTarget
     setErrorMessage('')
@@ -61,6 +62,7 @@ const PreviewTestimonialScreen = () => {
   }
   const shareAudioVideoToTwitter = (formData) => {
     setErrorMessage('')
+    setIsLoading(true)
     fetch("/tweet", {
       body: formData,
       method: "POST"
@@ -76,6 +78,7 @@ const PreviewTestimonialScreen = () => {
         return response.json()
 
       }).then((response) => {
+        setIsLoading(false)
         if (response.code === 324)
           setErrorMessage(response.message)
         else
@@ -91,11 +94,13 @@ const PreviewTestimonialScreen = () => {
   }
 
   const shareAudioVideoToServer = (formData, isApproveAction = false) => {
+    setIsApproveLoading(true)
     fetch("https://dev.api.fankave.com/cmsx/stories/testimonialmvp/publish", {
       body: formData,
       method: "POST",
     })
       .then((response) => {
+        setIsApproveLoading(false)
         // check for error response
         if (!response.ok) {
           // get error message from body or default to response status
@@ -306,6 +311,8 @@ const PreviewTestimonialScreen = () => {
           {!tweet ? 'Tweet' : 'Share'}
         </button>
       </article>
+      {tweet && isLoading && "Please wait request is processing"}
+      {isApproveLoading && "Please wait request is processing"}
       {testimonialType === "audio" && <SoundWave />}
     </article>
   );
