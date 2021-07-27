@@ -74,6 +74,7 @@
 	outline: none;
 	border: none;
 	cursor: pointer;
+	margin-right: 3px;
 }
 
 .preview-testimonial-screen .button-wrapper {
@@ -176,4 +177,16 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.text-area{
+	height: 50px;
+    width: 97%;
+    margin-top: 10px;
+	resize: none;
+}
+
+.error{
+	color: red;
+    font-size: 14px;
 }

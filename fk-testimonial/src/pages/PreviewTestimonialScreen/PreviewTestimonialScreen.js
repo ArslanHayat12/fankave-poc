@@ -40,10 +40,58 @@ const PreviewTestimonialScreen = () => {
   const [retakeModal, setRetakeModal] = useState(false);
   const videoRef = useRef(null);
   const audioRef = useRef(null);
+  const [tweet, setTweetAction] = useState(false);
+  const [tweetMessage, setTweetMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
+  const handleChangeInput = (event) => {
+    const { value } = event.currentTarget
+    setErrorMessage('')
+    if (value.length <= 560) {
+      setTweetMessage(value)
+    }
+  }
 
+  const openTwitterSiginInTab = () => {
+    window.open(`/twitter/login`, '_blank')
+    generateRequestData(true)
+    generateRequestData()
+    setErrorMessage('')
+
+  }
   const shareAudioVideoToTwitter = (formData) => {
-    fetch("http://localhost:5000/post-text-tweet", {
+    setErrorMessage('')
+    fetch("/tweet", {
+      body: formData,
+      method: "POST"
+
+    })
+      .then((response) => {
+
+        if (!response.ok) {
+          // get error message from body or default to response status
+          const error = response.status;
+          return Promise.reject(error);
+        }
+        return response.json()
+
+      }).then((response) => {
+        if (response.code === 324)
+          setErrorMessage(response.message)
+        else
+          dispatch({
+            type: SET_SCREEN,
+            payload: THANK_YOU_SCREEN,
+          });
+      })
+      .catch((err) => {
+        console.log("error", err);
+        alert("Request failed with error code " + err);
+      });
+  }
+
+  const shareAudioVideoToServer = (formData, isApproveAction = false) => {
+    fetch("https://dev.api.fankave.com/cmsx/stories/testimonialmvp/publish", {
       body: formData,
       method: "POST",
     })
@@ -54,37 +102,12 @@ const PreviewTestimonialScreen = () => {
           const error = response.status;
           return Promise.reject(error);
         }
-        console.log('Shared')
-        dispatch({
-          type: SET_SCREEN,
-          payload: THANK_YOU_SCREEN,
-        });
-      })
-      .catch((err) => {
-        console.log("error", err);
-        alert("Request failed with error code " + err);
-      });
-  }
-
-  const shareAudioVideoToServer = (formData) => {
-    fetch("https://dev.api.fankave.com/cmsx/stories/CiscoStore/publish", {
-      body: formData,
-      method: "POST",
-    })
-      .then((response) => {
-        // check for error response
-        if (!response.ok) {
-          // get error message from body or default to response status
-          const error = response.status;
-          return Promise.reject(error);
+        if (isApproveAction) {
+          dispatch({
+            type: SET_SCREEN,
+            payload: THANK_YOU_SCREEN,
+          });
         }
-
-        console.log(response);
-
-        dispatch({
-          type: SET_SCREEN,
-          payload: THANK_YOU_SCREEN,
-        });
       })
       .catch((err) => {
         console.log("error", err);
@@ -92,15 +115,16 @@ const PreviewTestimonialScreen = () => {
       });
   }
 
-  const generateRequestData = (isShare) => {
+  const generateRequestData = (isShare, isApproveAction) => {
     fetch(url)
       .then((res) => { console.log(res); return res.blob() })
       .then((blob) => {
         const formData = new FormData();
-
         if (isShare) {
-          const blob = new Blob(recordedChunks, { type: "video/mp4" });
+          // const blob = new Blob(recordedChunks, { type: "video/mp4" });
           formData.append("media", blob);
+          formData.append("tweetMessage", tweetMessage);
+          isShare && shareAudioVideoToTwitter(formData)
         } else {
           formData.append("media", blob);
 
@@ -131,8 +155,8 @@ const PreviewTestimonialScreen = () => {
               ? thumbUrl
               : `${window.location.origin}/wave.png`
           );
-        } //context -- in audio null
-        isShare ? shareAudioVideoToTwitter(formData) : shareAudioVideoToServer(formData)
+          shareAudioVideoToServer(formData, isApproveAction)
+        }
       });
   };
 
@@ -268,14 +292,18 @@ const PreviewTestimonialScreen = () => {
           />
         </>
       )}
-
-      <ClientDetails />
+      {tweet ? <textarea className="text-area"
+        placeholder="Write your tweet message!"
+        value={tweetMessage}
+        onChange={handleChangeInput} /> :
+        <ClientDetails />}
+      <div className="error">{errorMessage || ''}</div>
       <article className="button-wrapper">
-        <button className="approve-button" onClick={generateRequestData}>
+        <button className="approve-button" onClick={() => generateRequestData(false, true)}>
           Approve
         </button>
-        <button className="approve-button" onClick={() => generateRequestData(true)}>
-          Share on Twitter
+        <button className="approve-button" onClick={() => !tweet ? setTweetAction(true) : openTwitterSiginInTab()}>
+          {!tweet ? 'Tweet' : 'Share'}
         </button>
       </article>
       {testimonialType === "audio" && <SoundWave />}
