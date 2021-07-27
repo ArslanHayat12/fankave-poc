@@ -54,7 +54,7 @@ const PreviewTestimonialScreen = () => {
   }
 
   const openTwitterSiginInTab = () => {
-    window.open(`/twitter/login`, '_blank')
+    window.open(`/testimonial-poc/twitter/login`, '_blank')
     generateRequestData(true)
     generateRequestData()
     setErrorMessage('')
@@ -63,7 +63,7 @@ const PreviewTestimonialScreen = () => {
   const shareAudioVideoToTwitter = (formData) => {
     setErrorMessage('')
     setIsLoading(true)
-    fetch("/tweet", {
+    fetch("/testimonial-poc//tweet", {
       body: formData,
       method: "POST"
 
