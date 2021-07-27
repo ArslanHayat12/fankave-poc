@@ -46,7 +46,7 @@ app.use(cookieParser());
 app.use(session({ secret: 'whatever', resave: true, saveUninitialized: true }))
 
 app.use(passport.initialize())
-app.use(passport.session())
+app.use(passport.session({ secret: 'This is a secret', cookie: { secure: true } }));
 app.use(cors());
 
 // 
