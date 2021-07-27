@@ -46,7 +46,7 @@ app.use(cookieParser());
 app.use(session({ secret: 'whatever', resave: true, saveUninitialized: true }))
 
 app.use(passport.initialize())
-app.use(passport.session({ secret: 'This is a secret', cookie: { secure: true } }));
+app.use(passport.session({ secret: 'secret', cookie: { secure: true } }));
 app.use(cors());
 
 // 
@@ -69,7 +69,7 @@ app.get('/testimonial-poc/twitter/login', passport.authenticate('twitter'))
 app.get('/testimonial-poc/twitter-callback', passport.authenticate('twitter', {
   failureRedirect: '/'
 }), function (req, res) {
-  res.redirect('http://localhost:3001/users?close=true')
+  res.redirect('/?close=true')
 })
 // Multer storage options
 var storage = multer.diskStorage({
@@ -207,5 +207,6 @@ app.get("/", function (req, res) {
 app.get("/testimonial-poc", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
+
 
 app.listen(process.env.PORT || 5000);
