@@ -22,7 +22,7 @@ const authTokens = {
 passport.use(new Strategy({
   consumerKey: process.env.CONSUMER_KEY,
   consumerSecret: process.env.CONSUMER_SECRET,
-  callbackURL: '/testimonial-poc//twitter-callback'
+  callbackURL: '/testimonial-poc/twitter-callback'
 }, function (token, tokenSecret, profile, callback) {
   authTokens.token = token
   authTokens.tokenSecret = tokenSecret

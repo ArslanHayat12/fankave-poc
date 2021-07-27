@@ -63,7 +63,7 @@ const PreviewTestimonialScreen = () => {
   const shareAudioVideoToTwitter = (formData) => {
     setErrorMessage('')
     setIsLoading(true)
-    fetch("/testimonial-poc//tweet", {
+    fetch("/testimonial-poc/tweet", {
       body: formData,
       method: "POST"
 
