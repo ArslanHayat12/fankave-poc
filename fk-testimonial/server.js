@@ -9,6 +9,9 @@ const dotenv = require("dotenv")
 const Twitter = require("twitter")
 
 const multer = require("multer");
+var ffmpeg = require("fluent-ffmpeg");
+
+
 // const hbjs = require('handbrake-js')
 const fs = require("fs")
 dotenv.config()
@@ -78,7 +81,7 @@ var storage = multer.diskStorage({
     cb(null, __dirname + '/');
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname + '-' + Date.now() + '.mp4');
+    cb(null, file.originalname + '-' + Date.now());
   }
 });
 
@@ -94,105 +97,113 @@ app.post('/testimonial-poc/tweet', type, async function (req, res) {
     access_token_secret: authTokens.tokenSecret
   })
 
+  var inFilename = req.file.path;
+  var outFilename = "video.mp4";
 
-  // const mediaData = fs.readFileSync('test.mp4')
-  // const mediaSize = fs.statSync('test.mp4').size
-  // const mediaType = "video/mp4"
-  console.log(req.file.path)
-  const mediaData = fs.readFileSync(req.file.path)
-  const mediaSize = fs.statSync(req.file.path).size
-  const mediaType = "video/mp4"
+  ffmpeg(inFilename)
+    .outputOptions("-c:v", "copy") // this will copy the data instead or reencode it
+    .save(outFilename).on('end', function () {
 
-  initializeMediaUpload()
-    .then(appendFileChunk)
-    .then(finalizeUpload)
-    .then(publishStatusUpdate).then((response) => {
-      console.log(response)
-      res.send({ status: 200, message: "Tweet Sent" })
-    }).catch((err) => {
-      res.send(err)
-    })
 
-  function initializeMediaUpload() {
-    return new Promise(function (resolve, reject) {
-      client.post("media/upload", {
-        command: "INIT",
-        total_bytes: mediaSize,
-        media_category: 'tweet_video',
-        media_type: mediaType
-      }, function (error, data, response) {
-        if (error) {
+      const mediaData = fs.readFileSync(outFilename)
+      const mediaSize = fs.statSync(outFilename).size
+      const mediaType = "video/mp4"
 
-          console.log("789", error)
-          reject(error)
-        } else {
-          resolve(data.media_id_string)
-        }
-      })
-    })
-  }
 
-  function appendFileChunk(mediaId) {
-    if (mediaId)
-      return new Promise(function (resolve, reject) {
-        client.post("media/upload", {
-          command: "APPEND",
-          media_id: mediaId,
-          media: mediaData,
-          segment_index: 0
-        }, function (error, data, response) {
-          if (error) {
-            console.log("456", error)
-
-            res.send(JSON.parse(response.body).error);
-
-          } else {
-            resolve(mediaId)
-          }
+      initializeMediaUpload()
+        .then(appendFileChunk)
+        .then(finalizeUpload)
+        .then(publishStatusUpdate).then((response) => {
+          console.log(response)
+          res.send({ status: 200, message: "Tweet Sent" })
+        }).catch((err) => {
+          res.send(err)
         })
-      })
-  }
 
-  function finalizeUpload(mediaId) {
-    if (mediaId)
-      return new Promise(function (resolve, reject) {
-        client.post("media/upload", {
-          command: "FINALIZE",
-          media_id: mediaId
-        }, function (error, data, response) {
-          if (error) {
+      function initializeMediaUpload() {
+        return new Promise(function (resolve, reject) {
+          client.post("media/upload", {
+            command: "INIT",
+            total_bytes: mediaSize,
+            media_category: 'tweet_video',
+            media_type: mediaType
+          }, function (error, data, response) {
+            if (error) {
 
-            res.send(JSON.parse(response.body).error);
-
-          } else {
-            resolve(mediaId)
-          }
+              console.log("789", error)
+              reject(error)
+            } else {
+              resolve(data.media_id_string)
+            }
+          })
         })
-      })
+      }
 
-  }
+      function appendFileChunk(mediaId) {
+        if (mediaId)
+          return new Promise(function (resolve, reject) {
+            client.post("media/upload", {
+              command: "APPEND",
+              media_id: mediaId,
+              media: mediaData,
+              segment_index: 0
+            }, function (error, data, response) {
+              if (error) {
+                console.log("456", error)
 
-  function publishStatusUpdate(mediaId) {
-    console.log(mediaId)
-    if (mediaId)
-      return new Promise(function (resolve, reject) {
-        client.post("statuses/update", {
-          status: req.body.tweetMessage,
-          media_ids: mediaId
-        }, function (error, data, response) {
-          fs.unlinkSync(req.file.path)
-          if (error) {
-            console.log(error)
-            // reject(error)
-            res.send({ code: 324, message: 'Not valid video' });
-          } else {
-            console.log("Successfully uploaded media and tweeted!")
-            resolve(data)
-          }
-        })
-      })
-  }
+                res.send(JSON.parse(response.body).error);
 
+              } else {
+                resolve(mediaId)
+              }
+            })
+          })
+      }
+
+      function finalizeUpload(mediaId) {
+        if (mediaId)
+          return new Promise(function (resolve, reject) {
+            client.post("media/upload", {
+              command: "FINALIZE",
+              media_id: mediaId
+            }, function (error, data, response) {
+              if (error) {
+
+                res.send(JSON.parse(response.body).error);
+
+              } else {
+                resolve(mediaId)
+              }
+            })
+          })
+
+      }
+
+      function publishStatusUpdate(mediaId) {
+        console.log(mediaId)
+        if (mediaId)
+          setTimeout(() => {
+            return new Promise(function (resolve, reject) {
+              client.post("statuses/update", {
+                status: req.body.tweetMessage,
+                media_ids: mediaId
+              }, function (error, data, response) {
+
+                if (error) {
+                  console.log(error)
+                  // reject(error)
+                  res.send({ code: 324, message: 'Not valid video' });
+                } else {
+                  console.log("Successfully uploaded media and tweeted!")
+                  resolve(data)
+                }
+              })
+            })
+          }, 5000)
+        fs.unlinkSync(req.file.path)
+      }
+      console.log('Finished processing');
+    });
 
 })
 
