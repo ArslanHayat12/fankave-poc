@@ -131,10 +131,7 @@ app.post('/testimonial-poc/tweet', type, async function (req, res) {
         .then(appendFileChunk)
         .then(finalizeUpload)
         .then(publishStatusUpdate).then((response) => {
-          console.log(response)
           res.send({ status: 200, message: "Tweet Sent" })
-        }).catch((err) => {
-          res.send(err)
         })
 
       function initializeMediaUpload() {
@@ -146,8 +143,6 @@ app.post('/testimonial-poc/tweet', type, async function (req, res) {
             media_type: mediaType
           }, function (error, data, response) {
             if (error) {
-
-              console.log("789", error)
               reject(error)
             } else {
               resolve(data.media_id_string)
@@ -166,9 +161,7 @@ app.post('/testimonial-poc/tweet', type, async function (req, res) {
               segment_index: 0
             }, function (error, data, response) {
               if (error) {
-                console.log("456", error)
-
-                res.send(JSON.parse(response.body).error);
+                reject(JSON.parse(response.body).error);
 
               } else {
                 resolve(mediaId)
@@ -186,7 +179,7 @@ app.post('/testimonial-poc/tweet', type, async function (req, res) {
             }, function (error, data, response) {
               if (error) {
 
-                res.send(JSON.parse(response.body).error);
+                reject(JSON.parse(response.body).error);
 
               } else {
                 resolve(mediaId)
