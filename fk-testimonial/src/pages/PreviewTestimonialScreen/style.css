@@ -31,6 +31,7 @@
   right: 0;
   margin: auto;
   top: 45%;
+  width: 100%;
   background-color: transparent;
   cursor: pointer;
   transform: translate(5px, 0px);
@@ -184,6 +185,18 @@
   width: 97%;
   margin-top: 10px;
   resize: none;
+}
+
+.button-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.preview-testimonial-screen .share-button {
+  border-radius: 50%;
+  padding: 4px 5px;
+  padding-bottom: 0;
+  height: fit-content;
 }
 
 .error {

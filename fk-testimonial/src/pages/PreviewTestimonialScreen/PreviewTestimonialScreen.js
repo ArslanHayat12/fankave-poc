@@ -7,7 +7,8 @@ import React, {
   useMemo,
 } from "react";
 import { CustomAudioPlayer } from "../../components/CustomAudioPlayer/CustomAudioPlayer";
-import { PlayFilledIcon, RefreshIcon } from "../../assets/index";
+import { CustomTooltip as Tooltip } from "../../components/Tooltip/Tooltip";
+import { PlayFilledIcon, RefreshIcon, ShareIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { CustomTooltip } from "../../components/Tooltip/Tooltip";
 import { SoundWave } from "../../components/AudioVisualizers/SoundWave";
@@ -310,8 +311,14 @@ const PreviewTestimonialScreen = () => {
         <button className="approve-button" onClick={() => generateRequestData(false, true)}>
           Approve
         </button>
-        <button className="approve-button" onClick={() => !tweet ? setTweetAction(true) : openTwitterSiginInTab()}>
-          {!tweet ? 'Tweet' : 'Share'}
+        <button className={`approve-button ${!tweet ? 'share-button' : ''}`} onClick={() => !tweet ? setTweetAction(true) : openTwitterSiginInTab()}>
+          {tweet ? (
+              "Tweet"
+            ) : (
+              <Tooltip content="Share" placement="right">
+                <ShareIcon />
+              </Tooltip>
+            )}
         </button>
       </article>
       {tweet ? isLoading && "Please wait request is processing" : isApproveLoading && "Please wait request is processing"}
