@@ -22,17 +22,6 @@ const authTokens = {
   token: '', tokenSecret: ''
 }
 
-passport.use(new Strategy({
-  consumerKey: process.env.CONSUMER_KEY,
-  consumerSecret: process.env.CONSUMER_SECRET,
-  callbackURL: '/testimonial-poc/twitter-callback'
-}, function (token, tokenSecret, profile, callback) {
-  authTokens.token = token
-  authTokens.tokenSecret = tokenSecret
-
-  return callback(null, profile);
-}));
-
 passport.serializeUser(function (user, callback) {
   callback(null, user);
 })
@@ -46,26 +35,42 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(session({ secret: 'whatever', resave: true, saveUninitialized: true }))
+app.use(session({
+  cookie: {
+    maxAge: 2 * 24 * 60 * 60 * 1000,
+    //Please note that secure: true is a recommended option. However, it requires an https-enabled website
+    secure: false
+  },
+  name: 'sessionId',
+  resave: false,
+  saveUninitialized: false,
+  secret: '3U8K0A9M3N7FISDHI486',
+}))
 
 app.use(passport.initialize())
-app.use(passport.session({ secret: 'secret', cookie: { secure: true } }));
+app.use(passport.session());
 app.use(cors());
 
 // 
 
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
-
-// parse application/json
-app.use(bodyParser.json())
 
 
 app.use(express.static(path.join(__dirname, "build")));
 app.use("/testimonial-poc", express.static(path.join(__dirname, "build")));
 
 app.use(express.static(path.join(__dirname, "build", "static")));
+
+passport.use(new Strategy({
+  consumerKey: process.env.CONSUMER_KEY,
+  consumerSecret: process.env.CONSUMER_SECRET,
+  callbackURL: '/testimonial-poc/twitter-callback'
+}, function (token, tokenSecret, profile, callback) {
+  authTokens.token = token
+  authTokens.tokenSecret = tokenSecret
+
+  return callback(null, profile);
+}));
+
 
 app.get('/testimonial-poc/twitter/login', passport.authenticate('twitter'))
 
