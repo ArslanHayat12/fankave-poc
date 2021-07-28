@@ -19,6 +19,12 @@ var cors = require('cors')
 const authTokens = {
   token: '', tokenSecret: ''
 }
+var client = new Twitter({
+  consumer_key: process.env.CONSUMER_KEY,
+  consumer_secret: process.env.CONSUMER_SECRET,
+  access_token_key: authTokens.token,
+  access_token_secret: authTokens.tokenSecret
+})
 
 passport.serializeUser(function (user, callback) {
   callback(null, user);
@@ -63,8 +69,12 @@ passport.use(new Strategy({
   consumerSecret: process.env.CONSUMER_SECRET,
   callbackURL: '/testimonial-poc/twitter-callback'
 }, function (token, tokenSecret, profile, callback) {
-  authTokens.token = token
-  authTokens.tokenSecret = tokenSecret
+  client = new Twitter({
+    consumer_key: process.env.CONSUMER_KEY,
+    consumer_secret: process.env.CONSUMER_SECRET,
+    access_token_key: token,
+    access_token_secret: tokenSecret
+  })
 
   return callback(null, profile);
 }));
@@ -93,12 +103,8 @@ var upload = multer({ storage: storage });
 var type = upload.single('media');
 
 app.post('/testimonial-poc/tweet', type, async function (req, res) {
-  const client = new Twitter({
-    consumer_key: process.env.CONSUMER_KEY,
-    consumer_secret: process.env.CONSUMER_SECRET,
-    access_token_key: authTokens.token,
-    access_token_secret: authTokens.tokenSecret
-  })
+
+
 
   var inFilename = req.file.path;
   var outFilename = "video.mp4";
