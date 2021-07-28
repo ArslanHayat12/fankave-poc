@@ -154,14 +154,16 @@ const PreviewTestimonialScreen = () => {
           );
 
           formData.append("hashtags", JSON.stringify(["Testimonial", "POC"]));
-
-          formData.append(
-            "thumburl",
-            testimonialType === "video"
-              ? thumbUrl
-              : `${window.location.origin}/wave.png`
-          );
-          shareAudioVideoToServer(formData, isApproveAction)
+          fetch(thumbUrl)
+            .then(res => res.blob()).then((thumbUrlBlob) => {
+              formData.append(
+                "thumburl",
+                testimonialType === "video"
+                  ? thumbUrlBlob
+                  : `${window.location.origin}/wave.png`
+              );
+              shareAudioVideoToServer(formData, isApproveAction)
+            })
         }
       });
   };
