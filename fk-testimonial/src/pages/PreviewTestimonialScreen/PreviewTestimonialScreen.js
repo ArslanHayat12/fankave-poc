@@ -311,7 +311,7 @@ const PreviewTestimonialScreen = () => {
         <button className="approve-button" onClick={() => generateRequestData(false, true)}>
           Approve
         </button>
-        <button className={`approve-button ${!tweet ? 'share-button' : ''}`} onClick={() => !tweet ? setTweetAction(true) : openTwitterSiginInTab()}>
+        {testimonialType === "video" && <button className={`approve-button ${!tweet ? 'share-button' : ''}`} onClick={() => !tweet ? setTweetAction(true) : openTwitterSiginInTab()}>
           {tweet ? (
             "Tweet"
           ) : (
@@ -319,7 +319,7 @@ const PreviewTestimonialScreen = () => {
               <ShareIcon />
             </Tooltip>
           )}
-        </button>
+        </button>}
       </article>
       {tweet ? isLoading && "Please wait request is processing" : isApproveLoading && "Please wait request is processing"}
       {testimonialType === "audio" && <SoundWave />}
