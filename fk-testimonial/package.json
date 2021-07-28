@@ -16,6 +16,7 @@
     "ffmpeg": "^0.0.4",
     "firebase": "^8.8.0",
     "fluent-ffmpeg": "^2.1.2",
+    "handbrake-js": "^5.0.2",
     "multer": "^1.4.2",
     "nodemon": "^2.0.12",
     "passport": "^0.4.1",
