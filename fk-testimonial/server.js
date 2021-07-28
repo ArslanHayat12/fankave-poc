@@ -9,10 +9,8 @@ const dotenv = require("dotenv")
 const Twitter = require("twitter")
 
 const multer = require("multer");
-var ffmpeg = require("fluent-ffmpeg");
+const hbjs = require('handbrake-js')
 
-
-// const hbjs = require('handbrake-js')
 const fs = require("fs")
 dotenv.config()
 var cors = require('cors')
@@ -104,11 +102,18 @@ app.post('/testimonial-poc/tweet', type, async function (req, res) {
 
   var inFilename = req.file.path;
   var outFilename = "video.mp4";
-
-  ffmpeg(inFilename)
-    .outputOptions("-c:v", "copy") // this will copy the data instead or reencode it
-    .save(outFilename).on('end', function () {
-
+  hbjs.spawn({ input: inFilename, output: outFilename })
+    .on('error', err => {
+      // invalid user input, no video found etc
+    })
+    .on('progress', progress => {
+      console.log(
+        'Percent complete: %s, ETA: %s',
+        progress.percentComplete,
+        progress.eta
+      )
+    }).on('end', () => {
+      console.log("Finished")
 
       const mediaData = fs.readFileSync(outFilename)
       const mediaSize = fs.statSync(outFilename).size
