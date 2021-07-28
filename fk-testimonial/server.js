@@ -84,7 +84,7 @@ var storage = multer.diskStorage({
     cb(null, __dirname + '/');
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname + '-' + Date.now());
+    cb(null, file.originalname + '-' + Date.now() + '.mp4');
   }
 });
 
@@ -105,6 +105,7 @@ app.post('/testimonial-poc/tweet', type, async function (req, res) {
   hbjs.spawn({ input: inFilename, output: outFilename })
     .on('error', err => {
       // invalid user input, no video found etc
+      console.log("error", err)
     })
     .on('progress', progress => {
       console.log(
