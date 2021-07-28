@@ -103,9 +103,6 @@ var upload = multer({ storage: storage });
 var type = upload.single('media');
 
 app.post('/testimonial-poc/tweet', type, async function (req, res) {
-
-
-
   var inFilename = req.file.path;
   var outFilename = "video.mp4";
   hbjs.spawn({ input: inFilename, output: outFilename })
@@ -119,20 +116,23 @@ app.post('/testimonial-poc/tweet', type, async function (req, res) {
         progress.percentComplete,
         progress.eta
       )
-    }).on('end', () => {
+    }).on('end', async () => {
       console.log("Finished")
 
       const mediaData = fs.readFileSync(outFilename)
       const mediaSize = fs.statSync(outFilename).size
       const mediaType = "video/mp4"
 
-
-      initializeMediaUpload()
-        .then(appendFileChunk)
-        .then(finalizeUpload)
-        .then(publishStatusUpdate).then((response) => {
-          res.send({ status: 200, message: "Tweet Sent" })
-        })
+      try {
+        const mediaId = await initializeMediaUpload()
+        const mediaIdString = await appendFileChunk(mediaId)
+        const mediaIdInt = await finalizeUpload(mediaIdString)
+        await publishStatusUpdate(mediaIdInt)
+        res.send({ status: 200, message: "Tweet Sent" })
+      } catch (err) {
+        res.send({ code: 324, message: 'Not valid video' });
+      }
+      // })
 
       function initializeMediaUpload() {
         return new Promise(function (resolve, reject) {
@@ -201,8 +201,7 @@ app.post('/testimonial-poc/tweet', type, async function (req, res) {
 
                 if (error) {
                   console.log(error)
-                  // reject(error)
-                  res.send({ code: 324, message: 'Not valid video' });
+                  reject({ code: 324, message: 'Not valid video' })
                 } else {
                   console.log("Successfully uploaded media and tweeted!")
                   resolve(data)
