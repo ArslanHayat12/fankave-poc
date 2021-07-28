@@ -158,7 +158,7 @@ const PreviewTestimonialScreen = () => {
           fetch(thumbUrl)
             .then(res => res.blob()).then((thumbUrlBlob) => {
               formData.append(
-                "thumburl",
+                "thumb",
                 testimonialType === "video"
                   ? thumbUrlBlob
                   : `${window.location.origin}/wave.png`
@@ -313,12 +313,12 @@ const PreviewTestimonialScreen = () => {
         </button>
         <button className={`approve-button ${!tweet ? 'share-button' : ''}`} onClick={() => !tweet ? setTweetAction(true) : openTwitterSiginInTab()}>
           {tweet ? (
-              "Tweet"
-            ) : (
-              <Tooltip content="Share" placement="right">
-                <ShareIcon />
-              </Tooltip>
-            )}
+            "Tweet"
+          ) : (
+            <Tooltip content="Share" placement="right">
+              <ShareIcon />
+            </Tooltip>
+          )}
         </button>
       </article>
       {tweet ? isLoading && "Please wait request is processing" : isApproveLoading && "Please wait request is processing"}
