@@ -20,7 +20,7 @@
   margin: 15px 0 0;
   border: 1px solid #c9c9c9;
   border-radius: 8px;
-  height: 250px;
+  height: 325px;
 }
 
 .preview-testimonial-screen .play-button {
@@ -80,7 +80,7 @@
 
 .preview-testimonial-screen .button-wrapper {
   width: 100%;
-  margin-top: 25px;
+  margin-top: 10px;
 }
 
 .preview-testimonial-screen .hide-icon {
@@ -259,14 +259,8 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .preview-testimonial-screen .video-wrapper {
-    height: 220px;
-  }
-}
-
-@media (max-width: 425px) {
-  .preview-testimonial-screen .video-wrapper {
-    height: 190px;
+    height: 250px;
   }
 }

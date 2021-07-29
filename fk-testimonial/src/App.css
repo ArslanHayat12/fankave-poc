@@ -64,7 +64,7 @@ body {
 
 @media (max-height: 700px) {
   .widget-wrapper {
-    height: calc(100vh - 155px);
+    height: calc(100vh - 90px);
     overflow: auto;
     overflow-x: hidden;
   }
@@ -72,15 +72,7 @@ body {
 
 @media (min-height: 700px) and (max-height: 800px) {
   .widget-wrapper {
-    height: calc(100vh - 212px);
-    overflow: auto;
-    overflow-x: hidden;
-  }
-}
-
-@media (min-height: 800px) {
-  .widget-wrapper {
-    height: calc(100vh - 288px);
+    height: calc(100vh - 158px);
     overflow: auto;
     overflow-x: hidden;
   }
