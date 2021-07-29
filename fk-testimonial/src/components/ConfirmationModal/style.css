@@ -1,51 +1,57 @@
 .react-responsive-modal-modal {
-	max-width: 290px;
-	width: 100%;
-	border-radius: 5px;
+  max-width: 290px;
+  width: 100%;
+  border-radius: 5px;
 }
 
 .react-responsive-modal-closeButton {
-	outline: none;
+  outline: none;
 }
 
 .react-responsive-modal-closeButton svg {
-	fill: #35a4ff;
-	height: 18px;
+  fill: #35a4ff;
+  height: 18px;
 }
 
 .react-responsive-modal-modal .description {
-	font-size: 16px;
-	font-weight: normal;
-	color: #828282;
-	line-height: 1.25;
-	text-align: center;
-	margin: 30px 0 20px;
+  font-size: 16px;
+  font-weight: normal;
+  color: #828282;
+  line-height: 1.25;
+  text-align: center;
+  margin: 30px 0 20px;
 }
 
 .customModal {
-	margin: auto;
+  margin: auto;
 }
 
 .customModal .buttons-container {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .customModal .button {
-	font-family: "Poppins", sans-serif;
-	padding: 6px 22px;
-	border-radius: 18px;
-	background-color: #ffff;
-	color: #35a4ff;
-	border: 1px solid #35a4ff;
-	cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  padding: 6px 22px;
+  border-radius: 18px;
+  background-color: #ffff;
+  color: #35a4ff;
+  border: 1px solid #35a4ff;
+  cursor: pointer;
 }
 
 .customModal .button:first-child {
-	margin-right: 10px;
+  margin-right: 10px;
 }
 
 .customModal .accept-button {
-	background-color: #35a4ff;
-	color: #ffff;
+  background-color: #35a4ff;
+  color: #ffff;
+}
+
+@media (max-width: 320px) {
+  .react-responsive-modal-modal {
+    max-width: 248px;
+  }
 }
