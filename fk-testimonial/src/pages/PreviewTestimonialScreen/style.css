@@ -20,7 +20,7 @@
   margin: 15px 0 0;
   border: 1px solid #c9c9c9;
   border-radius: 8px;
-  height: 412px;
+  height: 250px;
 }
 
 .preview-testimonial-screen .play-button {
@@ -256,5 +256,17 @@
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 900px) {
+  .preview-testimonial-screen .video-wrapper {
+    height: 220px;
+  }
+}
+
+@media (max-width: 425px) {
+  .preview-testimonial-screen .video-wrapper {
+    height: 190px;
   }
 }
