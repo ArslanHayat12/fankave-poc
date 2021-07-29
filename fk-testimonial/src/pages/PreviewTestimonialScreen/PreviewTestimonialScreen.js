@@ -1,14 +1,6 @@
-import React, {
-  useContext,
-  useRef,
-  useState,
-  useCallback,
-  useEffect,
-  useMemo,
-} from "react";
+import React, { useContext, useRef, useState, useEffect, useMemo } from "react";
 import { CustomAudioPlayer } from "../../components/CustomAudioPlayer/CustomAudioPlayer";
-import { CustomTooltip as Tooltip } from "../../components/Tooltip/Tooltip";
-import { PlayFilledIcon, RefreshIcon, ShareIcon } from "../../assets/index";
+import { PlayFilledIcon, RefreshIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { CustomTooltip } from "../../components/Tooltip/Tooltip";
 import { SoundWave } from "../../components/AudioVisualizers/SoundWave";
@@ -22,6 +14,7 @@ import {
   THANK_YOU_SCREEN,
 } from "../../constants";
 import "./style.css";
+import { Loader } from "../../components/LoaderOverlay/Loader";
 
 const PreviewTestimonialScreen = () => {
   const {
@@ -33,7 +26,7 @@ const PreviewTestimonialScreen = () => {
       clientEmail,
       clientCompany,
       thumbUrl,
-      recordedChunks
+      recordedChunks,
     },
     dispatch,
   } = useContext(TestimonialContext);
@@ -41,68 +34,16 @@ const PreviewTestimonialScreen = () => {
   const [retakeModal, setRetakeModal] = useState(false);
   const videoRef = useRef(null);
   const audioRef = useRef(null);
-  const [tweet, setTweetAction] = useState(false);
-  const [tweetMessage, setTweetMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const [isApproveLoading, setIsApproveLoading] = useState(false);
-  const handleChangeInput = (event) => {
-    const { value } = event.currentTarget
-    setErrorMessage('')
-    if (value.length <= 560) {
-      setTweetMessage(value)
-    }
-  }
-
-  const openTwitterSiginInTab = () => {
-    window.open(`/testimonial-poc/twitter/login`, '_blank')
-    generateRequestData(true)
-    generateRequestData()
-    setErrorMessage('')
-
-  }
-  const shareAudioVideoToTwitter = (formData) => {
-    setErrorMessage('')
-    setIsLoading(true)
-    fetch("/testimonial-poc/tweet", {
-      body: formData,
-      method: "POST"
-
-    })
-      .then((response) => {
-        setIsLoading(false)
-        if (!response.ok) {
-          // get error message from body or default to response status
-          const error = response.status;
-          return Promise.reject(error);
-        }
-        return response.json()
-
-      }).then((response) => {
-        setIsLoading(false)
-        if (response.code === 324)
-          setErrorMessage(response.message)
-        else
-          dispatch({
-            type: SET_SCREEN,
-            payload: THANK_YOU_SCREEN,
-          });
-      })
-      .catch((err) => {
-        setIsLoading(false)
-        console.log("error", err);
-        alert("Request failed with error code " + err);
-      });
-  }
 
   const shareAudioVideoToServer = (formData, isApproveAction = false) => {
-    setIsApproveLoading(true)
+    setIsApproveLoading(true);
     fetch("https://dev.api.fankave.com/cmsx/stories/testimonialmvp/publish", {
       body: formData,
       method: "POST",
     })
       .then((response) => {
-        setIsApproveLoading(false)
+        setIsApproveLoading(false);
         // check for error response
         if (!response.ok) {
           // get error message from body or default to response status
@@ -120,55 +61,51 @@ const PreviewTestimonialScreen = () => {
         console.log("error", err);
         alert("Request failed with error code " + err);
       });
-  }
-
-  const generateRequestData = (isShare, isApproveAction) => {
-    fetch(url)
-      .then((res) => { console.log(res); return res.blob() })
-      .then((blob) => {
-        const formData = new FormData();
-        if (isShare) {
-          // const blob = new Blob(recordedChunks, { type: "video/mp4" });
-          formData.append("media", blob);
-          formData.append("tweetMessage", tweetMessage);
-          isShare && shareAudioVideoToTwitter(formData)
-        } else {
-          formData.append("media", blob);
-
-          formData.append(
-            "type",
-            testimonialType === "video" ? "video" : "audio"
-          );
-
-          formData.append(
-            "story",
-            testimonialType === "video" ? "Video" : "Audio"
-          ); //audio for audio
-
-          formData.append(
-            "author",
-            JSON.stringify({
-              name: clientName,
-              email: clientEmail,
-              company: clientCompany,
-            })
-          );
-
-          formData.append("hashtags", JSON.stringify(["Testimonial", "POC"]));
-          fetch(thumbUrl)
-            .then(res => res.blob()).then((thumbUrlBlob) => {
-              formData.append(
-                "thumb",
-                testimonialType === "video"
-                  ? thumbUrlBlob
-                  : `${window.location.origin}/wave.png`
-              );
-              shareAudioVideoToServer(formData, isApproveAction)
-            })
-        }
-      });
   };
 
+  const generateRequestData = (isApproveAction) => {
+    fetch(url)
+      .then((res) => {
+        console.log(res);
+        return res.blob();
+      })
+      .then((blob) => {
+        const formData = new FormData();
+        formData.append("media", blob);
+
+        formData.append(
+          "type",
+          testimonialType === "video" ? "video" : "audio"
+        );
+
+        formData.append(
+          "story",
+          testimonialType === "video" ? "Video" : "Audio"
+        ); //audio for audio
+
+        formData.append(
+          "author",
+          JSON.stringify({
+            name: clientName,
+            email: clientEmail,
+            company: clientCompany,
+          })
+        );
+
+        formData.append("hashtags", JSON.stringify(["Testimonial", "POC"]));
+        fetch(thumbUrl)
+          .then((res) => res.blob())
+          .then((thumbUrlBlob) => {
+            formData.append(
+              "thumb",
+              testimonialType === "video"
+                ? thumbUrlBlob
+                : `${window.location.origin}/wave.png`
+            );
+            shareAudioVideoToServer(formData, isApproveAction);
+          });
+      });
+  };
 
   const onPlayClick = () => {
     if (!playVideo) {
@@ -201,18 +138,6 @@ const PreviewTestimonialScreen = () => {
     });
   };
 
-  const urlObjectCleanUp = useCallback(() => {
-    //let browser discard reference to previous recorded file
-    url && window.URL.revokeObjectURL(url);
-  }, [url]);
-
-  //clean up recorded file on unmount
-  useEffect(() => {
-    return () => {
-      urlObjectCleanUp();
-    };
-  }, []);
-
   const AudioPlayer = useMemo(() => {
     return (
       <CustomAudioPlayer
@@ -237,8 +162,9 @@ const PreviewTestimonialScreen = () => {
 
   return (
     <article
-      className={`preview-testimonial-screen${testimonialType === "audio" ? " audio-preview-screen" : ""
-        }`}
+      className={`preview-testimonial-screen${
+        testimonialType === "audio" ? " audio-preview-screen" : ""
+      }`}
     >
       {testimonialType === "video" ? (
         <>
@@ -301,33 +227,18 @@ const PreviewTestimonialScreen = () => {
           />
         </>
       )}
-      {tweet ? <textarea className="text-area"
-        placeholder="Write your tweet message!"
-        value={tweetMessage}
-        onChange={handleChangeInput} /> :
-        <ClientDetails />}
-      <div className="error">{errorMessage || ''}</div>
+      <ClientDetails />
       <article className="button-wrapper">
-        <button className="approve-button" onClick={() => generateRequestData(false, true)}>
+        <button
+          className="approve-button"
+          onClick={() => generateRequestData(true)}
+        >
           Approve
         </button>
-        {testimonialType === "video" && <button className={`approve-button ${!tweet ? 'share-button' : ''}`} onClick={() => !tweet ? setTweetAction(true) : openTwitterSiginInTab()}>
-          {tweet ? (
-            "Tweet"
-          ) : (
-            <Tooltip content="Share" placement="right">
-              <ShareIcon />
-            </Tooltip>
-          )}
-        </button>}
       </article>
-      {tweet ? isLoading && "Please wait request is processing" : isApproveLoading && "Please wait request is processing"}
+      {isApproveLoading && "Please wait request is processing"}
       {testimonialType === "audio" && <SoundWave />}
-      {(isLoading || isApproveLoading) && (
-        <div className="loader-container">
-          <div className="loader">Loading</div>
-        </div>
-      )}
+      {isApproveLoading && <Loader />}
     </article>
   );
 };
