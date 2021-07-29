@@ -108,7 +108,7 @@ export const ThankYouScreen = () => {
         We will be in touch if we need anything else.
       </p>
       <span className="back-button" onClick={onBack}>
-        Return To Main
+        Go Again
       </span>
       {testimonialType === "video" && !tweet && !isTweetUploaded && (
         <div className="button-wrapper">
@@ -123,7 +123,7 @@ export const ThankYouScreen = () => {
         </div>
       )}
 
-      {tweet && (
+      {tweet && !isTweetUploaded && (
         <div className="tweet-container">
           <textarea
             className="text-area"
