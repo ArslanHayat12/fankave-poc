@@ -5,6 +5,7 @@ import { CustomTooltip as Tooltip } from "../../components/Tooltip/Tooltip";
 import { ShareIcon } from "../../assets";
 import "./style.css";
 import { Loader } from "../../components/LoaderOverlay/Loader";
+import { useWindowEvent } from "../../hooks/useWindowsEvent";
 
 export const ThankYouScreen = () => {
   const [tweet, setTweetAction] = useState(false);
@@ -12,6 +13,8 @@ export const ThankYouScreen = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isTweetUploaded, setIsTweetUploaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [windowTab, setWindowTab] = useState(null)
+  const [isLinkedIn, setIsLinkedIn] = useState(false)
 
   const {
     state: { url, type: testimonialType },
@@ -44,12 +47,32 @@ export const ThankYouScreen = () => {
     }
   };
 
+
   const openTwitterSiginInTab = () => {
-    window.open(`/testimonial-poc/twitter/login`, "_blank");
-    generateRequestData(true);
-    generateRequestData();
+    setIsLinkedIn(false)
+    window.localStorage.removeItem('token')
+    const tab = window.open(`/testimonial-poc/twitter/login`, "_blank");
+    setWindowTab(tab)
     setErrorMessage("");
   };
+  const openLinkedInSiginInTab = () => {
+    setIsLinkedIn(true)
+    window.localStorage.removeItem('token')
+    const tab = window.open(`/testimonial-poc/linkedin/login`, "_blank");
+    setWindowTab(tab)
+    setErrorMessage("");
+  }
+
+
+  useWindowEvent('storage', event => {
+    if (event.key == 'token') {
+      windowTab && windowTab.close()
+      if (window.localStorage.getItem('token')) {
+        generateRequestData(true, isLinkedIn);
+      }
+    }
+  })
+
 
   const shareAudioVideoToTwitter = (formData) => {
     setErrorMessage("");
@@ -57,6 +80,50 @@ export const ThankYouScreen = () => {
     fetch("/testimonial-poc/tweet", {
       body: formData,
       method: "POST",
+      headers: new Headers({
+        'Authorization': window.localStorage.getItem('token'),
+        'tokenSecret': window.localStorage.getItem('tokenSecret'),
+        "id": window.localStorage.getItem('id')
+
+      })
+    })
+      .then((response) => {
+        setIsLoading(false);
+        if (!response.ok) {
+          // get error message from body or default to response status
+          const error = response.status;
+          return Promise.reject(error);
+        }
+        return response.json();
+
+      })
+      .then((response) => {
+        setIsLoading(false);
+        if (response.code === 324) setErrorMessage(response.message);
+        else {
+          setIsTweetUploaded(true);
+          setErrorMessage(true);
+        }
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.log("error", err);
+        alert("Request failed with error code " + err);
+      });
+  };
+
+  const shareAudioVideoToLinkedIn = (formData) => {
+    setErrorMessage("");
+    setIsLoading(true);
+    fetch("/testimonial-poc/share-on-linkedin", {
+      body: formData,
+      method: "POST",
+      headers: new Headers({
+        'Authorization': window.localStorage.getItem('token'),
+        'tokenSecret': window.localStorage.getItem('tokenSecret'),
+        "id": window.localStorage.getItem('id')
+
+      })
     })
       .then((response) => {
         setIsLoading(false);
@@ -82,7 +149,7 @@ export const ThankYouScreen = () => {
       });
   };
 
-  const generateRequestData = (isShare = false) => {
+  const generateRequestData = (isShare = false, isLinkedIn = false) => {
     fetch(url)
       .then((res) => {
         console.log(res);
@@ -94,7 +161,7 @@ export const ThankYouScreen = () => {
           // const blob = new Blob(recordedChunks, { type: "video/mp4" });
           formData.append("media", blob);
           formData.append("tweetMessage", tweetMessage);
-          isShare && shareAudioVideoToTwitter(formData);
+          isShare && isLinkedIn ? shareAudioVideoToLinkedIn(formData) : shareAudioVideoToTwitter(formData);
         } else {
           //already published
         }
@@ -136,6 +203,12 @@ export const ThankYouScreen = () => {
             onClick={() => openTwitterSiginInTab()}
           >
             Tweet
+          </button>
+          <button
+            className="tweet-button"
+            onClick={() => openLinkedInSiginInTab()}
+          >
+            Share on Linkedin
           </button>
         </div>
       )}

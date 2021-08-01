@@ -6,6 +6,16 @@
     <h1>Testimonial POC</h1>
 
     <script>
+        function getQueryStringValue(key) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(key);
+        }
+        window.localStorage.removeItem("token")
+        window.localStorage.removeItem("tokenSecret")
+        window.localStorage.removeItem("id")
+        window.localStorage.setItem("token", getQueryStringValue("token"))
+        window.localStorage.setItem("tokenSecret", getQueryStringValue("tokenSecret"))
+        window.localStorage.setItem("id", getQueryStringValue("id"))
         window.open('', '_self').close();
     </script>
 
