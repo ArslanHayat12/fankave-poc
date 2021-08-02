@@ -19,9 +19,6 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <!-- <link rel="stylesheet" href="olympics/olympics.css" /> -->
-    <link rel="stylesheet" href="cisco/cisco.css" />
-
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -36,15 +33,24 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <script>
+      function loadDoc() {
+        const params = new URL(location.href).searchParams;
+        const type = params.get("type");
+        // Create new link element
+        const link = document.createElement("link");
+        link.setAttribute("rel", "stylesheet");
+        link.setAttribute(
+          "href",
+          `${type === "cisco" ? "/cisco/cisco.css" : "/olympics/olympics.css"}`
+        );
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+        // Append to the `head` element
+        document.head.appendChild(link);
+      }
+
+      loadDoc();
+    </script>
   </body>
 </html>
