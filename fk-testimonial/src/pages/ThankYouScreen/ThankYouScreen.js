@@ -13,8 +13,8 @@ export const ThankYouScreen = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isTweetUploaded, setIsTweetUploaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [windowTab, setWindowTab] = useState(null)
-  const [isLinkedIn, setIsLinkedIn] = useState(false)
+  const [windowTab, setWindowTab] = useState(null);
+  const [isLinkedIn, setIsLinkedIn] = useState(false);
 
   const {
     state: { url, type: testimonialType },
@@ -47,32 +47,29 @@ export const ThankYouScreen = () => {
     }
   };
 
-
   const openTwitterSiginInTab = () => {
-    setIsLinkedIn(false)
-    window.localStorage.removeItem('token')
+    setIsLinkedIn(false);
+    window.localStorage.removeItem("token");
     const tab = window.open(`/testimonial-poc/twitter/login`, "_blank");
-    setWindowTab(tab)
+    setWindowTab(tab);
     setErrorMessage("");
   };
   const openLinkedInSiginInTab = () => {
-    setIsLinkedIn(true)
-    window.localStorage.removeItem('token')
+    setIsLinkedIn(true);
+    window.localStorage.removeItem("token");
     const tab = window.open(`/testimonial-poc/linkedin/login`, "_blank");
-    setWindowTab(tab)
+    setWindowTab(tab);
     setErrorMessage("");
-  }
+  };
 
-
-  useWindowEvent('storage', event => {
-    if (event.key == 'token') {
-      windowTab && windowTab.close()
-      if (window.localStorage.getItem('token')) {
+  useWindowEvent("storage", (event) => {
+    if (event.key == "token") {
+      windowTab && windowTab.close();
+      if (window.localStorage.getItem("token")) {
         generateRequestData(true, isLinkedIn);
       }
     }
-  })
-
+  });
 
   const shareAudioVideoToTwitter = (formData) => {
     setErrorMessage("");
@@ -81,11 +78,10 @@ export const ThankYouScreen = () => {
       body: formData,
       method: "POST",
       headers: new Headers({
-        'Authorization': window.localStorage.getItem('token'),
-        'tokenSecret': window.localStorage.getItem('tokenSecret'),
-        "id": window.localStorage.getItem('id')
-
-      })
+        Authorization: window.localStorage.getItem("token"),
+        tokenSecret: window.localStorage.getItem("tokenSecret"),
+        id: window.localStorage.getItem("id"),
+      }),
     })
       .then((response) => {
         setIsLoading(false);
@@ -95,7 +91,6 @@ export const ThankYouScreen = () => {
           return Promise.reject(error);
         }
         return response.json();
-
       })
       .then((response) => {
         setIsLoading(false);
@@ -119,11 +114,10 @@ export const ThankYouScreen = () => {
       body: formData,
       method: "POST",
       headers: new Headers({
-        'Authorization': window.localStorage.getItem('token'),
-        'tokenSecret': window.localStorage.getItem('tokenSecret'),
-        "id": window.localStorage.getItem('id')
-
-      })
+        Authorization: window.localStorage.getItem("token"),
+        tokenSecret: window.localStorage.getItem("tokenSecret"),
+        id: window.localStorage.getItem("id"),
+      }),
     })
       .then((response) => {
         setIsLoading(false);
@@ -161,7 +155,9 @@ export const ThankYouScreen = () => {
           // const blob = new Blob(recordedChunks, { type: "video/mp4" });
           formData.append("media", blob);
           formData.append("tweetMessage", tweetMessage);
-          isShare && isLinkedIn ? shareAudioVideoToLinkedIn(formData) : shareAudioVideoToTwitter(formData);
+          isShare && isLinkedIn
+            ? shareAudioVideoToLinkedIn(formData)
+            : shareAudioVideoToTwitter(formData);
         } else {
           //already published
         }
@@ -169,7 +165,7 @@ export const ThankYouScreen = () => {
   };
 
   return (
-    <article className="thankyou-screen">
+    <article className="thankyou-screen" id="fk-thankyou-screen">
       <h2 className="heading">Thank you</h2>
       <p className="description">
         We will be in touch if we need anything else.

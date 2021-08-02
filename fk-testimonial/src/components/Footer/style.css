@@ -1,0 +1,10 @@
+.footer-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px;
+}
+
+.footer-wrapper img {
+  width: 70px;
+  height: 70px;
+}

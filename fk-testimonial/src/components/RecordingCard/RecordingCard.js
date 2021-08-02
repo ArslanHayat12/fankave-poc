@@ -9,7 +9,7 @@ const RecordingCard = (props) => {
   const icon = recordingType === "video" ? <CameraIcon /> : <MicIcon />;
 
   return (
-    <a className="card-wrapper" onClick={handleClick}>
+    <a className="card-wrapper" onClick={handleClick} id="fk-card-wrapper">
       {icon}
       <p className="card-description">{description}</p>
     </a>

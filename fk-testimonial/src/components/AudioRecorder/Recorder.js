@@ -111,7 +111,7 @@ export const AudioRecorder = () => {
   }, [status]);
 
   return (
-    <div className="recorder-container">
+    <div className="recorder-container" id="fk-recorder-container">
       <article className="buttons-wrapper">
         {getPlayButton()}
         {(status === "recording" || status === "paused") && (

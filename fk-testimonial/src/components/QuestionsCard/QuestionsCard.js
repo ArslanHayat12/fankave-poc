@@ -35,7 +35,7 @@ const QuestionsCard = () => {
 
   return (
     <QuestionContext.Provider value={value}>
-      <article className="question-card">
+      <article className="question-card" id="fk-question-card">
         <p className="questions">{questionArray[state.questionIndex]}</p>
 
         <article className="question-buttons-wrapper">
@@ -45,7 +45,8 @@ const QuestionsCard = () => {
             }`}
             onClick={state.questionIndex === 0 ? undefined : gotToPrevQuestion}
           >
-            <span>&#8249;</span>{` Prev`}
+            <span>&#8249;</span>
+            {` Prev`}
           </button>
           <span className="question-count">
             {state.questionIndex + 1}/{questionArray.length}
@@ -62,7 +63,8 @@ const QuestionsCard = () => {
                 : gotToNextQuestion
             }
           >
-            {`Next `}<span>&#8250;</span>
+            {`Next `}
+            <span>&#8250;</span>
           </button>
         </article>
       </article>

@@ -25,8 +25,8 @@ const RecordScreen = () => {
   recordingTimeRef.current = recordingTime;
 
   useInterval(() => {
-	status && setTime(recordingTime + 0.5)
-}, 500)
+    status && setTime(recordingTime + 0.5);
+  }, 500);
 
   const dispatchURLDuration = useCallback(() => {
     recordingTimeRef &&
@@ -43,7 +43,7 @@ const RecordScreen = () => {
   }, []);
 
   return (
-    <article className="record-screen">
+    <article className="record-screen" id="fk-record-screen">
       {type === "video" ? (
         <>
           <h2 className="heading">Record Video Testimonial</h2>

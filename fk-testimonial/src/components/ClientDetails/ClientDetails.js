@@ -42,7 +42,7 @@ const ClientDetails = () => {
   }, []);
 
   return (
-    <article className="client-details-wrapper">
+    <article className="client-details-wrapper" id="fk-client-details-wrapper">
       {!name ? (
         nameEdit ? (
           <input

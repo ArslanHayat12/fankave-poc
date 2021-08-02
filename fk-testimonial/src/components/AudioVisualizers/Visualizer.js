@@ -103,6 +103,7 @@ export const Visualizer = (props) => {
       ref={canvasRef}
       className="record-visualizer"
       height="250px"
+      id="fk-record-visualizer"
     ></canvas>
   );
 };

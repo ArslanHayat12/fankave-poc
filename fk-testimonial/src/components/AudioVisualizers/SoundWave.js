@@ -160,6 +160,7 @@ export const SoundWave = () => {
 
   return (
     <canvas
+      id="fk-sound-wave"
       ref={canvasRef}
       height="100px"
       style={{

@@ -1,0 +1,9 @@
+body {
+  background-image: url("./background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#fk-widget-wrapper {
+  background-color: cadetblue;
+}

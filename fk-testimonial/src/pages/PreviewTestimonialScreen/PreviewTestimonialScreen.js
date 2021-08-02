@@ -162,6 +162,7 @@ const PreviewTestimonialScreen = () => {
 
   return (
     <article
+      id="fk-preview-testimonial-screen"
       className={`preview-testimonial-screen${
         testimonialType === "audio" ? " audio-preview-screen" : ""
       }`}

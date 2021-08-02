@@ -15,7 +15,7 @@ const NotificationCard = (props) => {
   }, [setOpen]);
 
   return (
-    <article className="notification-wrapper">
+    <article className="notification-wrapper" id="fk-notification-wrapper">
       <Modal
         open={open}
         onClose={onCloseModal}

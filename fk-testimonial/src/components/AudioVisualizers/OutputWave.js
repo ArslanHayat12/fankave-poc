@@ -23,9 +23,7 @@ export const OutputWave = (props) => {
   }, []);
 
   useEffect(() => {
-    var src = context.createMediaElementSource(
-      audioRef.current
-    );
+    var src = context.createMediaElementSource(audioRef.current);
     var analyser = context.createAnalyser();
 
     const canvas = canvasRef.current;
@@ -92,6 +90,7 @@ export const OutputWave = (props) => {
       ref={canvasRef}
       className="preview-visualizer"
       height="80px"
+      id="fk-preview-visualizer"
     ></canvas>
   );
 };
