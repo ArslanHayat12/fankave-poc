@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
-    />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <link rel="manifest" href="./manifest.json" />
 
-    <!--
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -28,29 +22,32 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+  <title>React App</title>
+</head>
 
-    <script>
-      function loadDoc() {
-        const params = new URL(location.href).searchParams;
-        const type = params.get("type");
-        // Create new link element
-        const link = document.createElement("link");
-        link.setAttribute("rel", "stylesheet");
-        link.setAttribute(
-          "href",
-          `${type === "cisco" ? "/cisco/cisco.css" : "/olympics/olympics.css"}`
-        );
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <div id="testimonial-poc"></div>
+  <script src="http://localhost:8081/testimonial-poc.js"></script>
+  <script>
+    function loadDoc() {
+      const params = new URL(location.href).searchParams;
+      const type = params.get("type");
+      // Create new link element
+      const link = document.createElement("link");
+      link.setAttribute("rel", "stylesheet");
+      link.setAttribute(
+        "href",
+        `${type === "cisco" ? "/cisco/cisco.css" : "/olympics/olympics.css"}`
+      );
 
-        // Append to the `head` element
-        document.head.appendChild(link);
-      }
+      // Append to the `head` element
+      document.head.appendChild(link);
+    }
 
-      loadDoc();
-    </script>
-  </body>
+    loadDoc();
+  </script>
+</body>
+
 </html>

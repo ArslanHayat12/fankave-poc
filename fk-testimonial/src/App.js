@@ -1,7 +1,6 @@
-import { useReducer, useMemo } from "react";
-import { useLocation } from "react-router-dom";
-
+import React, { useReducer, useMemo } from "react";
 import { TestimonialApp } from "./pages";
+import { useLocation } from "react-router-dom";
 import { TestimonialContext } from "./context/TestimonialContext";
 import { initialState } from "./context/TestimonialContext";
 import { reducer } from "./reducers/reducers";

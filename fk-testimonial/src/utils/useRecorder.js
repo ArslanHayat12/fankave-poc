@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 const defaultContraints = {
   audio: true,
@@ -28,10 +28,10 @@ function useRecorder(
     //calls passed function (in case, startRecording) after setup
     callback
       ? initRecording()
-          .then((granted) => {
-            granted && callback();
-          })
-          .catch(setError)
+        .then((granted) => {
+          granted && callback();
+        })
+        .catch(setError)
       : initRecording();
   }, []);
 
@@ -50,8 +50,8 @@ function useRecorder(
 
           if (typeof MediaRecorder.isTypeSupported == "function") {
             /*
-				MediaRecorder.isTypeSupported is a function announced in https://developers.google.com/web/updates/2016/01/mediarecorder and later introduced in the MediaRecorder API spec http://www.w3.org/TR/mediastream-recording/
-			*/
+        MediaRecorder.isTypeSupported is a function announced in https://developers.google.com/web/updates/2016/01/mediarecorder and later introduced in the MediaRecorder API spec http://www.w3.org/TR/mediastream-recording/
+      */
             if (MediaRecorder.isTypeSupported("audio/x-aac")) {
               options = { mimeType: "audio/x-aac" };
             } else if (MediaRecorder.isTypeSupported("audio/wav")) {
@@ -113,8 +113,8 @@ function useRecorder(
           let options = { type: "audio/aac" };
           if (typeof MediaRecorder.isTypeSupported == "function") {
             /*
-				MediaRecorder.isTypeSupported is a function announced in https://developers.google.com/web/updates/2016/01/mediarecorder and later introduced in the MediaRecorder API spec http://www.w3.org/TR/mediastream-recording/
-			*/
+        MediaRecorder.isTypeSupported is a function announced in https://developers.google.com/web/updates/2016/01/mediarecorder and later introduced in the MediaRecorder API spec http://www.w3.org/TR/mediastream-recording/
+      */
             if (MediaRecorder.isTypeSupported("audio/x-aac")) {
               options = { type: "audio/x-aac" };
             } else if (MediaRecorder.isTypeSupported("audio/wav")) {

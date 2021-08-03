@@ -77,8 +77,8 @@ const controller = {
     sendTextMessageToLinkedIn: function (req, response) {
         let requestUrl = 'https://api.linkedin.com/v2/shares';
         const title = "First Message";
-        let shareUrl = "https://www.example.com/content.html"
-        let shareThumbnailUrl = "https://www.example.com/image.jpg"
+        let shareUrl = "https://i.pinimg.com/originals/af/8d/63/af8d63a477078732b79ff9d9fc60873f.jpg"
+        let shareThumbnailUrl = "git checkout "
         let body = {
             "owner": "urn:li:person:" + req.headers.id,
             "subject": title,
@@ -125,6 +125,52 @@ const controller = {
                 "owner": "urn:li:person:" + req.headers.id,
                 "recipes": [
                     "urn:li:digitalmediaRecipe:feedshare-video"
+                ],
+                "serviceRelationships": [
+                    {
+                        "identifier": "urn:li:userGeneratedContent",
+                        "relationshipType": "OWNER"
+                    }
+                ],
+                supportedUploadMechanism: ['SYNCHRONOUS_UPLOAD'],
+            }
+        }
+        let headers = {
+            'Authorization': 'Bearer ' + req.headers.authorization,
+            'cache-control': 'no-cache',
+            'X-Restli-Protocol-Version': '2.0.0',
+            'Content-Type': 'application/json',
+            'x-li-format': 'json',
+            'Content-Length': Buffer.byteLength(JSON.stringify(body))
+        };
+        return axios({ method: 'post', url: requestUrl, headers, data: JSON.stringify(body) })
+            .then((data) => {
+                const url = data.data.value.uploadMechanism['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest'].uploadUrl
+                const assetId = data.data.value.asset
+                console.log(assetId)
+                return { url, assetId };
+            }).then(({ url, assetId }) => {
+                console.log(assetId)
+                return axios.put(url, mediaData, {
+                    headers: {
+                        "x-amz-server-side-encryption-aws-kms-key-id": "ignore",
+                        "x-amz-server-side-encryption": "aws:kms",
+                        "Content-Type": "application/octet-stream"
+                    },
+                })
+            }).then((data) => { response.send({ data: data }) })
+            .catch((data) => { response.send(data) })
+    },
+    sendImageMessageToLinkedIn: function (req, response) {
+        var outFilename = "test.mp4";
+        const mediaData = fs.readFileSync(outFilename)
+        let requestUrl = 'https://api.linkedin.com/v2/assets?action=registerUpload';
+
+        let body = {
+            "registerUploadRequest": {
+                "owner": "urn:li:person:" + req.headers.id,
+                "recipes": [
+                    "urn:li:digitalmediaRecipe:feedshare-image"
                 ],
                 "serviceRelationships": [
                     {

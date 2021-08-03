@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import React, { useContext } from "react"
 import { HomeScreen } from "./HomeScreen/HomeScreen"
 import { TestimonialScreen } from "./TestimonialScreen/TestimonialScreen"
 import { ThankYouScreen } from "./ThankYouScreen/ThankYouScreen"

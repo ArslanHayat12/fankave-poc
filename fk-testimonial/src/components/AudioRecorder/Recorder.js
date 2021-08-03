@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import useRecorder from "../../utils/useRecorder";
 import { Visualizer } from "../AudioVisualizers/Visualizer";
 import { CustomTooltip } from "../Tooltip/Tooltip";

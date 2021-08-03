@@ -4,6 +4,8 @@ import {
     Switch,
     Route
 } from "react-router-dom";
+import ReactDOM from 'react-dom'
+import { waitForAddedNode } from "./utils/config";
 import App from './App';
 import Users from './Users';
 export default function Routes() {
@@ -21,3 +23,12 @@ export default function Routes() {
         </Router>
     );
 }
+
+
+waitForAddedNode({
+    id: 'testimonial-poc',
+    recursive: false,
+    done: (element) => {
+        ReactDOM.render(<Routes />, element)
+    }
+})

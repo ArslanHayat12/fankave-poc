@@ -1,3 +1,4 @@
+import React from "react";
 import Tooltip from "react-simple-tooltip"
 
 export const CustomTooltip = (props) => {
