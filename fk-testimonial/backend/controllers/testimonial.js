@@ -69,7 +69,7 @@ const controller = {
         return res.send("pong");
     },
     initialRedirect: function (req, res) {
-        res.sendFile(path.join(__dirname, "../../build", "index.html"));
+        res.sendFile(path.join(__dirname, "../../build/static", "index.html"));
     },
     userRedirect: function (req, res) {
         res.sendFile(path.join(__dirname, "../../", "close.html"));

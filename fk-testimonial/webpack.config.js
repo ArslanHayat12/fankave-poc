@@ -25,7 +25,7 @@ module.exports = (_, args) => ({
     },
     devServer: {
         disableHostCheck: true,
-        port: 8081,
+        port: 5000,
         host: '0.0.0.0',
         headers: {
             'Access-Control-Allow-Origin': '*',
