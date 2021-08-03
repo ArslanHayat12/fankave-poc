@@ -98,6 +98,7 @@
 
 @media (max-width: 420px) {
   .record-screen .video-wrapper {
-    height: 450px;
+    /* height: 450px; */
+    height: 350px;
   }
 }

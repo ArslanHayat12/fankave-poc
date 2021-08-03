@@ -20,7 +20,8 @@
   margin: 15px 0 0;
   border: 1px solid #c9c9c9;
   border-radius: 8px;
-  height: 325px;
+  /* height: 325px; */
+  height: 253px;
 }
 
 .preview-testimonial-screen .play-button {
@@ -206,6 +207,7 @@
 
 @media (max-width: 768px) {
   .preview-testimonial-screen .video-wrapper {
-    height: 325px;
+    height: 232px;
+    /* height: 325px; */
   }
 }
