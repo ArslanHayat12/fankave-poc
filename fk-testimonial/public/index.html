@@ -28,7 +28,7 @@
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
   <div id="testimonial-poc"></div>
-  <script src="/testimonial-poc.js"></script>
+  <script src="/testimonial-poc/testimonial-poc.js"></script>
   <script>
     function loadDoc() {
       const params = new URL(location.href).searchParams;
@@ -38,7 +38,7 @@
       link.setAttribute("rel", "stylesheet");
       link.setAttribute(
         "href",
-        `${type === "cisco" ? "/cisco/cisco.css" : "/olympics/olympics.css"}`
+        `${type === "cisco" ? "/testimonial-poc/cisco/cisco.css" : "/testimonial-poc/olympics/olympics.css"}`
       );
 
       // Append to the `head` element
