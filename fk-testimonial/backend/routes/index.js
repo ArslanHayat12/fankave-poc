@@ -18,7 +18,7 @@ module.exports = function (app) {
     app.get("/", testimonialController.initialRedirect);
     app.get("/testimonial-poc", testimonialController.initialRedirect);
 
-    app.get("/testimonial-poc/*", testimonialController.initialRedirect);
+    app.get("/testimonial-poc/*", testimonialController.addStaticFile);
     app.get("/testimonial-poc/users", testimonialController.userRedirect);
 
     app.get("/testimonial-poc/users", testimonialController.userRedirect);
