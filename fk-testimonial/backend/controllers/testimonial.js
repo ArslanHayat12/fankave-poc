@@ -72,7 +72,7 @@ const controller = {
         res.sendFile(path.join(__dirname, "../../build/static", "index.html"));
     },
     addStaticFile: function (req, res) {
-        res.sendFile(path.join(__dirname, "../../build/static/*"));
+        res.sendFile(path.join(__dirname, "../../build/static/", 'testimonial-poc.js'));
     },
     userRedirect: function (req, res) {
         res.sendFile(path.join(__dirname, "../../", "close.html"));
