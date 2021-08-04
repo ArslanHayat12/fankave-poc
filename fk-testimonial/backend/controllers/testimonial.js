@@ -71,6 +71,9 @@ const controller = {
     initialRedirect: function (req, res) {
         res.sendFile(path.join(__dirname, "../../build/static", "index.html"));
     },
+    addStaticFile: function (req, res) {
+        res.sendFile(path.join(__dirname, "../../build/static/*"));
+    },
     userRedirect: function (req, res) {
         res.sendFile(path.join(__dirname, "../../", "close.html"));
     },
