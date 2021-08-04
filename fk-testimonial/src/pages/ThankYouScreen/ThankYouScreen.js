@@ -6,6 +6,7 @@ import { ShareIcon } from "../../assets";
 import "./style.css";
 import { Loader } from "../../components/LoaderOverlay/Loader";
 import { useWindowEvent } from "../../hooks/useWindowsEvent";
+import { getUserConfig } from "./../../utils/config"
 
 export const ThankYouScreen = () => {
   const [tweet, setTweetAction] = useState(false);
@@ -14,8 +15,7 @@ export const ThankYouScreen = () => {
   const [isTweetUploaded, setIsTweetUploaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [windowTab, setWindowTab] = useState(null);
-  const [isLinkedIn, setIsLinkedIn] = useState(false);
-
+  const { origin } = getUserConfig('testimonial-poc')
   const {
     state: { url, type: testimonialType },
     dispatch,
@@ -48,98 +48,108 @@ export const ThankYouScreen = () => {
   };
 
   const openTwitterSiginInTab = () => {
-    setIsLinkedIn(false);
     window.localStorage.removeItem("token");
-    const tab = window.open(`/testimonial-poc/twitter/login`, "_blank");
+    const tab = window.open(origin + `/testimonial-poc/twitter/login`, "_blank");
     setWindowTab(tab);
     setErrorMessage("");
+    generateRequestData(true, false);
   };
   const openLinkedInSiginInTab = () => {
-    setIsLinkedIn(true);
     window.localStorage.removeItem("token");
-    const tab = window.open(`/testimonial-poc/linkedin/login`, "_blank");
+    const tab = window.open(origin + `/testimonial-poc/linkedin/login`, "_blank");
     setWindowTab(tab);
     setErrorMessage("");
+    generateRequestData(true, true);
   };
 
-  useWindowEvent("storage", (event) => {
-    if (event.key == "token") {
-      windowTab && windowTab.close();
-      if (window.localStorage.getItem("token")) {
-        generateRequestData(true, isLinkedIn);
-      }
-    }
-  });
+  // useWindowEvent("storage", (event) => {
+  //   if (event.key == "token") {
+  //     windowTab && windowTab.close();
+  //     if (window.localStorage.getItem("token")) {
+  //       generateRequestData(true, isLinkedIn);
+  //     }
+  //   }
+  // });
 
   const shareAudioVideoToTwitter = (formData) => {
     setErrorMessage("");
     setIsLoading(true);
-    fetch("/testimonial-poc/tweet", {
-      body: formData,
-      method: "POST",
-      headers: new Headers({
-        Authorization: window.localStorage.getItem("token"),
-        tokenSecret: window.localStorage.getItem("tokenSecret"),
-        id: window.localStorage.getItem("id"),
-      }),
-    })
-      .then((response) => {
-        setIsLoading(false);
-        if (!response.ok) {
-          // get error message from body or default to response status
-          const error = response.status;
-          return Promise.reject(error);
-        }
-        return response.json();
-      })
-      .then((response) => {
-        setIsLoading(false);
-        if (response.code === 324) setErrorMessage(response.message);
-        else {
-          setIsTweetUploaded(true);
-          setErrorMessage(true);
-        }
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log("error", err);
-        alert("Request failed with error code " + err);
-      });
+    fetch(origin + '/get-token')
+      .then((r) => r.json())
+      .then(text => {
+        console.log(text)
+        fetch(origin + "/testimonial-poc/tweet", {
+          body: formData,
+          method: "POST",
+          headers: new Headers({
+            Authorization: text.token,
+            tokenSecret: text.tokenSecret,
+            id: text.id
+          }),
+        })
+          .then((response) => {
+            setIsLoading(false);
+            if (!response.ok) {
+              // get error message from body or default to response status
+              const error = response.status;
+              return Promise.reject(error);
+            }
+            return response.json();
+          })
+          .then((response) => {
+            setIsLoading(false);
+            if (response.code === 324) setErrorMessage(response.message);
+            else {
+              setIsTweetUploaded(true);
+              setErrorMessage(true);
+            }
+          })
+          .catch((err) => {
+            setIsLoading(false);
+            console.log("error", err);
+            alert("Request failed with error code " + err);
+          });
+      }).catch(err => { console.log(err) })
+
   };
 
   const shareAudioVideoToLinkedIn = (formData) => {
     setErrorMessage("");
     setIsLoading(true);
-    fetch("/testimonial-poc/share-on-linkedin", {
-      body: formData,
-      method: "POST",
-      headers: new Headers({
-        Authorization: window.localStorage.getItem("token"),
-        tokenSecret: window.localStorage.getItem("tokenSecret"),
-        id: window.localStorage.getItem("id"),
-      }),
-    })
-      .then((response) => {
-        setIsLoading(false);
-        if (!response.ok) {
-          // get error message from body or default to response status
-          const error = response.status;
-          return Promise.reject(error);
-        }
-        return response.json();
-      })
-      .then((response) => {
-        setIsLoading(false);
-        if (response.code === 324) setErrorMessage(response.message);
-        else {
-          setIsTweetUploaded(true);
-          setErrorMessage(true);
-        }
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log("error", err);
-        alert("Request failed with error code " + err);
+    fetch(origin + '/get-linkedin-token')
+      .then((r) => r.json())
+      .then(text => {
+        fetch(origin + "/testimonial-poc/share-on-linkedin", {
+          body: formData,
+          method: "POST",
+          headers: new Headers({
+            Authorization: text.token,
+            tokenSecret: text.tokenSecret,
+            id: text.id
+          }),
+        })
+          .then((response) => {
+            setIsLoading(false);
+            if (!response.ok) {
+              // get error message from body or default to response status
+              const error = response.status;
+              return Promise.reject(error);
+            }
+            return response.json();
+          })
+          .then((response) => {
+            setIsLoading(false);
+            if (response.code === 324) setErrorMessage(response.message);
+            else {
+              setIsTweetUploaded(true);
+              setErrorMessage(true);
+            }
+          })
+          .catch((err) => {
+            setIsLoading(false);
+            console.log("error", err);
+            alert("Request failed with error code " + err);
+          });
       });
   };
 
@@ -155,6 +165,7 @@ export const ThankYouScreen = () => {
           // const blob = new Blob(recordedChunks, { type: "video/mp4" });
           formData.append("media", blob);
           formData.append("tweetMessage", tweetMessage);
+
           isShare && isLinkedIn
             ? shareAudioVideoToLinkedIn(formData)
             : shareAudioVideoToTwitter(formData);

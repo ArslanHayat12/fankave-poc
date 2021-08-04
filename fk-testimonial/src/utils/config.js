@@ -27,3 +27,23 @@ export const waitForAddedNode = (params) => {
         creationObserver.observe(parent, config)
     }
 }
+
+const getTransformedUserConfig = (widget = '', windowUserConfig) => {
+    switch (widget) {
+        case 'testimonial-poc':
+            return { ...windowUserConfig, ctag: windowUserConfig.ctag || 'olympics' }
+        default:
+            return windowUserConfig
+    }
+}
+
+export const getUserConfig = (widget) => {
+    return window
+        ? window.userConfig
+            ? getTransformedUserConfig(widget, window.userConfig)
+            : {
+                ctag: 'olympics',
+                origin: window.location.origin
+            }
+        : null
+}

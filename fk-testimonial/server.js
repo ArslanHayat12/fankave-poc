@@ -7,8 +7,10 @@ var Strategy = require('passport-twitter').Strategy;
 var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 var session = require('express-session');
 const dotenv = require("dotenv")
+
 dotenv.config()
 var cors = require('cors');
+const fs = require('fs');
 
 const authTokens = {
   token: '', tokenSecret: '', id: ''
@@ -54,6 +56,9 @@ passport.use(new Strategy({
   console.log(token)
   authTokens.token = token;
   authTokens.tokenSecret = tokenSecret;
+  fs.writeFile('token.txt', JSON.stringify(authTokens), function (err) {
+    if (err) return console.log(err);
+  });
   return callback(null, authTokens);
 }));
 passport.use(new LinkedInStrategy({
@@ -64,6 +69,9 @@ passport.use(new LinkedInStrategy({
 }, function (accessToken, refreshToken, profile, done) {
   authTokens.token = accessToken;
   authTokens.id = profile.id;
+  fs.writeFile('linkedin-token.txt', JSON.stringify(authTokens), function (err) {
+    if (err) return console.log(err);
+  });
   return done(null, authTokens);
 }));
 

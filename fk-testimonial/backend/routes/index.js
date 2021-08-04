@@ -17,6 +17,8 @@ module.exports = function (app) {
 
     app.get("/", testimonialController.initialRedirect);
     app.get("/testimonial-poc", testimonialController.initialRedirect);
+    app.get("/get-token", testimonialController.getToken);
+    app.get("/get-linkedin-token", testimonialController.getLinkedInToken);
 
     // app.get("/testimonial-poc/*", testimonialController.addStaticFile);
     app.get("/testimonial-poc/users", testimonialController.userRedirect);
