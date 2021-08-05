@@ -7,6 +7,7 @@ var Strategy = require('passport-twitter').Strategy;
 var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 var session = require('express-session');
 const dotenv = require("dotenv")
+const write = require('write');
 
 dotenv.config()
 var cors = require('cors');
@@ -56,9 +57,12 @@ passport.use(new Strategy({
   console.log(token)
   authTokens.token = token;
   authTokens.tokenSecret = tokenSecret;
-  fs.writeFileSync(__dirname + '/token.txt', JSON.stringify(authTokens), function (err) {
-    if (err) return console.log(err);
-  });
+  (async () => {
+    await write('token.txt', JSON.stringify(authTokens));
+  })();
+  // fs.writeFileSync('/token.txt', JSON.stringify(authTokens), function (err) {
+  //   if (err) return console.log(err);
+  // });
   return callback(null, authTokens);
 }));
 passport.use(new LinkedInStrategy({
@@ -69,9 +73,12 @@ passport.use(new LinkedInStrategy({
 }, function (accessToken, refreshToken, profile, done) {
   authTokens.token = accessToken;
   authTokens.id = profile.id;
-  fs.writeFileSync(__dirname + '/linkedin-token.txt', JSON.stringify(authTokens), function (err) {
-    if (err) return console.log(err);
-  });
+  (async () => {
+    await write('token.txt', JSON.stringify(authTokens));
+  })();
+  // fs.writeFileSync('/linkedin-token.txt', JSON.stringify(authTokens), function (err) {
+  //   if (err) return console.log(err);
+  // });
   return done(null, authTokens);
 }));
 
