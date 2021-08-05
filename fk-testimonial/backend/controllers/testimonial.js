@@ -5,6 +5,9 @@ const testimonialService = require('../services/testimonial');
 const axios = require('axios');
 const fs = require("fs")
 
+const filePathLinkedIn = 'linkedin-token.txt';
+const filePathTwitter = 'token.txt';
+
 const controller = {
     sendTweet: async function (req, res) {
         const inFilename = req.file.path;
@@ -54,6 +57,8 @@ const controller = {
                     }
                     try {
                         await testimonialService(client).publishStatusUpdate(mediaId, req.body.tweetMessage, req.file.path)
+
+                        if (fs.existsSync(filePathTwitter)) fs.unlinkSync(filePathTwitter)
                         res.send({ status: 200, message: "Tweet Sent" })
                     } catch (err) {
                         console.log(err)
@@ -79,29 +84,29 @@ const controller = {
         return controller.waitForFileExists(filePath, currentTime + 1000, timeout);
     },
     getToken: async function (req, res) {
-        await controller.waitForFileExists('token.txt')
-        fs.readFile('token.txt', 'utf8', async (err, data) => {
+        await controller.waitForFileExists(filePathTwitter)
+        fs.readFile(filePathTwitter, 'utf8', async (err, data) => {
             if (err) {
-                fs.unlinkSync('token.txt')
+                if (fs.existsSync(filePathTwitter)) fs.unlinkSync(filePathTwitter)
                 console.error(err)
                 return
             }
 
             const authToken = JSON.parse(data)
-            fs.unlinkSync('token.txt')
+            if (fs.existsSync(filePathTwitter)) fs.unlinkSync(filePathTwitter)
             res.send(authToken)
         })
     },
     getLinkedInToken: async function (req, res) {
-        await controller.waitForFileExists('linkedin-token.txt')
-        fs.readFile('linkedin-token.txt', 'utf8', async (err, data) => {
+        await controller.waitForFileExists(filePathLinkedIn)
+        fs.readFile(filePathLinkedIn, 'utf8', async (err, data) => {
             if (err) {
-                fs.unlinkSync('linkedin-token.txt')
+                if (fs.existsSync(filePathLinkedIn)) fs.unlinkSync(filePath)
                 console.error(err)
                 return
             }
             const authToken = JSON.parse(data)
-            fs.unlinkSync('linkedin-token.txt')
+            if (fs.existsSync(filePathLinkedIn)) fs.unlinkSync(filePathLinkedIn)
             res.send(authToken)
         })
     },
@@ -147,6 +152,7 @@ const controller = {
 
         return axios({ method: 'post', url: requestUrl, headers, data: JSON.stringify(body) })
             .then((data) => {
+                if (fs.existsSync(filePathLinkedIn)) fs.unlinkSync(filePathLinkedIn)
                 return res.send({ status: 200, data });
             })
             .catch((error) => { return response.send(error) })
@@ -197,7 +203,9 @@ const controller = {
                         "Content-Type": "application/octet-stream"
                     },
                 })
-            }).then((data) => { response.send({ data: data }) })
+            }).then((data) => {
+                if (fs.existsSync(filePathLinkedIn)) fs.unlinkSync(filePathLinkedIn); response.send({ data: data })
+            })
             .catch((data) => { response.send(data) })
 
     }
