@@ -108,7 +108,10 @@ export const ThankYouScreen = () => {
             console.log("error", err);
             alert("Request failed with error code " + err);
           });
-      }).catch(err => { console.log(err) })
+      }).catch(err => {
+        setIsLoading(false);
+        setErrorMessage("Tried With Invalid Token");
+      })
 
   };
 
@@ -149,6 +152,9 @@ export const ThankYouScreen = () => {
             console.log("error", err);
             alert("Request failed with error code " + err);
           });
+      }).catch(err => {
+        setIsLoading(false);
+        setErrorMessage("Tried With Invalid Token");
       });
   };
 
