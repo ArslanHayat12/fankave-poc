@@ -1,0 +1,20 @@
+name: Deploy fk testimonial development workflow
+on:
+  push:
+    branches:
+      - refactoring
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    container:
+      image: google/cloud-sdk:alpine
+    steps:
+      - name: Setup gcloud CLI
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ secrets.SERVICE_ACCOUNT }}
+      - name: Run commands
+        run: |
+          gcloud components install beta --quiet
+          gcloud config set project ${{ secrets.GCP_PROJECT_NAME }}
+          gcloud beta compute instance-groups managed rolling-action replace ${{ secrets.GROUP_NAME }} --max-surge=1 --max-unavailable=0 --zone us-central1-a
