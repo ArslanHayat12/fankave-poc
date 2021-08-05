@@ -17,4 +17,4 @@ jobs:
         run: |
           gcloud components install beta --quiet
           gcloud config set project ${{ secrets.GCP_PROJECT_NAME }}
-          gcloud beta compute instance-groups managed rolling-action replace ${{ secrets.GROUP_NAME }} --max-surge=1 --max-unavailable=1 --zone us-central1-a
+          gcloud beta compute instance-groups managed rolling-action replace ${{ secrets.GROUP_NAME }} --max-surge=1 --max-unavailable=0 --zone us-central1-a
