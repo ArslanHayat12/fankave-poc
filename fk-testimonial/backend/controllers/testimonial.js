@@ -4,9 +4,10 @@ const Twitter = require("twitter")
 const testimonialService = require('../services/testimonial');
 const axios = require('axios');
 const fs = require("fs")
+const storage = require('node-sessionstorage')
 
-const filePathLinkedIn = 'linkedin-token.txt';
-const filePathTwitter = 'token.txt';
+const linkedInStorage = 'linkedin-auth';
+const twitterStorage = 'twitter-auth';
 
 const controller = {
     sendTweet: async function (req, res) {
@@ -58,7 +59,7 @@ const controller = {
                     try {
                         await testimonialService(client).publishStatusUpdate(mediaId, req.body.tweetMessage, req.file.path)
 
-                        if (fs.existsSync(filePathTwitter)) fs.unlinkSync(filePathTwitter)
+                        if (storage.getItem(twitterStorage)) storage.removeItem(twitterStorage)
                         res.send({ status: 200, message: "Tweet Sent" })
                     } catch (err) {
                         console.log(err)
@@ -75,40 +76,21 @@ const controller = {
     initialRedirect: function (req, res) {
         res.sendFile(path.join(__dirname, "../../build/static", "index.html"));
     },
-    waitForFileExists: async function (filePath, currentTime = 0, timeout = 5000) {
-        if (fs.existsSync(filePath)) return true;
+    waitForValue: async function (storagePath, currentTime = 0, timeout = 5000) {
+        if (storage.getItem(storagePath)) return true;
         if (currentTime === timeout) return false;
         // wait for 1 second
         await (new Promise((resolve, reject) => setTimeout(() => resolve(true), 1000)));
         // waited for 1 second
-        return controller.waitForFileExists(filePath, currentTime + 1000, timeout);
+        return controller.waitForValue(storagePath, currentTime + 1000, timeout);
     },
     getToken: async function (req, res) {
-        await controller.waitForFileExists(filePathTwitter)
-        fs.readFile(filePathTwitter, 'utf8', async (err, data) => {
-            if (err) {
-                if (fs.existsSync(filePathTwitter)) fs.unlinkSync(filePathTwitter)
-                console.error(err)
-                return
-            }
-
-            const authToken = JSON.parse(data)
-            if (fs.existsSync(filePathTwitter)) fs.unlinkSync(filePathTwitter)
-            res.send(authToken)
-        })
+        await controller.waitForValue(twitterStorage)
+        res.send(storage.getItem(twitterStorage))
     },
     getLinkedInToken: async function (req, res) {
-        await controller.waitForFileExists(filePathLinkedIn)
-        fs.readFile(filePathLinkedIn, 'utf8', async (err, data) => {
-            if (err) {
-                if (fs.existsSync(filePathLinkedIn)) fs.unlinkSync(filePath)
-                console.error(err)
-                return
-            }
-            const authToken = JSON.parse(data)
-            if (fs.existsSync(filePathLinkedIn)) fs.unlinkSync(filePathLinkedIn)
-            res.send(authToken)
-        })
+        await controller.waitForValue(linkedInStorage)
+        res.send(storage.getItem(linkedInStorage))
     },
     addStaticFile: function (req, res) {
         res.sendFile(path.join(__dirname, "../../build/static/", 'testimonial-poc.js'));
@@ -117,7 +99,7 @@ const controller = {
         res.sendFile(path.join(__dirname, "../../", "close.html"));
     },
     sendTextMessageToLinkedIn: function (req, response) {
-
+        console.log(req.file.path)
         let requestUrl = 'https://api.linkedin.com/v2/shares';
         const title = "First Message";
         let shareUrl = "https://i.pinimg.com/originals/af/8d/63/af8d63a477078732b79ff9d9fc60873f.jpg"
@@ -126,7 +108,7 @@ const controller = {
             "owner": "urn:li:person:" + req.headers.id,
             "subject": title,
             "text": {
-                "text": req.body.tweetMessage // max 1300 characters
+                "text": req.body.tweetMessage || "No text" // max 1300 characters
             },
             "content": {
                 "contentEntities": [{
@@ -152,10 +134,11 @@ const controller = {
 
         return axios({ method: 'post', url: requestUrl, headers, data: JSON.stringify(body) })
             .then((data) => {
-                if (fs.existsSync(filePathLinkedIn)) fs.unlinkSync(filePathLinkedIn)
-                return res.send({ status: 200, data });
+                if (storage.getItem(linkedInStorage)) storage.removeItem(linkedInStorage);
+                fs.unlinkSync(req.file.path)
+                return response.send({ status: 200, data });
             })
-            .catch((error) => { return response.send(error) })
+            .catch((error) => { console.log(error); return response.send(error) })
 
 
     },
@@ -204,7 +187,9 @@ const controller = {
                     },
                 })
             }).then((data) => {
-                if (fs.existsSync(filePathLinkedIn)) fs.unlinkSync(filePathLinkedIn); response.send({ data: data })
+                if (storage.getItem(linkedInStorage)) storage.removeItem(linkedInStorage);
+                fs.unlinkSync(req.file.path)
+                response.send({ data: data })
             })
             .catch((data) => { response.send(data) })
 

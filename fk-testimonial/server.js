@@ -7,11 +7,10 @@ var Strategy = require('passport-twitter').Strategy;
 var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 var session = require('express-session');
 const dotenv = require("dotenv")
-const write = require('write');
+const storage = require('node-sessionstorage')
 
 dotenv.config()
 var cors = require('cors');
-const fs = require('fs');
 
 const authTokens = {
   token: '', tokenSecret: '', id: ''
@@ -54,17 +53,12 @@ passport.use(new Strategy({
   consumerSecret: process.env.CONSUMER_SECRET,
   callbackURL: '/testimonial-poc/twitter-callback'
 }, async function (token, tokenSecret, profile, callback) {
-  console.log(token)
   authTokens.token = token;
   authTokens.tokenSecret = tokenSecret;
-  (async () => {
-    await write('token.txt', JSON.stringify(authTokens));
-  })();
-  // fs.writeFileSync('/token.txt', JSON.stringify(authTokens), function (err) {
-  //   if (err) return console.log(err);
-  // });
+  storage.setItem('twitter-auth', JSON.stringify(authTokens))
   return callback(null, authTokens);
 }));
+
 passport.use(new LinkedInStrategy({
   clientID: process.env.LINKEDIN_KEY,
   clientSecret: process.env.LINKEDIN_SECRET,
@@ -73,12 +67,7 @@ passport.use(new LinkedInStrategy({
 }, function (accessToken, refreshToken, profile, done) {
   authTokens.token = accessToken;
   authTokens.id = profile.id;
-  (async () => {
-    await write('linkedin-token.txt', JSON.stringify(authTokens));
-  })();
-  // fs.writeFileSync('/linkedin-token.txt', JSON.stringify(authTokens), function (err) {
-  //   if (err) return console.log(err);
-  // });
+  storage.setItem('linkedin-auth', JSON.stringify(authTokens))
   return done(null, authTokens);
 }));
 

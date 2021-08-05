@@ -220,7 +220,7 @@ export const ThankYouScreen = () => {
       )}
       {errorMessage && <div className="error">{errorMessage || ""}</div>}
       {isTweetUploaded && (
-        <div className="success">Your tweet has been uploaded.</div>
+        <div className="success">Your message has been uploaded.</div>
       )}
       {isLoading && <Loader />}
     </article>
