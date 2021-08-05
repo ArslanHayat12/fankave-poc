@@ -5,7 +5,6 @@ import { CustomTooltip as Tooltip } from "../../components/Tooltip/Tooltip";
 import { ShareIcon } from "../../assets";
 import "./style.css";
 import { Loader } from "../../components/LoaderOverlay/Loader";
-import { useWindowEvent } from "../../hooks/useWindowsEvent";
 import { getUserConfig } from "./../../utils/config"
 
 export const ThankYouScreen = () => {
@@ -74,7 +73,7 @@ export const ThankYouScreen = () => {
   const shareAudioVideoToTwitter = (formData) => {
     setErrorMessage("");
     setIsLoading(true);
-    fetch(origin + '/get-token')
+    fetch(origin + '/testimonial-poc/get-token')
       .then((r) => r.json())
       .then(text => {
         console.log(text)
@@ -116,7 +115,7 @@ export const ThankYouScreen = () => {
   const shareAudioVideoToLinkedIn = (formData) => {
     setErrorMessage("");
     setIsLoading(true);
-    fetch(origin + '/get-linkedin-token')
+    fetch(origin + '/testimonial-poc/get-linkedin-token')
       .then((r) => r.json())
       .then(text => {
         fetch(origin + "/testimonial-poc/share-on-linkedin", {
