@@ -74,7 +74,7 @@ passport.use(new LinkedInStrategy({
   authTokens.token = accessToken;
   authTokens.id = profile.id;
   (async () => {
-    await write('token.txt', JSON.stringify(authTokens));
+    await write('linkedin-token.txt', JSON.stringify(authTokens));
   })();
   // fs.writeFileSync('/linkedin-token.txt', JSON.stringify(authTokens), function (err) {
   //   if (err) return console.log(err);
