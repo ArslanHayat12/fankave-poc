@@ -1,4 +1,8 @@
 import styled from "styled-components";
-export const Wrapper = styled.div`
-background:red;
-`
+
+export const PageWrapperStyled = styled.section`
+  background: red;
+  .background-video {
+    display: none;
+  }
+`;

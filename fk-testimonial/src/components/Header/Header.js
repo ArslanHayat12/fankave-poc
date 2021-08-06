@@ -1,11 +1,11 @@
 import React from "react";
-import "./style.css";
+import { HeaderStyled } from "./style";
 
 const Header = () => {
   return (
-    <section className="header-wrapper" id="fk-header">
+    <HeaderStyled className="header-wrapper" id="fk-header">
       <img src="http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/img/start.png" />
-    </section>
+    </HeaderStyled>
   );
 };
 

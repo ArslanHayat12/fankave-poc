@@ -2,28 +2,21 @@ import React from "react";
 
 import Header from "./../Header/Header";
 import Footer from "./../Footer/Footer";
-import { Wrapper } from "./style";
+import { PageWrapperStyled } from "./style";
 
-import "./style.css";
+import { BackgroundVideo } from "../BackgroundVideo/BackgroundVideo";
 
 function PageWrapper(props) {
   const { children } = props;
   console.log(window.self.ctag);
+
   return (
-    <Wrapper>
-      {/* <video
-        src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        className="background-video"
-        autoplay="true"
-        muted
-        minWidth="100%"
-        minHeight="100%"
-        id="fk-bg-video"
-      /> */}
+    <PageWrapperStyled>
+      <BackgroundVideo />
       <Header />
       {children}
       <Footer />
-    </Wrapper>
+    </PageWrapperStyled>
   );
 }
 

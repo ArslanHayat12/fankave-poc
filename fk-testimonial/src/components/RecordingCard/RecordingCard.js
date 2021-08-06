@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.css";
+import RecordingCardStyled from "./style";
 import { CameraIcon, MicIcon } from "../../assets/index";
 
 const RecordingCard = (props) => {
@@ -9,10 +9,14 @@ const RecordingCard = (props) => {
   const icon = recordingType === "video" ? <CameraIcon /> : <MicIcon />;
 
   return (
-    <a className="card-wrapper" onClick={handleClick} id="fk-card-wrapper">
+    <RecordingCardStyled
+      className="card-wrapper"
+      onClick={handleClick}
+      id="fk-card-wrapper"
+    >
       {icon}
       <p className="card-description">{description}</p>
-    </a>
+    </RecordingCardStyled>
   );
 };
 
