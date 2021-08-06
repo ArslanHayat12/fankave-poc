@@ -9,7 +9,7 @@ function PageWrapper(props) {
   const { children } = props;
   return (
     <>
-      <video
+      {/* <video
         src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
         className="background-video"
         autoplay="true"
@@ -17,7 +17,7 @@ function PageWrapper(props) {
         minWidth="100%"
         minHeight="100%"
         id="fk-bg-video"
-      />
+      /> */}
       <Header />
       {children}
       <Footer />
