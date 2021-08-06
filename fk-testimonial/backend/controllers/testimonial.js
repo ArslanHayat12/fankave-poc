@@ -92,9 +92,6 @@ const controller = {
         await controller.waitForValue(linkedInStorage)
         res.send(storage.getItem(linkedInStorage))
     },
-    addStaticFile: function (req, res) {
-        res.sendFile(path.join(__dirname, "../../build/static/", 'testimonial-poc.js'));
-    },
     userRedirect: function (req, res) {
         res.sendFile(path.join(__dirname, "../../", "close.html"));
     },

@@ -44,14 +44,14 @@ app.use(passport.session());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "static")));
 app.use(express.static(path.join(__dirname, "build", "static")));
-app.use("/testimonial-poc", express.static(path.join(__dirname, "build", "static")));
-// app.use('/testimonial-poc/*', express.static(path.join(__dirname, "build", "static")));
+app.use("/testimonials", express.static(path.join(__dirname, "build", "static")));
+// app.use('/testimonials/*', express.static(path.join(__dirname, "build", "static")));
 
 //Strategies
 passport.use(new Strategy({
   consumerKey: process.env.CONSUMER_KEY,
   consumerSecret: process.env.CONSUMER_SECRET,
-  callbackURL: '/testimonial-poc/twitter-callback'
+  callbackURL: '/testimonials/twitter-callback'
 }, async function (token, tokenSecret, profile, callback) {
   authTokens.token = token;
   authTokens.tokenSecret = tokenSecret;
@@ -62,7 +62,7 @@ passport.use(new Strategy({
 passport.use(new LinkedInStrategy({
   clientID: process.env.LINKEDIN_KEY,
   clientSecret: process.env.LINKEDIN_SECRET,
-  callbackURL: "/testimonial-poc/linkedin-callback",
+  callbackURL: "/testimonials/linkedin-callback",
   scope: ['r_emailaddress', 'r_liteprofile', 'w_member_social'],
 }, function (accessToken, refreshToken, profile, done) {
   authTokens.token = accessToken;

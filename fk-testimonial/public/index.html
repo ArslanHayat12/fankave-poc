@@ -51,8 +51,8 @@
     document.title = userConfigs[window.location.hostname].title || userConfigs['default'].title
   </script>
   <div id="root"></div>
-  <div id="testimonial-poc"></div>
-  <script src="/testimonial-poc/testimonial-poc.js"></script>
+  <div id="testimonials"></div>
+  <script src="/testimonials/testimonials.js"></script>
 
   <script>
     function loadDoc() {
@@ -62,7 +62,7 @@
       link.setAttribute("rel", "stylesheet");
       link.setAttribute(
         "href",
-        `${type === "cisco" ? "/testimonial-poc/cisco/cisco.css" : "/testimonial-poc/olympics/olympics.css"}`
+        `${type === "cisco" ? "/testimonials/cisco/cisco.css" : "/testimonials/olympics/olympics.css"}`
       );
 
       // Append to the `head` element
