@@ -6,9 +6,7 @@ import Widget from "./components/Widget/Widget";
 import "./App.css";
 
 function App() {
-  return <PageWrapper  >
-    <Widget />
-  </PageWrapper>;
+  return <PageWrapper children={<Widget />}></PageWrapper>;
 }
 
 export default App;

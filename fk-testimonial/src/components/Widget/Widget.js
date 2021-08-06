@@ -5,7 +5,7 @@ import { TestimonialContext } from "./../../context/TestimonialContext";
 import { initialState } from "./../../context/TestimonialContext";
 import { reducer } from "./../../reducers/reducers";
 
-import "./style.css";
+import { WidgetStyled } from "./style.js";
 
 function Widget() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -13,7 +13,7 @@ function Widget() {
 
   return (
     <TestimonialContext.Provider value={value}>
-      <section className="main-container" id="fk-main-container">
+      <WidgetStyled className="main-container" id="fk-main-container">
         {!(window.MediaRecorder || window.webkitMediaRecorder) && (
           <div className="not-supported-container">
             <p>
@@ -25,7 +25,7 @@ function Widget() {
         <article className="widget-wrapper" id="fk-widget-wrapper">
           <TestimonialApp />
         </article>
-      </section>
+      </WidgetStyled>
     </TestimonialContext.Provider>
   );
 }

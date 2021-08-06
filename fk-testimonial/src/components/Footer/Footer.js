@@ -1,11 +1,12 @@
 import React from "react";
-import "./style.css";
+import "./style.js";
+import { FooterStyled } from "./style.js";
 
 const Footer = () => {
   return (
-    <section className="footer-wrapper" id="fk-footer">
+    <FooterStyled className="footer-wrapper" id="fk-footer">
       <img src="http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/img/start.png" />
-    </section>
+    </FooterStyled>
   );
 };
 

@@ -2,7 +2,7 @@ import React, { useReducer, useMemo, useCallback } from "react";
 import { questionReducer } from "../../reducers/reducers";
 import { initialState, QuestionContext } from "../../context/QuestionContext";
 import { SET_INDEX } from "../../constants";
-import "./style.css";
+import QuestionCardStyled from "./style";
 
 const QuestionsCard = () => {
   const [state, dispatch] = useReducer(questionReducer, initialState);
@@ -35,7 +35,7 @@ const QuestionsCard = () => {
 
   return (
     <QuestionContext.Provider value={value}>
-      <article className="question-card" id="fk-question-card">
+      <QuestionCardStyled className="question-card" id="fk-question-card">
         <p className="questions">{questionArray[state.questionIndex]}</p>
 
         <article className="question-buttons-wrapper">
@@ -67,7 +67,7 @@ const QuestionsCard = () => {
             <span>&#8250;</span>
           </button>
         </article>
-      </article>
+      </QuestionCardStyled>
     </QuestionContext.Provider>
   );
 };

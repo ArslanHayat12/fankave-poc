@@ -7,7 +7,7 @@ import {
   SET_CLIENT_COMPANY,
 } from "../../constants";
 import { TestimonialContext } from "../../context/TestimonialContext";
-import "./style.css";
+import ClientDetailsStyled from "./style";
 
 const ClientDetails = () => {
   const {
@@ -42,7 +42,10 @@ const ClientDetails = () => {
   }, []);
 
   return (
-    <article className="client-details-wrapper" id="fk-client-details-wrapper">
+    <ClientDetailsStyled
+      className="client-details-wrapper"
+      id="fk-client-details-wrapper"
+    >
       {!name ? (
         nameEdit ? (
           <input
@@ -129,7 +132,7 @@ const ClientDetails = () => {
       ) : (
         <p className="client-details">{companyName}</p>
       )}
-    </article>
+    </ClientDetailsStyled>
   );
 };
 
