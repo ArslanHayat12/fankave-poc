@@ -1,22 +1,24 @@
 import React from "react";
+import { BackgroundVideoStyled } from "./style";
 
 export const BackgroundVideo = (props) => {
-  const { url, width, height } = props;
+  const { url } = props;
+
   return (
-    <video
-      src={url}
-      className="background-video"
-      autoplay="true"
-      muted
-      minWidth={width}
-      minHeight={height}
-      id="fk-bg-video"
-    />
+    <BackgroundVideoStyled>
+      <video
+        src={url}
+        className="background-video"
+        autoplay="true"
+        muted
+        minWidth="100%"
+        minHeight="100%"
+        id="fk-bg-video"
+      />
+    </BackgroundVideoStyled>
   );
 };
 
 BackgroundVideo.defaultProps = {
-  url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-  width: "100%",
-  height: "100%",
+  url: "",
 };

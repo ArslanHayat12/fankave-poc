@@ -2,7 +2,7 @@ import React, { useReducer, useMemo, useCallback } from "react";
 import { questionReducer } from "../../reducers/reducers";
 import { initialState, QuestionContext } from "../../context/QuestionContext";
 import { SET_INDEX } from "../../constants";
-import QuestionCardStyled from "./style";
+import { QuestionCardStyled } from "./style";
 
 const QuestionsCard = () => {
   const [state, dispatch] = useReducer(questionReducer, initialState);

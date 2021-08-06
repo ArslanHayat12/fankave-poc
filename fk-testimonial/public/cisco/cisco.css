@@ -8,3 +8,7 @@
   min-height: 100%;
   z-index: -1;
 }
+
+#fk-widget-wrapper {
+  background-color: #fff;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import RecordingCardStyled from "./style";
+import { RecordingCardStyled } from "./style";
 import { CameraIcon, MicIcon } from "../../assets/index";
 
 const RecordingCard = (props) => {

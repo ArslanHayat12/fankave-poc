@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Web site created using create-react-app" />
-
-  <!--
+    <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
 
-  <!--
+    <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -21,56 +26,65 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-  <title>React App</title>
-</head>
+    <title>React App</title>
+  </head>
 
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <script>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
 
-    var userConfigs = {
-      'dev.olympics.fankave.com': {
-        ctag: 'olympics',
-        origin: 'https://dev.olympics.fankave.com',
-        title: 'Dev'
-      },
-      localhost: {
-        ctag: 'cisco',
-        // origin is the url where web-app project is running e.g localhost:3000
-        origin: 'http://localhost:5000',
-        title: 'Localhost'
-      },
-      default: {
-        ctag: 'olympics',
-        origin: 'https://dev.olympics.fankave.com',
-        title: 'Dev'
+    <script>
+      var userConfigs = {
+        "dev.olympics.fankave.com": {
+          ctag: "olympics",
+          origin: "https://dev.olympics.fankave.com",
+          title: "Dev",
+        },
+        localhost: {
+          ctag: "cisco",
+          // origin is the url where web-app project is running e.g localhost:3000
+          origin: "http://localhost:5000",
+          title: "Localhost",
+        },
+        default: {
+          ctag: "olympics",
+          origin: "https://dev.olympics.fankave.com",
+          title: "Dev",
+        },
+      };
+      self.window.userConfig =
+        userConfigs[window.location.hostname] || userConfigs["default"];
+      self.window.ctag =
+        userConfigs[window.location.hostname].ctag ||
+        userConfigs["default"].ctag;
+      document.title =
+        userConfigs[window.location.hostname].title ||
+        userConfigs["default"].title;
+    </script>
+
+    <script>
+      function loadDoc() {
+        const type = window.self.ctag;
+        // Create new link element
+        const link = document.createElement("link");
+        link.setAttribute("rel", "stylesheet");
+        link.setAttribute(
+          "href",
+          `${
+            type === "cisco"
+              ? "/testimonial-poc/cisco/cisco.css"
+              : "/testimonial-poc/olympics/olympics.css"
+          }`
+        );
+
+        // Append to the `head` element
+        document.head.appendChild(link);
       }
-    }
-    self.window.userConfig = userConfigs[window.location.hostname] || userConfigs['default']
-    self.window.ctag = userConfigs[window.location.hostname].ctag || userConfigs['default'].ctag
-    document.title = userConfigs[window.location.hostname].title || userConfigs['default'].title
-  </script>
-  <div id="root"></div>
-  <div id="testimonial-poc"></div>
-  <script src="/testimonial-poc/testimonial-poc.js"></script>
 
-  <script>
-    function loadDoc() {
-      const type = self.window.ctag;
-      // Create new link element
-      const link = document.createElement("link");
-      link.setAttribute("rel", "stylesheet");
-      link.setAttribute(
-        "href",
-        `${type === "cisco" ? "/testimonial-poc/cisco/cisco.css" : "/testimonial-poc/olympics/olympics.css"}`
-      );
+      loadDoc();
+    </script>
 
-      // Append to the `head` element
-      document.head.appendChild(link);
-    }
-
-    loadDoc();
-  </script>
-</body>
-
+    <div id="root"></div>
+    <div id="testimonial-poc"></div>
+    <script src="/testimonial-poc/testimonial-poc.js"></script>
+  </body>
 </html>

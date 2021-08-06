@@ -7,7 +7,7 @@ import {
   SET_CLIENT_COMPANY,
 } from "../../constants";
 import { TestimonialContext } from "../../context/TestimonialContext";
-import ClientDetailsStyled from "./style";
+import { ClientDetailsStyled } from "./style";
 
 const ClientDetails = () => {
   const {
