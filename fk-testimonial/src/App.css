@@ -1,10 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
 
 body {
-  /* background-image: url("/testimonial-poc/olympics/background.png"); */
-
+  margin: 0;
   background-color: #fff;
-  background-repeat: no-repeat;
-  background-position: center;
   font-family: "Poppins", sans-serif;
 }

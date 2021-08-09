@@ -5,9 +5,9 @@ export const RecordingCardStyled = styled.a`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border: 1px solid #ccc;
+  border: 2px solid #878787;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 18px;
   text-decoration: none;
   color: #000;
   cursor: pointer;

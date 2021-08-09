@@ -2,10 +2,11 @@ import React from "react";
 import { HeaderStyled } from "./style";
 
 const Header = (props) => {
-  const { src } = props;
+  const { mainLogoSrc, subLogoSrc } = props;
   return (
     <HeaderStyled className="header-wrapper" id="fk-header">
-      {src && <img src={src} />}
+      {mainLogoSrc && <img src={mainLogoSrc} className="main-logo" />}
+      {subLogoSrc && <img src={subLogoSrc} className="sub-logo" />}
     </HeaderStyled>
   );
 };

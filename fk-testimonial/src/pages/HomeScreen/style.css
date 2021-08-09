@@ -1,6 +1,7 @@
 .home-screen {
   display: grid;
   grid-row-gap: 15px;
+  z-index: 1;
 }
 
 .home-screen .description {

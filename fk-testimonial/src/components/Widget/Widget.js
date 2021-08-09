@@ -1,16 +1,28 @@
-import React, { useReducer, useMemo } from "react";
+import React, { useReducer, useMemo, useContext } from "react";
+import { ThemeContext } from "styled-components";
 
 import { TestimonialApp } from "./../../pages";
-import { TestimonialContext } from "./../../context/TestimonialContext";
-import { initialState } from "./../../context/TestimonialContext";
+import {
+  TestimonialContext,
+  initialState,
+} from "./../../context/TestimonialContext";
 import { reducer } from "./../../reducers/reducers";
+import Footer from "./../Footer/Footer";
 
 import { WidgetStyled } from "./style.js";
 
 function Widget() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
-
+  const theme = useContext(ThemeContext);
+  const {
+    default: {
+      widget: {
+        background,
+        logo: { position, url },
+      },
+    },
+  } = theme;
   return (
     <TestimonialContext.Provider value={value}>
       <WidgetStyled className="main-container" id="fk-main-container">
@@ -23,7 +35,9 @@ function Widget() {
           </div>
         )}
         <article className="widget-wrapper" id="fk-widget-wrapper">
+          <img src={background} className="widget-bg" />
           <TestimonialApp />
+          <Footer src={url} position={position} />
         </article>
       </WidgetStyled>
     </TestimonialContext.Provider>

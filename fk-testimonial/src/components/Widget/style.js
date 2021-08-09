@@ -1,10 +1,25 @@
 import styled from "styled-components";
-
 export const WidgetStyled = styled.section`
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 0;
+
+  .widget-bg {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    @media (max-width: 768px) {
+      height: 100vh;
+    }
+  }
 
   .not-supported-container {
     width: 100vw;
@@ -28,13 +43,13 @@ export const WidgetStyled = styled.section`
     align-items: center;
     flex-direction: column;
     height: 650px;
-    background-color: #fff;
     width: 335px;
     border-radius: 5px;
     padding: 28px;
     margin: 15px;
     scrollbar-width: thin !important;
     overflow-x: hidden;
+    box-shadow: 1px 5px 110px #bdb1b1;
   }
 
   ::-webkit-scrollbar {

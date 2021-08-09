@@ -40,7 +40,7 @@
           title: "Dev",
         },
         localhost: {
-          ctag: "cisco",
+          ctag: "bevi",
           // origin is the url where web-app project is running e.g localhost:3000
           origin: "http://localhost:5000",
           title: "Localhost",
@@ -69,11 +69,7 @@
         link.setAttribute("rel", "stylesheet");
         link.setAttribute(
           "href",
-          `${
-            type === "cisco"
-              ? "/testimonial-poc/cisco/cisco.css"
-              : "/testimonial-poc/olympics/olympics.css"
-          }`
+          `/testimonial-poc/${window.self.ctag}/${window.self.ctag}.css`
         );
 
         // Append to the `head` element

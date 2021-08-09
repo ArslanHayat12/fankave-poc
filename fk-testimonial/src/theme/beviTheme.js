@@ -1,73 +1,66 @@
-export const beviBookConfigs = {
+const beviBookConfigs = {
   default: {
-    preLoadedVideo: {
-      position: "center", //left|right
-      url: "",
+    customClass: "default",
+    background: {
+      type: "image", //image|video
+      url: "/bevi/background.png",
     },
-    background: "",
 
-    containerCssClassname: "default",
-
-    loadingMedia: {
-      url: `/testimonial-poc/bg-video.mp4`,
-    },
-    layout: {
-      regular: {
-        header: {
-          leftLogoUrl: "/wave.png",
-          rightLogoUrl: "/wave.png",
-          centerLogoUrlParentUrl: "",
-          centerLogoUrlChildUrl: "",
-        },
-        footer: {
-          logoUrl: "/wave.png",
-        },
+    pageLayout: {
+      header: {
+        position: "center",
+        mainLogoUrl: "/bevi/main-logo.png",
+        subLogoUrl: "/bevi/sub-logo.png",
+        mainLogoHeight: "45px",
+        subLogoHeight: "22px",
+        mainLogoMargin: "0 0 27px 0",
+        subLogoMargin: "",
       },
-      threecolumn: {
-        header: {
-          leftLogoUrl: "/wave.png",
-          rightLogoUrl: "/wave.png",
-        },
-        footer: {
-          logoUrl: "",
-        },
+      footer: {
+        position: "center",
+        logoUrl: "",
       },
     },
 
-    card: {
-      background: "",
-      topLogo: "",
+    widget: {
+      background: "/bevi/widget-bg.png",
+      widgetGif: {
+        position: "center", //left|right
+        url: "/bevi/bevi-gif.gif",
+      },
       logo: {
-        topLeft: "",
-        bottomRight: "",
+        position: "bottom-right",
+        url: "/bevi/footer-logo.png",
       },
       mainHeadingText: "",
       fontSize: "",
       fontColor: "",
+
       homeScreen: {
         videoBox: {
-          icon: "",
+          icon: "/bevi/camera-icon.png",
           text: "",
-          borderRadius: "",
+          borderRadius: "18px",
           background: "",
-          borderColor: "",
+          border: "solid 2px #878787",
           iconColor: "",
           iconSize: "",
           fontColor: "",
           fontSize: "",
         },
         audioBox: {
-          icon: "",
+          icon: "/bevi/mic-icon.png",
           text: "",
-          borderRadius: "",
+          borderRadius: "18px",
           background: "",
-          borderColor: "",
+          border: "solid 2px #878787",
           iconColor: "",
           iconSize: "",
           fontColor: "",
           fontSize: "",
         },
       },
+
       previewScreen: {
         video: {
           heading: "",
@@ -155,3 +148,5 @@ export const beviBookConfigs = {
     },
   },
 };
+
+export default beviBookConfigs;

@@ -1,39 +1,45 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "styled-components";
 
 import Header from "./../Header/Header";
 import Footer from "./../Footer/Footer";
 import { PageWrapperStyled } from "./style";
 
 import { BackgroundVideo } from "../BackgroundVideo/BackgroundVideo";
-import { configs } from "../../configs";
+import themeConfigs from "../../theme";
 
 function PageWrapper(props) {
   const { children } = props;
-
-  if (configs) {
+  const theme = useContext(ThemeContext);
+  console.log("themeConfigs", themeConfigs);
+  if (themeConfigs) {
     const {
       default: {
-        loadingMedia: { url: BackgroundVideoUrl },
-        background = "",
-        containerCssClassname = "",
-        layout: {
-          regular: {
-            header: { leftLogoUrl = "" },
-            footer: { logoUrl = "" },
-          },
+        customClass = "",
+        background: { type, url: backgroundUrl },
+        pageLayout: {
+          header: { position, mainLogoUrl, subLogoUrl },
+          footer: { position: footerLogoPosition, logoUrl: footerLogoUrl },
         },
       },
-    } = configs;
+    } = themeConfigs;
 
     return (
-      <PageWrapperStyled
-        // background={background}
-        className={containerCssClassname}
-      >
-        <BackgroundVideo url={BackgroundVideoUrl} />
-        <Header src={leftLogoUrl} />
+      <PageWrapperStyled className={customClass}>
+        {type === "video" ? (
+          <BackgroundVideo url={backgroundUrl} />
+        ) : (
+          <img src={backgroundUrl} className="background-image" />
+        )}
+        <Header
+          mainLogoSrc={mainLogoUrl}
+          subLogoSrc={subLogoUrl}
+          position={position}
+        />
         {children}
-        <Footer src={logoUrl} />
+        {footerLogoUrl && (
+          <Footer src={logoUrl} position={footerLogoPosition} />
+        )}
       </PageWrapperStyled>
     );
   } else {

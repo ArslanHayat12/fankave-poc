@@ -3,26 +3,29 @@ import styled from "styled-components";
 export const FooterStyled = styled.section`
   display: flex;
   justify-content: flex-end;
-  margin: 0 20px 20px;
+  margin: 0px 20px 20px;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 
   img {
-    width: 50px;
-    height: 50px;
+    height: 30px;
   }
 
   @media (max-width: 768px) {
     margin: 0 10px 10px;
 
     img {
-      width: 35px;
-      height: 35px;
+      height: 20px;
+      margin: 10px;
     }
   }
 
   @media (max-width: 425px) {
     img {
-      width: 30px;
-      height: 30px;
+      height: 20px;
+      margin: 10px;
     }
   }
 `;
