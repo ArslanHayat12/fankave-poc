@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import RecordScreen from "../RecordScreen/RecordScreen";
-import Previewsharestoriescreen from "../Previewsharestoriescreen/Previewsharestoriescreen";
+import PreviewTestimonialScreen from "../PreviewTestimonialScreen/PreviewTestimonialScreen";
 import { TestimonialContext } from "../../context/TestimonialContext";
 
-export const sharestoriescreen = () => {
+export const TestimonialScreen = () => {
   const { state: { type, url } } = useContext(TestimonialContext);
 
   return (
@@ -14,7 +14,7 @@ export const sharestoriescreen = () => {
         </>
       ) : (
         <>
-          <Previewsharestoriescreen />
+          <PreviewTestimonialScreen />
         </>
       )}
     </>

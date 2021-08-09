@@ -16,7 +16,7 @@ import {
 import "./style.css";
 import { Loader } from "../../components/LoaderOverlay/Loader";
 
-const Previewsharestoriescreen = () => {
+const PreviewTestimonialScreen = () => {
   const {
     state: {
       url,
@@ -243,4 +243,4 @@ const Previewsharestoriescreen = () => {
   );
 };
 
-export default Previewsharestoriescreen;
+export default PreviewTestimonialScreen;
