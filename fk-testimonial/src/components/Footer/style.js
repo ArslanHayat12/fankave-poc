@@ -10,7 +10,7 @@ export const FooterStyled = styled.section`
   z-index: 1;
 
   img {
-    height: 30px;
+    height: 20px;
   }
 
   @media (max-width: 768px) {
