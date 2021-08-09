@@ -1,7 +1,7 @@
 const path = require('path');
 const hbjs = require('handbrake-js')
 const Twitter = require("twitter")
-const testimonialService = require('../services/testimonial');
+const sharestorieservice = require('../services/testimonial');
 const axios = require('axios');
 const fs = require("fs")
 const storage = require('node-sessionstorage')
@@ -38,26 +38,26 @@ const controller = {
                     const mediaSize = fs.statSync(outFilename).size
                     const mediaType = "video/mp4"
                     try {
-                        mediaId = await testimonialService(client).initializeMediaUpload(mediaSize, mediaType)
+                        mediaId = await sharestorieservice(client).initializeMediaUpload(mediaSize, mediaType)
                     }
                     catch (err) {
                         console.log(err)
                         return res.send({ code: 324, message: 'Something wrong with the video 1' });
                     }
                     try {
-                        mediaId = await testimonialService(client).appendFileChunk(mediaId, mediaData)
+                        mediaId = await sharestorieservice(client).appendFileChunk(mediaId, mediaData)
                     }
                     catch (err) {
                         return res.send({ code: 324, message: 'Something wrong with the video 2' });
                     }
                     try {
-                        mediaId = await testimonialService(client).finalizeUpload(mediaId)
+                        mediaId = await sharestorieservice(client).finalizeUpload(mediaId)
                     }
                     catch (err) {
                         return res.send({ code: 324, message: 'Something wrong with the video 3' });
                     }
                     try {
-                        await testimonialService(client).publishStatusUpdate(mediaId, req.body.tweetMessage, req.file.path)
+                        await sharestorieservice(client).publishStatusUpdate(mediaId, req.body.tweetMessage, req.file.path)
 
                         if (storage.getItem(twitterStorage)) storage.removeItem(twitterStorage)
                         res.send({ status: 200, message: "Tweet Sent" })

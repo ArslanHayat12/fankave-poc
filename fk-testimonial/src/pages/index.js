@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { HomeScreen } from "./HomeScreen/HomeScreen"
-import { TestimonialScreen } from "./TestimonialScreen/TestimonialScreen"
+import { sharestoriescreen } from "./sharestoriescreen/sharestoriescreen"
 import { ThankYouScreen } from "./ThankYouScreen/ThankYouScreen"
 import { TESTIMONIAL_SCREEN, THANK_YOU_SCREEN } from "../constants"
 import { TestimonialContext } from "../context/TestimonialContext"
@@ -11,7 +11,7 @@ export const TestimonialApp = () => {
 	} = useContext(TestimonialContext)
 
 	return screen === TESTIMONIAL_SCREEN ? (
-		<TestimonialScreen />
+		<sharestoriescreen />
 	) : screen === THANK_YOU_SCREEN ? (
 		<ThankYouScreen />
 	) : (

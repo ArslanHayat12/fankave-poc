@@ -6,7 +6,7 @@ module.exports = (_, args) => ({
     output: {
         ...(args.mode === 'production'
             ? {
-                publicPath: `${process.env.WEB_APP_HOST}/testimonials/`,
+                publicPath: `${process.env.WEB_APP_HOST}/sharestories/`,
                 path: path.resolve(__dirname, 'build/static')
             }
             : {
@@ -17,7 +17,7 @@ module.exports = (_, args) => ({
     entry: {
         testimonialPoc: {
             import: './src/Routes.js',
-            filename: 'testimonials.js'
+            filename: 'sharestories.js'
         }
     },
     resolve: {
@@ -33,7 +33,7 @@ module.exports = (_, args) => ({
             'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
         },
         contentBase: [path.join('public')],
-        contentBasePublicPath: '/testimonials',
+        contentBasePublicPath: '/sharestories',
         // historyApiFallback: {
         //     rewrites: [
         //         { from: /^\/$/, to: './src/index.html' },

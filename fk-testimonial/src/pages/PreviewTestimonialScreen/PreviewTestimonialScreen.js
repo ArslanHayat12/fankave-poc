@@ -16,7 +16,7 @@ import {
 import "./style.css";
 import { Loader } from "../../components/LoaderOverlay/Loader";
 
-const PreviewTestimonialScreen = () => {
+const Previewsharestoriescreen = () => {
   const {
     state: {
       url,
@@ -163,9 +163,8 @@ const PreviewTestimonialScreen = () => {
   return (
     <article
       id="fk-preview-testimonial-screen"
-      className={`preview-testimonial-screen${
-        testimonialType === "audio" ? " audio-preview-screen" : ""
-      }`}
+      className={`preview-testimonial-screen${testimonialType === "audio" ? " audio-preview-screen" : ""
+        }`}
     >
       {testimonialType === "video" ? (
         <>
@@ -244,4 +243,4 @@ const PreviewTestimonialScreen = () => {
   );
 };
 
-export default PreviewTestimonialScreen;
+export default Previewsharestoriescreen;
