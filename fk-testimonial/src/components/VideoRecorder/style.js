@@ -64,6 +64,10 @@ export const VideoRecorderStyled = styled.article`
 
   .video-play-icon path {
     fill: #e85775;
+
+    circle {
+      fill: #2771ff;
+    }
   }
 
   .video-play-icon {

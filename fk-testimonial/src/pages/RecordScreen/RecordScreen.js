@@ -42,6 +42,9 @@ const RecordScreen = () => {
       dispatchURLDuration();
     };
   }, []);
+
+  const theme = useContext(ThemeContext);
+
   return (
     <RecordingScreenStyled className="record-screen" id="fk-record-screen">
       {type === "video" ? (

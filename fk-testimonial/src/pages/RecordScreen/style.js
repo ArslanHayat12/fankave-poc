@@ -1,6 +1,7 @@
 import styled from "styled-components";
 export const RecordingScreenStyled = styled.article`
   width: 100%;
+  height: 100%;
   z-index: 1;
 
   .video {
@@ -75,7 +76,8 @@ export const RecordingScreenStyled = styled.article`
   }
 
   .mic-wrapper {
-    background: #e85757;
+    background: ${(props) =>
+      props.theme.default.widget.recordingScreen.audio.micIcon.background};
     height: 90px;
     width: 90px;
     border-radius: 50%;
@@ -91,6 +93,7 @@ export const RecordingScreenStyled = styled.article`
     flex-direction: column;
     align-items: center;
     justify-content: start;
+    height: 85%;
   }
 
   .timer {

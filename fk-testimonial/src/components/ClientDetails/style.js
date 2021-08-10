@@ -50,7 +50,7 @@ export const ClientDetailsStyled = styled.article`
     margin-bottom: 5px;
     border: ${(props) =>
       props.theme.default.widget.previewScreen.video.input.placeholders.border};
-    padding: 10px 7px;
+    padding: 10px;
     border-radius: ${(props) =>
       props.theme.default.widget.previewScreen.video.input.placeholders
         .borderRadius};

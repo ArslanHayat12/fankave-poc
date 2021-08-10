@@ -4,7 +4,7 @@ export const PreviewScreenStyled = styled.article`
   width: 100%;
   z-index: 1;
 
-  .audio-preview-screen {
+  &.audio-preview-screen {
     height: 100%;
   }
 

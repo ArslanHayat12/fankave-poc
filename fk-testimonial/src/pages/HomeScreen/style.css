@@ -2,6 +2,7 @@
   display: grid;
   grid-row-gap: 30px;
   z-index: 1;
+  height: 100%;
 }
 
 .home-screen .description {
