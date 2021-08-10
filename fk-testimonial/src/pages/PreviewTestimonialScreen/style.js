@@ -134,16 +134,37 @@ export const PreviewScreenStyled = styled.article`
   }
 
   .audio-wrapper {
+    width: 100%;
     position: relative;
     display: flex;
     align-items: center;
     font-size: 12px;
     justify-content: space-between;
-    background: #35a4ff;
+    height: 120px;
+    align-items: flex-end;
+    padding: 20px;
     border-radius: 25px;
     padding: 0 15px;
     margin: 30px 0;
     height: 30px;
+  }
+
+  .audio-card {
+    background: #95bafe;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 17px;
+    padding: 15px;
+    height: 120px;
+    margin-top: 20px;
+  }
+
+  .audio-card .mic-icon {
+    height: 50px;
+    width: 30px;
+    margin-top: 30px;
   }
 
   .preview-audio-canvas {
@@ -218,12 +239,5 @@ export const PreviewScreenStyled = styled.article`
   .error {
     color: red;
     font-size: 14px;
-  }
-
-  @media (max-width: 768px) {
-    .video-wrapper {
-      height: 232px;
-      /* height: 325px; */
-    }
   }
 `;

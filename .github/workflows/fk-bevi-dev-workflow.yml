@@ -1,0 +1,22 @@
+name: Deploy fk bevi development workflow
+on:
+  push:
+    branches:
+      - bevi-dev
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    container:
+      image: google/cloud-sdk:alpine
+    steps:
+      - name: Setup gcloud CLI
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ secrets.SERVICE_ACCOUNT }}
+          project_id: ${{ secrets.GCP_PROJECT_NAME }}
+          export_default_credentials: true
+      - name: Run commands
+        run: |
+          gcloud components install beta --quiet
+          gcloud config set project ${{ secrets.GCP_PROJECT_NAME }}
+          gcloud beta compute instance-groups managed rolling-action replace ${{ secrets.DEV_GROUP_NAME }} --max-surge=1 --max-unavailable=0 --zone us-central1-a
