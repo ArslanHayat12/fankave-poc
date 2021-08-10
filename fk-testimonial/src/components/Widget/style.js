@@ -24,10 +24,6 @@ export const WidgetStyled = styled.section`
     width: 100%;
     height: 100%;
     z-index: 1;
-
-    @media (max-width: 768px) {
-      height: 100vh;
-    }
   }
 
   .not-supported-container {
@@ -47,6 +43,7 @@ export const WidgetStyled = styled.section`
   }
 
   .widget-wrapper {
+    background: #fff;
     position: relative;
     display: flex;
     align-items: center;

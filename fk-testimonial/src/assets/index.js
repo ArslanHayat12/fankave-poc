@@ -52,7 +52,7 @@ export const RecordingIcon = (props) => {
           cy="7.5"
           r="7.5"
           transform="translate(743 739)"
-          fill="#246eff"
+          fill="#e85775"
         />
       </g>
     </svg>

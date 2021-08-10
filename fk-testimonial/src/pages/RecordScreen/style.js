@@ -100,11 +100,4 @@ export const RecordingScreenStyled = styled.article`
     margin: 52px 0 15px;
     z-index: 2;
   }
-
-  @media (max-width: 420px) {
-    .video-wrapper {
-      /* height: 450px; */
-      height: 350px;
-    }
-  }
 `;
