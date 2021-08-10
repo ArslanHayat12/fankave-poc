@@ -9,7 +9,7 @@ const questionsList = [
 const beviBookConfigs = {
   default: {
     topic: "beviemployee",
-    customClass: "default",
+    customClass: "bevi-layout",
     background: {
       type: "image", //image|video
       url: "/bevi/background.png",
@@ -37,7 +37,6 @@ const beviBookConfigs = {
       background: "/bevi/widget-bg.png",
       borderRadius: "12px",
       widgetGif: {
-        position: "center", //left|right
         url: "/bevi/bevi-gif.gif",
       },
       logo: {
@@ -117,7 +116,9 @@ const beviBookConfigs = {
           heading: "",
           fontSize: "",
           fontColor: "",
-          audio: {},
+          audio: {
+            displayWave: false,
+          },
           input: {
             placeholders: {
               name: "Name",
@@ -141,7 +142,7 @@ const beviBookConfigs = {
             color: "",
           },
           card: {
-            icon: "",
+            icon: "/bevi/mic-icon-white.png",
           },
         },
       },
@@ -177,15 +178,18 @@ const beviBookConfigs = {
         twitterButton: {
           bgColor: "#5089ed",
           borderRadius: "22px",
+          display: false,
         },
         linkedinButton: {
           bgColor: "#5089ed",
           borderRadius: "22px",
+          display: false,
         },
         goBackText: "",
         button: {
           backgroundColor: "#5089ed",
           text: "Share",
+          display: false,
           fontSize: "",
           color: "",
           height: "60px",

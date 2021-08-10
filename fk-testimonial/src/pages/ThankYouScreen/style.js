@@ -17,10 +17,9 @@ export const ThankyouScreenStyled = styled.section`
   .description {
     font-size: 27px;
     font-weight: 500;
-    font-weight: normal;
     line-height: 1.28;
     text-align: center;
-    color: #828282;
+    color: #2d2d2d;
     margin-top: 0;
   }
 

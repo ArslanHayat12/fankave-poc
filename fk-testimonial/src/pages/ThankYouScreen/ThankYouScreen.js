@@ -16,7 +16,7 @@ export const ThankYouScreen = () => {
   const [isTweetUploaded, setIsTweetUploaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [windowTab, setWindowTab] = useState(null);
-  const { origin } = getUserConfig('sharestories')
+  const { origin } = getUserConfig("sharestories");
   const {
     state: { url, type: testimonialType },
     dispatch,
@@ -75,10 +75,10 @@ export const ThankYouScreen = () => {
   const shareAudioVideoToTwitter = (formData) => {
     setErrorMessage("");
     setIsLoading(true);
-    fetch(origin + '/sharestories/get-token')
+    fetch(origin + "/sharestories/get-token")
       .then((r) => r.json())
-      .then(text => {
-        console.log(text)
+      .then((text) => {
+        console.log(text);
         fetch(origin + "/sharestories/tweet", {
           body: formData,
           method: "POST",
@@ -120,9 +120,9 @@ export const ThankYouScreen = () => {
   const shareAudioVideoToLinkedIn = (formData) => {
     setErrorMessage("");
     setIsLoading(true);
-    fetch(origin + '/sharestories/get-linkedin-token')
+    fetch(origin + "/sharestories/get-linkedin-token")
       .then((r) => r.json())
-      .then(text => {
+      .then((text) => {
         fetch(origin + "/sharestories/share-on-linkedin", {
           body: formData,
           method: "POST",
@@ -190,7 +190,7 @@ export const ThankYouScreen = () => {
         thankyouScreen: {
           shareIcon: { url: beviShareIcon },
           tweetIcon: { url: beviTweetIcon },
-          button: { text },
+          button: { text, display },
         },
       },
     },
@@ -205,7 +205,7 @@ export const ThankYouScreen = () => {
       <span className="back-button" onClick={onBack}>
         Go Again
       </span>
-      {testimonialType === "video" && !tweet && !isTweetUploaded && (
+      {display && testimonialType === "video" && !tweet && !isTweetUploaded && (
         <div className="button-wrapper">
           <button className="icon-button " onClick={() => setTweetAction(true)}>
             <Tooltip content="Share" placement="right">
@@ -214,7 +214,7 @@ export const ThankYouScreen = () => {
           </button>
 
           <button className="share-button" onClick={() => setTweetAction(true)}>
-            Share
+            {text}
           </button>
         </div>
       )}

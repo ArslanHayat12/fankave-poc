@@ -41,7 +41,17 @@ const PreviewTestimonialScreen = () => {
     window.location.hostname,
     theme.default.topic
   );
-
+  const {
+    default: {
+      widget: {
+        previewScreen: {
+          audio: {
+            card: { icon: iconUrl },
+          },
+        },
+      },
+    },
+  } = theme;
   const shareAudioVideoToServer = (formData, isApproveAction = false) => {
     setIsApproveLoading(true);
     fetch(apiRequestURL, {
@@ -169,8 +179,9 @@ const PreviewTestimonialScreen = () => {
   return (
     <PreviewScreenStyled
       id="fk-preview-testimonial-screen"
-      className={`preview-testimonial-screen${testimonialType === "audio" ? " audio-preview-screen" : ""
-        }`}
+      className={`preview-testimonial-screen${
+        testimonialType === "audio" ? " audio-preview-screen" : ""
+      }`}
     >
       {testimonialType === "video" ? (
         <>
@@ -213,17 +224,20 @@ const PreviewTestimonialScreen = () => {
       ) : (
         <>
           <h2 className="heading">Preview Audio Testimonial </h2>
+          <article className="audio-card">
+            <img src={iconUrl} className="mic-icon" />
 
-          <article className="audio-wrapper">
-            {AudioPlayer}
-            <CustomTooltip content="Retake" placement="bottom">
-              <button
-                className="audio-edit-button"
-                onClick={() => setRetakeModal(true)}
-              >
-                <RefreshIcon customClass="edit-icon" />
-              </button>
-            </CustomTooltip>
+            <article className="audio-wrapper">
+              {AudioPlayer}
+              <CustomTooltip content="Retake" placement="bottom">
+                <button
+                  className="audio-edit-button"
+                  onClick={() => setRetakeModal(true)}
+                >
+                  <RefreshIcon customClass="edit-icon" />
+                </button>
+              </CustomTooltip>
+            </article>
           </article>
           <ConfirmationModal
             title="audio"
@@ -243,7 +257,10 @@ const PreviewTestimonialScreen = () => {
         </button>
       </article>
       {isApproveLoading && "Please wait request is processing"}
-      {testimonialType === "audio" && <SoundWave />}
+      {testimonialType === "audio" &&
+        theme.default.widget.previewScreen.audio.audio.displayWave && (
+          <SoundWave />
+        )}
       {isApproveLoading && <Loader />}
     </PreviewScreenStyled>
   );
