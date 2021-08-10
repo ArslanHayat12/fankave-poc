@@ -6,7 +6,6 @@ export const SoundWave = () => {
   const { state, dispatch } = useContext(TestimonialContext);
 
   useEffect(() => {
-    console.log("isAudioPlaying", state.isAudioPlaying);
     var c = canvasRef.current,
       ctx = c.getContext("2d"),
       cw = c.width,

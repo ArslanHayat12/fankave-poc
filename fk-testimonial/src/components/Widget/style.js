@@ -7,6 +7,14 @@ export const WidgetStyled = styled.section`
 
   z-index: 0;
 
+  .widget-gif {
+    position: absolute;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .widget-bg {
     z-index: -1;
     position: absolute;
@@ -43,6 +51,7 @@ export const WidgetStyled = styled.section`
     display: flex;
     align-items: center;
     flex-direction: column;
+    justify-content: center;
     width: ${(props) => props.theme.default.widget.width};
     height: ${(props) => props.theme.default.widget.height};
     border-radius: ${(props) => props.theme.default.widget.borderRadius};

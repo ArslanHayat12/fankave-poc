@@ -11,7 +11,6 @@ import themeConfigs from "../../theme";
 function PageWrapper(props) {
   const { children } = props;
   const theme = useContext(ThemeContext);
-  console.log("themeConfigs", themeConfigs);
   if (themeConfigs) {
     const {
       default: {
