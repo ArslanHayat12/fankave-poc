@@ -1,6 +1,5 @@
 import React, { useContext, useRef, useState, useEffect, useMemo } from "react";
 import { ThemeContext } from "styled-components";
-
 import { CustomAudioPlayer } from "../../components/CustomAudioPlayer/CustomAudioPlayer";
 import { PlayFilledIcon, RefreshIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
@@ -28,7 +27,6 @@ const PreviewTestimonialScreen = () => {
       clientEmail,
       clientCompany,
       thumbUrl,
-      recordedChunks,
     },
     dispatch,
   } = useContext(TestimonialContext);
@@ -37,10 +35,15 @@ const PreviewTestimonialScreen = () => {
   const videoRef = useRef(null);
   const audioRef = useRef(null);
   const [isApproveLoading, setIsApproveLoading] = useState(false);
+  const theme = useContext(ThemeContext);
+  const apiRequestURL = getPublishAPIRequest(
+    window.location.hostname,
+    theme.default.topic
+  );
 
   const shareAudioVideoToServer = (formData, isApproveAction = false) => {
     setIsApproveLoading(true);
-    fetch("https://dev.api.fankave.com/cmsx/stories/testimonialmvp/publish", {
+    fetch(apiRequestURL, {
       body: formData,
       method: "POST",
     })
@@ -161,8 +164,6 @@ const PreviewTestimonialScreen = () => {
         payload: audioRef?.current.soundCloudAudio.audio.duration,
       });
   }, [testimonialType, audioRef?.current?.soundCloudAudio.audio.duration]);
-
-  const theme = useContext(ThemeContext);
 
   return (
     <PreviewScreenStyled

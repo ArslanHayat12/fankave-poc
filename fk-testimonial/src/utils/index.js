@@ -15,11 +15,20 @@ export const getQueryStringValue = (key) => {
     window.location.search.replace(
       new RegExp(
         "^(?:.*[&\\?]" +
-          encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") +
-          "(?:\\=([^&]*))?)?.*$",
+        encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") +
+        "(?:\\=([^&]*))?)?.*$",
         "i"
       ),
       "$1"
     )
   );
 };
+
+export const getPublishAPIRequest = (hostname, topic = "testimonialmvp") => {
+  const environment = hostname.includes("dev") ? "dev" : hostname.includes("staging") ? "staging" : "prod";
+  if (environment === "prod")
+    return `https://api.fankave.com/cmsx/stories/${topic}/publish`;
+  return `https://${environment}.api.fankave.com/cmsx/stories/${topic}/publish`;
+};
+
+
