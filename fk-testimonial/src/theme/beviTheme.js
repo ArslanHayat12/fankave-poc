@@ -1,3 +1,11 @@
+const questionsList = [
+  "What is your name and title?",
+  "What team do you report into?",
+  "How long have you been working at Bevi?",
+  "What excites you most about working at Bevi every day?",
+  "How would you describe the Bevi company culture?",
+  "Why would you recommend Bevi as a great place to work?",
+];
 const beviBookConfigs = {
   default: {
     customClass: "default",
@@ -122,6 +130,10 @@ const beviBookConfigs = {
       recordingScreen: {
         video: {
           height: "350px",
+          questionsList,
+        },
+        audio: {
+          questionsList,
         },
       },
 
