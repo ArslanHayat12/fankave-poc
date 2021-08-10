@@ -4,6 +4,7 @@ export const WidgetStyled = styled.section`
   justify-content: center;
   align-items: center;
   position: relative;
+
   z-index: 0;
 
   .widget-bg {
@@ -42,9 +43,9 @@ export const WidgetStyled = styled.section`
     display: flex;
     align-items: center;
     flex-direction: column;
-    height: 650px;
-    width: 335px;
-    border-radius: 5px;
+    width: ${(props) => props.theme.default.widget.width};
+    height: ${(props) => props.theme.default.widget.height};
+    border-radius: ${(props) => props.theme.default.widget.borderRadius};
     padding: 28px;
     margin: 15px;
     scrollbar-width: thin !important;

@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useContext } from "react";
+import { ThemeContext } from "styled-components";
 import { PencilIcon } from "../../assets";
 import { getQueryStringValue } from "../../utils/";
 import {
@@ -40,7 +41,24 @@ const ClientDetails = () => {
       setCompanyEdit(false);
     }
   }, []);
-
+  const theme = useContext(ThemeContext);
+  const {
+    default: {
+      widget: {
+        previewScreen: {
+          video: {
+            input: {
+              placeholders: {
+                name: namePlaceholder,
+                email: emailPlaceholder,
+                company: companyPlaceholder,
+              },
+            },
+          },
+        },
+      },
+    },
+  } = theme;
   return (
     <ClientDetailsStyled
       className="client-details-wrapper"
@@ -52,7 +70,7 @@ const ClientDetails = () => {
             type="text"
             className="input-name"
             id="name"
-            placeholder="Name"
+            placeholder={namePlaceholder}
             value={clientName}
             onChange={(e) =>
               dispatch({
@@ -82,7 +100,7 @@ const ClientDetails = () => {
             type="text"
             className="input-email"
             id="email"
-            placeholder="Email Address"
+            placeholder={emailPlaceholder}
             value={clientEmail}
             onChange={(e) =>
               dispatch({
@@ -110,7 +128,7 @@ const ClientDetails = () => {
             type="text"
             className="input-company"
             id="company"
-            placeholder="Company Name"
+            placeholder={companyPlaceholder}
             value={clientCompany}
             onChange={(e) =>
               dispatch({

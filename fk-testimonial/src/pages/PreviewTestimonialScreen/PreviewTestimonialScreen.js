@@ -1,4 +1,6 @@
 import React, { useContext, useRef, useState, useEffect, useMemo } from "react";
+import { ThemeContext } from "styled-components";
+
 import { CustomAudioPlayer } from "../../components/CustomAudioPlayer/CustomAudioPlayer";
 import { PlayFilledIcon, RefreshIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
@@ -13,8 +15,8 @@ import {
   SET_URL_DURATION,
   THANK_YOU_SCREEN,
 } from "../../constants";
-import "./style.css";
 import { Loader } from "../../components/LoaderOverlay/Loader";
+import { PreviewScreenStyled } from "./style";
 
 const PreviewTestimonialScreen = () => {
   const {
@@ -160,8 +162,10 @@ const PreviewTestimonialScreen = () => {
       });
   }, [testimonialType, audioRef?.current?.soundCloudAudio.audio.duration]);
 
+  const theme = useContext(ThemeContext);
+
   return (
-    <article
+    <PreviewScreenStyled
       id="fk-preview-testimonial-screen"
       className={`preview-testimonial-screen${
         testimonialType === "audio" ? " audio-preview-screen" : ""
@@ -240,7 +244,7 @@ const PreviewTestimonialScreen = () => {
       {isApproveLoading && "Please wait request is processing"}
       {testimonialType === "audio" && <SoundWave />}
       {isApproveLoading && <Loader />}
-    </article>
+    </PreviewScreenStyled>
   );
 };
 

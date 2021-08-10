@@ -9,7 +9,7 @@ export const FooterStyled = styled.section`
   z-index: 1;
 
   img {
-    height: 20px;
+    height: ${(props) => props.theme.default.widget.logo.height};
   }
 
   @media (max-width: 768px) {
