@@ -1,4 +1,10 @@
-import React, { useState, useRef, useCallback, useEffect, useContext } from "react";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useContext,
+} from "react";
 import Webcam from "react-webcam";
 import { isMobile } from "react-device-detect";
 import { TestimonialContext } from "../../context/TestimonialContext";
@@ -142,15 +148,15 @@ export const VideoRecorder = () => {
                 width: isMobile
                   ? undefined
                   : videoWidth > 400
-                    ? 333
-                    : videoWidth > 360
-                      ? 313
-                      : 298,
-                height: isMobile ? undefined : 400,
+                  ? 333
+                  : videoWidth > 360
+                  ? 313
+                  : 298,
+                height: isMobile ? undefined : 350,
                 facingMode: "user",
               }}
               width={videoWidth > 400 ? 333 : videoWidth > 360 ? 313 : 298}
-              height={400}
+              height={350}
               style={{ objectFit: "cover" }}
               onUserMedia={() => setIsStreamInit(true)}
               onUserMediaError={showAccessBlocked}
@@ -159,7 +165,7 @@ export const VideoRecorder = () => {
           {error && (
             <NotificationCard
               openModal={error ? true : false}
-            //   handlePermission={allowCameraPermission}
+              //   handlePermission={allowCameraPermission}
             />
           )}
         </div>

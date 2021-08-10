@@ -4,8 +4,8 @@ const questionsList = [
   "How long have you been working at Bevi?",
   "What excites you most about working at Bevi every day?",
   "How would you describe the Bevi company culture?",
-  "Why would you recommend Bevi as a great place to work?"
-]
+  "Why would you recommend Bevi as a great place to work?",
+];
 const beviBookConfigs = {
   default: {
     topic: "beviemployee",
@@ -130,10 +130,11 @@ const beviBookConfigs = {
 
       recordingScreen: {
         video: {
-          questionsList
+          height: "350px",
+          questionsList,
         },
         audio: {
-          questionsList
+          questionsList,
         },
       },
 
