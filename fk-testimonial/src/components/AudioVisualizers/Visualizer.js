@@ -63,7 +63,7 @@ export const Visualizer = (props) => {
           frameRef.current = requestAnimationFrame(draw);
 
           analyser.getByteFrequencyData(dataArray);
-          canvasCtx.fillStyle = "#fff";
+          canvasCtx.fillStyle = "transparent";
           canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
 
           var gradient = canvasCtx.createLinearGradient(
@@ -76,11 +76,11 @@ export const Visualizer = (props) => {
             70
           );
           // Add three color stops
-          gradient.addColorStop(0.1, "#e97272");
-          gradient.addColorStop(0.4, "#e77e7e");
-          gradient.addColorStop(0.7, "#e77e7e");
-          gradient.addColorStop(0.9, "#e77e7e");
-          gradient.addColorStop(1, "#e97272");
+          gradient.addColorStop(0.1, "#5e91f3");
+          gradient.addColorStop(0.4, "#96b5f352");
+          gradient.addColorStop(0.7, "#96b5f352");
+          gradient.addColorStop(0.9, "#5e91f3");
+          gradient.addColorStop(1, "#5e91f3");
 
           let radius = dataArray[2] / 2;
           if (radius < 20) radius = 20;
@@ -90,7 +90,7 @@ export const Visualizer = (props) => {
           canvasCtx.fillStyle = gradient;
           canvasCtx.fill();
           canvasCtx.lineWidth = 10;
-          canvasCtx.strokeStyle = "#e7a9a9";
+          canvasCtx.strokeStyle = "#96b5f352";
           canvasCtx.stroke();
         };
         draw();

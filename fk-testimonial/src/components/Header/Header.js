@@ -1,11 +1,13 @@
 import React from "react";
-import "./style.css";
+import { HeaderStyled } from "./style";
 
-const Header = () => {
+const Header = (props) => {
+  const { mainLogoSrc, subLogoSrc } = props;
   return (
-    <section className="header-wrapper" id="fk-header">
-      <img src="http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/img/start.png" />
-    </section>
+    <HeaderStyled className="header-wrapper" id="fk-header">
+      {mainLogoSrc && <img src={mainLogoSrc} className="main-logo" />}
+      {subLogoSrc && <img src={subLogoSrc} className="sub-logo" />}
+    </HeaderStyled>
   );
 };
 

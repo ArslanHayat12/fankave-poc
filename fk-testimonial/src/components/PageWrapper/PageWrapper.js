@@ -1,28 +1,60 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "styled-components";
 
 import Header from "./../Header/Header";
 import Footer from "./../Footer/Footer";
+import { PageWrapperStyled } from "./style";
 
-import "./style.css";
+import { BackgroundVideo } from "../BackgroundVideo/BackgroundVideo";
+import themeConfigs from "../../theme";
 
 function PageWrapper(props) {
   const { children } = props;
-  return (
-    <>
-      {/* <video
-        src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        className="background-video"
-        autoplay="true"
-        muted
-        minWidth="100%"
-        minHeight="100%"
-        id="fk-bg-video"
-      /> */}
-      <Header />
-      {children}
-      <Footer />
-    </>
-  );
+  const theme = useContext(ThemeContext);
+  if (themeConfigs) {
+    const {
+      default: {
+        customClass = "",
+        background: { type, url: backgroundUrl },
+        pageLayout: {
+          header: { position, mainLogoUrl, subLogoUrl },
+          footer: { position: footerLogoPosition, logoUrl: footerLogoUrl },
+        },
+      },
+    } = themeConfigs;
+
+    return (
+      <PageWrapperStyled className={customClass}>
+        {type === "video" ? (
+          <BackgroundVideo url={backgroundUrl} />
+        ) : (
+          <img src={backgroundUrl} className="background-image" />
+        )}
+        <Header
+          mainLogoSrc={mainLogoUrl}
+          subLogoSrc={subLogoUrl}
+          position={position}
+        />
+        {children}
+        {footerLogoUrl && (
+          <Footer src={logoUrl} position={footerLogoPosition} />
+        )}
+      </PageWrapperStyled>
+    );
+  } else {
+    return (
+      <PageWrapperStyled>
+        <BackgroundVideo
+          url={
+            window.self.ctag === "cisco" ? "/testimonial-poc/bg-video.mp4" : ""
+          }
+        />
+        <Header />
+        {children}
+        <Footer />
+      </PageWrapperStyled>
+    );
+  }
 }
 
 export default PageWrapper;

@@ -1,4 +1,5 @@
 import React, { useContext, useRef, useState, useEffect, useMemo } from "react";
+import { ThemeContext } from "styled-components";
 import { CustomAudioPlayer } from "../../components/CustomAudioPlayer/CustomAudioPlayer";
 import { PlayFilledIcon, RefreshIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
@@ -6,6 +7,7 @@ import { CustomTooltip } from "../../components/Tooltip/Tooltip";
 import { SoundWave } from "../../components/AudioVisualizers/SoundWave";
 import { ConfirmationModal } from "../../components/ConfirmationModal/ConfirmationModal";
 import { TestimonialContext } from "../../context/TestimonialContext";
+import { getPublishAPIRequest } from "../../utils/index";
 import {
   SET_URL,
   SET_SCREEN,
@@ -13,8 +15,8 @@ import {
   SET_URL_DURATION,
   THANK_YOU_SCREEN,
 } from "../../constants";
-import "./style.css";
 import { Loader } from "../../components/LoaderOverlay/Loader";
+import { PreviewScreenStyled } from "./style";
 
 const PreviewTestimonialScreen = () => {
   const {
@@ -26,7 +28,6 @@ const PreviewTestimonialScreen = () => {
       clientEmail,
       clientCompany,
       thumbUrl,
-      recordedChunks,
     },
     dispatch,
   } = useContext(TestimonialContext);
@@ -35,10 +36,15 @@ const PreviewTestimonialScreen = () => {
   const videoRef = useRef(null);
   const audioRef = useRef(null);
   const [isApproveLoading, setIsApproveLoading] = useState(false);
+  const theme = useContext(ThemeContext);
+  const apiRequestURL = getPublishAPIRequest(
+    window.location.hostname,
+    theme.default.topic
+  );
 
   const shareAudioVideoToServer = (formData, isApproveAction = false) => {
     setIsApproveLoading(true);
-    fetch("https://dev.api.fankave.com/cmsx/stories/testimonialmvp/publish", {
+    fetch(apiRequestURL, {
       body: formData,
       method: "POST",
     })
@@ -161,7 +167,7 @@ const PreviewTestimonialScreen = () => {
   }, [testimonialType, audioRef?.current?.soundCloudAudio.audio.duration]);
 
   return (
-    <article
+    <PreviewScreenStyled
       id="fk-preview-testimonial-screen"
       className={`preview-testimonial-screen${testimonialType === "audio" ? " audio-preview-screen" : ""
         }`}
@@ -239,7 +245,7 @@ const PreviewTestimonialScreen = () => {
       {isApproveLoading && "Please wait request is processing"}
       {testimonialType === "audio" && <SoundWave />}
       {isApproveLoading && <Loader />}
-    </article>
+    </PreviewScreenStyled>
   );
 };
 

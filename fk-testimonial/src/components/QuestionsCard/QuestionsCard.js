@@ -1,19 +1,17 @@
-import React, { useReducer, useMemo, useCallback } from "react";
+import React, { useReducer, useMemo, useCallback, useContext } from "react";
+import { ThemeContext } from "styled-components";
 import { questionReducer } from "../../reducers/reducers";
 import { initialState, QuestionContext } from "../../context/QuestionContext";
 import { SET_INDEX } from "../../constants";
-import "./style.css";
+import { QuestionCardStyled } from "./style";
 
 const QuestionsCard = () => {
   const [state, dispatch] = useReducer(questionReducer, initialState);
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
+  const theme = useContext(ThemeContext);
 
-  const questionArray = [
-    "What is your name, title and company?",
-    "What challenge did you have?",
-    "What made this partner the obvious choice?",
-    "What were the results?",
-  ];
+  const questionArray =
+    theme.default?.widget?.recordingScreen?.video?.questionsList || [];
 
   const gotToPrevQuestion = useCallback(() => {
     if (state.questionIndex > 0) {
@@ -35,7 +33,7 @@ const QuestionsCard = () => {
 
   return (
     <QuestionContext.Provider value={value}>
-      <article className="question-card" id="fk-question-card">
+      <QuestionCardStyled className="question-card" id="fk-question-card">
         <p className="questions">{questionArray[state.questionIndex]}</p>
 
         <article className="question-buttons-wrapper">
@@ -67,7 +65,7 @@ const QuestionsCard = () => {
             <span>&#8250;</span>
           </button>
         </article>
-      </article>
+      </QuestionCardStyled>
     </QuestionContext.Provider>
   );
 };

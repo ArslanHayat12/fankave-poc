@@ -1,19 +1,46 @@
-import React, { useReducer, useMemo } from "react";
+import React, {
+  useReducer,
+  useMemo,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
+import { ThemeContext } from "styled-components";
 
 import { TestimonialApp } from "./../../pages";
-import { TestimonialContext } from "./../../context/TestimonialContext";
-import { initialState } from "./../../context/TestimonialContext";
+import {
+  TestimonialContext,
+  initialState,
+} from "./../../context/TestimonialContext";
 import { reducer } from "./../../reducers/reducers";
+import Footer from "./../Footer/Footer";
 
-import "./style.css";
+import { WidgetStyled } from "./style.js";
 
 function Widget() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
+  const theme = useContext(ThemeContext);
+  const [displayGif, setDisplayGif] = useState(true);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDisplayGif(false);
+    }, 5000);
+    return () => clearTimeout(timer);
+  });
+
+  const {
+    default: {
+      widget: {
+        background,
+        logo: { position, url },
+      },
+    },
+  } = theme;
   return (
     <TestimonialContext.Provider value={value}>
-      <section className="main-container" id="fk-main-container">
+      <WidgetStyled className="main-container" id="fk-main-container">
         {!(window.MediaRecorder || window.webkitMediaRecorder) && (
           <div className="not-supported-container">
             <p>
@@ -23,9 +50,20 @@ function Widget() {
           </div>
         )}
         <article className="widget-wrapper" id="fk-widget-wrapper">
-          <TestimonialApp />
+          {displayGif ? (
+            <img
+              src={theme.default.widget.widgetGif.url}
+              className="widget-gif"
+            />
+          ) : (
+            <>
+              <img src={background} className="widget-bg" />
+              <TestimonialApp />
+              <Footer src={url} position={position} />
+            </>
+          )}
         </article>
-      </section>
+      </WidgetStyled>
     </TestimonialContext.Provider>
   );
 }

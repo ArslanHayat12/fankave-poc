@@ -1,4 +1,11 @@
-import React, { useState, useRef, useCallback, useEffect, useContext } from "react";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useContext,
+} from "react";
+import { ThemeContext } from "styled-components";
 import Webcam from "react-webcam";
 import { isMobile } from "react-device-detect";
 import { TestimonialContext } from "../../context/TestimonialContext";
@@ -14,7 +21,7 @@ import {
   SET_THUMB_URL,
   SET_RECORD_CHUKS,
 } from "../../constants";
-import "./style.css";
+import { VideoRecorderStyled } from "./style";
 
 export const VideoRecorder = () => {
   const { dispatch } = useContext(TestimonialContext);
@@ -131,8 +138,22 @@ export const VideoRecorder = () => {
     };
   }, []);
 
+  const theme = useContext(ThemeContext);
+  const {
+    default: {
+      widget: {
+        recordingScreen: {
+          video: { height: videoHeight },
+        },
+      },
+    },
+  } = theme;
+
   return (
-    <article className="video-recorder-wrapper" id="fk-video-recorder-wrapper">
+    <VideoRecorderStyled
+      className="video-recorder-wrapper"
+      id="fk-video-recorder-wrapper"
+    >
       <figure className="video-wrapper">
         <div className="video-recording-container">
           {!videoURL && (
@@ -142,15 +163,15 @@ export const VideoRecorder = () => {
                 width: isMobile
                   ? undefined
                   : videoWidth > 400
-                    ? 333
-                    : videoWidth > 360
-                      ? 313
-                      : 298,
-                height: isMobile ? undefined : 400,
+                  ? 333
+                  : videoWidth > 360
+                  ? 313
+                  : 298,
+                height: isMobile ? undefined : videoHeight,
                 facingMode: "user",
               }}
               width={videoWidth > 400 ? 333 : videoWidth > 360 ? 313 : 298}
-              height={400}
+              height={videoHeight}
               style={{ objectFit: "cover" }}
               onUserMedia={() => setIsStreamInit(true)}
               onUserMediaError={showAccessBlocked}
@@ -159,7 +180,7 @@ export const VideoRecorder = () => {
           {error && (
             <NotificationCard
               openModal={error ? true : false}
-            //   handlePermission={allowCameraPermission}
+              //   handlePermission={allowCameraPermission}
             />
           )}
         </div>
@@ -192,6 +213,6 @@ export const VideoRecorder = () => {
           </Tooltip>
         </div>
       )}
-    </article>
+    </VideoRecorderStyled>
   );
 };
