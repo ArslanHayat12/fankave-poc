@@ -1,5 +1,5 @@
 import React, { useReducer, useMemo, useCallback, useContext } from "react";
-import { ThemeContext } from "styled-components"
+import { ThemeContext } from "styled-components";
 import { questionReducer } from "../../reducers/reducers";
 import { initialState, QuestionContext } from "../../context/QuestionContext";
 import { SET_INDEX } from "../../constants";
@@ -10,8 +10,8 @@ const QuestionsCard = () => {
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
   const theme = useContext(ThemeContext);
 
-  const questionArray = theme.default?.widget?.recordingScreen?.video?.questionsList || [];
-  console.log("Question Card,", theme)
+  const questionArray =
+    theme.default?.widget?.recordingScreen?.video?.questionsList || [];
 
   const gotToPrevQuestion = useCallback(() => {
     if (state.questionIndex > 0) {
@@ -38,8 +38,9 @@ const QuestionsCard = () => {
 
         <article className="question-buttons-wrapper">
           <button
-            className={`question-button prev-button${state.questionIndex === 0 ? " disabled" : ""
-              }`}
+            className={`question-button prev-button${
+              state.questionIndex === 0 ? " disabled" : ""
+            }`}
             onClick={state.questionIndex === 0 ? undefined : gotToPrevQuestion}
           >
             <span>&#8249;</span>
@@ -49,10 +50,11 @@ const QuestionsCard = () => {
             {state.questionIndex + 1}/{questionArray.length}
           </span>
           <button
-            className={`question-button next-button${state.questionIndex === questionArray.length - 1
-              ? " disabled"
-              : ""
-              }`}
+            className={`question-button next-button${
+              state.questionIndex === questionArray.length - 1
+                ? " disabled"
+                : ""
+            }`}
             onClick={
               state.questionIndex === questionArray.length - 1
                 ? undefined

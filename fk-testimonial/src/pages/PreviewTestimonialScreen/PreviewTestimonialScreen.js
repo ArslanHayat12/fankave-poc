@@ -15,8 +15,8 @@ import {
   SET_URL_DURATION,
   THANK_YOU_SCREEN,
 } from "../../constants";
-import "./style.css";
 import { Loader } from "../../components/LoaderOverlay/Loader";
+import { PreviewScreenStyled } from "./style";
 
 const PreviewTestimonialScreen = () => {
   const {
@@ -37,7 +37,10 @@ const PreviewTestimonialScreen = () => {
   const audioRef = useRef(null);
   const [isApproveLoading, setIsApproveLoading] = useState(false);
   const theme = useContext(ThemeContext);
-  const apiRequestURL = getPublishAPIRequest(window.location.hostname, theme.default.topic);
+  const apiRequestURL = getPublishAPIRequest(
+    window.location.hostname,
+    theme.default.topic
+  );
 
   const shareAudioVideoToServer = (formData, isApproveAction = false) => {
     setIsApproveLoading(true);
@@ -164,10 +167,11 @@ const PreviewTestimonialScreen = () => {
   }, [testimonialType, audioRef?.current?.soundCloudAudio.audio.duration]);
 
   return (
-    <article
+    <PreviewScreenStyled
       id="fk-preview-testimonial-screen"
-      className={`preview-testimonial-screen${testimonialType === "audio" ? " audio-preview-screen" : ""
-        }`}
+      className={`preview-testimonial-screen${
+        testimonialType === "audio" ? " audio-preview-screen" : ""
+      }`}
     >
       {testimonialType === "video" ? (
         <>
@@ -242,7 +246,7 @@ const PreviewTestimonialScreen = () => {
       {isApproveLoading && "Please wait request is processing"}
       {testimonialType === "audio" && <SoundWave />}
       {isApproveLoading && <Loader />}
-    </article>
+    </PreviewScreenStyled>
   );
 };
 

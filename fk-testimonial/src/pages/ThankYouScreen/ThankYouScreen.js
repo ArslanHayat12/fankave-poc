@@ -1,11 +1,13 @@
 import React, { useContext, useCallback, useState, useEffect } from "react";
+import { ThemeContext } from "styled-components";
+
 import { RESET_DATA } from "../../constants";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { CustomTooltip as Tooltip } from "../../components/Tooltip/Tooltip";
 import { ShareIcon } from "../../assets";
-import "./style.css";
+import { ThankyouScreenStyled } from "./style";
 import { Loader } from "../../components/LoaderOverlay/Loader";
-import { getUserConfig } from "./../../utils/config"
+import { getUserConfig } from "./../../utils/config";
 
 export const ThankYouScreen = () => {
   const [tweet, setTweetAction] = useState(false);
@@ -14,7 +16,7 @@ export const ThankYouScreen = () => {
   const [isTweetUploaded, setIsTweetUploaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [windowTab, setWindowTab] = useState(null);
-  const { origin } = getUserConfig('testimonial-poc')
+  const { origin } = getUserConfig("testimonial-poc");
   const {
     state: { url, type: testimonialType },
     dispatch,
@@ -48,14 +50,20 @@ export const ThankYouScreen = () => {
 
   const openTwitterSiginInTab = () => {
     window.localStorage.removeItem("token");
-    const tab = window.open(origin + `/testimonial-poc/twitter/login`, "_blank");
+    const tab = window.open(
+      origin + `/testimonial-poc/twitter/login`,
+      "_blank"
+    );
     setWindowTab(tab);
     setErrorMessage("");
     generateRequestData(true, false);
   };
   const openLinkedInSiginInTab = () => {
     window.localStorage.removeItem("token");
-    const tab = window.open(origin + `/testimonial-poc/linkedin/login`, "_blank");
+    const tab = window.open(
+      origin + `/testimonial-poc/linkedin/login`,
+      "_blank"
+    );
     setWindowTab(tab);
     setErrorMessage("");
     generateRequestData(true, true);
@@ -73,17 +81,17 @@ export const ThankYouScreen = () => {
   const shareAudioVideoToTwitter = (formData) => {
     setErrorMessage("");
     setIsLoading(true);
-    fetch(origin + '/testimonial-poc/get-token')
+    fetch(origin + "/testimonial-poc/get-token")
       .then((r) => r.json())
-      .then(text => {
-        console.log(text)
+      .then((text) => {
+        console.log(text);
         fetch(origin + "/testimonial-poc/tweet", {
           body: formData,
           method: "POST",
           headers: new Headers({
             Authorization: text.token,
             tokenSecret: text.tokenSecret,
-            id: text.id
+            id: text.id,
           }),
         })
           .then((response) => {
@@ -108,26 +116,26 @@ export const ThankYouScreen = () => {
             console.log("error", err);
             alert("Request failed with error code " + err);
           });
-      }).catch(err => {
+      })
+      .catch((err) => {
         setIsLoading(false);
         setErrorMessage("Tried With Invalid Token");
-      })
-
+      });
   };
 
   const shareAudioVideoToLinkedIn = (formData) => {
     setErrorMessage("");
     setIsLoading(true);
-    fetch(origin + '/testimonial-poc/get-linkedin-token')
+    fetch(origin + "/testimonial-poc/get-linkedin-token")
       .then((r) => r.json())
-      .then(text => {
+      .then((text) => {
         fetch(origin + "/testimonial-poc/share-on-linkedin", {
           body: formData,
           method: "POST",
           headers: new Headers({
             Authorization: text.token,
             tokenSecret: text.tokenSecret,
-            id: text.id
+            id: text.id,
           }),
         })
           .then((response) => {
@@ -152,7 +160,8 @@ export const ThankYouScreen = () => {
             console.log("error", err);
             alert("Request failed with error code " + err);
           });
-      }).catch(err => {
+      })
+      .catch((err) => {
         setIsLoading(false);
         setErrorMessage("Tried With Invalid Token");
       });
@@ -180,8 +189,21 @@ export const ThankYouScreen = () => {
       });
   };
 
+  const theme = useContext(ThemeContext);
+  const {
+    default: {
+      widget: {
+        thankyouScreen: {
+          shareIcon: { url: beviShareIcon },
+          tweetIcon: { url: beviTweetIcon },
+          button: { text },
+        },
+      },
+    },
+  } = theme;
+
   return (
-    <article className="thankyou-screen" id="fk-thankyou-screen">
+    <ThankyouScreenStyled className="thankyou-screen" id="fk-thankyou-screen">
       <h2 className="heading">Thank you</h2>
       <p className="description">
         We will be in touch if we need anything else.
@@ -191,19 +213,23 @@ export const ThankYouScreen = () => {
       </span>
       {testimonialType === "video" && !tweet && !isTweetUploaded && (
         <div className="button-wrapper">
-          <button
-            className="icon-button share-button"
-            onClick={() => setTweetAction(true)}
-          >
+          <button className="icon-button " onClick={() => setTweetAction(true)}>
             <Tooltip content="Share" placement="right">
-              <ShareIcon />
+              {beviShareIcon ? <img src={beviShareIcon} /> : <ShareIcon />}
             </Tooltip>
+          </button>
+
+          <button className="share-button" onClick={() => setTweetAction(true)}>
+            Share
           </button>
         </div>
       )}
 
       {tweet && !isTweetUploaded && (
         <div className="tweet-container">
+          {beviTweetIcon && (
+            <img src={beviTweetIcon} className="twitter-icon" />
+          )}
           <textarea
             className="text-area"
             placeholder="Write your tweet message!"
@@ -229,6 +255,6 @@ export const ThankYouScreen = () => {
         <div className="success">Your message has been uploaded.</div>
       )}
       {isLoading && <Loader />}
-    </article>
+    </ThankyouScreenStyled>
   );
 };

@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { ThemeContext } from "styled-components";
 import QuestionsCard from "../../components/QuestionsCard/QuestionsCard";
 import { RecordingIcon, MicIcon } from "../../assets/index";
 import { AudioRecorder } from "../../components/AudioRecorder/Recorder";
@@ -12,7 +13,7 @@ import { VideoRecorder } from "../../components/VideoRecorder/VideoRecorder";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { useInterval } from "../../hooks/useInterval";
 import { convertSecondsToHourMinute } from "./../../utils/index";
-import "./style.css";
+import { RecordingScreenStyled } from "./style";
 import { SET_URL_DURATION } from "../../constants";
 
 const RecordScreen = () => {
@@ -42,8 +43,10 @@ const RecordScreen = () => {
     };
   }, []);
 
+  const theme = useContext(ThemeContext);
+
   return (
-    <article className="record-screen" id="fk-record-screen">
+    <RecordingScreenStyled className="record-screen" id="fk-record-screen">
       {type === "video" ? (
         <>
           <h2 className="heading">Record Video Testimonial</h2>
@@ -68,7 +71,7 @@ const RecordScreen = () => {
           </figure>
         </>
       )}
-    </article>
+    </RecordingScreenStyled>
   );
 };
 

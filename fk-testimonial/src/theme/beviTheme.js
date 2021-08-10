@@ -32,7 +32,10 @@ const beviBookConfigs = {
     },
 
     widget: {
+      width: "397px",
+      height: "729px",
       background: "/bevi/widget-bg.png",
+      borderRadius: "12px",
       widgetGif: {
         position: "center", //left|right
         url: "/bevi/bevi-gif.gif",
@@ -40,6 +43,7 @@ const beviBookConfigs = {
       logo: {
         position: "bottom-right",
         url: "/bevi/footer-logo.png",
+        height: "40px",
       },
       mainHeadingText: "",
       fontSize: "",
@@ -72,17 +76,22 @@ const beviBookConfigs = {
 
       previewScreen: {
         video: {
+          height: "350",
           heading: "",
           fontSize: "",
           fontColor: "",
           video: {},
           input: {
             placeholders: {
-              name: "",
-              email: "",
-              company: "",
-              fontSize: "",
-              fontColor: "",
+              name: "Name",
+              email: "Mail id",
+              company: "Company",
+              fontSize: "17px",
+              fontWeight: "500",
+              fontColor: "#2d2d2d",
+              boxShadow: "0px 1px 2px 0 rgba(0, 0, 0, 0.14)",
+              borderRadius: "24.5px",
+              border: "solid 2px rgba(218, 218, 218, 0.21)",
             },
 
             icon: "",
@@ -91,11 +100,18 @@ const beviBookConfigs = {
             borderColor: "",
           },
           button: {
-            backgroundColor: "",
+            backgroundColor: "#5089ed",
             text: "",
-            fontSize: "",
-            color: "",
+            fontSize: "17px",
+            fontWeight: "500",
+            color: "#fff",
+            textTransform: "uppercase",
+            borderRadius: "30px",
+            height: "61px",
+            width: "181px",
           },
+
+          bgHeight: "100vh",
         },
         audio: {
           heading: "",
@@ -104,11 +120,13 @@ const beviBookConfigs = {
           audio: {},
           input: {
             placeholders: {
-              name: "",
-              email: "",
-              company: "",
-              fontSize: "",
-              fontColor: "",
+              name: "Name",
+              email: "Mail id",
+              company: "Company",
+              fontSize: "17px",
+              fontColor: "#2d2d2d",
+              boxShadow: "0px 1px 2px 0 rgba(0, 0, 0, 0.14)",
+              borderRadius: "24.5px",
             },
 
             icon: "",
@@ -130,34 +148,57 @@ const beviBookConfigs = {
 
       recordingScreen: {
         video: {
-          height: "350px",
+          height: "550",
           questionsList,
         },
         audio: {
           questionsList,
+          micIcon: {
+            background: "#266fff",
+          },
         },
       },
 
       thankyouScreen: {
         heading: "",
         subHeading: "",
-        shareIcon: "",
-        tweetIcon: "",
+        shareIcon: {
+          borderRadius: "none",
+          url: "/bevi/share-icon.png",
+          bgColor: "transparent",
+          height: "95px",
+        },
+        tweetIcon: {
+          borderRadius: "none",
+          url: "/bevi/tweet-icon.png",
+          bgColor: "transparent",
+          height: "61px",
+        },
+        twitterButton: {
+          bgColor: "#5089ed",
+          borderRadius: "22px",
+        },
+        linkedinButton: {
+          bgColor: "#5089ed",
+          borderRadius: "22px",
+        },
         goBackText: "",
         button: {
-          backgroundColor: "",
-          text: "",
+          backgroundColor: "#5089ed",
+          text: "Share",
           fontSize: "",
           color: "",
+          height: "60px",
+          width: "180px",
         },
         input: {
           color: "",
-          fontSize: "",
+          fontSize: "17px",
           placeholder: "",
-          borderRadius: "",
+          borderRadius: "22px",
           background: "",
           borderColor: "",
-          height: "",
+          height: "85px",
         },
       },
     },

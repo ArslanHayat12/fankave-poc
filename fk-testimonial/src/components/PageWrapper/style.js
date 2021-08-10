@@ -7,7 +7,7 @@ export const PageWrapperStyled = styled.section`
     position: absolute;
     top: 0;
     bottom: 0;
-    height: 100%;
+    height: 100vh;
     width: 100%;
   }
 `;

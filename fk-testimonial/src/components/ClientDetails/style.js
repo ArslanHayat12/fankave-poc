@@ -22,7 +22,6 @@ export const ClientDetailsStyled = styled.article`
 
   .input-name {
     margin-top: 12px;
-    padding: 7px 7px;
   }
 
   .client-email-company-wrapper {
@@ -38,17 +37,30 @@ export const ClientDetailsStyled = styled.article`
 
   input {
     font-family: "Poppins", sans-serif;
-    font-size: 12px;
+    font-size: ${(props) =>
+      props.theme.default.widget.previewScreen.video.input.placeholders
+        .fontSize};
+    font-weight: ${(props) =>
+      props.theme.default.widget.previewScreen.video.input.placeholders
+        .fontWeight};
     background-color: rgb(255, 255, 255);
     width: 90%;
     display: block;
     transition: all 0.3s;
     margin-bottom: 5px;
-    border: 1px solid #ccc;
-    padding: 10px 7px;
-    border-radius: 5px;
-    color: #000;
+    border: ${(props) =>
+      props.theme.default.widget.previewScreen.video.input.placeholders.border};
+    padding: 10px;
+    border-radius: ${(props) =>
+      props.theme.default.widget.previewScreen.video.input.placeholders
+        .borderRadius};
+    color: ${(props) =>
+      props.theme.default.widget.previewScreen.video.input.placeholders
+        .fontColor};
     outline: #35a4ff;
+    box-shadow: ${(props) =>
+      props.theme.default.widget.previewScreen.video.input.placeholders
+        .boxShadow};
   }
 
   :-webkit-autofill {
