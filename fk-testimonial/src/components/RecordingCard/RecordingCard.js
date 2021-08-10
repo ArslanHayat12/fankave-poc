@@ -7,7 +7,6 @@ import { CameraIcon, MicIcon } from "../../assets/index";
 const RecordingCard = (props) => {
   const { recordingType, handleClick } = props;
   const theme = useContext(ThemeContext);
-  console.log("theme-----", theme);
   const {
     default: {
       widget: {

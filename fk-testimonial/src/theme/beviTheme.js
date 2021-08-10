@@ -120,7 +120,9 @@ const beviBookConfigs = {
       },
 
       recordingScreen: {
-        video: {},
+        video: {
+          height: "350px",
+        },
       },
 
       thankyouScreen: {

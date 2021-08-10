@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const FooterStyled = styled.section`
   display: flex;
   justify-content: flex-end;
-  margin: 0px 20px 20px;
   align-items: flex-end;
   width: 100%;
   height: 100%;
