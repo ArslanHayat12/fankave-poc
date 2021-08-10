@@ -1,4 +1,5 @@
-import React, { useReducer, useMemo, useCallback } from "react";
+import React, { useReducer, useMemo, useCallback, useContext } from "react";
+import { ThemeContext } from "styled-components"
 import { questionReducer } from "../../reducers/reducers";
 import { initialState, QuestionContext } from "../../context/QuestionContext";
 import { SET_INDEX } from "../../constants";
@@ -7,14 +8,10 @@ import { QuestionCardStyled } from "./style";
 const QuestionsCard = () => {
   const [state, dispatch] = useReducer(questionReducer, initialState);
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
+  const theme = useContext(ThemeContext);
 
-  const questionArray = [
-    "What is your name and title? What team do you report into?",
-    "How long have you been working at Bevi?",
-    "What excites you most about coming to work at Bevi every day?",
-    "How would you describe the Bevi company culture?",
-    "Why would you recommend Bevi as a great place to work?"
-  ];
+  const questionArray = theme.default?.widget?.recordingScreen?.video?.questionsList || [];
+  console.log("Question Card,", theme)
 
   const gotToPrevQuestion = useCallback(() => {
     if (state.questionIndex > 0) {
