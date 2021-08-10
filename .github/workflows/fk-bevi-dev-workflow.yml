@@ -1,8 +1,8 @@
-name: Deploy fk bevi production workflow
+name: Deploy fk bevi development workflow
 on:
   push:
     branches:
-      - bevi-prod
+      - bevi-dev
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -19,4 +19,4 @@ jobs:
         run: |
           gcloud components install beta --quiet
           gcloud config set project ${{ secrets.GCP_PROJECT_NAME }}
-          gcloud beta compute instance-groups managed rolling-action replace ${{ secrets.PROD_GROUP_NAME }} --max-surge=1 --max-unavailable=0 --zone us-central1-b
+          gcloud beta compute instance-groups managed rolling-action replace ${{ secrets.DEV_GROUP_NAME }} --max-surge=1 --max-unavailable=0 --zone us-central1-a
