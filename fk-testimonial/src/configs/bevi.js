@@ -9,7 +9,7 @@ export const beviBookConfigs = {
     containerCssClassname: "default",
 
     loadingMedia: {
-      url: `/testimonial-poc/bg-video.mp4`,
+      url: `/sharestories/bg-video.mp4`,
     },
     layout: {
       regular: {
