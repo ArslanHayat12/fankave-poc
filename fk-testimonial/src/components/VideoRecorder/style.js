@@ -7,15 +7,6 @@ export const VideoRecorderStyled = styled.article`
     font-size: 12px;
   }
 
-  .cross-icon {
-    height: 15px;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    cursor: pointer;
-    z-index: 1;
-  }
-
   .button-container .record-button {
     display: flex;
     background: transparent;

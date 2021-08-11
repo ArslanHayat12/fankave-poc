@@ -12,7 +12,7 @@ import { TestimonialContext } from "../../context/TestimonialContext";
 import NotificationCard from "../NotificationCard/NotificationCard";
 import { CustomTooltip as Tooltip } from "../Tooltip/Tooltip";
 import QuestionsCard from "../QuestionsCard/QuestionsCard";
-import { StopIcon, RecordingIcon, CrossIcon } from "../../assets";
+import { StopIcon, RecordingIcon } from "../../assets";
 import { useInterval } from "../../hooks/useInterval";
 import { convertSecondsToHourMinute } from "../../utils";
 import {
@@ -20,7 +20,6 @@ import {
   SET_URL_DURATION,
   SET_THUMB_URL,
   SET_RECORD_CHUKS,
-  RESET_DATA,
 } from "../../constants";
 import { VideoRecorderStyled } from "./style";
 
@@ -150,12 +149,6 @@ export const VideoRecorder = () => {
     },
   } = theme;
 
-  const onBack = useCallback(() => {
-    dispatch({
-      type: RESET_DATA,
-    });
-  }, []);
-
   return (
     <VideoRecorderStyled
       className="video-recorder-wrapper"
@@ -163,7 +156,6 @@ export const VideoRecorder = () => {
     >
       <figure className="video-wrapper">
         <div className="video-recording-container">
-          <CrossIcon customClass="cross-icon" onClick={onBack} />
           {!videoURL && (
             <Webcam
               ref={webcamRef}
