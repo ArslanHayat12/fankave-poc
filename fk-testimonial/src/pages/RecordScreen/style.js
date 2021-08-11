@@ -84,7 +84,7 @@ export const RecordingScreenStyled = styled.article`
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
+    z-index: 12;
     margin-top: 84px;
   }
 
