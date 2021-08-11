@@ -8,6 +8,15 @@ body {
   height: 100%;
 }
 
+#fk-home-screen {
+  margin-bottom: 20px;
+}
+
+#fk-footer {
+  position: absolute;
+  bottom: 0;
+}
+
 #fk-page-wrapper {
   height: 100%;
   /* height: 100%;
@@ -37,6 +46,10 @@ body {
 
 #fk-widget-wrapper {
   height: 72vh;
+}
+
+#fk-record-screen {
+  z-index: 10;
 }
 
 #fk-video-recorder-wrapper .video-wrapper {
@@ -103,7 +116,7 @@ body {
   }
 
   #fk-preview-testimonial-screen .video-wrapper {
-    height: 33vh;
+    height: 38vh;
   }
 
   #fk-client-details-wrapper input {
@@ -149,6 +162,11 @@ body {
   #fk-record-screen .timer {
     margin: 63px 0px 15px;
   }
+
+  #fk-footer {
+    margin-bottom: 10px;
+    right: 10px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -177,11 +195,11 @@ body {
   }
 
   #fk-video-recorder-wrapper .video-wrapper {
-    height: 280px;
+    height: 55vh;
   }
 
   #fk-video-recorder-wrapper .video-wrapper video {
-    height: 280px;
+    height: 55vh;
   }
 
   #fk-footer img {
@@ -200,7 +218,7 @@ body {
   }
 
   #fk-preview-testimonial-screen .video-wrapper {
-    height: 30vh;
+    height: 38vh;
   }
 
   #fk-thankyou-screen .tweet-button {
@@ -225,17 +243,12 @@ body {
     /* display: none; */
     height: 100%;
   }
-
-  #fk-video-recorder-wrapper .video-wrapper {
-    height: 46vh;
-  }
-
-  #fk-video-recorder-wrapper .video-wrapper video {
-    height: 46vh;
-  }
 }
 
 @media (min-width: 375px) and (max-width: 416px) {
+  #fk-widget-wrapper {
+    height: 60vh;
+  }
   #fk-video-recorder-wrapper .video-wrapper {
     height: 48vh;
   }
@@ -254,5 +267,50 @@ body {
 
   #fk-record-screen .record-visualizer {
     top: 5%;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 420px) {
+  #fk-widget-wrapper {
+    height: 66vh;
+  }
+  #fk-video-recorder-wrapper .video-wrapper {
+    height: 53vh;
+  }
+
+  #fk-video-recorder-wrapper .video-wrapper video {
+    height: 53vh;
+  }
+
+  #fk-preview-testimonial-screen .video-wrapper {
+    height: 36vh;
+  }
+
+  #fk-record-screen .mic-wrapper {
+    margin-top: 60px;
+  }
+
+  #fk-record-screen .record-visualizer {
+    top: 5%;
+  }
+}
+
+@media (width: 375px) and (height: 667px) {
+  #fk-widget-wrapper {
+    height: 67vh;
+  }
+}
+
+@media (max-width: 320px) {
+  #fk-widget-wrapper {
+    height: 70vh;
+  }
+
+  #fk-footer img {
+    height: 20px;
+  }
+
+  #fk-card-wrapper img {
+    height: 35px;
   }
 }
