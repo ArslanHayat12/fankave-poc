@@ -204,6 +204,7 @@ const PreviewTestimonialScreen = () => {
               controlsList="nodownload nofullscreen noremoteplayback"
               onClick={onPlayClick}
               onEnded={() => setPlayVideo(false)}
+              poster="/video-poster.png"
             >
               <source src={url} />
             </video>
