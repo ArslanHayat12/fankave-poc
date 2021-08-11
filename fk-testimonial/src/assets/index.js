@@ -39,8 +39,8 @@ export const RecordingIcon = (props) => {
           data-name="Ellipse 1"
           transform="translate(727 723)"
           fill="transparent"
-          stroke="#e85775"
-          stroke-width="1"
+          stroke="#35A4FF"
+          stroke-width="1.5"
         >
           <circle cx="23.5" cy="23.5" r="23.5" stroke="none" />
           <circle cx="23.5" cy="23.5" r="23" fill="none" />
@@ -52,7 +52,7 @@ export const RecordingIcon = (props) => {
           cy="7.5"
           r="7.5"
           transform="translate(743 739)"
-          fill="#e85775"
+          fill="#FF0000"
         />
       </g>
     </svg>
@@ -407,7 +407,7 @@ export const StopIcon = (props) => {
         data-name="Rectangle 20"
         width="8"
         height="8"
-        fill="#e85775"
+        fill="#FF0000"
       />
     </svg>
   );

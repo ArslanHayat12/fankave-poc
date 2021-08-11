@@ -1,18 +1,18 @@
 /* responsiveness */
 
 #fk-recorder-container .recording-button .play-icon g g {
-  stroke: #fff;
+  stroke: rgb(53, 164, 255);
 }
 #fk-recorder-container .recording-button .play-icon g #Ellipse_2 {
-  fill: #fff;
+  fill:#FF0000;
 }
 
 #fk-recorder-container .stop-recording-button .stop-icon #Rectangle_20 {
-  fill: #fff;
+  fill: #FF0000;
 }
 
 #fk-record-screen .recorder-container .stop-recording-button {
-  border: 1px solid #fff;
+  border: 2px solid #35A4FF;
 }
 @media (max-width: 1600px) {
   #fk-header {
