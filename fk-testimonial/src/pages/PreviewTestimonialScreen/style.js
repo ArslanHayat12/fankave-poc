@@ -1,11 +1,19 @@
 import styled from "styled-components";
 export const PreviewScreenStyled = styled.article`
-  position: relative;
   width: 100%;
   z-index: 1;
 
   &.audio-preview-screen {
     height: 100%;
+  }
+
+  .cross-icon {
+    height: 15px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    z-index: 1;
   }
 
   .heading {

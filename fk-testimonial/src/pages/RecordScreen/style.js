@@ -100,4 +100,13 @@ export const RecordingScreenStyled = styled.article`
     margin: 52px 0 15px;
     z-index: 2;
   }
+
+  .cross-icon {
+    height: 15px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    z-index: 1;
+  }
 `;

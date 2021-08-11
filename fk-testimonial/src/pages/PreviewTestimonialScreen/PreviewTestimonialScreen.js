@@ -1,7 +1,14 @@
-import React, { useContext, useRef, useState, useEffect, useMemo } from "react";
+import React, {
+  useContext,
+  useRef,
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
 import { ThemeContext } from "styled-components";
 import { CustomAudioPlayer } from "../../components/CustomAudioPlayer/CustomAudioPlayer";
-import { PlayFilledIcon, RefreshIcon } from "../../assets/index";
+import { PlayFilledIcon, RefreshIcon, CrossIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { CustomTooltip } from "../../components/Tooltip/Tooltip";
 import { SoundWave } from "../../components/AudioVisualizers/SoundWave";
@@ -14,6 +21,7 @@ import {
   SET_AUDIO_PLAYING,
   SET_URL_DURATION,
   THANK_YOU_SCREEN,
+  RESET_DATA,
 } from "../../constants";
 import { Loader } from "../../components/LoaderOverlay/Loader";
 import { PreviewScreenStyled } from "./style";
@@ -176,6 +184,12 @@ const PreviewTestimonialScreen = () => {
       });
   }, [testimonialType, audioRef?.current?.soundCloudAudio.audio.duration]);
 
+  const onBack = useCallback(() => {
+    dispatch({
+      type: RESET_DATA,
+    });
+  }, []);
+
   return (
     <PreviewScreenStyled
       id="fk-preview-testimonial-screen"
@@ -183,6 +197,8 @@ const PreviewTestimonialScreen = () => {
         testimonialType === "audio" ? " audio-preview-screen" : ""
       }`}
     >
+      <CrossIcon customClass="cross-icon" onClick={onBack} />
+
       {testimonialType === "video" ? (
         <>
           <h2 className="heading">Preview Video Testimonial </h2>

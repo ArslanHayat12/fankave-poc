@@ -556,7 +556,7 @@ export const CrossIcon = (props) => {
         y1="9.37"
         y2="54.63"
         fill="none"
-        stroke="#fff"
+        stroke="#246eff"
         stroke-miterlimit="10"
         stroke-width="4"
       />
@@ -566,7 +566,7 @@ export const CrossIcon = (props) => {
         y1="54.63"
         y2="9.37"
         fill="none"
-        stroke="#fff"
+        stroke="#246eff"
         stroke-miterlimit="10"
         stroke-width="4"
       />

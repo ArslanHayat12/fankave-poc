@@ -7,14 +7,14 @@ import React, {
 } from "react";
 import { ThemeContext } from "styled-components";
 import QuestionsCard from "../../components/QuestionsCard/QuestionsCard";
-import { RecordingIcon, MicIcon } from "../../assets/index";
+import { RecordingIcon, MicIcon, CrossIcon } from "../../assets/index";
 import { AudioRecorder } from "../../components/AudioRecorder/Recorder";
 import { VideoRecorder } from "../../components/VideoRecorder/VideoRecorder";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { useInterval } from "../../hooks/useInterval";
 import { convertSecondsToHourMinute } from "./../../utils/index";
 import { RecordingScreenStyled } from "./style";
-import { SET_URL_DURATION } from "../../constants";
+import { SET_URL_DURATION, RESET_DATA } from "../../constants";
 
 const RecordScreen = () => {
   const {
@@ -44,9 +44,16 @@ const RecordScreen = () => {
   }, []);
 
   const theme = useContext(ThemeContext);
+  const onBack = useCallback(() => {
+    dispatch({
+      type: RESET_DATA,
+    });
+  }, []);
 
   return (
     <RecordingScreenStyled className="record-screen" id="fk-record-screen">
+      <CrossIcon customClass="cross-icon" onClick={onBack} />
+
       {type === "video" ? (
         <>
           <h2 className="heading">Record Video Testimonial</h2>
