@@ -24,7 +24,7 @@ function PageWrapper(props) {
     } = themeConfigs;
 
     return (
-      <PageWrapperStyled className={customClass}>
+      <PageWrapperStyled className={customClass} id="fk-page-wrapper">
         {type === "video" ? (
           <BackgroundVideo url={backgroundUrl} />
         ) : (
@@ -45,9 +45,7 @@ function PageWrapper(props) {
     return (
       <PageWrapperStyled>
         <BackgroundVideo
-          url={
-            window.self.ctag === "cisco" ? "/sharestories/bg-video.mp4" : ""
-          }
+          url={window.self.ctag === "cisco" ? "/sharestories/bg-video.mp4" : ""}
         />
         <Header />
         {children}

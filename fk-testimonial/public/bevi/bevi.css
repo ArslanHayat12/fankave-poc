@@ -1,5 +1,20 @@
 /* responsiveness */
 
+body {
+  height: 100vh;
+}
+
+#sharestories {
+  height: 100%;
+}
+
+#fk-page-wrapper {
+  height: 100%;
+  /* height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; */
+}
 #fk-record-screen .timer {
   margin: 110px 0px 15px;
 }
@@ -19,6 +34,53 @@
 #fk-record-screen .recorder-container .stop-recording-button {
   border: 2px solid #35a4ff;
 }
+
+#fk-widget-wrapper {
+  height: 72vh;
+}
+
+#fk-video-recorder-wrapper .video-wrapper {
+  height: 48vh;
+}
+
+#fk-video-recorder-wrapper .video-wrapper video {
+  height: 48vh;
+}
+
+#fk-preview-testimonial-screen {
+  height: 100%;
+}
+
+#fk-record-screen .audio-wrapper {
+  height: 56vh;
+}
+
+#fk-record-screen .record-visualizer {
+  max-height: 170px;
+  top: 2.5%;
+}
+
+#fk-preview-testimonial-screen .audio-card {
+  height: 160px;
+}
+
+#fk-preview-testimonial-screen .audio-wrapper {
+  margin: 30px 0 0px;
+}
+@media (min-width: 1920px) {
+  #fk-video-recorder-wrapper .video-wrapper {
+    height: 55vh;
+  }
+
+  #fk-video-recorder-wrapper .video-wrapper video {
+    height: 55vh;
+  }
+
+  #fk-preview-testimonial-screen .video-wrapper {
+    height: 39vh;
+  }
+}
+
 @media (max-width: 1600px) {
   #fk-header {
     padding: 8px;
@@ -26,7 +88,7 @@
 
   #fk-widget-wrapper {
     box-shadow: rgb(189 177 177) 1px 5px 18px;
-    min-height: 100%;
+    /* min-height: 100%; */
   }
   .bevi-layout #fk-header .main-logo {
     margin: 0px 0px 5px;
@@ -36,20 +98,12 @@
     height: 30px;
   }
 
-  #fk-video-recorder-wrapper .video-wrapper {
-    height: 320px;
-  }
-
-  #fk-video-recorder-wrapper .video-wrapper video {
-    height: 320px;
-  }
-
   #fk-home-screen {
     grid-gap: 20px;
   }
 
   #fk-preview-testimonial-screen .video-wrapper {
-    height: 208px;
+    height: 33vh;
   }
 
   #fk-client-details-wrapper input {
@@ -88,20 +142,20 @@
     height: 40px;
   }
 
-  #fk-record-screen .audio-wrapper {
-    min-height: 380px;
-  }
-
   #fk-record-screen .mic-wrapper {
     margin-top: 50px;
   }
 
-  #fk-record-screen .record-visualizer {
-    top: -8%;
+  #fk-record-screen .timer {
+    margin: 63px 0px 15px;
   }
 }
 
 @media (max-width: 768px) {
+  #fk-record-screen .record-visualizer {
+    top: 1.5%;
+  }
+
   #fk-home-screen .description {
     font-size: 18px;
   }
@@ -134,10 +188,10 @@
     height: 25px;
   }
 
-  #fk-widget-wrapper {
+  /* #fk-widget-wrapper {
     min-height: 455px;
     height: unset;
-  }
+  } */
 
   #fk-preview-testimonial-screen .approve-button {
     width: 95px;
@@ -146,7 +200,7 @@
   }
 
   #fk-preview-testimonial-screen .video-wrapper {
-    height: 220px;
+    height: 30vh;
   }
 
   #fk-thankyou-screen .tweet-button {
@@ -159,19 +213,46 @@
     font-size: 12px;
   }
 
-  #fk-widget-wrapper .audio-preview-screen {
-    height: 400px;
-  }
-
   #fk-sound-wave {
     width: 300px !important;
   }
 
   #fk-record-screen .mic-wrapper {
-    margin-top: 75px;
+    margin-top: 45px;
+  }
+
+  #fk-page-wrapper .background-image {
+    /* display: none; */
+    height: 100%;
+  }
+
+  #fk-video-recorder-wrapper .video-wrapper {
+    height: 46vh;
+  }
+
+  #fk-video-recorder-wrapper .video-wrapper video {
+    height: 46vh;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 416px) {
+  #fk-video-recorder-wrapper .video-wrapper {
+    height: 48vh;
+  }
+
+  #fk-video-recorder-wrapper .video-wrapper video {
+    height: 48vh;
+  }
+
+  #fk-preview-testimonial-screen .video-wrapper {
+    height: 32vh;
+  }
+
+  #fk-record-screen .mic-wrapper {
+    margin-top: 60px;
   }
 
   #fk-record-screen .record-visualizer {
-    top: -1%;
+    top: 5%;
   }
 }
