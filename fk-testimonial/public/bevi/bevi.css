@@ -15,6 +15,10 @@ body {
   z-index: 101;
 }
 
+#fk-preview-testimonial-screen .play-button {
+  z-index: 101;
+}
+
 #fk-home-screen {
   margin-bottom: 20px;
 }
