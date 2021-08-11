@@ -8,6 +8,13 @@ body {
   height: 100%;
 }
 
+#fk-preview-testimonial-screen .video {
+  z-index: 100;
+}
+#fk-preview-testimonial-screen .edit-testimonial {
+  z-index: 101;
+}
+
 #fk-home-screen {
   margin-bottom: 20px;
 }
