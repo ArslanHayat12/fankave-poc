@@ -48,7 +48,7 @@ export const VideoRecorderStyled = styled.article`
     border: none;
     background: transparent;
     cursor: pointer;
-    border: 1px solid #e85775;
+    border: 2px solid #35A4FF;
     border-radius: 50%;
     margin: 1px 6px;
     height: 47px;

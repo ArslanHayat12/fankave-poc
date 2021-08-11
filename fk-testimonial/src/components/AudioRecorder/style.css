@@ -18,12 +18,12 @@
 }
 
 .recorder-container .play-icon path {
-  fill: #e85775;
+  fill:#FF0000;
 }
 
 .recorder-container .stop-recording-button {
   background-color: transparent;
-  border: 1px solid #e85775;
+  border: 2px solid #35A4FF;
   border-radius: 50%;
   width: 36px;
   height: 36px;
@@ -35,7 +35,7 @@
 }
 
 .recorder-container .stop-icon path {
-  fill: #e85775;
+  fill: #FF0000;
 }
 
 .recorder-container .buttons-wrapper {
