@@ -276,7 +276,9 @@ const PreviewTestimonialScreen = () => {
         <ClientDetails />
         <article className="button-wrapper">
           <button
-            className="approve-button"
+            className={`approve-button ${
+              isApproveLoading ? "button-clicked" : ""
+            }`}
             onClick={() => generateRequestData(true)}
           >
             {buttonText}

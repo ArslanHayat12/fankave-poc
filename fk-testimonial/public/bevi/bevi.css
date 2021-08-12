@@ -93,6 +93,14 @@ body {
   background-color: #fff;
 }
 
+#fk-preview-testimonial-screen .approve-button.button-clicked {
+  background-color: rgb(38 111 255);
+}
+
+#fk-preview-testimonial-screen .approve-button.button-clicked svg path {
+  fill: #fff;
+}
+
 #fk-preview-testimonial-screen .approve-button svg {
   height: 20px;
   width: 20px;
