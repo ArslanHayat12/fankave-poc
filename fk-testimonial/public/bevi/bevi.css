@@ -224,7 +224,7 @@ body {
   }
 
   #fk-footer img {
-    height: 20px;
+    height: 30px;
   }
 
   #fk-widget-wrapper {
@@ -232,8 +232,8 @@ body {
   }
 
   #fk-preview-testimonial-screen .approve-button {
-    width: 95px;
-    height: 31px;
+    width: 110px;
+    height: 40px;
     font-size: 11px;
   }
 
@@ -267,7 +267,7 @@ body {
 
 @media (min-width: 375px) and (max-width: 416px) {
   #fk-widget-wrapper {
-    height: 60vh;
+    height: 64vh;
   }
   #fk-video-recorder-wrapper .video-wrapper {
     height: 48vh;
@@ -317,7 +317,7 @@ body {
 
 @media (width: 375px) and (height: 667px) {
   #fk-widget-wrapper {
-    height: 67vh;
+    height: 69vh;
   }
 }
 
