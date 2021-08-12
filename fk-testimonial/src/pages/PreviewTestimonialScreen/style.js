@@ -16,6 +16,8 @@ export const PreviewScreenStyled = styled.article`
     z-index: 1;
   }
 
+  .client-details-wrapper {
+  }
   .heading {
     margin-bottom: 0;
     font-size: 25px;
@@ -95,7 +97,6 @@ export const PreviewScreenStyled = styled.article`
       props.theme.default.widget.previewScreen.video.button.fontWeight};
     border-radius: ${(props) =>
       props.theme.default.widget.previewScreen.video.button.borderRadius};
-    padding: 8px 20px;
     outline: none;
     border: none;
     cursor: pointer;

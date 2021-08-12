@@ -53,6 +53,12 @@ const ClientDetails = () => {
                 email: emailPlaceholder,
                 company: companyPlaceholder,
               },
+
+              display: {
+                name: displayName,
+                mail: displayMail,
+                company: displayCompnany,
+              },
             },
           },
         },
@@ -66,21 +72,23 @@ const ClientDetails = () => {
     >
       {!name ? (
         nameEdit ? (
-          <input
-            type="text"
-            className="input-name"
-            id="name"
-            placeholder={namePlaceholder}
-            value={clientName}
-            onChange={(e) =>
-              dispatch({
-                type: SET_CLIENT_NAME,
-                payload: e.target.value,
-              })
-            }
-            onKeyPress={handleNameChange}
-            onBlur={clientName ? () => setNameEdit(false) : undefined}
-          />
+          displayName && (
+            <input
+              type="text"
+              className="input-name"
+              id="name"
+              placeholder={namePlaceholder}
+              value={clientName}
+              onChange={(e) =>
+                dispatch({
+                  type: SET_CLIENT_NAME,
+                  payload: e.target.value,
+                })
+              }
+              onKeyPress={handleNameChange}
+              onBlur={clientName ? () => setNameEdit(false) : undefined}
+            />
+          )
         ) : (
           <article className="client-name-wrapper">
             <h3 className="client-name">{clientName}</h3>
@@ -96,21 +104,23 @@ const ClientDetails = () => {
       )}
       {!email ? (
         emailEdit ? (
-          <input
-            type="text"
-            className="input-email"
-            id="email"
-            placeholder={emailPlaceholder}
-            value={clientEmail}
-            onChange={(e) =>
-              dispatch({
-                type: SET_CLIENT_EMAIL,
-                payload: e.target.value,
-              })
-            }
-            onKeyPress={handleEmailChange}
-            onBlur={clientEmail ? () => setEmailEdit(false) : undefined}
-          />
+          displayMail && (
+            <input
+              type="text"
+              className="input-email"
+              id="email"
+              placeholder={emailPlaceholder}
+              value={clientEmail}
+              onChange={(e) =>
+                dispatch({
+                  type: SET_CLIENT_EMAIL,
+                  payload: e.target.value,
+                })
+              }
+              onKeyPress={handleEmailChange}
+              onBlur={clientEmail ? () => setEmailEdit(false) : undefined}
+            />
+          )
         ) : (
           <article className="client-email-company-wrapper">
             <p className="client-details">{clientEmail}</p>
@@ -124,21 +134,23 @@ const ClientDetails = () => {
       )}
       {!companyName ? (
         companyEdit ? (
-          <input
-            type="text"
-            className="input-company"
-            id="company"
-            placeholder={companyPlaceholder}
-            value={clientCompany}
-            onChange={(e) =>
-              dispatch({
-                type: SET_CLIENT_COMPANY,
-                payload: e.target.value,
-              })
-            }
-            onKeyPress={handleCompanyChange}
-            onBlur={clientCompany ? () => setCompanyEdit(false) : undefined}
-          />
+          displayCompnany && (
+            <input
+              type="text"
+              className="input-company"
+              id="company"
+              placeholder={companyPlaceholder}
+              value={clientCompany}
+              onChange={(e) =>
+                dispatch({
+                  type: SET_CLIENT_COMPANY,
+                  payload: e.target.value,
+                })
+              }
+              onKeyPress={handleCompanyChange}
+              onBlur={clientCompany ? () => setCompanyEdit(false) : undefined}
+            />
+          )
         ) : (
           <article className="client-email-company-wrapper">
             <p className="client-details">{clientCompany}</p>
