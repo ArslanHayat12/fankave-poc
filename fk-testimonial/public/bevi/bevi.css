@@ -88,6 +88,7 @@ body {
 #fk-preview-testimonial-screen .approve-button {
   border: 2px solid rgb(38 111 255);
   background-color: #fff;
+  padding: 1px;
 }
 
 #fk-preview-testimonial-screen .approve-button.button-clicked {
@@ -99,8 +100,8 @@ body {
 }
 
 #fk-preview-testimonial-screen .approve-button svg {
-  height: 15px;
-  width: 15px;
+  height: 13px;
+  width: 13px;
 }
 
 #fk-preview-testimonial-screen .approve-button svg path {
