@@ -10,6 +10,7 @@ const questionsList = [
   "How would you describe the Bevi company culture?",
   "Why would you recommend Bevi as a great place to work?",
 ];
+
 const beviBookConfigs = {
   default: {
     topic: "beviemployee",
