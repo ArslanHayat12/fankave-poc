@@ -1,7 +1,9 @@
 /* responsiveness */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 
 body {
   height: 100vh;
+  font-family: "Roboto", sans-serif !important;
 }
 
 #sharestories {
@@ -111,6 +113,7 @@ body {
 #fk-client-details-wrapper input {
   width: 85%;
   margin-right: 5px;
+  font-family: "Roboto", sans-serif !important;
 }
 
 #fk-preview-testimonial-screen .button-wrapper {
