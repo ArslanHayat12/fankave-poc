@@ -50,6 +50,8 @@ function Widget() {
           </div>
         )}
         <article className="widget-wrapper" id="fk-widget-wrapper">
+          <img src={background} className="widget-bg" />
+
           {displayGif ? (
             <img
               src={theme.default.widget.widgetGif.url}
@@ -57,7 +59,6 @@ function Widget() {
             />
           ) : (
             <>
-              <img src={background} className="widget-bg" />
               <TestimonialApp />
               <Footer src={url} position={position} />
             </>
