@@ -512,8 +512,6 @@ export const TickIcon = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="13.997"
-      height="10.998"
       viewBox="0 0 13.997 10.998"
       className={customClass}
     >
