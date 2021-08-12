@@ -37,7 +37,7 @@ const beviBookConfigs = {
     },
 
     widget: {
-      width: "397px",
+      width: "298px",
       height: "729px",
       background: "/bevi/widget-bg.png",
       borderRadius: "12px",

@@ -23,6 +23,13 @@ body {
 
 #fk-home-screen {
   margin-bottom: 100px;
+  width: 100%;
+}
+
+#fk-home-screen .description {
+  max-width: 240px;
+  text-align: center;
+  margin: auto;
 }
 
 #fk-footer {
@@ -241,11 +248,13 @@ body {
   }
 
   #fk-home-screen {
-    margin-bottom: 55px;
+    margin-bottom: 75px;
+    grid-gap: 21px;
   }
 
   #fk-home-screen .description {
     font-size: 18px;
+    max-width: 200px;
   }
 
   #fk-record-screen .heading {
@@ -259,10 +268,6 @@ body {
   #fk-footer {
     right: 10px;
     bottom: 1px;
-  }
-
-  #fk-home-screen {
-    grid-gap: 9px;
   }
 
   #fk-video-recorder-wrapper .video-wrapper {
@@ -279,6 +284,7 @@ body {
 
   #fk-widget-wrapper {
     padding: 15px;
+    height: 80vh;
   }
 
   #fk-preview-testimonial-screen .video-wrapper {
@@ -306,6 +312,14 @@ body {
   #fk-page-wrapper .background-image {
     /* display: none; */
     height: 100%;
+  }
+
+  #fk-header .main-logo {
+    height: 31px;
+  }
+
+  #fk-header .sub-logo {
+    height: 13px;
   }
 }
 
