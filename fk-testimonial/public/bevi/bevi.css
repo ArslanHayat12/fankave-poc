@@ -20,12 +20,13 @@ body {
 }
 
 #fk-home-screen {
-  margin-bottom: 20px;
+  margin-bottom: 100px;
 }
 
 #fk-footer {
   position: absolute;
-  bottom: 0;
+  bottom: 25px;
+  right: 15px;
 }
 
 #fk-page-wrapper {
@@ -110,6 +111,15 @@ body {
     margin: 0px 0px 5px;
   }
 
+  #fk-home-screen {
+    margin-bottom: 70px;
+  }
+  #fk-footer {
+    margin-bottom: 10px;
+    bottom: 15px;
+    right: 15px;
+  }
+
   #fk-footer img {
     height: 30px;
   }
@@ -166,11 +176,6 @@ body {
     margin: 63px 0px 15px;
   }
 
-  #fk-footer {
-    margin-bottom: 10px;
-    right: 10px;
-  }
-
   #fk-video-recorder-wrapper .video-wrapper {
     height: 55vh;
   }
@@ -183,6 +188,10 @@ body {
 @media (max-width: 768px) {
   #fk-record-screen .record-visualizer {
     top: 1.5%;
+  }
+
+  #fk-home-screen {
+    margin-bottom: 55px;
   }
 
   #fk-home-screen .description {
@@ -198,7 +207,8 @@ body {
   }
 
   #fk-footer {
-    margin-top: 10px;
+    right: 10px;
+    bottom: 1px;
   }
 
   #fk-home-screen {
@@ -214,13 +224,12 @@ body {
   }
 
   #fk-footer img {
-    height: 25px;
+    height: 20px;
   }
 
-  /* #fk-widget-wrapper {
-    min-height: 455px;
-    height: unset;
-  } */
+  #fk-widget-wrapper {
+    padding: 15px;
+  }
 
   #fk-preview-testimonial-screen .approve-button {
     width: 95px;
