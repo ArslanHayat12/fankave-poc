@@ -1,3 +1,7 @@
+import React from "react";
+
+import { TickIcon } from "../assets";
+
 const questionsList = [
   "What is your name and title?",
   "What team do you report into?",
@@ -6,6 +10,7 @@ const questionsList = [
   "How would you describe the Bevi company culture?",
   "Why would you recommend Bevi as a great place to work?",
 ];
+
 const beviBookConfigs = {
   default: {
     topic: "beviemployee",
@@ -97,17 +102,22 @@ const beviBookConfigs = {
             iconColor: "",
             borderRadius: "",
             borderColor: "",
+            display: {
+              name: true,
+              mail: false,
+              company: false,
+            },
           },
           button: {
             backgroundColor: "#5089ed",
-            text: "",
+            text: <TickIcon />,
             fontSize: "17px",
             fontWeight: "500",
             color: "#fff",
             textTransform: "uppercase",
-            borderRadius: "30px",
-            height: "61px",
-            width: "181px",
+            borderRadius: "50%",
+            height: "30px",
+            width: "30px",
           },
 
           bgHeight: "100vh",
@@ -129,11 +139,27 @@ const beviBookConfigs = {
               boxShadow: "0px 1px 2px 0 rgba(0, 0, 0, 0.14)",
               borderRadius: "24.5px",
             },
+            button: {
+              backgroundColor: "#5089ed",
+              text: <TickIcon />,
+              fontSize: "17px",
+              fontWeight: "500",
+              color: "#fff",
+              textTransform: "uppercase",
+              borderRadius: "50%",
+              height: "30px",
+              width: "30px",
+            },
 
             icon: "",
             iconColor: "",
             borderRadius: "",
             borderColor: "",
+            display: {
+              name: true,
+              mail: false,
+              company: false,
+            },
           },
           button: {
             backgroundColor: "",

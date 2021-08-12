@@ -6,7 +6,7 @@ import Footer from "./../Footer/Footer";
 import { PageWrapperStyled } from "./style";
 
 import { BackgroundVideo } from "../BackgroundVideo/BackgroundVideo";
-import themeConfigs from "../../theme";
+import themeConfigs from "../../configs";
 
 function PageWrapper(props) {
   const { children } = props;

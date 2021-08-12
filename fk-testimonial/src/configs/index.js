@@ -1,3 +1,5 @@
-import { beviBookConfigs } from "./bevi";
+import beviBookConfigs from "./beviTheme";
 
-export const configs = window.self.ctag == "bevi" ? beviBookConfigs : "";
+// const themeConfigs = window.self.ctag == "bevi" ? beviBookConfigs : "";
+const themeConfigs = beviBookConfigs;
+export default themeConfigs;

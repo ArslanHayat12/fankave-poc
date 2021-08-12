@@ -3,7 +3,7 @@ import React from "react";
 import PageWrapper from "./components/PageWrapper/PageWrapper";
 import Widget from "./components/Widget/Widget";
 
-import themeConfigs from "./theme";
+import themeConfigs from "./configs";
 import ThemeProvider from "./theme/ThemeProvider";
 
 import "./App.css";

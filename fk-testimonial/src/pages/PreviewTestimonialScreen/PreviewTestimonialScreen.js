@@ -8,7 +8,12 @@ import React, {
 } from "react";
 import { ThemeContext } from "styled-components";
 import { CustomAudioPlayer } from "../../components/CustomAudioPlayer/CustomAudioPlayer";
-import { PlayFilledIcon, RefreshIcon, CrossIcon } from "../../assets/index";
+import {
+  PlayFilledIcon,
+  RefreshIcon,
+  CrossIcon,
+  TickIcon,
+} from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { CustomTooltip } from "../../components/Tooltip/Tooltip";
 import { SoundWave } from "../../components/AudioVisualizers/SoundWave";
@@ -53,6 +58,9 @@ const PreviewTestimonialScreen = () => {
     default: {
       widget: {
         previewScreen: {
+          video: {
+            button: { text: buttonText },
+          },
           audio: {
             card: { icon: iconUrl },
           },
@@ -264,15 +272,17 @@ const PreviewTestimonialScreen = () => {
           />
         </>
       )}
-      <ClientDetails />
-      <article className="button-wrapper">
-        <button
-          className="approve-button"
-          onClick={() => generateRequestData(true)}
-        >
-          Approve
-        </button>
-      </article>
+      <section className="client-details-wrapper">
+        <ClientDetails />
+        <article className="button-wrapper">
+          <button
+            className="approve-button"
+            onClick={() => generateRequestData(true)}
+          >
+            {buttonText}
+          </button>
+        </article>
+      </section>
       {isApproveLoading && "Please wait request is processing"}
       {testimonialType === "audio" &&
         theme.default.widget.previewScreen.audio.audio.displayWave && (
