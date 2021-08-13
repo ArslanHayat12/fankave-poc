@@ -127,7 +127,7 @@ const olympicsConfigs = {
           fontSize: "",
           fontColor: "",
           audio: {
-            displayWave: false,
+            displayWave: true,
           },
           input: {
             placeholders: {
