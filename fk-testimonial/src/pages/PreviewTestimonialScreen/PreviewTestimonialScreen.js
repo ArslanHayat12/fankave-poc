@@ -32,6 +32,7 @@ import { Loader } from "../../components/LoaderOverlay/Loader";
 import { PreviewScreenStyled } from "./style";
 
 const PreviewTestimonialScreen = () => {
+  var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   const {
     state: {
       url,
@@ -201,9 +202,8 @@ const PreviewTestimonialScreen = () => {
   return (
     <PreviewScreenStyled
       id="fk-preview-testimonial-screen"
-      className={`preview-testimonial-screen${
-        testimonialType === "audio" ? " audio-preview-screen" : ""
-      }`}
+      className={`preview-testimonial-screen${testimonialType === "audio" ? " audio-preview-screen" : ""
+        }`}
     >
       <CrossIcon customClass="cross-icon" onClick={onBack} />
 
@@ -228,9 +228,9 @@ const PreviewTestimonialScreen = () => {
               controlsList="nodownload nofullscreen noremoteplayback"
               onClick={onPlayClick}
               onEnded={() => setPlayVideo(false)}
-              poster="/video-poster.png"
+              {...isSafari && { poster: "/video-poster.png" }}
             >
-              <source src={url} />
+              <source src={url + "#t=0.001"} type="video/mp4" />
             </video>
             <button
               className={`play-button ${playVideo ? "hide-icon" : ""}`}
@@ -276,9 +276,8 @@ const PreviewTestimonialScreen = () => {
         <ClientDetails />
         <article className="button-wrapper">
           <button
-            className={`approve-button ${
-              isApproveLoading ? "button-clicked" : ""
-            }`}
+            className={`approve-button ${isApproveLoading ? "button-clicked" : ""
+              }`}
             onClick={() => generateRequestData(true)}
           >
             {buttonText}
