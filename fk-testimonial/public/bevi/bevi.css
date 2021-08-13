@@ -95,12 +95,15 @@ body {
 }
 
 #fk-preview-testimonial-screen .approve-button {
-  border: 2px solid rgb(38 111 255);
+  width: 130px;
+  height: 40px;
+  border-radius: 40px;
+  /* border: 2px solid rgb(38 111 255);
   background-color: #fff;
-  padding: 1px;
+  padding: 1px; */
 }
 
-#fk-preview-testimonial-screen .approve-button.button-clicked {
+/* #fk-preview-testimonial-screen .approve-button.button-clicked {
   background-color: rgb(38 111 255);
 }
 
@@ -115,7 +118,7 @@ body {
 
 #fk-preview-testimonial-screen .approve-button svg path {
   fill: rgb(41 113 255);
-}
+} */
 
 #fk-client-details-wrapper input {
   width: 85%;
@@ -128,8 +131,8 @@ body {
 }
 
 #fk-preview-testimonial-screen .client-details-wrapper {
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
 }
 
 #fk-preview-testimonial-screen .video-wrapper {

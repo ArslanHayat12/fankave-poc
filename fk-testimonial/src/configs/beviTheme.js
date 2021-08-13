@@ -110,7 +110,7 @@ const beviBookConfigs = {
           },
           button: {
             backgroundColor: "#5089ed",
-            text: <TickIcon />,
+            text: "Approve",
             fontSize: "17px",
             fontWeight: "500",
             color: "#fff",
@@ -141,14 +141,14 @@ const beviBookConfigs = {
             },
             button: {
               backgroundColor: "#5089ed",
-              text: <TickIcon />,
+              text: "Approve",
               fontSize: "17px",
               fontWeight: "500",
               color: "#fff",
               textTransform: "uppercase",
-              borderRadius: "50%",
-              height: "30px",
-              width: "30px",
+              borderRadius: "40px",
+              height: "130px",
+              width: "20px",
             },
 
             icon: "",
