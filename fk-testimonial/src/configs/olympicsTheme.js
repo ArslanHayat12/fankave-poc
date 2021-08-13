@@ -11,20 +11,20 @@ const questionsList = [
   "Why would you recommend Bevi as a great place to work?",
 ];
 
-const beviBookConfigs = {
+const olympicsConfigs = {
   default: {
-    topic: "beviemployee",
-    customClass: "bevi-layout",
+    topic: "olympics",
+    customClass: "olympics-layout",
     background: {
       type: "image", //image|video
-      url: "/bevi/background.png",
+      url: "/olympics/background.png",
     },
 
     pageLayout: {
       header: {
         position: "center",
-        mainLogoUrl: "/bevi/main-logo.png",
-        subLogoUrl: "/bevi/sub-logo.png",
+        mainLogoUrl: "",
+        subLogoUrl: "",
         mainLogoHeight: "45px",
         subLogoHeight: "22px",
         mainLogoMargin: "0 0 27px 0",
@@ -39,15 +39,14 @@ const beviBookConfigs = {
     widget: {
       width: "298px",
       height: "729px",
-      background: "/bevi/widget-bg.png",
       borderRadius: "12px",
       widgetGif: {
-        url: "/bevi/bevi-gif.gif",
-        gif: true,
+        url: "",
+        gif: false,
       },
       logo: {
         position: "bottom-right",
-        url: "/bevi/footer-logo.png",
+        url: "",
         height: "40px",
       },
       mainHeadingText: "",
@@ -56,7 +55,7 @@ const beviBookConfigs = {
 
       homeScreen: {
         videoBox: {
-          icon: "/bevi/camera-icon.png",
+          icon: "/olympics/camera.png",
           text: "",
           borderRadius: "18px",
           background: "",
@@ -67,7 +66,7 @@ const beviBookConfigs = {
           fontSize: "",
         },
         audioBox: {
-          icon: "/bevi/mic-icon.png",
+          icon: "/olympics/mic.png",
           text: "",
           borderRadius: "18px",
           background: "",
@@ -91,11 +90,11 @@ const beviBookConfigs = {
               name: "Name",
               email: "Mail id",
               company: "Company",
-              fontSize: "17px",
+              fontSize: "12px",
               fontWeight: "500",
               fontColor: "#2d2d2d",
-              boxShadow: "0px 1px 2px 0 rgba(0, 0, 0, 0.14)",
-              borderRadius: "24.5px",
+              boxShadow: "",
+              borderRadius: "20px",
               border: "solid 2px rgba(218, 218, 218, 0.21)",
             },
 
@@ -105,20 +104,20 @@ const beviBookConfigs = {
             borderColor: "",
             display: {
               name: true,
-              mail: false,
-              company: false,
+              mail: true,
+              company: true,
             },
           },
           button: {
-            backgroundColor: "#5089ed",
+            backgroundColor: "#4dbbe5",
             text: "Approve",
-            fontSize: "17px",
+            fontSize: "14px",
             fontWeight: "500",
             color: "#fff",
             textTransform: "uppercase",
-            borderRadius: "50%",
-            height: "30px",
-            width: "30px",
+            borderRadius: "40px",
+            height: "33px",
+            width: "110px",
           },
 
           bgHeight: "100vh",
@@ -135,21 +134,21 @@ const beviBookConfigs = {
               name: "Name",
               email: "Mail id",
               company: "Company",
-              fontSize: "17px",
+              fontSize: "12px",
               fontColor: "#2d2d2d",
-              boxShadow: "0px 1px 2px 0 rgba(0, 0, 0, 0.14)",
-              borderRadius: "24.5px",
+              boxShadow: "",
+              borderRadius: "20px",
             },
             button: {
-              backgroundColor: "#5089ed",
+              backgroundColor: "#4dbbe5",
               text: "Approve",
-              fontSize: "17px",
+              fontSize: "14px",
               fontWeight: "500",
               color: "#fff",
               textTransform: "uppercase",
               borderRadius: "40px",
-              height: "130px",
-              width: "20px",
+              height: "33px",
+              width: "110px",
             },
 
             icon: "",
@@ -158,8 +157,8 @@ const beviBookConfigs = {
             borderColor: "",
             display: {
               name: true,
-              mail: false,
-              company: false,
+              mail: true,
+              company: true,
             },
           },
           button: {
@@ -182,9 +181,9 @@ const beviBookConfigs = {
         audio: {
           questionsList,
           micIcon: {
-            background: "#5e91f3",
-            canvasPrimaryColor: "#5e91f3",
-            canvasSecondaryColor: "#96b5f352",
+            stroke: "#e7a9a9",
+            canvasPrimaryColor: "#e97272",
+            canvasSecondaryColor: "#e77e7e",
           },
         },
       },
@@ -238,4 +237,4 @@ const beviBookConfigs = {
   },
 };
 
-export default beviBookConfigs;
+export default olympicsConfigs;

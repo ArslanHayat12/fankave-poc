@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useContext } from "react";
 import "./style.css";
+import { ThemeContext } from "styled-components";
 
 export const Visualizer = (props) => {
   //receives stream initialized in useRecorder, and isAudioPlaying to show canvas
@@ -11,6 +12,22 @@ export const Visualizer = (props) => {
   const analyserRef = useRef();
   //canvas ref required in drawing
   const canvasRef = useRef(null);
+
+  const theme = useContext(ThemeContext);
+
+  const {
+    default: {
+      widget: {
+        recordingScreen: {
+          audio: {
+            micIcon: { canvasPrimaryColor, canvasSecondaryColor, stroke },
+          },
+        },
+      },
+    },
+  } = theme;
+
+  console.log("theme", canvasPrimaryColor);
 
   const cleanUpFunction = useCallback(() => {
     cancelAnimationFrame(frameRef.current);
@@ -76,11 +93,11 @@ export const Visualizer = (props) => {
             70
           );
           // Add three color stops
-          gradient.addColorStop(0.1, "#5e91f3");
-          gradient.addColorStop(0.4, "#96b5f352");
-          gradient.addColorStop(0.7, "#96b5f352");
-          gradient.addColorStop(0.9, "#5e91f3");
-          gradient.addColorStop(1, "#5e91f3");
+          gradient.addColorStop(0.1, canvasPrimaryColor);
+          gradient.addColorStop(0.4, canvasSecondaryColor);
+          gradient.addColorStop(0.7, canvasSecondaryColor);
+          gradient.addColorStop(0.9, canvasPrimaryColor);
+          gradient.addColorStop(1, canvasPrimaryColor);
 
           let radius = dataArray[2] / 2;
           if (radius < 20) radius = 20;
@@ -90,7 +107,7 @@ export const Visualizer = (props) => {
           canvasCtx.fillStyle = gradient;
           canvasCtx.fill();
           canvasCtx.lineWidth = 10;
-          canvasCtx.strokeStyle = "#96b5f352";
+          canvasCtx.strokeStyle = stroke;
           canvasCtx.stroke();
         };
         draw();
