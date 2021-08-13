@@ -4,22 +4,85 @@ body {
   background-position: center;
 }
 
+#fk-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 #fk-widget-wrapper {
-  background-color: #2f438a;
+  background-color: #fff;
+  border: none;
+  box-shadow: none;
 }
 
-#fk-widget-wrapper .description {
-  color: #fff;
+#fk-home-screen {
+  animation: none;
 }
 
-#fk-widget-wrapper .card-description {
-  color: #fff;
+#fk-video-recorder-wrapper .video-wrapper {
+  height: 52vh;
 }
 
-#fk-main-container .heading {
-  color: #fff;
+#fk-video-recorder-wrapper .video-wrapper video {
+  height: 52vh;
 }
 
-#fk-main-container .video-timer {
-  color: #fff;
+#fk-record-screen .heading {
+  font-size: 22px;
+}
+
+#fk-home-screen .description {
+  font-size: 22px;
+}
+
+#fk-preview-testimonial-screen {
+  height: 100%;
+}
+
+#fk-preview-testimonial-screen .heading {
+  font-size: 22px;
+}
+
+#fk-preview-testimonial-screen .video-wrapper {
+  height: 33vh;
+}
+
+#fk-preview-testimonial-screen .video-wrapper video {
+  height: 33vh;
+}
+
+#fk-client-details-wrapper input {
+  padding: 5px;
+}
+
+#fk-client-details-wrapper .approve-button {
+  font-size: 14px;
+  background-color: #1a2b61;
+}
+
+#fk-thankyou-screen .description {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+#fk-record-screen .mic-wrapper {
+  background-color: #ec2222;
+}
+
+#fk-preview-testimonial-screen .audio-card {
+  background-color: transparent;
+  height: unset;
+  padding: unset;
+}
+
+#fk-preview-testimonial-screen .audio-card .audio-wrapper {
+  background: #4dbbe5;
+  padding: 0px 5px;
+  align-items: center;
+  margin: 0;
+}
+#fk-preview-testimonial-screen .audio-card .mic-icon {
+  display: none;
 }
