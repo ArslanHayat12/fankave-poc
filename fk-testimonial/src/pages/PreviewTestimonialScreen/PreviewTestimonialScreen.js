@@ -229,7 +229,7 @@ const PreviewTestimonialScreen = () => {
               controlsList="nodownload nofullscreen noremoteplayback"
               onClick={onPlayClick}
               onEnded={() => setPlayVideo(false)}
-              {..._iOSDevice && { poster: "/video-poster.png" }}
+              poster={thumbUrl}
             >
               <source src={url + "#t=0.001"} type="video/mp4" />
             </video>
