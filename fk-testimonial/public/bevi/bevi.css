@@ -95,9 +95,10 @@ body {
 }
 
 #fk-preview-testimonial-screen .approve-button {
-  width: 130px;
-  height: 40px;
+  width: 110px;
+  height: 30px;
   border-radius: 40px;
+  font-size: 14px;
   /* border: 2px solid rgb(38 111 255);
   background-color: #fff;
   padding: 1px; */
@@ -124,6 +125,7 @@ body {
   width: 85%;
   margin-right: 5px;
   font-family: "Roboto", sans-serif !important;
+  outline: none;
 }
 
 #fk-preview-testimonial-screen .button-wrapper {
