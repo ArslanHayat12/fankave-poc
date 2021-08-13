@@ -32,7 +32,8 @@ import { Loader } from "../../components/LoaderOverlay/Loader";
 import { PreviewScreenStyled } from "./style";
 
 const PreviewTestimonialScreen = () => {
-  var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const _iOSDevice = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+  console.log(_iOSDevice)
   const {
     state: {
       url,
@@ -228,7 +229,7 @@ const PreviewTestimonialScreen = () => {
               controlsList="nodownload nofullscreen noremoteplayback"
               onClick={onPlayClick}
               onEnded={() => setPlayVideo(false)}
-              {...isSafari && { poster: "/video-poster.png" }}
+              {..._iOSDevice && { poster: "/video-poster.png" }}
             >
               <source src={url + "#t=0.001"} type="video/mp4" />
             </video>
