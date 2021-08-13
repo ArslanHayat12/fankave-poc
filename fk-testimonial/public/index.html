@@ -26,7 +26,6 @@
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
-
   <script>
     var userConfigs = {
       "dev.bevi.fankave.com": {
@@ -45,7 +44,7 @@
         title: "Dev",
       },
       localhost: {
-        ctag: "bevi",
+        ctag: "olympics",
         // origin is the url where web-app project is running e.g localhost:3000
         origin: "http://localhost:5000",
         title: "Localhost",
@@ -76,11 +75,7 @@
         "href",
         `/sharestories/${window.self.ctag}/${window.self.ctag}.css`
       );
-
-      // Append to the `head` element
-      document.head.appendChild(link);
     }
-
     loadDoc();
   </script>
 

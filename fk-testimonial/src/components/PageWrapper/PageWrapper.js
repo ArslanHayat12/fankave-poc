@@ -30,11 +30,13 @@ function PageWrapper(props) {
         ) : (
           <img src={backgroundUrl} className="background-image" />
         )}
-        <Header
-          mainLogoSrc={mainLogoUrl}
-          subLogoSrc={subLogoUrl}
-          position={position}
-        />
+        {mainLogoUrl && (
+          <Header
+            mainLogoSrc={mainLogoUrl}
+            subLogoSrc={subLogoUrl}
+            position={position}
+          />
+        )}
         {children}
         {footerLogoUrl && (
           <Footer src={logoUrl} position={footerLogoPosition} />
