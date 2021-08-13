@@ -231,7 +231,7 @@ const PreviewTestimonialScreen = () => {
               onEnded={() => setPlayVideo(false)}
               poster={thumbUrl}
             >
-              <source src={url + "#t=0.001"} type="video/mp4" />
+              <source src={url} />
             </video>
             <button
               className={`play-button ${playVideo ? "hide-icon" : ""}`}
