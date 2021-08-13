@@ -21,7 +21,9 @@ function Widget() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
   const theme = useContext(ThemeContext);
-  const [displayGif, setDisplayGif] = useState(true);
+  const [displayGif, setDisplayGif] = useState(
+    theme.default.widget.widgetGif.gif
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -60,7 +62,7 @@ function Widget() {
           ) : (
             <>
               <TestimonialApp />
-              <Footer src={url} position={position} />
+              {url && <Footer src={url} position={position} />}
             </>
           )}
         </article>
