@@ -33,7 +33,7 @@ import { PreviewScreenStyled } from "./style";
 
 const PreviewTestimonialScreen = () => {
   const _iOSDevice = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
-  console.log(_iOSDevice)
+
   const {
     state: {
       url,
@@ -124,8 +124,12 @@ const PreviewTestimonialScreen = () => {
             email: clientEmail,
             company: clientCompany,
           })
-        );
 
+        );
+        formData.append(
+          "isIOS",
+          _iOSDevice
+        );
         formData.append("hashtags", JSON.stringify(["Testimonial", "POC"]));
         fetch(thumbUrl)
           .then((res) => res.blob())

@@ -88,7 +88,7 @@ const beviBookConfigs = {
           video: {},
           input: {
             placeholders: {
-              name: "Name",
+              name: "Name (Optional)",
               email: "Mail id",
               company: "Company",
               fontSize: "17px",
@@ -132,7 +132,7 @@ const beviBookConfigs = {
           },
           input: {
             placeholders: {
-              name: "Name",
+              name: "Name (Optional)",
               email: "Mail id",
               company: "Company",
               fontSize: "17px",
