@@ -182,9 +182,10 @@ const beviBookConfigs = {
         audio: {
           questionsList,
           micIcon: {
+            stroke: "#86a6e3",
             background: "#5e91f3",
             canvasPrimaryColor: "#5e91f3",
-            canvasSecondaryColor: "#96b5f352",
+            canvasSecondaryColor: "#88abf0",
           },
         },
       },
