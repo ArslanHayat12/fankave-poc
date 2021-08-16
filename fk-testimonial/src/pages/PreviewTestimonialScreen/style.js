@@ -17,9 +17,8 @@ export const PreviewScreenStyled = styled.article`
   }
 
   .client-details-wrapper {
-   
   }
-  .processing-text{
+  .processing-text {
     left: 10px;
     position: relative;
     top: 8px;
@@ -40,7 +39,7 @@ export const PreviewScreenStyled = styled.article`
     border-radius: 8px;
     /* height: 325px; */
     height: ${(props) =>
-    props.theme.default.widget.previewScreen.video.height}px;
+      props.theme.default.widget.previewScreen.video.height}px;
   }
 
   .play-button {
@@ -89,21 +88,21 @@ export const PreviewScreenStyled = styled.article`
   .approve-button {
     font-family: "Poppins", sans-serif;
     background-color: ${(props) =>
-    props.theme.default.widget.previewScreen.video.button.backgroundColor};
+      props.theme.default.widget.previewScreen.video.button.backgroundColor};
     color: ${(props) =>
-    props.theme.default.widget.previewScreen.video.button.color};
+      props.theme.default.widget.previewScreen.video.button.color};
     text-transform: ${(props) =>
-    props.theme.default.widget.previewScreen.video.button.textTransform};
+      props.theme.default.widget.previewScreen.video.button.textTransform};
     width: ${(props) =>
-    props.theme.default.widget.previewScreen.video.button.width};
+      props.theme.default.widget.previewScreen.video.button.width};
     height: ${(props) =>
-    props.theme.default.widget.previewScreen.video.button.height};
+      props.theme.default.widget.previewScreen.video.button.height};
     font-size: ${(props) =>
-    props.theme.default.widget.previewScreen.video.button.fontSize};
+      props.theme.default.widget.previewScreen.video.button.fontSize};
     font-weight: ${(props) =>
-    props.theme.default.widget.previewScreen.video.button.fontWeight};
+      props.theme.default.widget.previewScreen.video.button.fontWeight};
     border-radius: ${(props) =>
-    props.theme.default.widget.previewScreen.video.button.borderRadius};
+      props.theme.default.widget.previewScreen.video.button.borderRadius};
     outline: none;
     border: none;
     cursor: pointer;
@@ -150,6 +149,7 @@ export const PreviewScreenStyled = styled.article`
   }
 
   .audio-wrapper {
+    z-index: 1;
     width: 100%;
     position: relative;
     display: flex;
@@ -166,6 +166,7 @@ export const PreviewScreenStyled = styled.article`
   }
 
   .audio-card {
+    position: relative;
     background: #95bafe;
     display: flex;
     flex-direction: column;
@@ -175,6 +176,18 @@ export const PreviewScreenStyled = styled.article`
     padding: 15px;
     height: 120px;
     margin-top: 20px;
+
+    &:after {
+      content: "";
+      background-image: linear-gradient(#95bafe, #20201ab0);
+      z-index: 0;
+      position: absolute;
+      bottom: 0;
+      height: 50%;
+      background-repeat: no-repeat;
+      width: 100%;
+      border-radius: 0 0 17px 17px;
+    }
   }
 
   .audio-card .mic-icon {

@@ -1,23 +1,19 @@
-import React from "react";
-
-import { TickIcon } from "../assets";
-
 const questionsList = [
   "What is your name and title?",
   "What team do you report into?",
-  "How long have you been working at Bevi?",
-  "What excites you most about working at Bevi every day?",
-  "How would you describe the Bevi company culture?",
-  "Why would you recommend Bevi as a great place to work?",
+  "How long have you been working at POSTAL.IO?",
+  "What excites you most about working at POSTAL.IO every day?",
+  "How would you describe the POSTAL.IO company culture?",
+  "Why would you recommend POSTAL.IO as a great place to work?",
 ];
 
-const olympicsConfigs = {
+const defaultConfigs = {
   default: {
-    topic: "olympics",
-    customClass: "olympics-layout",
+    topic: "beviemployee",
+    customClass: "default-layout",
     background: {
       type: "image", //image|video
-      url: "/olympics/background.png",
+      url: "/default/background.png",
     },
 
     pageLayout: {
@@ -39,6 +35,7 @@ const olympicsConfigs = {
     widget: {
       width: "298px",
       height: "729px",
+      background: "/default/widget-bg.png",
       borderRadius: "12px",
       widgetGif: {
         url: "",
@@ -46,7 +43,7 @@ const olympicsConfigs = {
       },
       logo: {
         position: "bottom-right",
-        url: "",
+        url: "/default/postal-logo.png",
         height: "40px",
       },
       mainHeadingText: "",
@@ -55,7 +52,7 @@ const olympicsConfigs = {
 
       homeScreen: {
         videoBox: {
-          icon: "/olympics/camera.png",
+          icon: "/default/camera.png",
           text: "",
           borderRadius: "18px",
           background: "",
@@ -66,7 +63,7 @@ const olympicsConfigs = {
           fontSize: "",
         },
         audioBox: {
-          icon: "/olympics/mic.png",
+          icon: "/default/mic.png",
           text: "",
           borderRadius: "18px",
           background: "",
@@ -87,12 +84,10 @@ const olympicsConfigs = {
           video: {},
           input: {
             placeholders: {
-              name: "Name",
-              email: "Mail id",
-              company: "Company",
+              name: "Name (optional)",
               fontSize: "12px",
               fontWeight: "500",
-              fontColor: "#2d2d2d",
+              fontColor: "#000",
               boxShadow: "",
               borderRadius: "20px",
               border: "solid 2px rgba(218, 218, 218, 0.21)",
@@ -104,12 +99,12 @@ const olympicsConfigs = {
             borderColor: "",
             display: {
               name: true,
-              mail: true,
-              company: true,
+              mail: false,
+              company: false,
             },
           },
           button: {
-            backgroundColor: "#4dbbe5",
+            backgroundColor: "#5089ed",
             text: "Approve",
             fontSize: "14px",
             fontWeight: "500",
@@ -118,6 +113,7 @@ const olympicsConfigs = {
             borderRadius: "40px",
             height: "33px",
             width: "110px",
+            placement: "center",
           },
 
           bgHeight: "100vh",
@@ -127,13 +123,11 @@ const olympicsConfigs = {
           fontSize: "",
           fontColor: "",
           audio: {
-            displayWave: true,
+            displayWave: false,
           },
           input: {
             placeholders: {
-              name: "Name",
-              email: "Mail id",
-              company: "Company",
+              name: "Name (optional)",
               fontSize: "12px",
               fontColor: "#2d2d2d",
               boxShadow: "",
@@ -149,6 +143,7 @@ const olympicsConfigs = {
               borderRadius: "40px",
               height: "33px",
               width: "110px",
+              placement: "center",
             },
 
             icon: "",
@@ -157,18 +152,24 @@ const olympicsConfigs = {
             borderColor: "",
             display: {
               name: true,
-              mail: true,
-              company: true,
+              mail: false,
+              company: false,
             },
           },
           button: {
-            backgroundColor: "",
-            text: "",
-            fontSize: "",
-            color: "",
+            backgroundColor: "#5089ed",
+            text: "Approve",
+            fontSize: "14px",
+            fontWeight: "500",
+            color: "#fff",
+            textTransform: "uppercase",
+            borderRadius: "40px",
+            height: "33px",
+            width: "110px",
+            placement: "center",
           },
           card: {
-            icon: "/bevi/mic-icon-white.png",
+            icon: "default/mic-icon-white.png",
           },
         },
       },
@@ -177,13 +178,38 @@ const olympicsConfigs = {
         video: {
           height: "550",
           questionsList,
+          button: {
+            display: true,
+            startRecording: {
+              text: "Record",
+            },
+            stopRecording: {
+              text: "Stop",
+            },
+          },
+          icon: {
+            display: false,
+          },
         },
         audio: {
           questionsList,
+          button: {
+            display: true,
+            startRecording: {
+              text: "Record",
+            },
+            stopRecording: {
+              text: "Stop",
+            },
+          },
+          icon: {
+            display: false,
+          },
           micIcon: {
-            stroke: "#e7a9a9",
-            canvasPrimaryColor: "#e97272",
-            canvasSecondaryColor: "#e77e7e",
+            stroke: "#86a6e3",
+            background: "#5e91f3",
+            canvasPrimaryColor: "#5e91f3",
+            canvasSecondaryColor: "#88abf0",
           },
         },
       },
@@ -193,20 +219,22 @@ const olympicsConfigs = {
         subHeading: "",
         shareIcon: {
           borderRadius: "none",
-          url: "/bevi/share-icon.png",
+          url: "/default/share-icon.png",
           bgColor: "transparent",
           height: "95px",
+          display: true,
         },
         tweetIcon: {
           borderRadius: "none",
-          url: "/bevi/tweet-icon.png",
+          url: "/default/tweet-icon.png",
           bgColor: "transparent",
           height: "61px",
         },
         twitterButton: {
           bgColor: "#5089ed",
           borderRadius: "22px",
-          display: false,
+          display: true,
+          placement: "center",
         },
         linkedinButton: {
           bgColor: "#5089ed",
@@ -237,4 +265,4 @@ const olympicsConfigs = {
   },
 };
 
-export default olympicsConfigs;
+export default defaultConfigs;

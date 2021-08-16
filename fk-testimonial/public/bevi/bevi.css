@@ -74,6 +74,10 @@ body {
   height: 160px;
 }
 
+#fk-preview-testimonial-screen .audio-card .mic-icon {
+  z-index: 1;
+}
+
 #fk-preview-testimonial-screen .audio-wrapper {
   margin: 30px 0 0px;
 }
@@ -201,8 +205,8 @@ body {
   }
 
   #fk-thankyou-screen .tweet-button {
-    height: 40px;
-    width: 168px;
+    /* height: 40px;
+    width: 168px; */
     font-size: 15px;
   }
 
@@ -281,8 +285,8 @@ body {
   }
 
   #fk-thankyou-screen .tweet-button {
-    height: 40px;
-    width: 148px;
+    /* height: 40px;
+    width: 148px; */
     font-size: 12px;
   }
 
