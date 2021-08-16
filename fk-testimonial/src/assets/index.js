@@ -396,18 +396,32 @@ export const StopIcon = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="8"
-      height="8"
-      viewBox="0 0 8 8"
-      className={customClass}
+      width="47"
+      height="47"
+      viewBox="0 0 47 47"
     >
-      <rect
-        id="Rectangle_20"
-        data-name="Rectangle 20"
-        width="8"
-        height="8"
-        fill="#FF0000"
-      />
+      <g id="Group_61" data-name="Group 61" transform="translate(-727 -723)">
+        <g
+          id="Ellipse_1"
+          data-name="Ellipse 1"
+          transform="translate(727 723)"
+          fill="transparent"
+          stroke="#F55555"
+          stroke-width="1"
+        >
+          <circle cx="23.5" cy="23.5" r="23.5" stroke="none" />
+          <circle cx="23.5" cy="23.5" r="22.5" fill="none" />
+        </g>
+        <rect
+          id="Rectangle_101"
+          data-name="Rectangle 101"
+          width="27"
+          height="27"
+          rx="3"
+          transform="translate(737 733)"
+          fill="#F55555"
+        />
+      </g>
     </svg>
   );
 };
