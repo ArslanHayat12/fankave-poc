@@ -287,7 +287,7 @@ const PreviewTestimonialScreen = () => {
         </article>
       </section>
       <span className="processing-text">
-        {isApproveLoading && "Processing..."}</span>
+        {isApproveLoading && "Processing ..."}</span>
       {testimonialType === "audio" &&
         theme.default.widget.previewScreen.audio.audio.displayWave && (
           <SoundWave />
