@@ -32,7 +32,8 @@ import { Loader } from "../../components/LoaderOverlay/Loader";
 import { PreviewScreenStyled } from "./style";
 
 const PreviewTestimonialScreen = () => {
-  const _iOSDevice = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+  const _iOSDevice =
+    !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 
   const {
     state: {
@@ -124,12 +125,8 @@ const PreviewTestimonialScreen = () => {
             email: clientEmail,
             company: clientCompany,
           })
-
         );
-        formData.append(
-          "isIOS",
-          _iOSDevice
-        );
+        formData.append("isIOS", _iOSDevice);
         formData.append("hashtags", JSON.stringify(["Testimonial", "POC"]));
         fetch(thumbUrl)
           .then((res) => res.blob())
@@ -207,8 +204,9 @@ const PreviewTestimonialScreen = () => {
   return (
     <PreviewScreenStyled
       id="fk-preview-testimonial-screen"
-      className={`preview-testimonial-screen${testimonialType === "audio" ? " audio-preview-screen" : ""
-        }`}
+      className={`preview-testimonial-screen${
+        testimonialType === "audio" ? " audio-preview-screen" : ""
+      }`}
     >
       <CrossIcon customClass="cross-icon" onClick={onBack} />
 
@@ -281,15 +279,18 @@ const PreviewTestimonialScreen = () => {
         <ClientDetails />
         <article className="button-wrapper">
           <button
-            className={`approve-button ${isApproveLoading ? "button-clicked" : ""
-              }`}
+            className={`approve-button ${
+              isApproveLoading ? "button-clicked" : ""
+            }`}
             onClick={() => generateRequestData(true)}
           >
             {buttonText}
           </button>
         </article>
       </section>
-      {isApproveLoading && "Please wait request is processing"}
+      {isApproveLoading && (
+        <p className="waiting-text">Please wait request is processing</p>
+      )}
       {testimonialType === "audio" &&
         theme.default.widget.previewScreen.audio.audio.displayWave && (
           <SoundWave />
