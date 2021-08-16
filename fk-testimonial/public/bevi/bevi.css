@@ -201,8 +201,8 @@ body {
   }
 
   #fk-thankyou-screen .tweet-button {
-    height: 40px;
-    width: 168px;
+    /* height: 40px;
+    width: 168px; */
     font-size: 15px;
   }
 
@@ -281,8 +281,8 @@ body {
   }
 
   #fk-thankyou-screen .tweet-button {
-    height: 40px;
-    width: 148px;
+    /* height: 40px;
+    width: 148px; */
     font-size: 12px;
   }
 

@@ -66,6 +66,29 @@ export const VideoRecorderStyled = styled.article`
     height: 47px;
   }
 
+  .text-button {
+    border-radius: 30px;
+    box-shadow: 0px 6px 10px 0 rgba(44, 91, 203, 0.45);
+    background-color: #5089ed;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+
+    .stop-icon {
+      width: 15px;
+      height: 15px;
+    }
+
+    .play-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
   @media (max-width: 420px) {
     .video-recording-container {
       height: 100%;

@@ -1,8 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { ThemeContext } from "styled-components";
 import useRecorder from "../../utils/useRecorder";
 import { Visualizer } from "../AudioVisualizers/Visualizer";
 import { CustomTooltip } from "../Tooltip/Tooltip";
-import { RecordingIcon, StopIcon } from "../../assets";
+import {
+  RecordingIcon,
+  StopIcon,
+  DefaultStopIcon,
+  DefaultRecordingIcon,
+} from "../../assets";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { useContext } from "react";
 import { SET_URL, SET_STATUS } from "../../constants";
@@ -23,6 +29,24 @@ export const AudioRecorder = () => {
     stream,
     error,
   } = useRecorder();
+
+  const theme = useContext(ThemeContext);
+
+  const {
+    default: {
+      widget: {
+        recordingScreen: {
+          audio: {
+            button: {
+              display: displayButton,
+              startRecording: { text: recordText },
+              stopRecording: { text: stopText },
+            },
+          },
+        },
+      },
+    },
+  } = theme;
 
   //passed to useRecorder stopRecording, receives recorded blob and url
   const onStop = useCallback((blob, blobUrl) => {
@@ -102,11 +126,17 @@ export const AudioRecorder = () => {
 
   const getPlayButton = useCallback(() => {
     return status === "init" || status === "idle" ? (
-      <CustomTooltip content="Record" placement="bottom">
-        <button className="recording-button" onClick={playButtonHandle}>
-          <RecordingIcon customClass="play-icon" />
+      displayButton ? (
+        <button className="text-button" onClick={playButtonHandle}>
+          <DefaultRecordingIcon customClass="play-icon" /> {recordText}
         </button>
-      </CustomTooltip>
+      ) : (
+        <CustomTooltip content="Record" placement="bottom">
+          <button className="recording-button" onClick={playButtonHandle}>
+            <RecordingIcon customClass="play-icon" />
+          </button>
+        </CustomTooltip>
+      )
     ) : null;
   }, [status]);
 
@@ -114,13 +144,21 @@ export const AudioRecorder = () => {
     <div className="recorder-container" id="fk-recorder-container">
       <article className="buttons-wrapper">
         {getPlayButton()}
-        {(status === "recording" || status === "paused") && (
-          <CustomTooltip content="Stop" placement="bottom">
-            <button className="stop-recording-button" onClick={handleStopClick}>
-              <StopIcon customClass="stop-icon" />
+        {(status === "recording" || status === "paused") &&
+          (displayButton ? (
+            <button className="text-button" onClick={handleStopClick}>
+              <DefaultStopIcon customClass="stop-icon" /> {stopText}
             </button>
-          </CustomTooltip>
-        )}
+          ) : (
+            <CustomTooltip content="Stop" placement="bottom">
+              <button
+                className="stop-recording-button"
+                onClick={handleStopClick}
+              >
+                <StopIcon customClass="stop-icon" />
+              </button>
+            </CustomTooltip>
+          ))}
       </article>
 
       {isAudioPlaying && (
