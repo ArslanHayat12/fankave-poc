@@ -11,13 +11,13 @@ const questionsList = [
   "Why would you recommend Bevi as a great place to work?",
 ];
 
-const olympicsConfigs = {
+const defaultConfigs = {
   default: {
-    topic: "olympics",
-    customClass: "olympics-layout",
+    topic: "default",
+    customClass: "default-layout",
     background: {
       type: "image", //image|video
-      url: "/olympics/background.png",
+      url: "/default/background.png",
     },
 
     pageLayout: {
@@ -237,4 +237,4 @@ const olympicsConfigs = {
   },
 };
 
-export default olympicsConfigs;
+export default defaultConfigs;
