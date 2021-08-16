@@ -9,7 +9,7 @@ const questionsList = [
 
 const defaultConfigs = {
   default: {
-    topic: "default",
+    topic: "beviemployee",
     customClass: "default-layout",
     background: {
       type: "image", //image|video
@@ -44,7 +44,7 @@ const defaultConfigs = {
       logo: {
         position: "bottom-right",
         url: "/default/postal-logo.png",
-        height: "30px",
+        height: "40px",
       },
       mainHeadingText: "",
       fontSize: "",

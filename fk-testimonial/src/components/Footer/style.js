@@ -15,17 +15,8 @@ export const FooterStyled = styled.section`
 
   @media (max-width: 768px) {
     // margin: 0 10px 10px;
-
-    img {
-      height: 20px;
-      margin: 10px;
-    }
   }
 
   @media (max-width: 425px) {
-    img {
-      height: 20px;
-      margin: 10px;
-    }
   }
 `;

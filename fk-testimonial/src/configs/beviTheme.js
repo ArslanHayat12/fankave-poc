@@ -89,8 +89,8 @@ const beviBookConfigs = {
           input: {
             placeholders: {
               name: "Name (optional)",
-              email: "Mail id",
-              company: "Company",
+              // email: "Mail id",
+              // company: "Company",
               fontSize: "17px",
               fontWeight: "500",
               fontColor: "#2d2d2d",
@@ -119,6 +119,7 @@ const beviBookConfigs = {
             borderRadius: "50%",
             height: "30px",
             width: "30px",
+            placement: "left",
           },
 
           bgHeight: "100vh",
@@ -133,8 +134,8 @@ const beviBookConfigs = {
           input: {
             placeholders: {
               name: "Name (optional)",
-              email: "Mail id",
-              company: "Company",
+              // email: "Mail id",
+              // company: "Company",
               fontSize: "17px",
               fontColor: "#2d2d2d",
               boxShadow: "0px 1px 2px 0 rgba(0, 0, 0, 0.14)",
@@ -167,8 +168,13 @@ const beviBookConfigs = {
             backgroundColor: "",
             text: "",
             fontSize: "",
+            fontWeight: "",
             color: "",
-            placement: "center",
+            textTransform: "",
+            borderRadius: "",
+            height: "",
+            width: "",
+            placement: "",
           },
           card: {
             icon: "/bevi/mic-icon-white.png",
@@ -236,6 +242,7 @@ const beviBookConfigs = {
           bgColor: "#5089ed",
           borderRadius: "22px",
           display: false,
+          placement: "left",
         },
         linkedinButton: {
           bgColor: "#5089ed",

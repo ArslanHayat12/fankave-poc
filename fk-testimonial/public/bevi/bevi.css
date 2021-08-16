@@ -74,6 +74,10 @@ body {
   height: 160px;
 }
 
+#fk-preview-testimonial-screen .audio-card .mic-icon {
+  z-index: 1;
+}
+
 #fk-preview-testimonial-screen .audio-wrapper {
   margin: 30px 0 0px;
 }
