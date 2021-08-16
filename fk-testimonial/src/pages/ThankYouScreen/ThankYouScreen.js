@@ -188,7 +188,8 @@ export const ThankYouScreen = () => {
     default: {
       widget: {
         thankyouScreen: {
-          shareIcon: { url: beviShareIcon },
+          shareIcon: { url: beviShareIcon, display: displayShareIcon },
+          linkedinButton: { display: linkedinIconDisplay },
           tweetIcon: { url: beviTweetIcon },
           button: { text, display },
         },
@@ -205,17 +206,27 @@ export const ThankYouScreen = () => {
       <span className="back-button" onClick={onBack}>
         Go Again
       </span>
-      {display && testimonialType === "video" && !tweet && !isTweetUploaded && (
+      {testimonialType === "video" && !tweet && !isTweetUploaded && (
         <div className="button-wrapper">
-          <button className="icon-button " onClick={() => setTweetAction(true)}>
-            <Tooltip content="Share" placement="right">
-              {beviShareIcon ? <img src={beviShareIcon} /> : <ShareIcon />}
-            </Tooltip>
-          </button>
+          {displayShareIcon && (
+            <button
+              className="icon-button "
+              onClick={() => setTweetAction(true)}
+            >
+              <Tooltip content="Share" placement="right">
+                {beviShareIcon ? <img src={beviShareIcon} /> : <ShareIcon />}
+              </Tooltip>
+            </button>
+          )}
 
-          <button className="share-button" onClick={() => setTweetAction(true)}>
-            {text}
-          </button>
+          {display && (
+            <button
+              className="share-button"
+              onClick={() => setTweetAction(true)}
+            >
+              {text}
+            </button>
+          )}
         </div>
       )}
 
@@ -236,12 +247,14 @@ export const ThankYouScreen = () => {
           >
             Tweet
           </button>
-          <button
-            className="tweet-button"
-            onClick={() => openLinkedInSiginInTab()}
-          >
-            Share on Linkedin
-          </button>
+          {linkedinIconDisplay && (
+            <button
+              className="tweet-button"
+              onClick={() => openLinkedInSiginInTab()}
+            >
+              Share on Linkedin
+            </button>
+          )}
         </div>
       )}
       {errorMessage && <div className="error">{errorMessage || ""}</div>}

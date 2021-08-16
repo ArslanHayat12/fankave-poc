@@ -89,8 +89,8 @@ const beviBookConfigs = {
           input: {
             placeholders: {
               name: "Name (optional)",
-              email: "Mail id",
-              company: "Company",
+              // email: "Mail id",
+              // company: "Company",
               fontSize: "17px",
               fontWeight: "500",
               fontColor: "#2d2d2d",
@@ -119,6 +119,7 @@ const beviBookConfigs = {
             borderRadius: "50%",
             height: "30px",
             width: "30px",
+            placement: "left",
           },
 
           bgHeight: "100vh",
@@ -133,8 +134,8 @@ const beviBookConfigs = {
           input: {
             placeholders: {
               name: "Name (optional)",
-              email: "Mail id",
-              company: "Company",
+              // email: "Mail id",
+              // company: "Company",
               fontSize: "17px",
               fontColor: "#2d2d2d",
               boxShadow: "0px 1px 2px 0 rgba(0, 0, 0, 0.14)",
@@ -150,6 +151,7 @@ const beviBookConfigs = {
               borderRadius: "40px",
               height: "130px",
               width: "20px",
+              placement: "left",
             },
 
             icon: "",
@@ -166,7 +168,13 @@ const beviBookConfigs = {
             backgroundColor: "",
             text: "",
             fontSize: "",
+            fontWeight: "",
             color: "",
+            textTransform: "",
+            borderRadius: "",
+            height: "",
+            width: "",
+            placement: "",
           },
           card: {
             icon: "/bevi/mic-icon-white.png",
@@ -178,9 +186,33 @@ const beviBookConfigs = {
         video: {
           height: "550",
           questionsList,
+          button: {
+            display: false,
+            startRecording: {
+              text: "Record",
+            },
+            stopRecording: {
+              text: "Stop",
+            },
+          },
+          icon: {
+            display: true,
+          },
         },
         audio: {
           questionsList,
+          button: {
+            display: false,
+            startRecording: {
+              text: "Record",
+            },
+            stopRecording: {
+              text: "Stop",
+            },
+          },
+          icon: {
+            display: true,
+          },
           micIcon: {
             stroke: "#86a6e3",
             background: "#5e91f3",
@@ -198,6 +230,7 @@ const beviBookConfigs = {
           url: "/bevi/share-icon.png",
           bgColor: "transparent",
           height: "95px",
+          display: false,
         },
         tweetIcon: {
           borderRadius: "none",
@@ -209,6 +242,7 @@ const beviBookConfigs = {
           bgColor: "#5089ed",
           borderRadius: "22px",
           display: false,
+          placement: "left",
         },
         linkedinButton: {
           bgColor: "#5089ed",

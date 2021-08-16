@@ -12,7 +12,12 @@ import { TestimonialContext } from "../../context/TestimonialContext";
 import NotificationCard from "../NotificationCard/NotificationCard";
 import { CustomTooltip as Tooltip } from "../Tooltip/Tooltip";
 import QuestionsCard from "../QuestionsCard/QuestionsCard";
-import { StopIcon, RecordingIcon } from "../../assets";
+import {
+  StopIcon,
+  RecordingIcon,
+  DefaultRecordingIcon,
+  DefaultStopIcon,
+} from "../../assets";
 import { useInterval } from "../../hooks/useInterval";
 import { convertSecondsToHourMinute } from "../../utils";
 import {
@@ -143,7 +148,14 @@ export const VideoRecorder = () => {
     default: {
       widget: {
         recordingScreen: {
-          video: { height: videoHeight },
+          video: {
+            height: videoHeight,
+            button: {
+              display: displayButton,
+              startRecording: { text: recordText },
+              stopRecording: { text: stopText },
+            },
+          },
         },
       },
     },
@@ -196,21 +208,39 @@ export const VideoRecorder = () => {
             {convertSecondsToHourMinute(String(recordingTime))}
           </article>
           <div className="stop-button-container">
-            <Tooltip content="Stop" placement="right">
-              <button onClick={handleStopCaptureClick} className="stop-button">
-                <StopIcon />
+            {displayButton ? (
+              <button onClick={handleStopCaptureClick} className="text-button">
+                <DefaultStopIcon customClass="stop-icon" /> {stopText}
               </button>
-            </Tooltip>
+            ) : (
+              <Tooltip content="Stop" placement="right">
+                <button
+                  onClick={handleStopCaptureClick}
+                  className="stop-button"
+                >
+                  <StopIcon />
+                </button>
+              </Tooltip>
+            )}
           </div>
         </div>
       )}
       {isStreamInit && !capturing && (
         <div className="button-container">
-          <Tooltip content="Record" placement="right">
-            <button onClick={handleStartCaptureClick} className="record-button">
-              <RecordingIcon customClass="video-play-icon" />
+          {displayButton ? (
+            <button onClick={handleStartCaptureClick} className="text-button">
+              <DefaultRecordingIcon customClass="play-icon" /> {recordText}
             </button>
-          </Tooltip>
+          ) : (
+            <Tooltip content="Record" placement="right">
+              <button
+                onClick={handleStartCaptureClick}
+                className="record-button"
+              >
+                <RecordingIcon customClass="video-play-icon" />
+              </button>
+            </Tooltip>
+          )}
         </div>
       )}
     </VideoRecorderStyled>

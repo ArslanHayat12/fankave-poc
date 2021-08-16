@@ -586,3 +586,65 @@ export const CrossIcon = (props) => {
     </svg>
   );
 };
+
+export const DefaultRecordingIcon = (props) => {
+  const { customClass } = props;
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="34"
+      height="34"
+      viewBox="0 0 34 34"
+      className={customClass}
+    >
+      <g
+        id="Group_62"
+        data-name="Group 62"
+        transform="translate(-727 -723.108)"
+      >
+        <g
+          id="Ellipse_1"
+          data-name="Ellipse 1"
+          transform="translate(727 723.108)"
+          fill="none"
+          stroke="#fff"
+          stroke-width="3"
+        >
+          <circle cx="17" cy="17" r="17" stroke="none" />
+          <circle cx="17" cy="17" r="15.5" fill="none" />
+        </g>
+        <circle
+          id="Ellipse_2"
+          data-name="Ellipse 2"
+          cx="7"
+          cy="7"
+          r="7"
+          transform="translate(737 733.108)"
+          fill="#fff"
+        />
+      </g>
+    </svg>
+  );
+};
+
+export const DefaultStopIcon = (props) => {
+  const { customClass } = props;
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      viewBox="0 0 22 22"
+      className={customClass}
+    >
+      <rect
+        id="Rectangle_102"
+        data-name="Rectangle 102"
+        width="22"
+        height="22"
+        rx="3"
+        fill="#fff"
+      />
+    </svg>
+  );
+};

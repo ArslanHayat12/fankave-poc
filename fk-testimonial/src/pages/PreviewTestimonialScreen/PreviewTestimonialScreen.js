@@ -292,7 +292,7 @@ const PreviewTestimonialScreen = () => {
         theme.default.widget.previewScreen.audio.audio.displayWave && (
           <SoundWave />
         )}
-      {isApproveLoading && <Loader />}
+      {/* {isApproveLoading && <Loader />} */}
     </PreviewScreenStyled>
   );
 };

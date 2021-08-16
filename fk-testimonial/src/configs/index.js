@@ -1,12 +1,12 @@
 import beviBookConfigs from "./beviTheme";
-import olympicsConfigs from "./olympicsTheme";
+import defaultConfigs from "./defaultTheme";
 
 const theme = () => {
   switch (window.self.ctag) {
     case "bevi":
       return beviBookConfigs;
-    case "olympics":
-      return olympicsConfigs;
+    case "default":
+      return defaultConfigs;
     case "cisco":
       return ciscoConfig;
   }

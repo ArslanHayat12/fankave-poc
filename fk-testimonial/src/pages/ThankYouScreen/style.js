@@ -108,8 +108,8 @@ export const ThankyouScreenStyled = styled.section`
     cursor: pointer;
     margin-right: 3px;
     box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.14);
-    height: 61px;
-    width: 180px;
+    // height: 61px;
+    // width: 180px;
     border-radius: 30px;
     font-size: 15px;
 
@@ -124,5 +124,9 @@ export const ThankyouScreenStyled = styled.section`
     color: green;
     font-size: 14px;
     margin-top: 25px;
+  }
+
+  .error{
+    margin-top:10px;
   }
 `;
