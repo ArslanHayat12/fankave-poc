@@ -150,6 +150,7 @@ const beviBookConfigs = {
               borderRadius: "40px",
               height: "130px",
               width: "20px",
+              placement: "left",
             },
 
             icon: "",
@@ -167,6 +168,7 @@ const beviBookConfigs = {
             text: "",
             fontSize: "",
             color: "",
+            placement: "center",
           },
           card: {
             icon: "/bevi/mic-icon-white.png",
@@ -178,9 +180,33 @@ const beviBookConfigs = {
         video: {
           height: "550",
           questionsList,
+          button: {
+            display: false,
+            startRecording: {
+              text: "Record",
+            },
+            stopRecording: {
+              text: "Stop",
+            },
+          },
+          icon: {
+            display: true,
+          },
         },
         audio: {
           questionsList,
+          button: {
+            display: false,
+            startRecording: {
+              text: "Record",
+            },
+            stopRecording: {
+              text: "Stop",
+            },
+          },
+          icon: {
+            display: true,
+          },
           micIcon: {
             stroke: "#86a6e3",
             background: "#5e91f3",
@@ -198,6 +224,7 @@ const beviBookConfigs = {
           url: "/bevi/share-icon.png",
           bgColor: "transparent",
           height: "95px",
+          display: false,
         },
         tweetIcon: {
           borderRadius: "none",
