@@ -13,7 +13,7 @@ const defaultConfigs = {
     customClass: "default-layout",
     background: {
       type: "image", //image|video
-      url: "/default/background.png",
+      url: "/sharestories/default/background.png",
     },
 
     pageLayout: {
@@ -35,7 +35,7 @@ const defaultConfigs = {
     widget: {
       width: "298px",
       height: "729px",
-      background: "/default/widget-bg.png",
+      background: "/sharestories/default/widget-bg.png",
       borderRadius: "12px",
       widgetGif: {
         url: "",
@@ -43,7 +43,7 @@ const defaultConfigs = {
       },
       logo: {
         position: "bottom-right",
-        url: "/default/postal-logo.png",
+        url: "/sharestories/default/postal-logo.png",
         height: "40px",
       },
       mainHeadingText: "",
@@ -52,7 +52,7 @@ const defaultConfigs = {
 
       homeScreen: {
         videoBox: {
-          icon: "/default/camera.png",
+          icon: "/sharestories/default/camera.png",
           text: "",
           borderRadius: "18px",
           background: "",
@@ -63,7 +63,7 @@ const defaultConfigs = {
           fontSize: "",
         },
         audioBox: {
-          icon: "/default/mic.png",
+          icon: "/sharestories/default/mic.png",
           text: "",
           borderRadius: "18px",
           background: "",
@@ -219,14 +219,14 @@ const defaultConfigs = {
         subHeading: "",
         shareIcon: {
           borderRadius: "none",
-          url: "/default/share-icon.png",
+          url: "/sharestories/default/share-icon.png",
           bgColor: "transparent",
           height: "95px",
           display: true,
         },
         tweetIcon: {
           borderRadius: "none",
-          url: "/default/tweet-icon.png",
+          url: "/sharestories/default/tweet-icon.png",
           bgColor: "transparent",
           height: "61px",
         },
