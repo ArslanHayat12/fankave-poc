@@ -25,22 +25,6 @@ export const WidgetStyled = styled.section`
     z-index: 0;
   }
 
-  .not-supported-container {
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    z-index: 1;
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
-  }
-
-  .not-supported-container p {
-    background: #ffd000;
-    padding: 5px 20px;
-    margin: 0;
-    text-align: center;
-  }
-
   .widget-wrapper {
     background: #fff;
     position: relative;

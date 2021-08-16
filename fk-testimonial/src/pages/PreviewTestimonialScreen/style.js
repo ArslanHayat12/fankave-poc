@@ -245,14 +245,13 @@ export const PreviewScreenStyled = styled.article`
     height: fit-content;
   }
 
-  .waiting-text {
-    position: absolute;
-    bottom: 35px;
-    z-index: 10;
-  }
-
   .error {
     color: red;
     font-size: 14px;
+  }
+
+  .button-clicked {
+    background: #a7c0ec;
+    cursor: not-allowed;
   }
 `;

@@ -282,13 +282,13 @@ const PreviewTestimonialScreen = () => {
             className={`approve-button ${
               isApproveLoading ? "button-clicked" : ""
             }`}
-            onClick={() => generateRequestData(true)}
+            onClick={isApproveLoading ? "" : () => generateRequestData(true)}
           >
             {buttonText}
           </button>
         </article>
       </section>
-      {isApproveLoading && <p className="waiting-text">Processing...</p>}
+      {isApproveLoading && "Processing..."}
       {testimonialType === "audio" &&
         theme.default.widget.previewScreen.audio.audio.displayWave && (
           <SoundWave />

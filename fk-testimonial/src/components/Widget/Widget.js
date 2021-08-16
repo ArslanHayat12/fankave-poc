@@ -43,15 +43,7 @@ function Widget() {
   return (
     <TestimonialContext.Provider value={value}>
       <WidgetStyled className="main-container" id="fk-main-container">
-        {!(window.MediaRecorder || window.webkitMediaRecorder) && (
-          <div className="not-supported-container">
-            <p>
-              Unfortunately, this browser does not support the web technology
-              that powers this app. We recommend desktop Chrome or Firefox.
-            </p>
-          </div>
-        )}
-        <article className="widget-wrapper" id="fk-widget-wrapper">
+        <article className={`widget-wrapper `} id="fk-widget-wrapper">
           <img src={background} className="widget-bg" />
 
           {displayGif ? (

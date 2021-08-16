@@ -24,35 +24,61 @@ function PageWrapper(props) {
     } = themeConfigs;
 
     return (
-      <PageWrapperStyled className={customClass} id="fk-page-wrapper">
-        {type === "video" ? (
-          <BackgroundVideo url={backgroundUrl} />
-        ) : (
-          <img src={backgroundUrl} className="background-image" />
+      <>
+        {!(window.MediaRecorder || window.webkitMediaRecorder) && (
+          <>
+            <p className="not-supported-text">
+              Unfortunately, this browser does not support the web technology
+              that powers this app. We recommend desktop Chrome or Firefox.
+            </p>{" "}
+            <div className="not-supported-container"></div>
+          </>
         )}
-        {mainLogoUrl && (
-          <Header
-            mainLogoSrc={mainLogoUrl}
-            subLogoSrc={subLogoUrl}
-            position={position}
-          />
-        )}
-        {children}
-        {footerLogoUrl && (
-          <Footer src={logoUrl} position={footerLogoPosition} />
-        )}
-      </PageWrapperStyled>
+        <PageWrapperStyled className={customClass} id="fk-page-wrapper">
+          {type === "video" ? (
+            <BackgroundVideo url={backgroundUrl} />
+          ) : (
+            <img src={backgroundUrl} className="background-image" />
+          )}
+
+          {mainLogoUrl && (
+            <Header
+              mainLogoSrc={mainLogoUrl}
+              subLogoSrc={subLogoUrl}
+              position={position}
+            />
+          )}
+          {children}
+          {footerLogoUrl && (
+            <Footer src={logoUrl} position={footerLogoPosition} />
+          )}
+        </PageWrapperStyled>
+      </>
     );
   } else {
     return (
-      <PageWrapperStyled>
-        <BackgroundVideo
-          url={window.self.ctag === "cisco" ? "/sharestories/bg-video.mp4" : ""}
-        />
-        <Header />
-        {children}
-        <Footer />
-      </PageWrapperStyled>
+      <>
+        {!(window.MediaRecorder || window.webkitMediaRecorder) && (
+          <>
+            <p className="not-supported-text">
+              Unfortunately, this browser does not support the web technology
+              that powers this app. We recommend desktop Chrome or Firefox.
+            </p>{" "}
+            <div className="not-supported-container"></div>
+          </>
+        )}
+        <PageWrapperStyled>
+          <BackgroundVideo
+            url={
+              window.self.ctag === "cisco" ? "/sharestories/bg-video.mp4" : ""
+            }
+          />
+
+          <Header />
+          {children}
+          <Footer />
+        </PageWrapperStyled>
+      </>
     );
   }
 }
