@@ -198,7 +198,7 @@ export const VideoRecorder = () => {
           <div className="stop-button-container">
             <Tooltip content="Stop" placement="right">
               <button onClick={handleStopCaptureClick} className="stop-button">
-                <StopIcon />
+                <RecordingIcon />
               </button>
             </Tooltip>
           </div>

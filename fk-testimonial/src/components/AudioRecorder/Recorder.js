@@ -117,7 +117,7 @@ export const AudioRecorder = () => {
         {(status === "recording" || status === "paused") && (
           <CustomTooltip content="Stop" placement="bottom">
             <button className="stop-recording-button" onClick={handleStopClick}>
-              <StopIcon customClass="stop-icon" />
+              <RecordingIcon customClass="stop-icon" />
             </button>
           </CustomTooltip>
         )}

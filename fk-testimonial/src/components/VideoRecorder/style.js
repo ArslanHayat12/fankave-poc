@@ -44,23 +44,14 @@ export const VideoRecorderStyled = styled.article`
   }
 
   .stop-button-container .stop-button {
-    display: flex;
     border: none;
     background: transparent;
-    cursor: pointer;
-    border: 2px solid #35a4ff;
-    border-radius: 50%;
-    margin: 1px 6px;
-    height: 47px;
-    width: 47px;
-    align-items: center;
-    justify-content: center;
   }
 
-  .stop-button-container .stop-button svg {
-    width: 12px;
-    height: 12px;
-  }
+  // .stop-button-container .stop-button svg {
+  //   width: 12px;
+  //   height: 12px;
+  // }
 
   .video-play-icon path {
     fill: #e85775;

@@ -49,22 +49,6 @@ body {
   margin: 110px 0px 15px;
 }
 
-#fk-recorder-container .recording-button .play-icon g g {
-  stroke: rgb(53, 164, 255);
-}
-
-#fk-recorder-container .recording-button .play-icon g #Ellipse_2 {
-  fill: #ff0000;
-}
-
-#fk-recorder-container .stop-recording-button .stop-icon #Rectangle_20 {
-  fill: #ff0000;
-}
-
-#fk-record-screen .recorder-container .stop-recording-button {
-  border: 2px solid #35a4ff;
-}
-
 #fk-widget-wrapper {
   height: 72vh;
 }

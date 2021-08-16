@@ -31,16 +31,15 @@ export const RecordingIcon = (props) => {
       width="47"
       height="47"
       viewBox="0 0 47 47"
-      className={customClass}
     >
-      <g id="Group_30" data-name="Group 30" transform="translate(-727 -723)">
+      <g id="Group_60" data-name="Group 60" transform="translate(-727 -723)">
         <g
           id="Ellipse_1"
           data-name="Ellipse 1"
           transform="translate(727 723)"
           fill="transparent"
-          stroke="#35A4FF"
-          stroke-width="1.5"
+          stroke="#F55555"
+          stroke-width="1"
         >
           <circle cx="23.5" cy="23.5" r="23.5" stroke="none" />
           <circle cx="23.5" cy="23.5" r="23" fill="none" />
@@ -48,11 +47,11 @@ export const RecordingIcon = (props) => {
         <circle
           id="Ellipse_2"
           data-name="Ellipse 2"
-          cx="7.5"
-          cy="7.5"
-          r="7.5"
-          transform="translate(743 739)"
-          fill="#FF0000"
+          cx="20.5"
+          cy="20.5"
+          r="20.5"
+          transform="translate(730 726)"
+          fill="#F55555"
         />
       </g>
     </svg>
