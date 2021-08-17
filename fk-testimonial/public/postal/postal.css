@@ -44,11 +44,11 @@ body {
 }
 
 #fk-video-recorder-wrapper .video-wrapper {
-  height: 62vh;
+  height: 60vh;
 }
 
 #fk-video-recorder-wrapper .video-wrapper video {
-  height: 62vh;
+  height: 60vh;
 }
 
 #fk-record-screen .heading {
@@ -70,11 +70,11 @@ body {
 }
 
 #fk-preview-testimonial-screen .video-wrapper {
-  height: 56vh;
+  height: 50vh;
 }
 
 #fk-preview-testimonial-screen .video-wrapper video {
-  height: 56vh;
+  height: 50vh;
 }
 
 #fk-client-details-wrapper input {
@@ -174,10 +174,10 @@ body {
   }
 
   #fk-preview-testimonial-screen .video-wrapper {
-    height: 42vh;
+    height: 40vh;
   }
 
   #fk-preview-testimonial-screen .video-wrapper video {
-    height: 42vh;
+    height: 40vh;
   }
 }
