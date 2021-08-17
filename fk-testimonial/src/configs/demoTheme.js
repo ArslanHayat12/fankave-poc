@@ -42,9 +42,9 @@ const demoConfigs = {
         gif: false,
       },
       logo: {
-        position: "bottom-right",
-        url: `${pathName}/demo/postal-logo.png`,
-        height: "40px",
+        position: "",
+        url: ``,
+        height: "",
       },
       mainHeadingText: "",
       fontSize: "",
@@ -179,7 +179,7 @@ const demoConfigs = {
           height: "550",
           questionsList,
           button: {
-            display: true,
+            display: false,
             startRecording: {
               text: "Record",
             },
@@ -188,13 +188,13 @@ const demoConfigs = {
             },
           },
           icon: {
-            display: false,
+            display: true,
           },
         },
         audio: {
           questionsList,
           button: {
-            display: true,
+            display: false,
             startRecording: {
               text: "Record",
             },
@@ -203,7 +203,7 @@ const demoConfigs = {
             },
           },
           icon: {
-            display: false,
+            display: true,
           },
           micIcon: {
             stroke: "#86a6e3",

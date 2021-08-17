@@ -92,7 +92,8 @@ export const ThankyouScreenStyled = styled.section`
     padding:15px;
     box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.14);
     border: solid 2px rgba(218, 218, 218, 0.21);
-    border-radius:22px
+    border-radius:22px;
+    outline:none
   }
 
   .tweet-button {
