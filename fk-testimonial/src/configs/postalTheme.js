@@ -9,10 +9,11 @@ const questionsList = [
 let pathName = window.location.pathname.replace("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
+
 const postalConfigs = {
   default: {
-    topic: "beviemployee",
-    customClass: "default-layout",
+    topic: "postalcustomer",
+    customClass: "postal-layout",
     background: {
       type: "image", //image|video
       url: `${pathName}/postal/postal-bg.svg`,
