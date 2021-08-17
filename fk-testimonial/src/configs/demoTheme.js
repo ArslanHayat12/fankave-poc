@@ -1,23 +1,19 @@
 const questionsList = [
-  "What's your name, title, and company name?",
-  "What pain point did you look for Postal to solve?",
-  "Why did you choose Postal over a competitor?",
-  "How are you using Postal today?",
-  "How are you measuring success today?",
-  "How does Postal help you achieve your goals?",
+  "What is your name, title and company?",
+  "What challenge did you have?",
+  "What made this partner the obvious choice?",
+  "What were the results?",
 ];
 let pathName = window.location.pathname.replace("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
-console.log(pathName);
-
-const defaultConfigs = {
+const demoConfigs = {
   default: {
-    topic: "beviemployee",
-    customClass: "default-layout",
+    topic: "demostories",
+    customClass: "demo-layout",
     background: {
       type: "image", //image|video
-      url: `${pathName}/default/background.png`,
+      url: `${pathName}/demo/background.png`,
     },
 
     pageLayout: {
@@ -39,7 +35,7 @@ const defaultConfigs = {
     widget: {
       width: "298px",
       height: "729px",
-      background: `${pathName}/default/widget-bg.png`,
+      background: `${pathName}/demo/widget-bg.png`,
       borderRadius: "12px",
       widgetGif: {
         url: "",
@@ -47,7 +43,7 @@ const defaultConfigs = {
       },
       logo: {
         position: "bottom-right",
-        url: `${pathName}/default/postal-logo.png`,
+        url: `${pathName}/demo/postal-logo.png`,
         height: "40px",
       },
       mainHeadingText: "",
@@ -56,7 +52,7 @@ const defaultConfigs = {
 
       homeScreen: {
         videoBox: {
-          icon: `${pathName}/default/camera.png`,
+          icon: `${pathName}/demo/camera.png`,
           text: "",
           borderRadius: "18px",
           background: "",
@@ -67,7 +63,7 @@ const defaultConfigs = {
           fontSize: "",
         },
         audioBox: {
-          icon: `${pathName}/default/mic.png`,
+          icon: `${pathName}/demo/mic.png`,
           text: "",
           borderRadius: "18px",
           background: "",
@@ -223,14 +219,14 @@ const defaultConfigs = {
         subHeading: "",
         shareIcon: {
           borderRadius: "none",
-          url: `${pathName}/default/share-icon.png`,
+          url: `${pathName}/demo/share-icon.png`,
           bgColor: "transparent",
           height: "95px",
           display: true,
         },
         tweetIcon: {
           borderRadius: "none",
-          url: `${pathName}/default/tweet-icon.png`,
+          url: `${pathName}/demo/tweet-icon.png`,
           bgColor: "transparent",
           height: "61px",
         },
@@ -269,4 +265,4 @@ const defaultConfigs = {
   },
 };
 
-export default defaultConfigs;
+export default demoConfigs;

@@ -1,19 +1,15 @@
 const questionsList = [
-  "What's your name, title, and company name?",
-  "What pain point did you look for Postal to solve?",
-  "Why did you choose Postal over a competitor?",
-  "How are you using Postal today?",
-  "How are you measuring success today?",
-  "How does Postal help you achieve your goals?"
+  "What is your name, title and company?",
+  "What challenge did you have?",
+  "What made this partner the obvious choice?",
+  "What were the results?",
 ];
 let pathName = window.location.pathname.replace("/", "")
 pathName = pathName ? `/${pathName}` : "";
 
-console.log(pathName)
-
 const defaultConfigs = {
   default: {
-    topic: "beviemployee",
+    topic: "demostories",
     customClass: "default-layout",
     background: {
       type: "image", //image|video

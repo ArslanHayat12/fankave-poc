@@ -9,15 +9,14 @@ const questionsList = [
 let pathName = window.location.pathname.replace("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
-console.log(pathName);
 
 const defaultConfigs = {
   default: {
-    topic: "beviemployee",
-    customClass: "default-layout",
+    topic: "postalcustomer",
+    customClass: "postal-layout",
     background: {
       type: "image", //image|video
-      url: `${pathName}/default/background.png`,
+      url: `${pathName}/postal/background.png`,
     },
 
     pageLayout: {
@@ -39,7 +38,7 @@ const defaultConfigs = {
     widget: {
       width: "298px",
       height: "729px",
-      background: `${pathName}/default/widget-bg.png`,
+      background: `${pathName}/postal/widget-bg.png`,
       borderRadius: "12px",
       widgetGif: {
         url: "",
@@ -47,7 +46,7 @@ const defaultConfigs = {
       },
       logo: {
         position: "bottom-right",
-        url: `${pathName}/default/postal-logo.png`,
+        url: `${pathName}/postal/postal-logo.png`,
         height: "40px",
       },
       mainHeadingText: "",
@@ -56,7 +55,7 @@ const defaultConfigs = {
 
       homeScreen: {
         videoBox: {
-          icon: `${pathName}/default/camera.png`,
+          icon: `${pathName}/postal/camera.png`,
           text: "",
           borderRadius: "18px",
           background: "",
@@ -67,7 +66,7 @@ const defaultConfigs = {
           fontSize: "",
         },
         audioBox: {
-          icon: `${pathName}/default/mic.png`,
+          icon: `${pathName}/postal/mic.png`,
           text: "",
           borderRadius: "18px",
           background: "",
@@ -223,14 +222,14 @@ const defaultConfigs = {
         subHeading: "",
         shareIcon: {
           borderRadius: "none",
-          url: `${pathName}/default/share-icon.png`,
+          url: `${pathName}/postal/share-icon.png`,
           bgColor: "transparent",
           height: "95px",
           display: true,
         },
         tweetIcon: {
           borderRadius: "none",
-          url: `${pathName}/default/tweet-icon.png`,
+          url: `${pathName}/postal/tweet-icon.png`,
           bgColor: "transparent",
           height: "61px",
         },
