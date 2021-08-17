@@ -4,7 +4,7 @@ const questionsList = [
   "What made this partner the obvious choice?",
   "What were the results?",
 ];
-let pathName = window.location.pathname.replace("/", "")
+let pathName = window.location.pathname.replace("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
 const defaultConfigs = {
@@ -42,9 +42,9 @@ const defaultConfigs = {
         gif: false,
       },
       logo: {
-        position: "bottom-right",
-        url: `${pathName}/default/postal-logo.png`,
-        height: "40px",
+        position: "",
+        url: ``,
+        height: "",
       },
       mainHeadingText: "",
       fontSize: "",
@@ -179,7 +179,7 @@ const defaultConfigs = {
           height: "550",
           questionsList,
           button: {
-            display: true,
+            display: false,
             startRecording: {
               text: "Record",
             },
@@ -188,13 +188,13 @@ const defaultConfigs = {
             },
           },
           icon: {
-            display: false,
+            display: true,
           },
         },
         audio: {
           questionsList,
           button: {
-            display: true,
+            display: false,
             startRecording: {
               text: "Record",
             },
@@ -203,7 +203,7 @@ const defaultConfigs = {
             },
           },
           icon: {
-            display: false,
+            display: true,
           },
           micIcon: {
             stroke: "#86a6e3",
