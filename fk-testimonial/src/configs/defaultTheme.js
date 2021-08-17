@@ -4,12 +4,12 @@ const questionsList = [
   "Why did you choose Postal over a competitor?",
   "How are you using Postal today?",
   "How are you measuring success today?",
-  "How does Postal help you achieve your goals?"
+  "How does Postal help you achieve your goals?",
 ];
-let pathName = window.location.pathname.replace("/", "")
+let pathName = window.location.pathname.replace("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
-console.log(pathName)
+console.log(pathName);
 
 const defaultConfigs = {
   default: {
@@ -17,16 +17,16 @@ const defaultConfigs = {
     customClass: "default-layout",
     background: {
       type: "image", //image|video
-      url: `${pathName}/default/background.png`,
+      url: "/default/postal-background.svg",
     },
 
     pageLayout: {
       header: {
         position: "center",
-        mainLogoUrl: "",
+        mainLogoUrl: "/default/postal-logo-white.png",
         subLogoUrl: "",
-        mainLogoHeight: "45px",
-        subLogoHeight: "22px",
+        mainLogoHeight: "40px",
+        subLogoHeight: "",
         mainLogoMargin: "0 0 27px 0",
         subLogoMargin: "",
       },
@@ -39,7 +39,7 @@ const defaultConfigs = {
     widget: {
       width: "298px",
       height: "729px",
-      background: `${pathName}/default/widget-bg.png`,
+      background: "/default/widget-bg.png",
       borderRadius: "12px",
       widgetGif: {
         url: "",
@@ -47,8 +47,8 @@ const defaultConfigs = {
       },
       logo: {
         position: "bottom-right",
-        url: `${pathName}/default/postal-logo.png`,
-        height: "40px",
+        url: "",
+        height: "",
       },
       mainHeadingText: "",
       fontSize: "",
@@ -56,7 +56,7 @@ const defaultConfigs = {
 
       homeScreen: {
         videoBox: {
-          icon: `${pathName}/default/camera.png`,
+          icon: "/default/camera.png",
           text: "",
           borderRadius: "18px",
           background: "",
@@ -67,7 +67,7 @@ const defaultConfigs = {
           fontSize: "",
         },
         audioBox: {
-          icon: `${pathName}/default/mic.png`,
+          icon: "/default/mic.png",
           text: "",
           borderRadius: "18px",
           background: "",
@@ -223,14 +223,14 @@ const defaultConfigs = {
         subHeading: "",
         shareIcon: {
           borderRadius: "none",
-          url: `${pathName}/default/share-icon.png`,
+          url: "/default/share-icon.png",
           bgColor: "transparent",
           height: "95px",
           display: true,
         },
         tweetIcon: {
           borderRadius: "none",
-          url: `${pathName}/default/tweet-icon.png`,
+          url: "/default/tweet-icon.png",
           bgColor: "transparent",
           height: "61px",
         },

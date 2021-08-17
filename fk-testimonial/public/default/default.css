@@ -4,6 +4,10 @@ body {
   background-position: center; */
 }
 
+#fk-page-wrapper .background-image {
+  object-fit: cover;
+}
+
 #fk-page-wrapper {
   display: flex;
   justify-content: center;
