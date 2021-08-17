@@ -12,7 +12,7 @@ export default function Routes() {
     return (
         <Router>
             <Switch>
-                <Route path="/sharestories/users">
+                <Route path="/testimonials/users">
                     <Users />
                 </Route>
                 <Route path="/">
@@ -26,7 +26,7 @@ export default function Routes() {
 
 
 waitForAddedNode({
-    id: 'sharestories',
+    id: 'testimonials',
     recursive: false,
     done: (element) => {
         ReactDOM.render(<Routes />, element)

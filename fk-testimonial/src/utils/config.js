@@ -30,7 +30,7 @@ export const waitForAddedNode = (params) => {
 
 const getTransformedUserConfig = (widget = '', windowUserConfig) => {
     switch (widget) {
-        case 'sharestories':
+        case 'testimonials':
             return { ...windowUserConfig, ctag: windowUserConfig.ctag || 'olympics' }
         default:
             return windowUserConfig
