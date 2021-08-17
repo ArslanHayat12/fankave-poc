@@ -30,7 +30,7 @@ body {
   background-color: #fff;
   border: none;
   box-shadow: rgb(189 177 177) 1px 1px 5px;
-  height: 70vh;
+  height: 76vh;
   border: 1px solid #ccc;
 }
 
@@ -44,11 +44,11 @@ body {
 }
 
 #fk-video-recorder-wrapper .video-wrapper {
-  height: 55vh;
+  height: 62vh;
 }
 
 #fk-video-recorder-wrapper .video-wrapper video {
-  height: 55vh;
+  height: 62vh;
 }
 
 #fk-record-screen .heading {
@@ -70,11 +70,11 @@ body {
 }
 
 #fk-preview-testimonial-screen .video-wrapper {
-  height: 33vh;
+  height: 56vh;
 }
 
 #fk-preview-testimonial-screen .video-wrapper video {
-  height: 33vh;
+  height: 56vh;
 }
 
 #fk-client-details-wrapper input {
@@ -170,5 +170,13 @@ body {
 
   #fk-recorder-container .stop-recording-button svg {
     height: 20px;
+  }
+
+  #fk-preview-testimonial-screen .video-wrapper {
+    height: 42vh;
+  }
+
+  #fk-preview-testimonial-screen .video-wrapper video {
+    height: 42vh;
   }
 }
