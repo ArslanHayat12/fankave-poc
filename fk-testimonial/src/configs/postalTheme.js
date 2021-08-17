@@ -9,7 +9,6 @@ const questionsList = [
 let pathName = window.location.pathname.replace("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
-
 const postalConfigs = {
   default: {
     topic: "postalcustomer",
@@ -38,7 +37,7 @@ const postalConfigs = {
     widget: {
       width: "298px",
       height: "729px",
-      background: `${pathName}/postal/widget-bg.png`,
+      // background: ``,
       borderRadius: "12px",
       widgetGif: {
         url: "",
@@ -182,7 +181,7 @@ const postalConfigs = {
           height: "550",
           questionsList,
           button: {
-            display: true,
+            display: false,
             startRecording: {
               text: "Record",
             },
@@ -191,13 +190,13 @@ const postalConfigs = {
             },
           },
           icon: {
-            display: false,
+            display: true,
           },
         },
         audio: {
           questionsList,
           button: {
-            display: true,
+            display: false,
             startRecording: {
               text: "Record",
             },
@@ -206,7 +205,7 @@ const postalConfigs = {
             },
           },
           icon: {
-            display: false,
+            display: true,
           },
           micIcon: {
             stroke: "#86a6e3",
@@ -225,7 +224,7 @@ const postalConfigs = {
           url: `${pathName}/postal/share-icon.png`,
           bgColor: "transparent",
           height: "95px",
-          display: true,
+          display: false,
         },
         tweetIcon: {
           borderRadius: "none",

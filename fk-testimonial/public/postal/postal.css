@@ -8,18 +8,34 @@ body {
   object-fit: cover;
 }
 
+#fk-header {
+  padding: 0;
+}
+
+#fk-header .main-logo {
+  z-index: 1;
+  height: 60px;
+  margin: 0 0 10px 0;
+}
+
 #fk-page-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  flex-direction: column;
 }
 
 #fk-widget-wrapper {
   background-color: #fff;
   border: none;
-  box-shadow: none;
-  height: 79vh;
+  box-shadow: rgb(189 177 177) 1px 1px 5px;
+  height: 70vh;
+  border: 1px solid #ccc;
+}
+
+#fk-widget-wrapper .widget-bg {
+  display: none;
 }
 
 #fk-home-screen {
@@ -28,11 +44,11 @@ body {
 }
 
 #fk-video-recorder-wrapper .video-wrapper {
-  height: 52vh;
+  height: 55vh;
 }
 
 #fk-video-recorder-wrapper .video-wrapper video {
-  height: 52vh;
+  height: 55vh;
 }
 
 #fk-record-screen .heading {
@@ -75,11 +91,6 @@ body {
   font-weight: normal;
 }
 
-#fk-card-wrapper {
-  background-color: #eff7ff;
-  border: none;
-}
-
 #fk-card-wrapper .card-description {
   font-weight: 500;
 }
@@ -107,7 +118,7 @@ body {
 
 @media (max-width: 325px) {
   #fk-widget-wrapper {
-    height: 83vh;
+    height: 65vh;
     width: unset;
   }
 
@@ -133,12 +144,31 @@ body {
   }
 
   #fk-recorder-container .record-visualizer {
-    top: -6%;
+    top: 0%;
     left: unset;
-    right: -25px;
+    right: 8px;
+    height: 200px;
   }
 
   #fk-widget-wrapper .timer {
-    z-index: 1;
+    z-index: 18;
+    margin: 23px 0 15px;
+  }
+
+  #fk-video-recorder-wrapper .video-wrapper video {
+    height: 49vh;
+  }
+
+  #fk-video-recorder-wrapper .video-wrapper {
+    height: 49vh;
+  }
+
+  #fk-recorder-container .recording-button svg {
+    height: 20px;
+    width: 20px;
+  }
+
+  #fk-recorder-container .stop-recording-button svg {
+    height: 20px;
   }
 }
