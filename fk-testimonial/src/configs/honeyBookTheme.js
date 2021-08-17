@@ -1,30 +1,30 @@
-import React from "react";
-
-import { TickIcon } from "../assets";
-
 const questionsList = [
-  "What is your name and title?",
-  "What team do you report into?",
-  "How long have you been working at Bevi?",
-  "What excites you most about working at Bevi every day?",
-  "How would you describe the Bevi company culture?",
-  "Why would you recommend Bevi as a great place to work?",
+  "What's your name, title, and company name?",
+  "What pain point did you look for Postal to solve?",
+  "Why did you choose Postal over a competitor?",
+  "How are you using Postal today?",
+  "How are you measuring success today?",
+  "How does Postal help you achieve your goals?",
 ];
+let pathName = window.location.pathname.replace("/", "");
+pathName = pathName ? `/${pathName}` : "";
 
-const beviBookConfigs = {
+console.log(pathName);
+
+const defaultConfigs = {
   default: {
     topic: "beviemployee",
-    customClass: "bevi-layout",
+    customClass: "default-layout",
     background: {
       type: "image", //image|video
-      url: "/bevi/background.png",
+      url: `${pathName}/default/background.png`,
     },
 
     pageLayout: {
       header: {
         position: "center",
-        mainLogoUrl: "/bevi/main-logo.png",
-        subLogoUrl: "/bevi/sub-logo.png",
+        mainLogoUrl: "",
+        subLogoUrl: "",
         mainLogoHeight: "45px",
         subLogoHeight: "22px",
         mainLogoMargin: "0 0 27px 0",
@@ -39,15 +39,15 @@ const beviBookConfigs = {
     widget: {
       width: "298px",
       height: "729px",
-      background: "/bevi/widget-bg.png",
+      background: `${pathName}/default/widget-bg.png`,
       borderRadius: "12px",
       widgetGif: {
-        url: "/bevi/bevi-gif.gif",
-        gif: true,
+        url: "",
+        gif: false,
       },
       logo: {
         position: "bottom-right",
-        url: "/bevi/footer-logo.png",
+        url: `${pathName}/default/postal-logo.png`,
         height: "40px",
       },
       mainHeadingText: "",
@@ -56,7 +56,7 @@ const beviBookConfigs = {
 
       homeScreen: {
         videoBox: {
-          icon: "/bevi/camera-icon.png",
+          icon: `${pathName}/default/camera.png`,
           text: "",
           borderRadius: "18px",
           background: "",
@@ -67,7 +67,7 @@ const beviBookConfigs = {
           fontSize: "",
         },
         audioBox: {
-          icon: "/bevi/mic-icon.png",
+          icon: `${pathName}/default/mic.png`,
           text: "",
           borderRadius: "18px",
           background: "",
@@ -89,13 +89,11 @@ const beviBookConfigs = {
           input: {
             placeholders: {
               name: "Name (optional)",
-              // email: "Mail id",
-              // company: "Company",
-              fontSize: "17px",
+              fontSize: "12px",
               fontWeight: "500",
-              fontColor: "#2d2d2d",
-              boxShadow: "0px 1px 2px 0 rgba(0, 0, 0, 0.14)",
-              borderRadius: "24.5px",
+              fontColor: "#000",
+              boxShadow: "",
+              borderRadius: "20px",
               border: "solid 2px rgba(218, 218, 218, 0.21)",
             },
 
@@ -112,14 +110,14 @@ const beviBookConfigs = {
           button: {
             backgroundColor: "#5089ed",
             text: "Approve",
-            fontSize: "17px",
+            fontSize: "14px",
             fontWeight: "500",
             color: "#fff",
             textTransform: "uppercase",
-            borderRadius: "50%",
-            height: "30px",
-            width: "30px",
-            placement: "left",
+            borderRadius: "40px",
+            height: "33px",
+            width: "110px",
+            placement: "center",
           },
 
           bgHeight: "100vh",
@@ -134,24 +132,22 @@ const beviBookConfigs = {
           input: {
             placeholders: {
               name: "Name (optional)",
-              // email: "Mail id",
-              // company: "Company",
-              fontSize: "17px",
+              fontSize: "12px",
               fontColor: "#2d2d2d",
-              boxShadow: "0px 1px 2px 0 rgba(0, 0, 0, 0.14)",
-              borderRadius: "24.5px",
+              boxShadow: "",
+              borderRadius: "20px",
             },
             button: {
-              backgroundColor: "#5089ed",
+              backgroundColor: "#4dbbe5",
               text: "Approve",
-              fontSize: "17px",
+              fontSize: "14px",
               fontWeight: "500",
               color: "#fff",
               textTransform: "uppercase",
               borderRadius: "40px",
-              height: "130px",
-              width: "20px",
-              placement: "left",
+              height: "33px",
+              width: "110px",
+              placement: "center",
             },
 
             icon: "",
@@ -165,19 +161,19 @@ const beviBookConfigs = {
             },
           },
           button: {
-            backgroundColor: "",
-            text: "",
-            fontSize: "",
-            fontWeight: "",
-            color: "",
-            textTransform: "",
-            borderRadius: "",
-            height: "",
-            width: "",
-            placement: "",
+            backgroundColor: "#5089ed",
+            text: "Approve",
+            fontSize: "14px",
+            fontWeight: "500",
+            color: "#fff",
+            textTransform: "uppercase",
+            borderRadius: "40px",
+            height: "33px",
+            width: "110px",
+            placement: "center",
           },
           card: {
-            icon: "/bevi/mic-icon-white.png",
+            icon: "default/mic-icon-white.png",
           },
         },
       },
@@ -187,7 +183,7 @@ const beviBookConfigs = {
           height: "550",
           questionsList,
           button: {
-            display: false,
+            display: true,
             startRecording: {
               text: "Record",
             },
@@ -196,13 +192,13 @@ const beviBookConfigs = {
             },
           },
           icon: {
-            display: true,
+            display: false,
           },
         },
         audio: {
           questionsList,
           button: {
-            display: false,
+            display: true,
             startRecording: {
               text: "Record",
             },
@@ -211,7 +207,7 @@ const beviBookConfigs = {
             },
           },
           icon: {
-            display: true,
+            display: false,
           },
           micIcon: {
             stroke: "#86a6e3",
@@ -227,22 +223,22 @@ const beviBookConfigs = {
         subHeading: "",
         shareIcon: {
           borderRadius: "none",
-          url: "/bevi/share-icon.png",
+          url: `${pathName}/default/share-icon.png`,
           bgColor: "transparent",
           height: "95px",
-          display: false,
+          display: true,
         },
         tweetIcon: {
           borderRadius: "none",
-          url: "/bevi/tweet-icon.png",
+          url: `${pathName}/default/tweet-icon.png`,
           bgColor: "transparent",
           height: "61px",
         },
         twitterButton: {
           bgColor: "#5089ed",
           borderRadius: "22px",
-          display: false,
-          placement: "left",
+          display: true,
+          placement: "center",
         },
         linkedinButton: {
           bgColor: "#5089ed",
@@ -273,4 +269,4 @@ const beviBookConfigs = {
   },
 };
 
-export default beviBookConfigs;
+export default defaultConfigs;
