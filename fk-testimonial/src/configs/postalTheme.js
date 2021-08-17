@@ -6,7 +6,7 @@ const questionsList = [
   "How are you measuring success today?",
   "How does Postal help you achieve your goals?",
 ];
-let pathName = window.location.pathname.replace("/", "");
+let pathName = window.location.pathname.replaceAll("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
 

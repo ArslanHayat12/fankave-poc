@@ -1,4 +1,4 @@
-let pathName = window.location.pathname.replace("/", "")
+let pathName = window.location.pathname.replaceAll("/", "")
 pathName = pathName ? `/${pathName}` : "";
 
 const questionsList = [

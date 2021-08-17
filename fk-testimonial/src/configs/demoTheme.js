@@ -4,7 +4,7 @@ const questionsList = [
   "What made this partner the obvious choice?",
   "What were the results?",
 ];
-let pathName = window.location.pathname.replace("/", "");
+let pathName = window.location.pathname.replaceAll("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
 const demoConfigs = {

@@ -12,7 +12,7 @@ export default function Routes() {
     return (
         <Router>
             <Switch>
-                <Route path="/sharestories/users">
+                <Route path="/api/users">
                     <Users />
                 </Route>
                 <Route path="/">
