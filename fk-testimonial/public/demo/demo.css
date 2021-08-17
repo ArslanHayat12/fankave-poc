@@ -15,7 +15,7 @@ body {
   background-color: #fff;
   border: none;
   box-shadow: none;
-  height: 79vh;
+  height: 89vh;
 }
 
 #fk-home-screen {
@@ -24,11 +24,11 @@ body {
 }
 
 #fk-video-recorder-wrapper .video-wrapper {
-  height: 64vh;
+  height: 61vh;
 }
 
 #fk-video-recorder-wrapper .video-wrapper video {
-  height: 64vh;
+  height: 61vh;
 }
 
 #fk-record-screen .heading {
@@ -113,11 +113,11 @@ body {
   }
 
   #fk-record-screen .heading {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   #fk-preview-testimonial-screen .heading {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   #fk-question-card .questions {
@@ -136,5 +136,21 @@ body {
 
   #fk-widget-wrapper .timer {
     z-index: 1;
+  }
+
+  #fk-video-recorder-wrapper .video-wrapper {
+    height: 52vh;
+  }
+
+  #fk-video-recorder-wrapper .video-wrapper video {
+    height: 52vh;
+  }
+
+  #fk-preview-testimonial-screen .video-wrapper {
+    height: 49vh;
+  }
+
+  #fk-preview-testimonial-screen .video-wrapper video {
+    height: 49vh;
   }
 }

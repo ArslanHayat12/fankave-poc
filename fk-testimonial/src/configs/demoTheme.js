@@ -43,8 +43,8 @@ const demoConfigs = {
       },
       logo: {
         position: "",
-        url: ``,
-        height: "",
+        url: `/demo/logo.png`,
+        height: "40px",
       },
       mainHeadingText: "",
       fontSize: "",
