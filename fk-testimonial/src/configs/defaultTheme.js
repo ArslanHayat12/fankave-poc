@@ -6,6 +6,10 @@ const questionsList = [
   "How are you measuring success today?",
   "How does Postal help you achieve your goals?"
 ];
+let pathName = window.location.pathname.replace("/", "")
+pathName = pathName ? `/${pathName}` : "";
+
+console.log(pathName)
 
 const defaultConfigs = {
   default: {
@@ -13,7 +17,7 @@ const defaultConfigs = {
     customClass: "default-layout",
     background: {
       type: "image", //image|video
-      url: "/sharestories/default/background.png",
+      url: `${pathName}/default/background.png`,
     },
 
     pageLayout: {
@@ -35,7 +39,7 @@ const defaultConfigs = {
     widget: {
       width: "298px",
       height: "729px",
-      background: "/sharestories/default/widget-bg.png",
+      background: `${pathName}/default/widget-bg.png`,
       borderRadius: "12px",
       widgetGif: {
         url: "",
@@ -43,7 +47,7 @@ const defaultConfigs = {
       },
       logo: {
         position: "bottom-right",
-        url: "/sharestories/default/postal-logo.png",
+        url: `${pathName}/default/postal-logo.png`,
         height: "40px",
       },
       mainHeadingText: "",
@@ -52,7 +56,7 @@ const defaultConfigs = {
 
       homeScreen: {
         videoBox: {
-          icon: "/sharestories/default/camera.png",
+          icon: `${pathName}/default/camera.png`,
           text: "",
           borderRadius: "18px",
           background: "",
@@ -63,7 +67,7 @@ const defaultConfigs = {
           fontSize: "",
         },
         audioBox: {
-          icon: "/sharestories/default/mic.png",
+          icon: `${pathName}/default/mic.png`,
           text: "",
           borderRadius: "18px",
           background: "",
@@ -219,14 +223,14 @@ const defaultConfigs = {
         subHeading: "",
         shareIcon: {
           borderRadius: "none",
-          url: "/sharestories/default/share-icon.png",
+          url: `${pathName}/default/share-icon.png`,
           bgColor: "transparent",
           height: "95px",
           display: true,
         },
         tweetIcon: {
           borderRadius: "none",
-          url: "/sharestories/default/tweet-icon.png",
+          url: `${pathName}/default/tweet-icon.png`,
           bgColor: "transparent",
           height: "61px",
         },
