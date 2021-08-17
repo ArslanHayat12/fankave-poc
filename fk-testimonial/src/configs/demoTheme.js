@@ -43,7 +43,7 @@ const demoConfigs = {
       },
       logo: {
         position: "",
-        url: `/demo/logo.png`,
+        url: `${pathName}/demo/logo.png`,
         height: "40px",
       },
       mainHeadingText: "",
