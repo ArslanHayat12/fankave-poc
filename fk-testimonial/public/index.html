@@ -51,7 +51,7 @@
         title: "Dev",
       },
       localhost: {
-        ctag: "default",
+        ctag: "postal",
         // origin is the url where web-app project is running e.g localhost:3000
         origin: "http://localhost:5000",
         title: "Localhost",
@@ -80,7 +80,7 @@
       link.setAttribute("rel", "stylesheet");
       link.setAttribute(
         "href",
-        `/sharestories/${window.self.ctag}/${window.self.ctag}.css`
+        `/testimonials/${window.self.ctag}/${window.self.ctag}.css`
       );
 
       // Append to the `head` element
@@ -91,8 +91,8 @@
   </script>
 
   <div id="root"></div>
-  <div id="sharestories"></div>
-  <script src="/sharestories/sharestories.js"></script>
+  <div id="testimonials"></div>
+  <script src="/testimonials/testimonials.js"></script>
 </body>
 
 </html>

@@ -7,22 +7,23 @@ const questionsList = [
 let pathName = window.location.pathname.replaceAll("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
+
 const defaultConfigs = {
   default: {
     topic: "demostories",
     customClass: "default-layout",
     background: {
       type: "image", //image|video
-      url: `${pathName}/default/background.png`,
+      url: `${pathName}/default/postal-background.svg`,
     },
 
     pageLayout: {
       header: {
         position: "center",
-        mainLogoUrl: "",
+        mainLogoUrl: `${pathName}/default/postal-logo-white.png`,
         subLogoUrl: "",
-        mainLogoHeight: "45px",
-        subLogoHeight: "22px",
+        mainLogoHeight: "40px",
+        subLogoHeight: "",
         mainLogoMargin: "0 0 27px 0",
         subLogoMargin: "",
       },
@@ -42,8 +43,8 @@ const defaultConfigs = {
         gif: false,
       },
       logo: {
-        position: "",
-        url: ``,
+        position: "bottom-right",
+        url: "",
         height: "",
       },
       mainHeadingText: "",
@@ -169,7 +170,7 @@ const defaultConfigs = {
             placement: "center",
           },
           card: {
-            icon: "default/mic-icon-white.png",
+            icon: `${pathName}/default/mic-icon-white.png`,
           },
         },
       },

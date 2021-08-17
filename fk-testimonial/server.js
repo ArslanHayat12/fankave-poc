@@ -44,8 +44,8 @@ app.use(passport.session());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "static")));
 app.use(express.static(path.join(__dirname, "build", "static")));
-app.use("/sharestories", express.static(path.join(__dirname, "build", "static")));
-// app.use('/api/*', express.static(path.join(__dirname, "build", "static")));
+app.use("/testimonials", express.static(path.join(__dirname, "build", "static")));
+// app.use('/testimonials/*', express.static(path.join(__dirname, "build", "static")));
 
 //Strategies
 passport.use(new Strategy({

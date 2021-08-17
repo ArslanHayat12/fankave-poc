@@ -1,6 +1,6 @@
 const passport = require('passport');
 const testimonialController = require('../controllers/testimonial')
-const sharestorieservice = require('../services/testimonial')
+const testimonialservice = require('../services/testimonial')
 module.exports = function (app) {
 
     app.get('/api/twitter/login', passport.authenticate('twitter'))
@@ -11,12 +11,12 @@ module.exports = function (app) {
         res.redirect('/api/users?token=' + req.user.token + '&tokenSecret=' + req.user.tokenSecret)
     })
 
-    app.post('/api/tweet', sharestorieservice().uploadFile(), testimonialController.sendTweet)
+    app.post('/api/tweet', testimonialservice().uploadFile(), testimonialController.sendTweet)
 
     app.get("/ping", testimonialController.ping);
 
     app.get("/", testimonialController.initialRedirect);
-    app.get("/sharestories", testimonialController.initialRedirect);
+    app.get("/testimonials", testimonialController.initialRedirect);
     app.get("/api/get-token", testimonialController.getToken);
     app.get("/api/get-linkedin-token", testimonialController.getLinkedInToken);
 
@@ -29,6 +29,6 @@ module.exports = function (app) {
         res.redirect('/api/users?token=' + req.user.token + '&id=' + req.user.id)
     });
 
-    app.post('/api/share-on-linkedin', sharestorieservice().uploadFile(), testimonialController.sendTextMessageToLinkedIn)
+    app.post('/api/share-on-linkedin', testimonialservice().uploadFile(), testimonialController.sendTextMessageToLinkedIn)
 
 };

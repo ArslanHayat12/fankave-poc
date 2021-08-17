@@ -9,23 +9,22 @@ const questionsList = [
 let pathName = window.location.pathname.replaceAll("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
-
-const defaultConfigs = {
+const postalConfigs = {
   default: {
     topic: "postalcustomer",
     customClass: "postal-layout",
     background: {
       type: "image", //image|video
-      url: `${pathName}/postal/background.png`,
+      url: `${pathName}/postal/postal-bg.svg`,
     },
 
     pageLayout: {
       header: {
         position: "center",
-        mainLogoUrl: "",
+        mainLogoUrl: `${pathName}/postal/postal-logo-white.png`,
         subLogoUrl: "",
-        mainLogoHeight: "45px",
-        subLogoHeight: "22px",
+        mainLogoHeight: "40px",
+        subLogoHeight: "",
         mainLogoMargin: "0 0 27px 0",
         subLogoMargin: "",
       },
@@ -38,7 +37,7 @@ const defaultConfigs = {
     widget: {
       width: "298px",
       height: "729px",
-      background: `${pathName}/postal/widget-bg.png`,
+      // background: ``,
       borderRadius: "12px",
       widgetGif: {
         url: "",
@@ -46,8 +45,8 @@ const defaultConfigs = {
       },
       logo: {
         position: "bottom-right",
-        url: `${pathName}/postal/postal-logo.png`,
-        height: "40px",
+        url: "",
+        height: "",
       },
       mainHeadingText: "",
       fontSize: "",
@@ -172,7 +171,7 @@ const defaultConfigs = {
             placement: "center",
           },
           card: {
-            icon: "default/mic-icon-white.png",
+            icon: `${pathName}/postal/mic-icon-white.png`,
           },
         },
       },
@@ -182,7 +181,7 @@ const defaultConfigs = {
           height: "550",
           questionsList,
           button: {
-            display: true,
+            display: false,
             startRecording: {
               text: "Record",
             },
@@ -191,13 +190,13 @@ const defaultConfigs = {
             },
           },
           icon: {
-            display: false,
+            display: true,
           },
         },
         audio: {
           questionsList,
           button: {
-            display: true,
+            display: false,
             startRecording: {
               text: "Record",
             },
@@ -206,7 +205,7 @@ const defaultConfigs = {
             },
           },
           icon: {
-            display: false,
+            display: true,
           },
           micIcon: {
             stroke: "#86a6e3",
@@ -225,7 +224,7 @@ const defaultConfigs = {
           url: `${pathName}/postal/share-icon.png`,
           bgColor: "transparent",
           height: "95px",
-          display: true,
+          display: false,
         },
         tweetIcon: {
           borderRadius: "none",
@@ -268,4 +267,4 @@ const defaultConfigs = {
   },
 };
 
-export default defaultConfigs;
+export default postalConfigs;

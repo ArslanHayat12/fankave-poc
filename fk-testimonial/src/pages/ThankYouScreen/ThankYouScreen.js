@@ -16,7 +16,7 @@ export const ThankYouScreen = () => {
   const [isTweetUploaded, setIsTweetUploaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [windowTab, setWindowTab] = useState(null);
-  const { origin } = getUserConfig("sharestories");
+  const { origin } = getUserConfig("testimonials");
   const {
     state: { url, type: testimonialType },
     dispatch,

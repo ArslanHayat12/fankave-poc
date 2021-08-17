@@ -7,7 +7,7 @@ module.exports = (_, args) => ({
     output: {
         ...(args.mode === "production"
             ? {
-                publicPath: `${process.env.WEB_APP_HOST}/sharestories/`,
+                publicPath: `${process.env.WEB_APP_HOST}/testimonials/`,
                 path: path.resolve(__dirname, "build/static"),
             }
             : {
@@ -19,7 +19,7 @@ module.exports = (_, args) => ({
     entry: {
         testimonialPoc: {
             import: "./src/Routes.js",
-            filename: "sharestories.js",
+            filename: "testimonials.js",
         },
     },
     resolve: {

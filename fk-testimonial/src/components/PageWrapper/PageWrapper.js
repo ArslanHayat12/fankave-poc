@@ -70,7 +70,7 @@ function PageWrapper(props) {
         <PageWrapperStyled>
           <BackgroundVideo
             url={
-              window.self.ctag === "cisco" ? "/sharestories/bg-video.mp4" : ""
+              window.self.ctag === "cisco" ? "/testimonials/bg-video.mp4" : ""
             }
           />
 
