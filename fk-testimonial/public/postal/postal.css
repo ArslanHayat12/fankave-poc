@@ -106,6 +106,10 @@ body {
   font-size: 20px;
 }
 
+.fk-client-details-wrapper input {
+  box-shadow: rgb(189 177 177) 1px 1px 5px;
+}
+
 @media (max-width: 425px) {
   #fk-question-card .questions {
     font-size: 14px;
