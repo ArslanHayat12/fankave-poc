@@ -1,0 +1,144 @@
+body {
+  /* background-image: url("/sharestories/olympics/background.png");
+  background-repeat: no-repeat;
+  background-position: center; */
+}
+
+#fk-page-wrapper .background-image {
+  object-fit: cover;
+}
+
+#fk-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#fk-widget-wrapper {
+  background-color: #fff;
+  border: none;
+  box-shadow: none;
+  height: 79vh;
+}
+
+#fk-home-screen {
+  animation: none;
+  width: 100%;
+}
+
+#fk-video-recorder-wrapper .video-wrapper {
+  height: 52vh;
+}
+
+#fk-video-recorder-wrapper .video-wrapper video {
+  height: 52vh;
+}
+
+#fk-record-screen .heading {
+  font-size: 22px;
+}
+
+#fk-home-screen .description {
+  font-size: 22px;
+  max-width: 250px;
+  margin: auto;
+}
+
+#fk-preview-testimonial-screen {
+  height: 100%;
+}
+
+#fk-preview-testimonial-screen .heading {
+  font-size: 22px;
+}
+
+#fk-preview-testimonial-screen .video-wrapper {
+  height: 33vh;
+}
+
+#fk-preview-testimonial-screen .video-wrapper video {
+  height: 33vh;
+}
+
+#fk-client-details-wrapper input {
+  padding: 5px 10px;
+}
+
+#fk-client-details-wrapper .approve-button {
+  font-size: 14px;
+  background-color: #1a2b61;
+}
+
+#fk-thankyou-screen .description {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+#fk-card-wrapper {
+  background-color: #eff7ff;
+  border: none;
+}
+
+#fk-card-wrapper .card-description {
+  font-weight: 500;
+}
+
+#fk-thankyou-screen .tweet-container {
+  display: grid;
+  width: 100%;
+}
+
+#fk-thankyou-screen .tweet-button {
+  width: 150px;
+  margin: auto;
+  font-size: 20px;
+}
+
+@media (max-width: 425px) {
+  #fk-question-card .questions {
+    font-size: 14px;
+  }
+
+  #fk-widget-wrapper .timer {
+    margin: 40px 0 15px;
+  }
+}
+
+@media (max-width: 325px) {
+  #fk-widget-wrapper {
+    height: 83vh;
+    width: unset;
+  }
+
+  #fk-card-wrapper img {
+    width: 31px;
+    height: 42px;
+  }
+
+  #fk-record-screen .heading {
+    font-size: 20px;
+  }
+
+  #fk-preview-testimonial-screen .heading {
+    font-size: 20px;
+  }
+
+  #fk-question-card .questions {
+    font-size: 14px;
+  }
+
+  #fk-record-screen .mic-wrapper {
+    margin-top: 55px;
+  }
+
+  #fk-recorder-container .record-visualizer {
+    top: -6%;
+    left: unset;
+    right: -25px;
+  }
+
+  #fk-widget-wrapper .timer {
+    z-index: 1;
+  }
+}

@@ -17,13 +17,13 @@ const defaultConfigs = {
     customClass: "default-layout",
     background: {
       type: "image", //image|video
-      url: "/default/postal-background.svg",
+      url: `${pathName}/default/postal-background.svg`,
     },
 
     pageLayout: {
       header: {
         position: "center",
-        mainLogoUrl: "/default/postal-logo-white.png",
+        mainLogoUrl: `${pathName}/default/postal-logo-white.png`,
         subLogoUrl: "",
         mainLogoHeight: "40px",
         subLogoHeight: "",
@@ -39,7 +39,7 @@ const defaultConfigs = {
     widget: {
       width: "298px",
       height: "729px",
-      background: "/default/widget-bg.png",
+      background: `${pathName}/default/widget-bg.png`,
       borderRadius: "12px",
       widgetGif: {
         url: "",
@@ -56,7 +56,7 @@ const defaultConfigs = {
 
       homeScreen: {
         videoBox: {
-          icon: "/default/camera.png",
+          icon: `${pathName}/default/camera.png`,
           text: "",
           borderRadius: "18px",
           background: "",
@@ -67,7 +67,7 @@ const defaultConfigs = {
           fontSize: "",
         },
         audioBox: {
-          icon: "/default/mic.png",
+          icon: `${pathName}/default/mic.png`,
           text: "",
           borderRadius: "18px",
           background: "",
@@ -173,7 +173,7 @@ const defaultConfigs = {
             placement: "center",
           },
           card: {
-            icon: "default/mic-icon-white.png",
+            icon: `${pathName}/default/mic-icon-white.png`,
           },
         },
       },
@@ -223,14 +223,14 @@ const defaultConfigs = {
         subHeading: "",
         shareIcon: {
           borderRadius: "none",
-          url: "/default/share-icon.png",
+          url: `${pathName}/default/share-icon.png`,
           bgColor: "transparent",
           height: "95px",
           display: true,
         },
         tweetIcon: {
           borderRadius: "none",
-          url: "/default/tweet-icon.png",
+          url: `${pathName}/default/tweet-icon.png`,
           bgColor: "transparent",
           height: "61px",
         },
