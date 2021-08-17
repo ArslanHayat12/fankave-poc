@@ -50,14 +50,14 @@ export const ThankYouScreen = () => {
 
   const openTwitterSiginInTab = () => {
     window.localStorage.removeItem("token");
-    const tab = window.open(origin + `/api/twitter/login`, "_blank");
+    const tab = window.open(origin + `/v1/api/twitter/login`, "_blank");
     setWindowTab(tab);
     setErrorMessage("");
     generateRequestData(true, false);
   };
   const openLinkedInSiginInTab = () => {
     window.localStorage.removeItem("token");
-    const tab = window.open(origin + `/api/linkedin/login`, "_blank");
+    const tab = window.open(origin + `/v1/api/linkedin/login`, "_blank");
     setWindowTab(tab);
     setErrorMessage("");
     generateRequestData(true, true);
@@ -75,11 +75,11 @@ export const ThankYouScreen = () => {
   const shareAudioVideoToTwitter = (formData) => {
     setErrorMessage("");
     setIsLoading(true);
-    fetch(origin + "/api/get-token")
+    fetch(origin + "/v1/api/get-token")
       .then((r) => r.json())
       .then((text) => {
         console.log(text);
-        fetch(origin + "/api/tweet", {
+        fetch(origin + "/v1/api/tweet", {
           body: formData,
           method: "POST",
           headers: new Headers({
@@ -120,10 +120,10 @@ export const ThankYouScreen = () => {
   const shareAudioVideoToLinkedIn = (formData) => {
     setErrorMessage("");
     setIsLoading(true);
-    fetch(origin + "/api/get-linkedin-token")
+    fetch(origin + "/v1/api/get-linkedin-token")
       .then((r) => r.json())
       .then((text) => {
-        fetch(origin + "/api/share-on-linkedin", {
+        fetch(origin + "/v1/api/share-on-linkedin", {
           body: formData,
           method: "POST",
           headers: new Headers({

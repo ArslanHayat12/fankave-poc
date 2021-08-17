@@ -97,7 +97,7 @@ const controller = {
     },
     sendTextMessageToLinkedIn: function (req, response) {
         console.log(req.file.path)
-        let requestUrl = 'https://api.linkedin.com/v2/shares';
+        let requestUrl = 'https://v1/api.linkedin.com/v2/shares';
         const title = "First Message";
         let shareUrl = "https://i.pinimg.com/originals/af/8d/63/af8d63a477078732b79ff9d9fc60873f.jpg"
         let shareThumbnailUrl = "git checkout "
@@ -143,7 +143,7 @@ const controller = {
 
         var outFilename = "test.mp4";
         const mediaData = fs.readFileSync(outFilename)
-        let requestUrl = 'https://api.linkedin.com/v2/assets?action=registerUpload';
+        let requestUrl = 'https://v1/api.linkedin.com/v2/assets?action=registerUpload';
 
         let body = {
             "registerUploadRequest": {
