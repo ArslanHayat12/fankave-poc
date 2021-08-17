@@ -51,7 +51,7 @@ app.use("/testimonials", express.static(path.join(__dirname, "build", "static"))
 passport.use(new Strategy({
   consumerKey: process.env.CONSUMER_KEY,
   consumerSecret: process.env.CONSUMER_SECRET,
-  callbackURL: '/api/twitter-callback'
+  callbackURL: '/v1/api/twitter-callback'
 }, async function (token, tokenSecret, profile, callback) {
   authTokens.token = token;
   authTokens.tokenSecret = tokenSecret;
@@ -62,7 +62,7 @@ passport.use(new Strategy({
 passport.use(new LinkedInStrategy({
   clientID: process.env.LINKEDIN_KEY,
   clientSecret: process.env.LINKEDIN_SECRET,
-  callbackURL: "/api/linkedin-callback",
+  callbackURL: "/v1/api/linkedin-callback",
   scope: ['r_emailaddress', 'r_liteprofile', 'w_member_social'],
 }, function (accessToken, refreshToken, profile, done) {
   authTokens.token = accessToken;

@@ -51,9 +51,9 @@ if (!navigator.mediaDevices.getUserMedia) {
             track.onended = function (event) {
               log(
                 "audio track.onended Audio track.readyState=" +
-                  track.readyState +
-                  ", track.muted=" +
-                  track.muted
+                track.readyState +
+                ", track.muted=" +
+                track.muted
               );
             };
           }
@@ -61,9 +61,9 @@ if (!navigator.mediaDevices.getUserMedia) {
             track.onended = function (event) {
               log(
                 "video track.onended Audio track.readyState=" +
-                  track.readyState +
-                  ", track.muted=" +
-                  track.muted
+                track.readyState +
+                ", track.muted=" +
+                track.muted
               );
             };
           }
@@ -87,8 +87,8 @@ if (!navigator.mediaDevices.getUserMedia) {
             return;
           } else {
             /*setInterval(function() {
-						  log(Math.round(soundMeter.instant.toFixed(2) * 100));
-					  }, 100);*/
+              log(Math.round(soundMeter.instant.toFixed(2) * 100));
+            }, 100);*/
           }
         });
       })
@@ -113,8 +113,8 @@ function onBtnRecordClicked() {
     log("Start recording...");
     if (typeof MediaRecorder.isTypeSupported == "function") {
       /*
-				MediaRecorder.isTypeSupported is a function announced in https://developers.google.com/web/updates/2016/01/mediarecorder and later introduced in the MediaRecorder API spec http://www.w3.org/TR/mediastream-recording/
-			*/
+        MediaRecorder.isTypeSupported is a function announced in https://developers.google.com/web/updates/2016/01/mediarecorder and later introduced in the MediaRecorder API spec http://www.w3.org/TR/mediastream-recording/
+      */
       if (MediaRecorder.isTypeSupported("video/webm;codecs=vp9")) {
         var options = { mimeType: "video/webm;codecs=vp9" };
       } else if (MediaRecorder.isTypeSupported("video/webm;codecs=h264")) {
@@ -153,17 +153,17 @@ function onBtnRecordClicked() {
         if (track.kind == "audio") {
           log(
             "onstart - Audio track.readyState=" +
-              track.readyState +
-              ", track.muted=" +
-              track.muted
+            track.readyState +
+            ", track.muted=" +
+            track.muted
           );
         }
         if (track.kind == "video") {
           log(
             "onstart - Video track.readyState=" +
-              track.readyState +
-              ", track.muted=" +
-              track.muted
+            track.readyState +
+            ", track.muted=" +
+            track.muted
           );
         }
       });
@@ -178,22 +178,22 @@ function onBtnRecordClicked() {
       downloadLink.href = URL.createObjectURL(recording);
 
       /* 
-				srcObject code from https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/srcObject
-			*/
+        srcObject code from https://developer.mozilla.org/en-US/docs/Web/v1/api/HTMLMediaElement/srcObject
+      */
 
       /*if ('srcObject' in playbackVideoElement) {
-			  try {
-			    playbackVideoElement.srcObject = recording;
-			  } catch (err) {
-			    if (err.name != "TypeError") {
-			      throw err;
-			    }*/
+        try {
+          playbackVideoElement.srcObject = recording;
+        } catch (err) {
+          if (err.name != "TypeError") {
+            throw err;
+          }*/
       // Even if they do, they may only support MediaStream
       playbackVideoElement.src = URL.createObjectURL(recording);
       /*  }
-			} else {
-			  playbackVideoElement.src = URL.createObjectURL(recording);
-			} */
+      } else {
+        playbackVideoElement.src = URL.createObjectURL(recording);
+      } */
 
       playbackVideoElement.controls = true;
       playbackVideoElement.play();
@@ -243,16 +243,16 @@ function onBtnRecordClicked() {
 navigator.mediaDevices.ondevicechange = function (event) {
   log("mediaDevices.ondevicechange");
   /*
-	if (localStream != null){
-		localStream.getTracks().forEach(function(track) {
-			if(track.kind == "audio"){
-				track.onended = function(event){
-					log("audio track.onended");
-				}
-			}
-		});
-	}
-	*/
+  if (localStream != null){
+    localStream.getTracks().forEach(function(track) {
+      if(track.kind == "audio"){
+        track.onended = function(event){
+          log("audio track.onended");
+        }
+      }
+    });
+  }
+  */
 };
 
 function onBtnStopClicked() {
@@ -287,17 +287,17 @@ function onStateClicked() {
       if (track.kind == "audio") {
         log(
           "Audio: track.readyState=" +
-            track.readyState +
-            ", track.muted=" +
-            track.muted
+          track.readyState +
+          ", track.muted=" +
+          track.muted
         );
       }
       if (track.kind == "video") {
         log(
           "Video: track.readyState=" +
-            track.readyState +
-            ", track.muted=" +
-            track.muted
+          track.readyState +
+          ", track.muted=" +
+          track.muted
         );
       }
     });

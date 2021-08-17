@@ -12,7 +12,7 @@ export default function Routes() {
     return (
         <Router>
             <Switch>
-                <Route path="/api/users">
+                <Route path="/v1/api/users">
                     <Users />
                 </Route>
                 <Route path="/">
