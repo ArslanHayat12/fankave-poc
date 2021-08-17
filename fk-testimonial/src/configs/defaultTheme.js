@@ -1,10 +1,10 @@
 const questionsList = [
-  "What is your name and title?",
-  "What team do you report into?",
-  "How long have you been working at POSTAL.IO?",
-  "What excites you most about working at POSTAL.IO every day?",
-  "How would you describe the POSTAL.IO company culture?",
-  "Why would you recommend POSTAL.IO as a great place to work?",
+  "What's your name, title, and company name?",
+  "What pain point did you look for Postal to solve?",
+  "Why did you choose Postal over a competitor?",
+  "How are you using Postal today?",
+  "How are you measuring success today?",
+  "How does Postal help you achieve your goals?"
 ];
 
 const defaultConfigs = {
