@@ -1,6 +1,5 @@
-import React from "react";
-
-import { TickIcon } from "../assets";
+let pathName = window.location.pathname.replace("/", "")
+pathName = pathName ? `/${pathName}` : "";
 
 const questionsList = [
   "What is your name and title?",
@@ -17,14 +16,14 @@ const beviBookConfigs = {
     customClass: "bevi-layout",
     background: {
       type: "image", //image|video
-      url: "/bevi/background.png",
+      url: `${pathName}/bevi/background.png`,
     },
 
     pageLayout: {
       header: {
         position: "center",
-        mainLogoUrl: "/bevi/main-logo.png",
-        subLogoUrl: "/bevi/sub-logo.png",
+        mainLogoUrl: `${pathName}/bevi/main-logo.png`,
+        subLogoUrl: `${pathName}/bevi/sub-logo.png`,
         mainLogoHeight: "45px",
         subLogoHeight: "22px",
         mainLogoMargin: "0 0 27px 0",
@@ -39,15 +38,15 @@ const beviBookConfigs = {
     widget: {
       width: "298px",
       height: "729px",
-      background: "/bevi/widget-bg.png",
+      background: `${pathName}/bevi/widget-bg.png`,
       borderRadius: "12px",
       widgetGif: {
-        url: "/bevi/bevi-gif.gif",
+        url: `${pathName}/bevi/bevi-gif.gif`,
         gif: true,
       },
       logo: {
         position: "bottom-right",
-        url: "/bevi/footer-logo.png",
+        url: `${pathName}/bevi/footer-logo.png`,
         height: "40px",
       },
       mainHeadingText: "",
@@ -56,7 +55,7 @@ const beviBookConfigs = {
 
       homeScreen: {
         videoBox: {
-          icon: "/bevi/camera-icon.png",
+          icon: `${pathName}/bevi/camera-icon.png`,
           text: "",
           borderRadius: "18px",
           background: "",
@@ -67,7 +66,7 @@ const beviBookConfigs = {
           fontSize: "",
         },
         audioBox: {
-          icon: "/bevi/mic-icon.png",
+          icon: `${pathName}/bevi/mic-icon.png`,
           text: "",
           borderRadius: "18px",
           background: "",
@@ -177,7 +176,7 @@ const beviBookConfigs = {
             placement: "",
           },
           card: {
-            icon: "/bevi/mic-icon-white.png",
+            icon: `${pathName}/bevi/mic-icon-white.png`,
           },
         },
       },
@@ -227,14 +226,14 @@ const beviBookConfigs = {
         subHeading: "",
         shareIcon: {
           borderRadius: "none",
-          url: "/bevi/share-icon.png",
+          url: `${pathName}/bevi/share-icon.png`,
           bgColor: "transparent",
           height: "95px",
           display: false,
         },
         tweetIcon: {
           borderRadius: "none",
-          url: "/bevi/tweet-icon.png",
+          url: `${pathName}/bevi/tweet-icon.png`,
           bgColor: "transparent",
           height: "61px",
         },
