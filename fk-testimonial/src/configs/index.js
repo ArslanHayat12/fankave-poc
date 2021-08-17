@@ -11,7 +11,7 @@ const theme = () => {
             return beviBookConfigs;
         case "default":
             return defaultConfigs;
-        case "honey-book":
+        case "honeybook":
             return honeyBookConfigs;
         case "demo":
             return demoConfigs;
