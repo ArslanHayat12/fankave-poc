@@ -50,11 +50,11 @@ body {
 }
 
 #fk-preview-testimonial-screen .video-wrapper {
-  height: 33vh;
+  height: 60vh;
 }
 
 #fk-preview-testimonial-screen .video-wrapper video {
-  height: 33vh;
+  height: 60vh;
 }
 
 #fk-client-details-wrapper input {
