@@ -79,6 +79,7 @@ body {
 
 #fk-client-details-wrapper input {
   padding: 5px 10px;
+  box-shadow: rgb(189 177 177) 1px 1px 5px;
 }
 
 #fk-client-details-wrapper .approve-button {
@@ -104,10 +105,6 @@ body {
   width: 150px;
   margin: auto;
   font-size: 20px;
-}
-
-.fk-client-details-wrapper input {
-  box-shadow: rgb(189 177 177) 1px 1px 5px;
 }
 
 @media (max-width: 425px) {
