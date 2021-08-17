@@ -1,5 +1,6 @@
 import beviBookConfigs from "./beviTheme";
 import defaultConfigs from "./defaultTheme";
+import postalConfigs from "./postalTheme";
 
 const theme = () => {
   switch (window.self.ctag) {
@@ -7,8 +8,10 @@ const theme = () => {
       return beviBookConfigs;
     case "default":
       return defaultConfigs;
-    case "cisco":
-      return ciscoConfig;
+    case "postal":
+      return postalConfigs;
+    default:
+      return defaultConfigs;
   }
 };
 

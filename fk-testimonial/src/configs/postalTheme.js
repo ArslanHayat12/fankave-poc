@@ -9,21 +9,19 @@ const questionsList = [
 let pathName = window.location.pathname.replace("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
-console.log(pathName);
-
-const defaultConfigs = {
+const postalConfigs = {
   default: {
     topic: "beviemployee",
     customClass: "default-layout",
     background: {
       type: "image", //image|video
-      url: `${pathName}/default/postal-bg.svg`,
+      url: `${pathName}/postal/postal-bg.svg`,
     },
 
     pageLayout: {
       header: {
         position: "center",
-        mainLogoUrl: `${pathName}/default/postal-logo-white.png`,
+        mainLogoUrl: `${pathName}/postal/postal-logo-white.png`,
         subLogoUrl: "",
         mainLogoHeight: "40px",
         subLogoHeight: "",
@@ -39,7 +37,7 @@ const defaultConfigs = {
     widget: {
       width: "298px",
       height: "729px",
-      background: `${pathName}/default/widget-bg.png`,
+      background: `${pathName}/postal/widget-bg.png`,
       borderRadius: "12px",
       widgetGif: {
         url: "",
@@ -56,7 +54,7 @@ const defaultConfigs = {
 
       homeScreen: {
         videoBox: {
-          icon: `${pathName}/default/camera.png`,
+          icon: `${pathName}/postal/camera.png`,
           text: "",
           borderRadius: "18px",
           background: "",
@@ -67,7 +65,7 @@ const defaultConfigs = {
           fontSize: "",
         },
         audioBox: {
-          icon: `${pathName}/default/mic.png`,
+          icon: `${pathName}/postal/mic.png`,
           text: "",
           borderRadius: "18px",
           background: "",
@@ -173,7 +171,7 @@ const defaultConfigs = {
             placement: "center",
           },
           card: {
-            icon: `${pathName}/default/mic-icon-white.png`,
+            icon: `${pathName}/postal/mic-icon-white.png`,
           },
         },
       },
@@ -223,14 +221,14 @@ const defaultConfigs = {
         subHeading: "",
         shareIcon: {
           borderRadius: "none",
-          url: `${pathName}/default/share-icon.png`,
+          url: `${pathName}/postal/share-icon.png`,
           bgColor: "transparent",
           height: "95px",
           display: true,
         },
         tweetIcon: {
           borderRadius: "none",
-          url: `${pathName}/default/tweet-icon.png`,
+          url: `${pathName}/postal/tweet-icon.png`,
           bgColor: "transparent",
           height: "61px",
         },
@@ -269,4 +267,4 @@ const defaultConfigs = {
   },
 };
 
-export default defaultConfigs;
+export default postalConfigs;
