@@ -6,7 +6,7 @@ body {
   font-family: "Roboto", sans-serif !important;
 }
 
-#sharestories {
+#testimonials {
   height: 100%;
 }
 
@@ -30,12 +30,18 @@ body {
   max-width: 240px;
   text-align: center;
   margin: auto;
+  color:#fff
 }
 
 #fk-footer {
   position: absolute;
   bottom: 25px;
   right: 15px;
+}
+
+#fk-thankyou-screen .back-button{
+color:#fff;
+text-decoration: underline;
 }
 
 #fk-page-wrapper {
@@ -51,13 +57,18 @@ body {
 
 #fk-widget-wrapper {
   height: 72vh;
-  margin-top: 65px;
+  border-radius: 17px;
   box-shadow: none;
 }
 
 #fk-record-screen {
   z-index: 10;
 }
+
+#fk-record-screen .heading{
+  color:#fff
+}
+
 
 #fk-preview-testimonial-screen {
   height: 100%;
@@ -94,19 +105,13 @@ body {
   padding: 1px; */
 }
 
-/* #fk-preview-testimonial-screen .approve-button.button-clicked {
-  background-color: rgb(38 111 255);
+#fk-preview-testimonial-screen .heading{
+color:#fff
 }
-#fk-preview-testimonial-screen .approve-button.button-clicked svg path {
-  fill: #fff;
+
+#fk-video-recorder-wrapper .video-timer{
+  color:#fff
 }
-#fk-preview-testimonial-screen .approve-button svg {
-  height: 13px;
-  width: 13px;
-}
-#fk-preview-testimonial-screen .approve-button svg path {
-  fill: rgb(41 113 255);
-} */
 
 #fk-client-details-wrapper input {
   width: 85%;
@@ -122,11 +127,6 @@ body {
 #fk-preview-testimonial-screen .client-details-wrapper {
   /* display: flex;
   align-items: center; */
-}
-
-#fk-card-wrapper {
-  background-color: #eff7ff;
-  border: none;
 }
 
 #fk-preview-testimonial-screen .video-wrapper {
@@ -150,8 +150,39 @@ body {
   height: 24px;
   width: 15px;
 }
+ #fk-header .main-logo {
+  margin: 0px;
+}
+
+#fk-card-wrapper {
+  background: #ffffff59;
+}
+
+#fk-thankyou-screen .heading{
+  color:#fff
+}
+
+#fk-preview-testimonial-screen .processing-text{
+color: #fff;
+}
+
+#fk-thankyou-screen .description {
+  color:#fff
+}
+
+#fk-record-screen .timer{
+color:#fff
+}
+
+#fk-page-wrapper .background-image {
+  object-fit: cover;
+}
 
 @media (min-width: 1920px) {
+  #fk-widget-wrapper .widget-gif{
+    height: unset;
+  }
+
   #fk-video-recorder-wrapper .video-wrapper {
     height: 55vh;
   }
@@ -166,12 +197,6 @@ body {
     padding: 8px;
   }
 
-  #fk-widget-wrapper {
-    /* min-height: 100%; */
-  }
-  .bevi-layout #fk-header .main-logo {
-    margin: 0px 0px 5px;
-  }
 
   #fk-home-screen {
     margin-bottom: 70px;
@@ -201,7 +226,10 @@ body {
 
   #fk-thankyou-screen .description {
     font-size: 18px;
+    color:#fff
   }
+
+ 
 
   #fk-thankyou-screen {
     min-height: 400px;
@@ -306,8 +334,8 @@ body {
   }
 
   #fk-page-wrapper .background-image {
-    /* display: none; */
     height: 100%;
+   
   }
 
   #fk-header .main-logo {
@@ -319,7 +347,18 @@ body {
   }
 }
 
+@media (min-width:360px) and (max-width:399px){
+  #fk-widget-wrapper .widget-gif{
+    height: 80.5vh;
+  }
+}
+
 @media (min-width: 375px) and (max-width: 416px) {
+
+  #fk-widget-wrapper .widget-gif{
+    height: 67.85vh;
+  }
+
   #fk-card-wrapper img {
     height: 50px;
   }
@@ -348,6 +387,11 @@ body {
 }
 
 @media (min-width: 400px) and (max-width: 420px) {
+
+  #fk-widget-wrapper .widget-gif{
+    height: 69.7vh;
+  }
+
   #fk-widget-wrapper {
     height: 66vh;
   }
@@ -373,6 +417,11 @@ body {
 }
 
 @media (max-width: 320px) {
+  #fk-widget-wrapper .widget-gif{
+    height: 78vh;
+  }
+
+
   #fk-widget-wrapper {
     height: 73vh;
   }
@@ -387,5 +436,9 @@ body {
 
   #fk-preview-testimonial-screen .video-wrapper {
     height: 45vh;
+  }
+
+  #fk-header .sub-text{
+font-size: 12px;
   }
 }

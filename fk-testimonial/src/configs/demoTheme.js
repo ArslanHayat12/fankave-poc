@@ -11,6 +11,12 @@ const demoConfigs = {
   default: {
     topic: "demostories",
     customClass: "demo-layout",
+    onPageLoad: {
+      video: {
+        url: `${pathName}/honeybook/honeybook.mp4`,
+        display: false,
+      },
+    },
     background: {
       type: "image", //image|video
       url: `${pathName}/demo/background.png`,
@@ -21,6 +27,7 @@ const demoConfigs = {
         position: "center",
         mainLogoUrl: "",
         subLogoUrl: "",
+        subLogoTex: "",
         mainLogoHeight: "45px",
         subLogoHeight: "22px",
         mainLogoMargin: "0 0 27px 0",

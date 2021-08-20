@@ -12,6 +12,12 @@ const defaultConfigs = {
   default: {
     topic: "proveemployee",
     customClass: "prove-layout",
+    onPageLoad: {
+      video: {
+        url: `${pathName}/honeybook/honeybook.mp4`,
+        display: false,
+      },
+    },
     background: {
       type: "image", //image|video
       url: `${pathName}/prove/background.png`,
@@ -22,6 +28,7 @@ const defaultConfigs = {
         position: "center",
         mainLogoUrl: "",
         subLogoUrl: "",
+        subLogoTex: "",
         mainLogoHeight: "45px",
         subLogoHeight: "22px",
         mainLogoMargin: "0 0 27px 0",

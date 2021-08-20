@@ -13,6 +13,12 @@ const defaultConfigs = {
   default: {
     topic: "honeybookcustomer",
     customClass: "honeybook-layout",
+    onPageLoad: {
+      video: {
+        url: `${pathName}/honeybook/honeybook.mp4`,
+        display: false,
+      },
+    },
     background: {
       type: "image", //image|video
       url: `${pathName}/honeybook/background.png`,
@@ -21,8 +27,9 @@ const defaultConfigs = {
     pageLayout: {
       header: {
         position: "center",
-        mainLogoUrl: "",
+        mainLogoUrl: "/honeybook/logo.png",
         subLogoUrl: "",
+        subLogoText: "Everything your business needs to get it done.",
         mainLogoHeight: "45px",
         subLogoHeight: "22px",
         mainLogoMargin: "0 0 27px 0",
@@ -40,12 +47,12 @@ const defaultConfigs = {
       background: `${pathName}/honeybook/widget-bg.png`,
       borderRadius: "12px",
       widgetGif: {
-        url: "",
-        gif: false,
+        url: `${pathName}/honeybook/Honeybook.gif`,
+        gif: true,
       },
       logo: {
-        position: "bottom-right",
-        url: `${pathName}/honeybook/postal-logo.png`,
+        position: "",
+        url: ``,
         height: "40px",
       },
       mainHeadingText: "",
@@ -181,7 +188,7 @@ const defaultConfigs = {
           height: "550",
           questionsList,
           button: {
-            display: true,
+            display: false,
             startRecording: {
               text: "Record",
             },
@@ -190,13 +197,13 @@ const defaultConfigs = {
             },
           },
           icon: {
-            display: false,
+            display: true,
           },
         },
         audio: {
           questionsList,
           button: {
-            display: true,
+            display: false,
             startRecording: {
               text: "Record",
             },
@@ -205,7 +212,7 @@ const defaultConfigs = {
             },
           },
           icon: {
-            display: false,
+            display: true,
           },
           micIcon: {
             stroke: "#86a6e3",
@@ -224,7 +231,7 @@ const defaultConfigs = {
           url: `${pathName}/honeybook/share-icon.png`,
           bgColor: "transparent",
           height: "95px",
-          display: true,
+          display: false,
         },
         tweetIcon: {
           borderRadius: "none",
@@ -235,7 +242,7 @@ const defaultConfigs = {
         twitterButton: {
           bgColor: "#5089ed",
           borderRadius: "22px",
-          display: true,
+          display: false,
           placement: "center",
         },
         linkedinButton: {
