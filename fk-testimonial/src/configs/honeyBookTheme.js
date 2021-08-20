@@ -4,7 +4,7 @@ const questionsList = [
   "Why did you choose HoneyBook over a competitor?",
   "How are you using HoneyBook today?",
   "How are you measuring success today?",
-  "How does HoneyBook help you achieve your goals?",
+  "How does HoneyBook help you achieve your goals?"
 ];
 let pathName = window.location.pathname.replaceAll("/", "");
 pathName = pathName ? `/${pathName}` : "";
