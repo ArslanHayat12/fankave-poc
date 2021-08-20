@@ -4,7 +4,7 @@ const questionsList = [
   "Why did you choose HoneyBook over a competitor?",
   "How are you using HoneyBook today?",
   "How are you measuring success today?",
-  "How does HoneyBook help you achieve your goals?"
+  "How does HoneyBook help you achieve your goals?",
 ];
 let pathName = window.location.pathname.replaceAll("/", "");
 pathName = pathName ? `/${pathName}` : "";
@@ -47,8 +47,8 @@ const defaultConfigs = {
       background: `${pathName}/honeybook/widget-bg.png`,
       borderRadius: "12px",
       widgetGif: {
-        url: `${pathName}/honeybook/Honeybook.gif`,
-        gif: true,
+        url: ``,
+        gif: false,
       },
       logo: {
         position: "",
