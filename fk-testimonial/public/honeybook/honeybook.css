@@ -39,6 +39,11 @@ body {
   right: 15px;
 }
 
+#fk-thankyou-screen .back-button{
+color:#fff;
+text-decoration: underline;
+}
+
 #fk-page-wrapper {
   height: 100%;
   /* height: 100%;
@@ -169,7 +174,15 @@ color: #fff;
 color:#fff
 }
 
+#fk-page-wrapper .background-image {
+  object-fit: cover;
+}
+
 @media (min-width: 1920px) {
+  #fk-widget-wrapper .widget-gif{
+    height: unset;
+  }
+
   #fk-video-recorder-wrapper .video-wrapper {
     height: 55vh;
   }
@@ -321,8 +334,8 @@ color:#fff
   }
 
   #fk-page-wrapper .background-image {
-    /* display: none; */
     height: 100%;
+   
   }
 
   #fk-header .main-logo {
@@ -334,7 +347,18 @@ color:#fff
   }
 }
 
+@media (min-width:360px) and (max-width:399px){
+  #fk-widget-wrapper .widget-gif{
+    height: 80.5vh;
+  }
+}
+
 @media (min-width: 375px) and (max-width: 416px) {
+
+  #fk-widget-wrapper .widget-gif{
+    height: 67.85vh;
+  }
+
   #fk-card-wrapper img {
     height: 50px;
   }
@@ -363,6 +387,11 @@ color:#fff
 }
 
 @media (min-width: 400px) and (max-width: 420px) {
+
+  #fk-widget-wrapper .widget-gif{
+    height: 69.7vh;
+  }
+
   #fk-widget-wrapper {
     height: 66vh;
   }
@@ -388,6 +417,11 @@ color:#fff
 }
 
 @media (max-width: 320px) {
+  #fk-widget-wrapper .widget-gif{
+    height: 78vh;
+  }
+
+
   #fk-widget-wrapper {
     height: 73vh;
   }

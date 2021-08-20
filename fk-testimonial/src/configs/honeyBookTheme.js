@@ -13,6 +13,12 @@ const defaultConfigs = {
   default: {
     topic: "honeybookcustomer",
     customClass: "honeybook-layout",
+    onPageLoad: {
+      video: {
+        url: `${pathName}/honeybook/honeybook.mp4`,
+        display: false,
+      },
+    },
     background: {
       type: "image", //image|video
       url: `${pathName}/honeybook/background.png`,
@@ -41,8 +47,8 @@ const defaultConfigs = {
       background: `${pathName}/honeybook/widget-bg.png`,
       borderRadius: "12px",
       widgetGif: {
-        url: "",
-        gif: false,
+        url: `${pathName}/honeybook/Honeybook.gif`,
+        gif: true,
       },
       logo: {
         position: "",

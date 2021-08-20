@@ -13,6 +13,12 @@ const postalConfigs = {
   default: {
     topic: "postalcustomer",
     customClass: "postal-layout",
+    onPageLoad: {
+      video: {
+        url: `${pathName}/honeybook/honeybook.mp4`,
+        display: false,
+      },
+    },
     background: {
       type: "image", //image|video
       url: `${pathName}/postal/postal-bg.svg`,

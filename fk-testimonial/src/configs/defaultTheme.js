@@ -11,6 +11,12 @@ const defaultConfigs = {
   default: {
     topic: "demostories",
     customClass: "default-layout",
+    onPageLoad: {
+      video: {
+        url: `${pathName}/honeybook/honeybook.mp4`,
+        display: false,
+      },
+    },
     background: {
       type: "image", //image|video
       url: `${pathName}/default/postal-background.svg`,

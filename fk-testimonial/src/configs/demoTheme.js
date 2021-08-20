@@ -11,6 +11,12 @@ const demoConfigs = {
   default: {
     topic: "demostories",
     customClass: "demo-layout",
+    onPageLoad: {
+      video: {
+        url: `${pathName}/honeybook/honeybook.mp4`,
+        display: false,
+      },
+    },
     background: {
       type: "image", //image|video
       url: `${pathName}/demo/background.png`,

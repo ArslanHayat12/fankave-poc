@@ -14,6 +14,12 @@ const beviBookConfigs = {
   default: {
     topic: "beviemployee",
     customClass: "bevi-layout",
+    onPageLoad: {
+      video: {
+        url: `${pathName}/honeybook/honeybook.mp4`,
+        display: false,
+      },
+    },
     background: {
       type: "image", //image|video
       url: `${pathName}/bevi/background.png`,
