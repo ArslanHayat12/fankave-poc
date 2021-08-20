@@ -10,6 +10,11 @@ body {
   object-fit: cover;
 }
 
+#fk-widget-wrapper .widget-bg{
+  display: none;
+    }
+    
+
 #fk-header {
   padding: 0;
 }
@@ -64,6 +69,8 @@ body {
 
 #fk-widget-wrapper {
   height: 72vh;
+  border:1px solid #ccc;
+  box-shadow: none;
 }
 
 #fk-record-screen {
@@ -175,11 +182,8 @@ body {
     padding: 8px;
   }
 
-  #fk-widget-wrapper {
-    box-shadow: rgb(189 177 177) 1px 5px 18px;
-    /* min-height: 100%; */
-  }
-  .bevi-layout #fk-header .main-logo {
+ 
+   #fk-header .main-logo {
     margin: 0px 0px 5px;
   }
 
@@ -292,6 +296,8 @@ body {
     padding: 15px;
     height: 76vh;
   }
+
+
 
   #fk-preview-testimonial-screen .video-wrapper {
     height: 50vh;
