@@ -9,7 +9,12 @@ body {
 #testimonials {
   height: 100%;
 }
-
+#fk-record-screen .cross-icon line{
+stroke: #fff;
+}
+#fk-preview-testimonial-screen .cross-icon line{
+  stroke: #fff;
+  }
 #fk-preview-testimonial-screen .video {
   z-index: 100;
 }
