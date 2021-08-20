@@ -17,7 +17,7 @@ function PageWrapper(props) {
         customClass = "",
         background: { type, url: backgroundUrl },
         pageLayout: {
-          header: { position, mainLogoUrl, subLogoUrl },
+          header: { position, mainLogoUrl, subLogoUrl, subLogoText },
           footer: { position: footerLogoPosition, logoUrl: footerLogoUrl },
         },
       },
@@ -45,6 +45,7 @@ function PageWrapper(props) {
             <Header
               mainLogoSrc={mainLogoUrl}
               subLogoSrc={subLogoUrl}
+              subLogoText={subLogoText}
               position={position}
             />
           )}

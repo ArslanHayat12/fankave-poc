@@ -22,6 +22,7 @@ const defaultConfigs = {
         position: "center",
         mainLogoUrl: "",
         subLogoUrl: "",
+        subLogoTex: "",
         mainLogoHeight: "45px",
         subLogoHeight: "22px",
         mainLogoMargin: "0 0 27px 0",

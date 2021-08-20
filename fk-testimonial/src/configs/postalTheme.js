@@ -23,6 +23,7 @@ const postalConfigs = {
         position: "center",
         mainLogoUrl: `${pathName}/postal/postal-logo-white.png`,
         subLogoUrl: "",
+        subLogoTex: "",
         mainLogoHeight: "40px",
         subLogoHeight: "",
         mainLogoMargin: "0 0 27px 0",

@@ -17,4 +17,11 @@ export const HeaderStyled = styled.section`
     z-index: 1;
     height: ${(props) => props.theme.default.pageLayout.header.subLogoHeight};
   }
+
+  .sub-text {
+    color: #fff;
+    font-size: 16px;
+    z-index: 1;
+    margin: 0;
+  }
 `;

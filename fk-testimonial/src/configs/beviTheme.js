@@ -1,4 +1,4 @@
-let pathName = window.location.pathname.replaceAll("/", "")
+let pathName = window.location.pathname.replaceAll("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
 const questionsList = [
@@ -24,6 +24,7 @@ const beviBookConfigs = {
         position: "center",
         mainLogoUrl: `${pathName}/bevi/main-logo.png`,
         subLogoUrl: `${pathName}/bevi/sub-logo.png`,
+        subLogoTex: "",
         mainLogoHeight: "45px",
         subLogoHeight: "22px",
         mainLogoMargin: "0 0 27px 0",
