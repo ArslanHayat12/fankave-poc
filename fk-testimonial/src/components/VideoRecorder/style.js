@@ -7,6 +7,15 @@ export const VideoRecorderStyled = styled.article`
     font-size: 12px;
   }
 
+  .webcam-video {
+    display: none;
+  }
+
+  .video-canvas {
+    width: 100%;
+    border-radius: 8px;
+  }
+
   .button-container .record-button {
     display: flex;
     background: transparent;

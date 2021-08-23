@@ -24,7 +24,7 @@ body {
 }
 
 #fk-video-recorder-wrapper .video-wrapper {
-  height: 64vh;
+  height: auto;
 }
 
 #fk-video-recorder-wrapper .video-wrapper video {

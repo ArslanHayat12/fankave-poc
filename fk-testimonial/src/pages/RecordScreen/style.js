@@ -17,16 +17,16 @@ export const RecordingScreenStyled = styled.article`
     border-radius: 8px;
   }
 
-  .video-wrapper:after {
-    position: absolute;
-    content: "";
-    background-image: linear-gradient(to bottom, rgba(32, 42, 98, 0), #1a1e33);
-    left: 0;
-    right: 0;
-    height: 200px;
-    bottom: 0;
-    border-radius: 8px;
-  }
+  // .video-wrapper:after {
+  //   position: absolute;
+  //   content: "";
+  //   background-image: linear-gradient(to bottom, rgba(32, 42, 98, 0), #1a1e33);
+  //   left: 0;
+  //   right: 0;
+  //   height: 200px;
+  //   bottom: 0;
+  //   border-radius: 8px;
+  // }
 
   .video-wrapper {
     position: relative;

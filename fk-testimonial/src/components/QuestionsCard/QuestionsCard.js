@@ -1,11 +1,11 @@
-import React, { useReducer, useMemo, useCallback, useContext } from "react";
+import React, { useReducer, useEffect, useMemo, useCallback, useContext } from "react";
 import { ThemeContext } from "styled-components";
 import { questionReducer } from "../../reducers/reducers";
 import { initialState, QuestionContext } from "../../context/QuestionContext";
 import { SET_INDEX } from "../../constants";
 import { QuestionCardStyled } from "./style";
 
-const QuestionsCard = () => {
+const QuestionsCard = ({setCurrentQuestion}) => {
   const [state, dispatch] = useReducer(questionReducer, initialState);
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
   const theme = useContext(ThemeContext);
@@ -31,10 +31,14 @@ const QuestionsCard = () => {
     }
   }, [state]);
 
+  useEffect(()=>{
+    setCurrentQuestion(questionArray[state.questionIndex])
+  },[state.questionIndex])
+
   return (
     <QuestionContext.Provider value={value}>
       <QuestionCardStyled className="question-card" id="fk-question-card">
-        <p className="questions">{questionArray[state.questionIndex]}</p>
+        {/* <p className="questions">{questionArray[state.questionIndex]}</p> */}
 
         <article className="question-buttons-wrapper">
           <button
