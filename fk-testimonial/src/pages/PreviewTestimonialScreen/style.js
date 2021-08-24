@@ -26,10 +26,13 @@ export const PreviewScreenStyled = styled.article`
 
   .heading {
     margin-bottom: 0;
-    font-size: 25px;
+    font-size: ${(props) =>
+      props.theme.default.widget.previewScreen.video.fontSize || "25px"};
     font-weight: normal;
     margin-top: 0;
     text-align: center;
+    color: ${(props) =>
+      props.theme.default.widget.previewScreen.video.fontColor || "#000"};
   }
 
   .video-wrapper {
