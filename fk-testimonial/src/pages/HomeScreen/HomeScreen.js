@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
+import { ThemeContext } from "styled-components";
+
 import RecordingCard from "../../components/RecordingCard/RecordingCard";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { TESTIMONIAL_SCREEN, SET_TYPE, SET_SCREEN } from "../../constants";
-import "./style.css";
+import { HomeScreenStyled } from "./style";
 
 export const HomeScreen = () => {
   const { dispatch } = useContext(TestimonialContext);
@@ -29,11 +31,72 @@ export const HomeScreen = () => {
     });
   };
 
+  const onCaptureClick = () => {
+    dispatch({
+      type: SET_TYPE,
+      payload: "capture",
+    });
+    dispatch({
+      type: SET_SCREEN,
+      payload: TESTIMONIAL_SCREEN,
+    });
+  };
+
+  const onUploadClick = () => {
+    dispatch({
+      type: SET_TYPE,
+      payload: "upload",
+    });
+    dispatch({
+      type: SET_SCREEN,
+      payload: TESTIMONIAL_SCREEN,
+    });
+  };
+
+  const theme = useContext(ThemeContext);
+
+  const {
+    default: {
+      widget: {
+        homeScreen: {
+          videoBox: { display: displayVideoCard },
+          audioBox: { display: displayAudioCard },
+          imageCaptureBox: { display: displayCaptureCard },
+          imageUploadBox: { display: displayUploadCard },
+        },
+      },
+    },
+  } = theme;
+
   return (
-    <article className="home-screen" id="fk-home-screen">
+    <HomeScreenStyled id="fk-home-screen">
       <p className="description">Select one to record your testimonial</p>
-      <RecordingCard recordingType="video" handleClick={() => onVideoClick()} />
-      <RecordingCard recordingType="audio" handleClick={() => onAudioClick()} />
-    </article>
+      <article className="widgets-wrapper">
+        {displayVideoCard && (
+          <RecordingCard
+            recordingType="video"
+            handleClick={() => onVideoClick()}
+          />
+        )}
+        {displayAudioCard && (
+          <RecordingCard
+            recordingType="audio"
+            handleClick={() => onAudioClick()}
+          />
+        )}
+        {displayCaptureCard && (
+          <RecordingCard
+            recordingType="imageCapture"
+            handleClick={() => onCaptureClick()}
+          />
+        )}
+        {displayUploadCard && (
+          <RecordingCard
+            recordingType="imageUpload"
+            handleClick={() => onUploadClick()}
+          />
+        )}
+      </article>
+    </HomeScreenStyled>
   );
 };

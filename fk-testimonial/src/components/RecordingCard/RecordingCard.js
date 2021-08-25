@@ -2,24 +2,62 @@ import React, { useContext } from "react";
 import { ThemeContext } from "styled-components";
 
 import { RecordingCardStyled } from "./style";
-import { CameraIcon, MicIcon } from "../../assets/index";
 
 const RecordingCard = (props) => {
   const { recordingType, handleClick } = props;
   const theme = useContext(ThemeContext);
+
   const {
     default: {
       widget: {
         homeScreen: {
-          videoBox: { icon: cameraIcon },
-          audioBox: { icon: micIcon },
+          videoBox: { icon: cameraIcon, text: videoDescription },
+          audioBox: { icon: micIcon, text: audioDescription },
+          imageCaptureBox: {
+            icon: imageCaptureIcon,
+            text: imageCaptureDescription,
+          },
+          imageUploadBox: {
+            icon: imageUploadIcon,
+            text: imageUploadDescription,
+          },
         },
       },
     },
   } = theme;
-  const description =
-    recordingType === "video" ? "RECORD VIDEO" : "RECORD AUDIO";
-  const icon = recordingType === "video" ? <CameraIcon /> : <MicIcon />;
+
+  const Description = () => {
+    switch (recordingType) {
+      case "video":
+        return videoDescription;
+      case "audio":
+        return audioDescription;
+      case "imageCapture":
+        return imageCaptureDescription;
+      case "imageUpload":
+        return imageUploadDescription;
+      default:
+        return videoDescription;
+    }
+  };
+
+  const Icon = () => {
+    switch (recordingType) {
+      case "video":
+        return cameraIcon;
+      case "audio":
+        return micIcon;
+      case "imageCapture":
+        return imageCaptureIcon;
+      case "imageUpload":
+        return imageUploadIcon;
+      default:
+        return cameraIcon;
+    }
+  };
+
+  const description = Description();
+  const icon = Icon();
 
   return (
     <RecordingCardStyled
@@ -27,11 +65,8 @@ const RecordingCard = (props) => {
       onClick={handleClick}
       id="fk-card-wrapper"
     >
-      {cameraIcon ? (
-        <img src={recordingType === "video" ? cameraIcon : micIcon} />
-      ) : (
-        { icon }
-      )}
+      <img src={icon} alt="icon" />
+
       <p className="card-description">{description}</p>
     </RecordingCardStyled>
   );
