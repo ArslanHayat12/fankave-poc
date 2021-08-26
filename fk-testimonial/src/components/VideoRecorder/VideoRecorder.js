@@ -63,6 +63,7 @@ export const VideoRecorder = () => {
   const handleStartCaptureClick = useCallback(() => {
     setCapturing(true);
     captureCanvasVideo()
+    webcamRef.current.video.muted = true
     // let options = { mimeType: "video/webm" };
     // if (typeof MediaRecorder.isTypeSupported == "function") {
     //   if (MediaRecorder.isTypeSupported("video/webm")) {
@@ -259,6 +260,7 @@ export const VideoRecorder = () => {
                   height: isMobile ? undefined : videoHeight,
                   facingMode: "user",
                 }}
+                muted="true"
                 width={videoWidth > 400 ? 333 : videoWidth > 360 ? 313 : 298}
                 height={videoHeight}
                 style={{ objectFit: "cover" }}
