@@ -117,7 +117,6 @@ const beviBookConfigs = {
       previewScreen: {
         video: {
           height: "350",
-          heading: "",
           fontSize: "",
           fontColor: "",
           video: {},
@@ -160,7 +159,6 @@ const beviBookConfigs = {
           bgHeight: "100vh",
         },
         audio: {
-          heading: "",
           fontSize: "",
           fontColor: "",
           audio: {
@@ -258,8 +256,6 @@ const beviBookConfigs = {
       },
 
       thankyouScreen: {
-        heading: "",
-        subHeading: "",
         shareIcon: {
           borderRadius: "none",
           url: `${pathName}/bevi/share-icon.png`,
@@ -284,7 +280,6 @@ const beviBookConfigs = {
           borderRadius: "22px",
           display: false,
         },
-        goBackText: "",
         button: {
           backgroundColor: "#5089ed",
           text: "Share",

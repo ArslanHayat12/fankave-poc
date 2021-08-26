@@ -63,6 +63,7 @@ export const HomeScreen = () => {
           audioBox: { display: displayAudioCard },
           imageCaptureBox: { display: displayCaptureCard },
           imageUploadBox: { display: displayUploadCard },
+          heading,
         },
       },
     },
@@ -70,7 +71,7 @@ export const HomeScreen = () => {
 
   return (
     <HomeScreenStyled id="fk-home-screen">
-      <p className="description">Select one to record your testimonial</p>
+      <p className="description">{heading}</p>
       <article className="widgets-wrapper">
         {displayVideoCard && (
           <RecordingCard

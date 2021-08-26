@@ -19,13 +19,11 @@ const defaultConfigs = {
     },
     background: {
       type: "image", //image|video
-      url: `${pathName}/default/postal-background.svg`,
     },
 
     pageLayout: {
       header: {
         position: "center",
-        mainLogoUrl: `${pathName}/default/postal-logo-white.png`,
         subLogoUrl: "",
         subLogoTex: "",
         mainLogoHeight: "40px",
@@ -114,7 +112,6 @@ const defaultConfigs = {
       previewScreen: {
         video: {
           height: "350",
-          heading: "",
           fontSize: "",
           fontColor: "",
           video: {},
@@ -155,7 +152,6 @@ const defaultConfigs = {
           bgHeight: "100vh",
         },
         audio: {
-          heading: "",
           fontSize: "",
           fontColor: "",
           audio: {
@@ -251,13 +247,11 @@ const defaultConfigs = {
       },
 
       thankyouScreen: {
-        heading: "",
-        subHeading: "",
         shareIcon: {
           borderRadius: "none",
           url: `${pathName}/default/share-icon.png`,
           bgColor: "transparent",
-          height: "95px",
+          height: "35px",
           display: true,
         },
         tweetIcon: {
@@ -277,7 +271,6 @@ const defaultConfigs = {
           borderRadius: "22px",
           display: false,
         },
-        goBackText: "",
         button: {
           backgroundColor: "#5089ed",
           text: "Share",

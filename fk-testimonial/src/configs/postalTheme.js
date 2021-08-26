@@ -116,7 +116,6 @@ const postalConfigs = {
       previewScreen: {
         video: {
           height: "350",
-          heading: "",
           fontSize: "",
           fontColor: "",
           video: {},
@@ -159,7 +158,6 @@ const postalConfigs = {
           bgHeight: "100vh",
         },
         audio: {
-          heading: "",
           fontSize: "",
           fontColor: "",
           audio: {
@@ -257,8 +255,6 @@ const postalConfigs = {
       },
 
       thankyouScreen: {
-        heading: "",
-        subHeading: "",
         shareIcon: {
           borderRadius: "none",
           url: `${pathName}/postal/share-icon.png`,
@@ -283,7 +279,6 @@ const postalConfigs = {
           borderRadius: "22px",
           display: false,
         },
-        goBackText: "",
         button: {
           backgroundColor: "#5089ed",
           text: "Share",

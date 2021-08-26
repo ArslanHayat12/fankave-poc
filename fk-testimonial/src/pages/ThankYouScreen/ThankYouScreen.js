@@ -192,6 +192,9 @@ export const ThankYouScreen = () => {
           linkedinButton: { display: linkedinIconDisplay },
           tweetIcon: { url: beviTweetIcon },
           button: { text, display },
+          heading,
+          subHeading,
+          goBackText,
         },
       },
     },
@@ -199,12 +202,10 @@ export const ThankYouScreen = () => {
 
   return (
     <ThankyouScreenStyled className="thankyou-screen" id="fk-thankyou-screen">
-      <h2 className="heading">Thank you</h2>
-      <p className="description">
-        We will be in touch if we need anything else.
-      </p>
+      <h2 className="heading">{heading}</h2>
+      <p className="description">{subHeading}</p>
       <span className="back-button" onClick={onBack}>
-        Go Again
+        {goBackText}
       </span>
       {testimonialType === "video" && !tweet && !isTweetUploaded && (
         <div className="button-wrapper">

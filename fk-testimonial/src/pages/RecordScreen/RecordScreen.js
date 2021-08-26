@@ -44,6 +44,18 @@ const RecordScreen = () => {
   }, []);
 
   const theme = useContext(ThemeContext);
+
+  const {
+    default: {
+      widget: {
+        recordingScreen: {
+          video: { heading: videoScreenHeading },
+          audio: { heading: audioScreenHeading },
+        },
+      },
+    },
+  } = theme;
+
   const onBack = useCallback(() => {
     dispatch({
       type: RESET_DATA,
@@ -53,7 +65,7 @@ const RecordScreen = () => {
   const VideoScreen = () => {
     return (
       <>
-        <h2 className="heading">Record Video Testimonial</h2>
+        <h2 className="heading">{videoScreenHeading}</h2>
         <VideoRecorder className="video" />
       </>
     );
@@ -62,7 +74,7 @@ const RecordScreen = () => {
   const AudioScreen = () => {
     return (
       <>
-        <h2 className="heading">Record Audio Testimonial</h2>
+        <h2 className="heading">{audioScreenHeading}</h2>
         <figure className="audio-wrapper">
           <article className="mic-wrapper">
             <MicIcon customClass="mic-icon" height="35px" />

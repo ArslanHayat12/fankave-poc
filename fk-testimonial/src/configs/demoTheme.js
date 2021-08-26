@@ -59,6 +59,7 @@ const demoConfigs = {
 
       homeScreen: {
         cardStyle: "columns", // columns | rows
+        heading: "Select one to record your testimonial",
         videoBox: {
           display: true,
           type: "video",
@@ -116,7 +117,7 @@ const demoConfigs = {
       previewScreen: {
         video: {
           height: "350",
-          heading: "",
+          heading: "Preview Video Testimonial",
           fontSize: "",
           fontColor: "",
           video: {},
@@ -157,7 +158,7 @@ const demoConfigs = {
           bgHeight: "100vh",
         },
         audio: {
-          heading: "",
+          heading: "Preview Audio Testimonial",
           fontSize: "",
           fontColor: "",
           audio: {
@@ -214,6 +215,7 @@ const demoConfigs = {
 
       recordingScreen: {
         video: {
+          heading: "Record Video Testimonial",
           height: "550",
           questionsList,
           button: {
@@ -230,6 +232,7 @@ const demoConfigs = {
           },
         },
         audio: {
+          heading: "Record Audio Testimonial",
           questionsList,
           button: {
             display: false,
@@ -253,8 +256,8 @@ const demoConfigs = {
       },
 
       thankyouScreen: {
-        heading: "",
-        subHeading: "",
+        heading: "Thank you",
+        subHeading: "We will be in touch if we need anything else.",
         shareIcon: {
           borderRadius: "none",
           url: `${pathName}/demo/share-icon.png`,
@@ -279,7 +282,7 @@ const demoConfigs = {
           borderRadius: "22px",
           display: false,
         },
-        goBackText: "",
+        goBackText: "Go Again",
         button: {
           backgroundColor: "#5089ed",
           text: "Share",
