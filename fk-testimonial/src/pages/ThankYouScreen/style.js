@@ -36,25 +36,28 @@ export const ThankyouScreenStyled = styled.section`
     margin-top: 25px;
   }
 
-  .twitter-icon{
-    height:${(props) =>
+  .twitter-icon {
+    height: ${(props) =>
       props.theme.default.widget.thankyouScreen.tweetIcon.height};
     display: flex;
     margin: 20px auto;
   }
 
   .share-button {
-    color:#fff;
-    font-size: 17px;
-    margin-top:10px;
+    color: ${(props) =>
+      props.theme.default.widget.thankyouScreen.button.color || "#fff"};
+    font-size: ${(props) =>
+      props.theme.default.widget.thankyouScreen.button.fontSize || "17px"};
+    margin-top: 10px;
     border: none;
     border-radius: 30px;
     box-shadow: 0px 6px 10px 0 rgba(44, 91, 203, 0.45);
-    background:${(props) =>
+    background: ${(props) =>
       props.theme.default.widget.thankyouScreen.button.backgroundColor};
-    height:${(props) =>
+    height: ${(props) =>
       props.theme.default.widget.thankyouScreen.button.height};
-    width:${(props) => props.theme.default.widget.thankyouScreen.button.width}}
+    width: ${(props) => props.theme.default.widget.thankyouScreen.button.width};
+  }
 
   .icon-button {
     background-color: transparent;
@@ -62,15 +65,14 @@ export const ThankyouScreenStyled = styled.section`
     border: none;
     cursor: pointer;
     margin-right: 3px;
-    border-radius:${(props) =>
-      props.theme.default.widget.thankyouScreen.shareIcon.borderRadius}
+    border-radius: ${(props) =>
+      props.theme.default.widget.thankyouScreen.shareIcon.borderRadius};
     padding: 4px 5px 0;
 
-    img{
-      height:${(props) =>
-        props.theme.default.widget.thankyouScreen.shareIcon.height}
+    img {
+      height: ${(props) =>
+        props.theme.default.widget.thankyouScreen.shareIcon.height};
     }
-   
   }
 
   .back-button svg {
@@ -85,15 +87,23 @@ export const ThankyouScreenStyled = styled.section`
   .text-area {
     height: ${(props) =>
       props.theme.default.widget.thankyouScreen.input.height};
+    font-size: ${(props) =>
+      props.theme.default.widget.thankyouScreen.input.fontSize || "16px"};
     width: 90%;
     margin-bottom: 10px;
     resize: none;
     font-family: "Poppins";
-    padding:15px;
+    padding: 15px;
     box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.14);
-    border: solid 2px rgba(218, 218, 218, 0.21);
-    border-radius:22px;
-    outline:none
+    border: ${`solid 2px ${(props) =>
+      props.theme.default.widget.thankyouScreen.input.borderColor ||
+      "rgba(218, 218, 218, 0.21)"}`};
+    border-radius: ${(props) =>
+      props.theme.default.widget.thankyouScreen.input.borderRadius || "22px"};
+    outline: none;
+    background: ${(props) =>
+      props.theme.default.widget.thankyouScreen.input.background ||
+      "transparent"};
   }
 
   .tweet-button {
@@ -101,7 +111,7 @@ export const ThankyouScreenStyled = styled.section`
     background-color: ${(props) =>
       props.theme.default.widget.thankyouScreen.twitterButton.bgColor};
     color: #fff;
-    border-radius:${(props) =>
+    border-radius: ${(props) =>
       props.theme.default.widget.thankyouScreen.twitterButton.borderRadius};
     padding: 6px 18px;
     outline: none;
@@ -114,11 +124,10 @@ export const ThankyouScreenStyled = styled.section`
     border-radius: 30px;
     font-size: 15px;
 
-    img{
-      height:${(props) =>
-        props.theme.default.widget.thankyouScreen.tweetIcon.height}
+    img {
+      height: ${(props) =>
+        props.theme.default.widget.thankyouScreen.tweetIcon.height};
     }
-    
   }
 
   .success {
@@ -127,7 +136,7 @@ export const ThankyouScreenStyled = styled.section`
     margin-top: 25px;
   }
 
-  .error{
-    margin-top:10px;
+  .error {
+    margin-top: 10px;
   }
 `;

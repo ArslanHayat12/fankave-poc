@@ -20,6 +20,12 @@ export const ClientDetailsStyled = styled.article`
     cursor: pointer;
   }
 
+  .client-name-wrapper svg path {
+    fill: ${(props) =>
+      props.theme.default.widget.previewScreen.video.input.iconColor ||
+      "#5089ed"};
+  }
+
   .input-name {
     margin-top: 12px;
   }
@@ -61,6 +67,8 @@ export const ClientDetailsStyled = styled.article`
     box-shadow: ${(props) =>
       props.theme.default.widget.previewScreen.video.input.placeholders
         .boxShadow};
+    border-color: ${(props) =>
+      props.theme.default.widget.previewScreen.video.input.borderColor};
   }
 
   :-webkit-autofill {
