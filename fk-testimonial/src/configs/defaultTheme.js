@@ -19,13 +19,11 @@ const defaultConfigs = {
     },
     background: {
       type: "image", //image|video
-      url: `${pathName}/default/postal-background.svg`,
     },
 
     pageLayout: {
       header: {
         position: "center",
-        mainLogoUrl: `${pathName}/default/postal-logo-white.png`,
         subLogoUrl: "",
         subLogoTex: "",
         mainLogoHeight: "40px",
@@ -58,9 +56,11 @@ const defaultConfigs = {
       fontColor: "",
 
       homeScreen: {
+        cardStyle: "rows", // columns | rows
         videoBox: {
+          display: true,
           icon: `${pathName}/default/camera.png`,
-          text: "",
+          text: "RECORD VIDEO",
           borderRadius: "18px",
           background: "",
           border: "solid 2px #878787",
@@ -70,8 +70,35 @@ const defaultConfigs = {
           fontSize: "",
         },
         audioBox: {
+          display: true,
           icon: `${pathName}/default/mic.png`,
-          text: "",
+          text: "RECORD AUDIO",
+          borderRadius: "18px",
+          background: "",
+          border: "solid 2px #878787",
+          iconColor: "",
+          iconSize: "",
+          fontColor: "",
+          fontSize: "",
+        },
+        imageCaptureBox: {
+          display: false,
+          type: "imageCapture",
+          icon: `${pathName}/demo/upload.png`,
+          text: "CAPTURE IMAGE",
+          borderRadius: "18px",
+          background: "",
+          border: "solid 2px #878787",
+          iconColor: "",
+          iconSize: "",
+          fontColor: "",
+          fontSize: "",
+        },
+        imageUploadBox: {
+          display: false,
+          type: "imageUpload",
+          icon: `${pathName}/demo/upload.png`,
+          text: "UPLOAD IMAGE",
           borderRadius: "18px",
           background: "",
           border: "solid 2px #878787",
@@ -85,7 +112,6 @@ const defaultConfigs = {
       previewScreen: {
         video: {
           height: "350",
-          heading: "",
           fontSize: "",
           fontColor: "",
           video: {},
@@ -126,7 +152,6 @@ const defaultConfigs = {
           bgHeight: "100vh",
         },
         audio: {
-          heading: "",
           fontSize: "",
           fontColor: "",
           audio: {
@@ -222,13 +247,11 @@ const defaultConfigs = {
       },
 
       thankyouScreen: {
-        heading: "",
-        subHeading: "",
         shareIcon: {
           borderRadius: "none",
           url: `${pathName}/default/share-icon.png`,
           bgColor: "transparent",
-          height: "95px",
+          height: "35px",
           display: true,
         },
         tweetIcon: {
@@ -248,7 +271,6 @@ const defaultConfigs = {
           borderRadius: "22px",
           display: false,
         },
-        goBackText: "",
         button: {
           backgroundColor: "#5089ed",
           text: "Share",

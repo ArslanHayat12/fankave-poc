@@ -60,9 +60,11 @@ const defaultConfigs = {
       fontColor: "",
 
       homeScreen: {
+        cardStyle: "rows", // columns | rows
         videoBox: {
+          display: true,
           icon: `${pathName}/honeybook/camera.png`,
-          text: "",
+          text: "RECORD VIDEO",
           borderRadius: "18px",
           background: "red",
           border: "solid 2px transparent",
@@ -72,8 +74,36 @@ const defaultConfigs = {
           fontSize: "",
         },
         audioBox: {
+          display: true,
           icon: `${pathName}/honeybook/mic.png`,
-          text: "",
+          text: "RECORD AUDIO",
+          borderRadius: "18px",
+          background: "",
+          border: "solid 2px #878787",
+          iconColor: "",
+          iconSize: "",
+          fontColor: "",
+          fontSize: "",
+        },
+
+        imageCaptureBox: {
+          display: false,
+          type: "imageCapture",
+          icon: `${pathName}/demo/upload.png`,
+          text: "CAPTURE IMAGE",
+          borderRadius: "18px",
+          background: "",
+          border: "solid 2px #878787",
+          iconColor: "",
+          iconSize: "",
+          fontColor: "",
+          fontSize: "",
+        },
+        imageUploadBox: {
+          display: false,
+          type: "imageUpload",
+          icon: `${pathName}/demo/upload.png`,
+          text: "UPLOAD IMAGE",
           borderRadius: "18px",
           background: "",
           border: "solid 2px transparent",
@@ -87,7 +117,6 @@ const defaultConfigs = {
       previewScreen: {
         video: {
           height: "350",
-          heading: "",
           fontSize: "",
           fontColor: "",
           video: {},
@@ -128,7 +157,6 @@ const defaultConfigs = {
           bgHeight: "100vh",
         },
         audio: {
-          heading: "",
           fontSize: "",
           fontColor: "",
           audio: {
@@ -224,8 +252,6 @@ const defaultConfigs = {
       },
 
       thankyouScreen: {
-        heading: "",
-        subHeading: "",
         shareIcon: {
           borderRadius: "none",
           url: `${pathName}/honeybook/share-icon.png`,
@@ -250,7 +276,6 @@ const defaultConfigs = {
           borderRadius: "22px",
           display: false,
         },
-        goBackText: "",
         button: {
           backgroundColor: "#5089ed",
           text: "Share",
