@@ -87,9 +87,11 @@
       );
 
       // Append to the `head` element
-      scr.setAttribute('src', `${filePath}${pathName}.js`);
+      if (pathName) {
+        scr.setAttribute('src', `${filePath}${pathName}.js`);
+        document.body.appendChild(scr);
+      }
       document.head.appendChild(link);
-      document.body.appendChild(scr);
 
     }
     loadDoc();
