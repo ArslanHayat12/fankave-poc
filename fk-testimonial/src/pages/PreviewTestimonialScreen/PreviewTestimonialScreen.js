@@ -63,9 +63,11 @@ const PreviewTestimonialScreen = () => {
         previewScreen: {
           video: {
             button: { text: buttonText },
+            heading: videoScreenHeading,
           },
           audio: {
             card: { icon: iconUrl },
+            heading: audioScreenHeading,
           },
         },
       },
@@ -204,14 +206,15 @@ const PreviewTestimonialScreen = () => {
   return (
     <PreviewScreenStyled
       id="fk-preview-testimonial-screen"
-      className={`preview-testimonial-screen${testimonialType === "audio" ? " audio-preview-screen" : ""
-        }`}
+      className={`preview-testimonial-screen${
+        testimonialType === "audio" ? " audio-preview-screen" : ""
+      }`}
     >
       <CrossIcon customClass="cross-icon" onClick={onBack} />
 
       {testimonialType === "video" ? (
         <>
-          <h2 className="heading">Preview Video Testimonial </h2>
+          <h2 className="heading">{videoScreenHeading} </h2>
           <figure className="video-wrapper">
             <button
               className="edit-testimonial"
@@ -250,7 +253,7 @@ const PreviewTestimonialScreen = () => {
         </>
       ) : (
         <>
-          <h2 className="heading">Preview Audio Testimonial </h2>
+          <h2 className="heading">{audioScreenHeading}</h2>
           <article className="audio-card">
             <img src={iconUrl} className="mic-icon" />
 
@@ -278,8 +281,9 @@ const PreviewTestimonialScreen = () => {
         <ClientDetails />
         <article className="button-wrapper">
           <button
-            className={`approve-button ${isApproveLoading ? "button-clicked" : ""
-              }`}
+            className={`approve-button ${
+              isApproveLoading ? "button-clicked" : ""
+            }`}
             onClick={isApproveLoading ? "" : () => generateRequestData(true)}
           >
             {buttonText}
@@ -287,7 +291,8 @@ const PreviewTestimonialScreen = () => {
         </article>
       </section>
       <span className="processing-text">
-        {isApproveLoading && "Processing ..."}</span>
+        {isApproveLoading && "Processing ..."}
+      </span>
       {testimonialType === "audio" &&
         theme.default.widget.previewScreen.audio.audio.displayWave && (
           <SoundWave />
