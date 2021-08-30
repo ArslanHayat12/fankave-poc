@@ -58,7 +58,7 @@ const demoConfigs = {
       fontColor: "",
 
       homeScreen: {
-        cardStyle: "columns", // columns | rows
+        cardStyle: "rows", // columns | rows
         heading: "Select one to record your testimonial",
         videoBox: {
           display: true,
@@ -87,7 +87,7 @@ const demoConfigs = {
           fontSize: "",
         },
         imageCaptureBox: {
-          display: true,
+          display: false,
           type: "imageCapture",
           icon: `${pathName}/demo/upload.png`,
           text: "CAPTURE IMAGE",
@@ -100,7 +100,7 @@ const demoConfigs = {
           fontSize: "",
         },
         imageUploadBox: {
-          display: true,
+          display: false,
           type: "imageUpload",
           icon: `${pathName}/demo/upload.png`,
           text: "UPLOAD IMAGE",
