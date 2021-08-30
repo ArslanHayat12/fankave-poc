@@ -50,7 +50,7 @@ const demoConfigs = {
       },
       logo: {
         position: "",
-        url: ``,
+        url: `${pathName}/demo/postal-logo.png`,
         height: "40px",
       },
       mainHeadingText: "",
