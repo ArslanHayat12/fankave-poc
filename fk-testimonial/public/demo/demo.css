@@ -176,7 +176,7 @@ body {
   }
 
   #fk-home-screen {
-    margin-bottom: 70px;
+    margin-bottom: 50px;
   }
   #fk-footer {
     margin-bottom: 10px;
@@ -228,15 +228,15 @@ body {
   }
 
   #fk-record-screen .timer {
-    margin: 63px 0px 15px;
+    margin: 50px 0px 15px;
   }
 
   #fk-video-recorder-wrapper .video-wrapper {
-    height: 55vh;
+    height: 50vh;
   }
 
   #fk-video-recorder-wrapper video {
-    height: 55vh;
+    height: 50vh;
   }
 }
 
