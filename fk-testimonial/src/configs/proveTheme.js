@@ -22,7 +22,6 @@ const defaultConfigs = {
       type: "image", //image|video
       url: `${pathName}/prove/background.png`,
     },
-
     pageLayout: {
       header: {
         position: "center",
@@ -187,7 +186,7 @@ const defaultConfigs = {
           height: "550",
           questionsList,
           button: {
-            display: true,
+            display: false,
             startRecording: {
               text: "Record",
             },
@@ -196,13 +195,13 @@ const defaultConfigs = {
             },
           },
           icon: {
-            display: false,
+            display: true,
           },
         },
         audio: {
           questionsList,
           button: {
-            display: true,
+            display: false,
             startRecording: {
               text: "Record",
             },
@@ -211,7 +210,7 @@ const defaultConfigs = {
             },
           },
           icon: {
-            display: false,
+            display: true,
           },
           micIcon: {
             stroke: "#86a6e3",

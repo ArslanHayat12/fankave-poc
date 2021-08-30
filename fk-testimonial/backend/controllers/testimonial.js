@@ -79,14 +79,15 @@ const controller = {
     waitForValue: async function (storagePath, currentTime = 0, timeout = 5000) {
         if (storage.getItem(storagePath)) return true;
         if (currentTime === timeout) return false;
-        // wait for 1 second
-        await (new Promise((resolve, reject) => setTimeout(() => resolve(true), 1000)));
-        // waited for 1 second
-        return controller.waitForValue(storagePath, currentTime + 1000, timeout);
+        // wait for 2 second
+        await (new Promise((resolve, reject) => setTimeout(() => resolve(true), 2000)));
+        // waited for 2 second
+        return controller.waitForValue(storagePath, currentTime + 2000, timeout);
     },
     getToken: async function (req, res) {
         await controller.waitForValue(twitterStorage)
-        res.send(storage.getItem(twitterStorage))
+        const value = await storage.getItem(twitterStorage)
+        res.send(value)
     },
     getLinkedInToken: async function (req, res) {
         await controller.waitForValue(linkedInStorage)

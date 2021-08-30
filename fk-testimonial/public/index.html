@@ -71,28 +71,33 @@
       userConfigs[window.location.hostname].title ||
       userConfigs["default"].title;
   </script>
-
   <script>
     function loadDoc() {
       const type = window.self.ctag;
+      const pathName = window.location.pathname.replaceAll("/", "");
+      const filePath = window.location.hostname === "localhost" ? "/" : `/${pathName}/`
       // Create new link element
+      var scr = document.createElement('script');
+
       const link = document.createElement("link");
       link.setAttribute("rel", "stylesheet");
       link.setAttribute(
         "href",
-        `/testimonials/${window.self.ctag}/${window.self.ctag}.css`
+        `${filePath}${window.self.ctag}/${window.self.ctag}.css`
       );
 
       // Append to the `head` element
+      scr.setAttribute('src', `${filePath}${pathName}.js`);
       document.head.appendChild(link);
-    }
+      document.body.appendChild(scr);
 
+    }
     loadDoc();
   </script>
 
   <div id="root"></div>
   <div id="testimonials"></div>
-  <script src="/testimonials/testimonials.js"></script>
+
 </body>
 
 </html>

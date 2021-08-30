@@ -46,6 +46,8 @@ app.use(express.static(path.join(__dirname, "static")));
 app.use(express.static(path.join(__dirname, "build", "static")));
 app.use("/testimonials", express.static(path.join(__dirname, "build", "static")));
 // app.use('/testimonials/*', express.static(path.join(__dirname, "build", "static")));
+app.use("/sharestories", express.static(path.join(__dirname, "build", "static")));
+// app.use('/v1/api/*', express.static(path.join(__dirname, "build", "static")));
 
 //Strategies
 passport.use(new Strategy({

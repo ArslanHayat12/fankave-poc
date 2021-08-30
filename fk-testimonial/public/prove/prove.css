@@ -106,6 +106,7 @@ body {
   height: 13px;
   width: 13px;
 }
+
 #fk-preview-testimonial-screen .approve-button svg path {
   fill: rgb(41 113 255);
 } */
@@ -371,24 +372,6 @@ body {
 
   #fk-record-screen .record-visualizer {
     top: 5%;
-  }
-}
-
-@media (max-width: 320px) {
-  #fk-widget-wrapper {
-    height: 73vh;
-  }
-
-  #fk-footer img {
-    height: 20px;
-  }
-
-  #fk-card-wrapper img {
-    height: 35px;
-  }
-
-  #fk-preview-testimonial-screen .video-wrapper {
-    height: 45vh;
   }
 }
 
