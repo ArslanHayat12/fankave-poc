@@ -17,6 +17,7 @@ import {
   RecordingIcon,
   DefaultRecordingIcon,
   DefaultStopIcon,
+  PauseIcon,
 } from "../../assets";
 import { useInterval } from "../../hooks/useInterval";
 import { convertSecondsToHourMinute } from "../../utils";
@@ -46,6 +47,7 @@ export const VideoRecorder = () => {
   const [currentQuestion, setCurrentQuestion] = useState("0")
   const [isStreamInit, setIsStreamInit] = useState(false);
   const [capturing, setCapturing] = useState(false);
+  const [isPausedVideo, setIsPausedVideo] = useState(false)
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [canvasRecordedChunks, setCanvasRecordedChunks] = useState([]);
   const [videoURL, setVideoURl] = useState("");
@@ -129,6 +131,14 @@ export const VideoRecorder = () => {
       outputVideoRef.current.src = videoURL;
     };
 
+    mediaRecorderRef.current.onpause = function () {
+      setIsPausedVideo(true)
+    }
+
+    mediaRecorderRef.current.onresume = function () {
+      setIsPausedVideo(false)
+    }
+
     mediaRecorderRef.current.ondataavailable = function (e) {
       setCanvasRecordedChunks([...canvasRecordedChunks, e.data]);
     };
@@ -138,6 +148,16 @@ export const VideoRecorder = () => {
 
   const stopCanvasVideo = () => {
     mediaRecorderRef.current.stop()
+  }
+
+  const handlePauseVideo = () => {
+    setCapturing(false)
+    mediaRecorderRef.current.pause()
+  }
+
+  const handleResumeVideo = () => {
+    setCapturing(true)
+    mediaRecorderRef.current.resume()
   }
 
   const computeFrames = useCallback(() => {
@@ -217,6 +237,7 @@ export const VideoRecorder = () => {
             button: {
               display: displayButton,
               startRecording: { text: recordText },
+              pauseRecording: { text: pauseText, display: pauseButtonDisplay },
               stopRecording: { text: stopText },
             },
           },
@@ -260,7 +281,7 @@ export const VideoRecorder = () => {
                   height: isMobile ? undefined : videoHeight,
                   facingMode: "user",
                 }}
-                muted="true"
+                muted={true}
                 width={videoWidth > 400 ? 333 : videoWidth > 360 ? 313 : 298}
                 height={videoHeight}
                 style={{ objectFit: "cover" }}
@@ -281,14 +302,14 @@ export const VideoRecorder = () => {
           <QuestionsCard setCurrentQuestion={setCurrentQuestion} />
         </article>
       </figure>
-      {capturing && (
+
+      {capturing ? (
         <div className="timer-button-container">
           <article className="video-timer">
-            {" "}
             {convertSecondsToHourMinute(String(recordingTime))}
           </article>
           <div className="stop-button-container">
-            {displayButton ? (
+            {!isPausedVideo && displayButton ? (
               <button onClick={handleStopCaptureClick} className="text-button">
                 <DefaultStopIcon customClass="stop-icon" /> {stopText}
               </button>
@@ -302,8 +323,24 @@ export const VideoRecorder = () => {
                 </button>
               </Tooltip>
             )}
+
+            {
+              pauseButtonDisplay && (
+                <Tooltip content={pauseText} placement="right">
+                  <button onClick={handlePauseVideo} className="stop-button">
+                    <PauseIcon customClass="play-icon" />
+                  </button>
+                </Tooltip>
+              )
+            }
           </div>
         </div>
+      ) : isPausedVideo && pauseButtonDisplay && (
+        <Tooltip content="Play" placement="right">
+          <button onClick={handleResumeVideo} className="">
+            Resume
+          </button>
+        </Tooltip>
       )}
       {isStreamInit && !capturing && (
         <div className="button-container">
@@ -311,7 +348,7 @@ export const VideoRecorder = () => {
             <button onClick={handleStartCaptureClick} className="text-button">
               <DefaultRecordingIcon customClass="play-icon" /> {recordText}
             </button>
-          ) : (
+          ) : !isPausedVideo && (
             <Tooltip content="Record" placement="right">
               <button
                 onClick={handleStartCaptureClick}

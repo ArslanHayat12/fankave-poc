@@ -73,7 +73,7 @@ const RecordScreen = () => {
 
             <AudioRecorder />
             <article className="testimonial-questions-wrapper">
-              <QuestionsCard />
+              <QuestionsCard setCurrentQuestion={()=>{}} />
             </article>
           </figure>
         </>

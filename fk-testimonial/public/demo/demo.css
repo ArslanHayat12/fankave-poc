@@ -24,11 +24,11 @@ body {
 }
 
 #fk-video-recorder-wrapper .video-wrapper {
-  height: 61vh;
+  height: auto;
 }
 
 #fk-video-recorder-wrapper .video-wrapper video {
-  height: 61vh;
+  height: auto;
 }
 
 #fk-record-screen .heading {
