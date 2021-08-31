@@ -39,7 +39,7 @@ body {
 }
 
 #fk-page-wrapper {
-  height: 100%;
+  height: 100vh !important;
   /* height: 100%;
   display: flex;
   flex-direction: column;
@@ -129,6 +129,7 @@ body {
 #fk-card-wrapper {
   background-color: #eff7ff;
   border: none;
+  padding: 10px;
 }
 
 #fk-preview-testimonial-screen .video-wrapper {
