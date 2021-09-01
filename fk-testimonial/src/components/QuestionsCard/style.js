@@ -6,6 +6,10 @@ export const QuestionCardStyled = styled.article`
   align-items: center;
   width: 100%;
 
+  &.pulse {
+    animation: pulse 1s linear;
+  }
+
   .questions {
     width: 90%;
     text-align: center;
@@ -41,5 +45,14 @@ export const QuestionCardStyled = styled.article`
   .question-count {
     font-size: 12px;
     color: #35a4ff;
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opcaity: 1;
+    }
   }
 `;

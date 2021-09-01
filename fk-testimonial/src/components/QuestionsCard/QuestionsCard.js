@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useState, useEffect } from "react";
 import { ThemeContext } from "styled-components";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { SET_INDEX } from "../../constants";
@@ -6,6 +6,7 @@ import { QuestionCardStyled } from "./style";
 
 const QuestionsCard = () => {
   const { state, dispatch } = useContext(TestimonialContext);
+  const [pulse, setPulse] = useState(false);
   const theme = useContext(ThemeContext);
 
   const questionArray =
@@ -29,8 +30,23 @@ const QuestionsCard = () => {
     }
   }, [state]);
 
+  useEffect(() => {
+    setPulse(true);
+
+    const timer = setTimeout(() => {
+      setPulse(false);
+    }, 1000);
+    return () => {
+      setPulse(false);
+      clearTimeout(timer);
+    };
+  }, [state.questionIndex]);
+
   return (
-    <QuestionCardStyled className="question-card" id="fk-question-card">
+    <QuestionCardStyled
+      className={`question-card ${pulse && "pulse"}`}
+      id="fk-question-card"
+    >
       <p className="questions">{questionArray[state.questionIndex].text}</p>
 
       <article className="question-buttons-wrapper">
