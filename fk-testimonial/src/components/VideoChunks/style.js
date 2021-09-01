@@ -50,6 +50,7 @@ export const CardStyled = styled.article`
     height: 60px;
     width: 60px;
     margin-right: 10px;
+    cursor: pointer;
   }
 `;
 

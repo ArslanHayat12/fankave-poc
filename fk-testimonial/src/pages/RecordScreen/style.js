@@ -1,5 +1,7 @@
 import styled from "styled-components";
 export const RecordingScreenStyled = styled.article`
+  animation: pulse 1s linear;
+
   width: 100%;
   height: 100%;
   z-index: 1;
@@ -108,5 +110,14 @@ export const RecordingScreenStyled = styled.article`
     top: 10px;
     cursor: pointer;
     z-index: 1;
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opcaity: 1;
+    }
   }
 `;

@@ -99,3 +99,12 @@ export const VideoRecorderStyled = styled.article`
     }
   }
 `;
+
+export const ListingLinkStyled = styled.span`
+  position: absolute;
+  color: #fff;
+  margin: 5px 10px;
+  font-size: 12px;
+  z-index: 10;
+  cursor: pointer;
+`;

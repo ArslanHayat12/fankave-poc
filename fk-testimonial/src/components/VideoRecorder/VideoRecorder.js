@@ -22,11 +22,13 @@ import { useInterval } from "../../hooks/useInterval";
 import { convertSecondsToHourMinute } from "../../utils";
 import {
   SET_URL,
+  SET_SCREEN,
   SET_URL_DURATION,
   SET_THUMB_URL,
   SET_RECORD_CHUKS,
+  VIDEO_QUESTIONS_SCREEN,
 } from "../../constants";
-import { VideoRecorderStyled } from "./style";
+import { VideoRecorderStyled, ListingLinkStyled } from "./style";
 
 export const VideoRecorder = () => {
   const { dispatch } = useContext(TestimonialContext);
@@ -161,12 +163,23 @@ export const VideoRecorder = () => {
     },
   } = theme;
 
+  const goToListing = () => {
+    console.log("============>");
+    dispatch({
+      type: SET_SCREEN,
+      payload: VIDEO_QUESTIONS_SCREEN,
+    });
+  };
+
   return (
     <VideoRecorderStyled
       className="video-recorder-wrapper"
       id="fk-video-recorder-wrapper"
     >
       <figure className="video-wrapper">
+        <ListingLinkStyled onClick={() => goToListing()}>
+          {"< Go to Listing"}
+        </ListingLinkStyled>
         <div className="video-recording-container">
           {!videoURL && (
             <Webcam
