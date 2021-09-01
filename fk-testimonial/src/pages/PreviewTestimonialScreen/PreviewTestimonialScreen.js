@@ -20,6 +20,7 @@ import { SoundWave } from "../../components/AudioVisualizers/SoundWave";
 import { ConfirmationModal } from "../../components/ConfirmationModal/ConfirmationModal";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { getPublishAPIRequest } from "../../utils/index";
+import { getUserConfig } from "./../../utils/config";
 import {
   SET_URL,
   SET_SCREEN,
@@ -53,10 +54,13 @@ const PreviewTestimonialScreen = () => {
   const audioRef = useRef(null);
   const [isApproveLoading, setIsApproveLoading] = useState(false);
   const theme = useContext(ThemeContext);
+  const { origin } = getUserConfig("testimonials");
+
   const apiRequestURL = getPublishAPIRequest(
     window.location.hostname,
     theme.default.topic
   );
+
   const {
     default: {
       widget: {
@@ -73,31 +77,50 @@ const PreviewTestimonialScreen = () => {
       },
     },
   } = theme;
+
   const shareAudioVideoToServer = (formData, isApproveAction = false) => {
     setIsApproveLoading(true);
-    fetch(apiRequestURL, {
-      body: formData,
+    // fetch(apiRequestURL, {
+    //   body: formData,
+    //   method: "POST",
+    // })
+    //   .then((response) => {
+    //     setIsApproveLoading(false);
+    //     // check for error response
+    //     if (!response.ok) {
+    //       // get error message from body or default to response status
+    //       const error = response.status;
+    //       return Promise.reject(error);
+    //     }
+    //     if (isApproveAction) {
+    //       dispatch({
+    //         type: SET_SCREEN,
+    //         payload: THANK_YOU_SCREEN,
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log("error", err);
+    //     alert("Request failed with error code " + err);
+    //   });
+
+    fetch(origin + "/v1/api/transcription", {
       method: "POST",
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify({file_path: "gs://optimum-surface-602.appspot.com/6834178896867368971.mp4"}),
+    }).then(response => {
+      // fetch(apiRequestURL, {
+      //     body: JSON.stringify({
+      //       transcript: response.transcript
+      //     }),
+      //     method: "PUT",
+      //     headers: new Headers({
+      //       'Content-Type': 'application/json'
+      //     }),
+      //   })
     })
-      .then((response) => {
-        setIsApproveLoading(false);
-        // check for error response
-        if (!response.ok) {
-          // get error message from body or default to response status
-          const error = response.status;
-          return Promise.reject(error);
-        }
-        if (isApproveAction) {
-          dispatch({
-            type: SET_SCREEN,
-            payload: THANK_YOU_SCREEN,
-          });
-        }
-      })
-      .catch((err) => {
-        console.log("error", err);
-        alert("Request failed with error code " + err);
-      });
   };
 
   const generateRequestData = (isApproveAction) => {

@@ -73,7 +73,6 @@ const methods = (client) => ({
             })
 
     },
-
     publishStatusUpdate: function (mediaId, tweetMessage, filePath) {
         if (mediaId)
             setTimeout(() => {
@@ -94,6 +93,63 @@ const methods = (client) => ({
                 })
             }, 5000)
         fs.unlinkSync(filePath)
+    },
+    handleTranscription: async function(gcsUri) {
+        // Imports the Google Cloud Video Intelligence library
+        const videoIntelligence = require('@google-cloud/video-intelligence');
+
+        // Creates a client
+        const client = new videoIntelligence.VideoIntelligenceServiceClient();
+        const fs = require('fs');
+
+        async function analyzeVideoTranscript(gcsUri) {
+            const videoContext = {
+                speechTranscriptionConfig: {
+                    languageCode: 'en-US',
+                    enableAutomaticPunctuation: true,
+                    speechContexts: [{
+                        phrases: ['bevi'],
+                        boost: "15"
+                    }],
+                },
+            };
+
+            const request = {
+                inputUri: gcsUri,
+                features: ['SPEECH_TRANSCRIPTION'],
+                videoContext: videoContext,
+
+            };
+
+            const [operation] = await client.annotateVideo(request);
+            console.log('Waiting for operation to complete...');
+            const [operationResult] = await operation.promise();
+            // There is only one annotation_result since only
+            // one video is processed.
+            const annotationResults = operationResult.annotationResults[0];
+            const fullTranscript = []
+
+            for (const speechTranscription of annotationResults.speechTranscriptions) {
+                // The number of alternatives for each transcription is limited by
+                // SpeechTranscriptionConfig.max_alternatives.
+                // Each alternative is a different possible transcription
+                // and has its own confidence score.
+                console.log(speechTranscription)
+                for (const alternative of speechTranscription.alternatives) {
+                    fullTranscript.push(alternative.transcript)
+                    fs.appendFile('message.json', JSON.stringify({ 
+                        transcript: alternative.transcript, 
+                        confidence: alternative.confidence 
+                    }, null, 3), 'utf8', function (err) {
+                        if (err) throw err;
+                        console.log('Saved!');
+                    });
+                }
+            }
+            return fullTranscript
+        }
+
+        return await analyzeVideoTranscript(gcsUri)
     }
 })
 module.exports = methods

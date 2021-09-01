@@ -191,6 +191,13 @@ const controller = {
             })
             .catch((data) => { response.send(data) })
 
+    },
+    getTranscription: async function (req, response) {
+        const uri = req.body.file_path
+        const fullTranscript = await testimonialservice().handleTranscription(uri);
+        response.send({
+            transcript: fullTranscript
+        })
     }
 
 }
