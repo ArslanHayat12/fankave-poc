@@ -20,6 +20,14 @@ export const VideoRecorderStyled = styled.article`
     z-index: 2;
   }
 
+  .webcam-video {
+    display: none;
+  }
+  .video-canvas {
+    width: 100%;
+    border-radius: 8px;
+  }
+
   .video-recording-container video {
     width: 100%;
   }
@@ -41,6 +49,8 @@ export const VideoRecorderStyled = styled.article`
 
   .timer-button-container .stop-button-container {
     justify-self: center;
+    display: flex;
+    align-items: center;
   }
 
   .stop-button-container .stop-button {

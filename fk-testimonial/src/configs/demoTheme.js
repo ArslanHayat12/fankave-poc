@@ -223,6 +223,10 @@ const demoConfigs = {
             startRecording: {
               text: "Record",
             },
+            pauseRecording: {
+              text: "Pause",
+              display: true
+            },
             stopRecording: {
               text: "Stop",
             },

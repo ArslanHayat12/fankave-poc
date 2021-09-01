@@ -28,11 +28,11 @@ body {
 }
 
 #fk-video-recorder-wrapper .video-wrapper {
-  height: 64vh;
+  height: auto;
 }
 
 #fk-video-recorder-wrapper .video-wrapper video {
-  height: 64vh;
+  height: auto;
 }
 
 #fk-record-screen .heading {
@@ -54,11 +54,11 @@ body {
 }
 
 #fk-preview-testimonial-screen .video-wrapper {
-  height: 60vh;
+  height: auto;
 }
 
 #fk-preview-testimonial-screen .video-wrapper video {
-  height: 60vh;
+  height: auto;
 }
 
 #fk-client-details-wrapper input {

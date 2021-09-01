@@ -61,32 +61,16 @@ export const RecordingIcon = (props) => {
 export const PauseIcon = (props) => {
   const { customClass } = props;
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="6"
-      height="8"
-      viewBox="0 0 6 8"
-      className={customClass}
-    >
-      <g id="Group_31" data-name="Group 31" transform="translate(-726 -467)">
-        <rect
-          id="Rectangle_18"
-          data-name="Rectangle 18"
-          width="2"
-          height="8"
-          transform="translate(726 467)"
-          fill="#e85775"
-        />
-        <rect
-          id="Rectangle_19"
-          data-name="Rectangle 19"
-          width="2"
-          height="8"
-          transform="translate(730 467)"
-          fill="#e85775"
-        />
+    < svg className={customClass} xmlns="http://www.w3.org/2000/svg" width="37" height="37" >
+      <g id="Group_69" data-name="Group 69" transform="translate(-732 -728)">
+        <g id="Ellipse_1" data-name="Ellipse 1" transform="translate(732 728)" fill="#fff" stroke="#f55555">
+          <circle cx="18.5" cy="18.5" r="18.5" stroke="none" />
+          <circle cx="18.5" cy="18.5" r="18" fill="none" />
+        </g>
+        <path id="Rectangle_178" data-name="Rectangle 178" fill="#f55555" transform="translate(747 740)" d="M0 0h2v13H0z" />
+        <path id="Rectangle_179" data-name="Rectangle 179" fill="#f55555" transform="translate(752 740)" d="M0 0h2v13H0z" />
       </g>
-    </svg>
+    </svg >
   );
 };
 

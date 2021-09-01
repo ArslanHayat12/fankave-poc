@@ -327,7 +327,7 @@ body {
     height: 50px;
   }
   #fk-widget-wrapper {
-    height: 64vh;
+    height: 64vha;
   }
   #fk-video-recorder-wrapper .video-wrapper {
     height: 48vh;
@@ -355,11 +355,11 @@ body {
     height: 66vh;
   }
   #fk-video-recorder-wrapper .video-wrapper {
-    height: 53vh;
+    height: auto;
   }
 
   #fk-video-recorder-wrapper .video-wrapper video {
-    height: 53vh;
+    height: auto;
   }
 
   #fk-preview-testimonial-screen .video-wrapper {
