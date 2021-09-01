@@ -9,12 +9,12 @@ import { ThemeContext } from "styled-components";
 import QuestionsCard from "../../components/QuestionsCard/QuestionsCard";
 import { MicIcon, CrossIcon } from "../../assets/index";
 import { AudioRecorder } from "../../components/AudioRecorder/Recorder";
-import { VideoRecorder } from "../../components/VideoRecorder/VideoRecorder";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { useInterval } from "../../hooks/useInterval";
 import { convertSecondsToHourMinute } from "./../../utils/index";
 import { RecordingScreenStyled } from "./style";
 import { SET_URL_DURATION, RESET_DATA } from "../../constants";
+import { VideoRecorder } from "../../components/VideoRecorder/VideoRecorder";
 
 const RecordScreen = () => {
   const {

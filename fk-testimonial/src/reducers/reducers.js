@@ -11,7 +11,7 @@ import {
   SET_CLIENT_EMAIL,
   SET_CLIENT_COMPANY,
   SET_THUMB_URL,
-  SET_RECORD_CHUKS
+  SET_RECORD_CHUKS,
 } from "../constants";
 import { initialState } from "../context/TestimonialContext";
 
@@ -49,6 +49,9 @@ export const reducer = (state, action) => {
 
     case RESET_DATA:
       return { ...initialState };
+
+    case SET_INDEX:
+      return { ...state, questionIndex: action.payload };
 
     default:
       return state;

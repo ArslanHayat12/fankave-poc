@@ -1,6 +1,7 @@
 export const HOME_SCREEN = "HOME_SCREEN";
 export const TESTIMONIAL_SCREEN = "TESTIMONIAL_SCREEN";
 export const THANK_YOU_SCREEN = "THANK_YOU_SCREEN";
+export const VIDEO_QUESTIONS_SCREEN = "VIDEO_QUESTIONS_SCREEN";
 
 // Dispatch types
 export const RESET_DATA = "RESET_DATA";
@@ -18,4 +19,4 @@ export const SET_CLIENT_COMPANY = "SET_CLIENT_COMPANY";
 export const SET_THUMB_URL = "SET_THUMB_URL";
 
 export const SET_INDEX = "Set_INDEX";
-export const SET_RECORD_CHUKS = "SET_RECORD_CHUKS"
+export const SET_RECORD_CHUKS = "SET_RECORD_CHUKS";

@@ -648,3 +648,37 @@ export const DefaultStopIcon = (props) => {
     </svg>
   );
 };
+
+export const ArrowIcon = (props) => {
+  const { customClass, onClick } = props;
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="70"
+      height="70"
+      viewBox="0 0 70 70"
+      className={customClass}
+      onClick={onClick}
+    >
+      <g id="Group_70" data-name="Group 70" transform="translate(-856 -382)">
+        <g
+          id="Testimonial-Rebecca"
+          transform="translate(856 382)"
+          fill="#fff"
+          stroke="#E6E6E6"
+          stroke-width="1"
+        >
+          <rect width="70" height="70" rx="35" stroke="none" />
+          <rect x="0.5" y="0.5" width="69" height="69" rx="34.5" fill="none" />
+        </g>
+        <path
+          id="Union_2"
+          data-name="Union 2"
+          d="M2580.707-7254.009a1,1,0,0,1,0-1.415l12.729-12.728-12.729-12.729a1,1,0,0,1,0-1.413,1,1,0,0,1,1.415,0l13.436,13.436a1,1,0,0,1,.292.706,1,1,0,0,1-.292.707l-13.436,13.436a1,1,0,0,1-.707.293A1,1,0,0,1,2580.707-7254.009Z"
+          transform="translate(-1694.914 7684.651)"
+          fill="#E1E1E1"
+        />
+      </g>
+    </svg>
+  );
+};

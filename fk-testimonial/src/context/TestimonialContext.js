@@ -12,8 +12,8 @@ export const initialState = {
   clientEmail: "",
   clientCompany: "",
   thumbUrl: null,
-  recordedChunks: ''
-
+  recordedChunks: "",
+  questionIndex: 0,
 };
 
 export const TestimonialContext = createContext({

@@ -3,7 +3,12 @@ import { ThemeContext } from "styled-components";
 
 import RecordingCard from "../../components/RecordingCard/RecordingCard";
 import { TestimonialContext } from "../../context/TestimonialContext";
-import { TESTIMONIAL_SCREEN, SET_TYPE, SET_SCREEN } from "../../constants";
+import {
+  TESTIMONIAL_SCREEN,
+  SET_TYPE,
+  SET_SCREEN,
+  VIDEO_QUESTIONS_SCREEN,
+} from "../../constants";
 import { HomeScreenStyled } from "./style";
 
 export const HomeScreen = () => {
@@ -11,12 +16,12 @@ export const HomeScreen = () => {
 
   const onVideoClick = () => {
     dispatch({
-      type: SET_TYPE,
-      payload: "video",
+      type: SET_SCREEN,
+      payload: VIDEO_QUESTIONS_SCREEN,
     });
     dispatch({
-      type: SET_SCREEN,
-      payload: TESTIMONIAL_SCREEN,
+      type: SET_TYPE,
+      payload: "video",
     });
   };
 

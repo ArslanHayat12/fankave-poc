@@ -1,9 +1,22 @@
-const questionsList = [
-  "What is your name, title and company?",
-  "What challenge did you have?",
-  "What made this partner the obvious choice?",
-  "What were the results?",
+const questionDetails = [
+  {
+    text: "What is your name, title and company?",
+    chunkSize: "0.25",
+  },
+  {
+    text: "What challenge did you have?",
+    chunkSize: "0.5",
+  },
+  {
+    text: "What made this partner the obvious choice?",
+    chunkSize: "",
+  },
+  {
+    text: "What were the results?",
+    chunkSize: "",
+  },
 ];
+
 let pathName = window.location.pathname.replaceAll("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
@@ -209,7 +222,7 @@ const defaultConfigs = {
       recordingScreen: {
         video: {
           height: "550",
-          questionsList,
+          questionDetails,
           button: {
             display: false,
             startRecording: {
@@ -224,7 +237,7 @@ const defaultConfigs = {
           },
         },
         audio: {
-          questionsList,
+          questionDetails,
           button: {
             display: false,
             startRecording: {
