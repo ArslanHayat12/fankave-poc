@@ -45,7 +45,7 @@ export const VideoRecorder = () => {
   tempCanvas.setAttribute("height", 550)
   const tempCanvasContext = tempCanvas.getContext("2d")
 
-  const [currentQuestion, setCurrentQuestion] = useState("0")
+  const [currentQuestion, setCurrentQuestion] = useState({ questionIndex: 0, questionText: "" })
   const [isStreamInit, setIsStreamInit] = useState(false);
   const [capturing, setCapturing] = useState(false);
   const [isPausedVideo, setIsPausedVideo] = useState(false)
@@ -57,8 +57,8 @@ export const VideoRecorder = () => {
   const [error, setError] = useState("");
   const [showNotification, setShowNotification] = useState(false);
   const [recordingTime, setTime] = useState(0);
+  const [previewQuestionIndex, setPreviewQuestionIndex ] = useState(0)
 
-  console.log("recordedChunks: ", recordedChunks, casvasRecordedChunksList)
   useInterval(() => {
     capturing && setTime(recordingTime + 1);
   }, 1000);
@@ -101,39 +101,14 @@ export const VideoRecorder = () => {
       if (data.size > 0) {
         setRecordedChunks((prev) => prev.concat(data));
       }
-      setCasvasRecordedChunksList((prev) => prev.concat({ questionIndex: currentQuestion, data: [data] }))
+      setCasvasRecordedChunksList((prev) => prev.concat({ questionIndex: currentQuestion.questionIndex, data: [data] }))
+      
     },
     [setRecordedChunks, casvasRecordedChunksList]
   );
-  // useEffect(() => {
-  //   //webm type video file created
-  //   if (recordedChunks.length) {
-  //     let options = { type: "video/webm" };
-  //     if (typeof MediaRecorder.isTypeSupported == "function") {
-  //       if (MediaRecorder.isTypeSupported("video/webm")) {
-  //         options = { type: "video/webm" };
-  //       } else if (MediaRecorder.isTypeSupported("video/mp4")) {
-  //         //Safari 14.0.2 has an EXPERIMENTAL version of MediaRecorder enabled by default
-  //         options = { type: "video/mp4" };
-  //       }
-  //     }
-
-  //     const blob = new Blob(recordedChunks, options);
-
-  //     let url = window.URL.createObjectURL(blob);
-  //     try {
-  //       url = window.webkitURL.createObjectURL(blob);
-  //     } catch {
-  //       url = window.URL.createObjectURL(blob);
-  //     }
-
-  //     console.log(url)
-
-  //   }
-  // }, [recordedChunks]);
-
+  console.log("casvasRecordedChunksList: ", casvasRecordedChunksList)
   const handleStopCaptureClick = useCallback(() => {
-    // mediaRecorderRef.current.stop();
+    mediaRecorderRef.current.stop();
     setCapturing(false);
     setIsStopVideo(true)
     stopCanvasVideo()
@@ -165,8 +140,7 @@ export const VideoRecorder = () => {
 
     mediaRecorderRef.current.onpause = function (e) {
       setIsPausedVideo(true)
-      mediaRecorderRef.current.requestData()
-      console.log("casvasRecordedChunksList PAUSE: ", casvasRecordedChunksList, e)
+      // mediaRecorderRef.current.requestData()
     }
 
     mediaRecorderRef.current.onresume = function () {
@@ -210,7 +184,7 @@ export const VideoRecorder = () => {
     tempCanvasContext.textAlign = "center"
     tempCanvasContext.font = 'normal normal 500 19px "Poppins"'
 
-    const currentQuestionSplitted = getLines(tempCanvasContext, currentQuestion, 300).reverse()
+    const currentQuestionSplitted = getLines(tempCanvasContext, currentQuestion.questionText, 300).reverse()
     const lineHeight = 40
     currentQuestionSplitted.map((data, index) => {
       tempCanvasContext.fillText(data, (webcamRef?.current?.video.width / 2), webcamRef?.current?.video.height - (lineHeight + ((index + 1) * 30)))
@@ -225,6 +199,7 @@ export const VideoRecorder = () => {
   useEffect(() => {
     //webm type video file created
     if (canvasRecordedChunks.length && isStopVideo) {
+      alert("working")
       let options = { type: "video/webm" };
       if (typeof MediaRecorder.isTypeSupported == "function") {
         if (MediaRecorder.isTypeSupported("video/webm")) {
@@ -294,9 +269,17 @@ export const VideoRecorder = () => {
       id="fk-video-recorder-wrapper"
     >
       {
-        casvasRecordedChunksList.length > 1 && (
-          <VideoPreview videoChunks={casvasRecordedChunksList[1].data} />
+        casvasRecordedChunksList.length > 0 && (
+          <VideoPreview videoChunks={casvasRecordedChunksList[previewQuestionIndex].data} />
         )
+      }
+
+      {
+        casvasRecordedChunksList?.map((data, index) => {
+          return (
+            <button onClick={()=> {setPreviewQuestionIndex(data.questionIndex)}}>Question {data.questionIndex}</button>
+          )
+        })
       }
       <figure className="video-wrapper">
         <div className="video-recording-container">
@@ -346,7 +329,7 @@ export const VideoRecorder = () => {
         </div>
 
         <article className="testimonial-questions-wrapper">
-          <QuestionsCard setCurrentQuestion={setCurrentQuestion} handleStartCaptureClick={handleStartCaptureClick} />
+          <QuestionsCard mediaRef={mediaRecorderRef} setCurrentQuestion={setCurrentQuestion} handleStartCaptureClick={handleStartCaptureClick} />
         </article>
       </figure>
 

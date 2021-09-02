@@ -5,7 +5,7 @@ import { initialState, QuestionContext } from "../../context/QuestionContext";
 import { SET_INDEX } from "../../constants";
 import { QuestionCardStyled } from "./style";
 
-const QuestionsCard = ({setCurrentQuestion, handleStartCaptureClick}) => {
+const QuestionsCard = ({setCurrentQuestion, handleStartCaptureClick, mediaRef}) => {
   const [state, dispatch] = useReducer(questionReducer, initialState);
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
   const theme = useContext(ThemeContext);
@@ -24,6 +24,7 @@ const QuestionsCard = ({setCurrentQuestion, handleStartCaptureClick}) => {
 
   const gotToNextQuestion = useCallback(() => {
     if (state.questionIndex < questionArray.length - 1) {
+      mediaRef.current.requestData()
       dispatch({
         type: SET_INDEX,
         payload: state.questionIndex + 1,
@@ -32,7 +33,7 @@ const QuestionsCard = ({setCurrentQuestion, handleStartCaptureClick}) => {
   }, [state]);
 
   useEffect(()=>{
-    setCurrentQuestion(questionArray[state.questionIndex])
+    setCurrentQuestion({questionIndex: state.questionIndex, questionText: questionArray[state.questionIndex]})
   },[state.questionIndex])
 
   return (
