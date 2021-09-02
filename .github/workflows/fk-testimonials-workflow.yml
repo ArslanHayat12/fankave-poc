@@ -2,7 +2,7 @@ name: Deploy fk testimonials workflow
 on:
   push:
     branches:
-      - testimonials
+      - synched-branch
 jobs:
   deploy:
     runs-on: ubuntu-latest
