@@ -36,10 +36,15 @@ export const VideoRecorderStyled = styled.article`
   .video-timer {
     position: absolute;
     z-index: 1;
-    right: 8px;
     color: #fff;
     top: 5px;
     font-size: 16px;
+
+    margin: auto;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
   }
 
   .timer-button-container .stop-button-container {

@@ -278,9 +278,9 @@ export const VideoRecorder = () => {
       id="fk-video-recorder-wrapper"
     >
       <figure className="video-wrapper">
-        <ListingLinkStyled onClick={() => goToListing()}>
+        {/* <ListingLinkStyled onClick={() => goToListing()}>
           {"< Go to Listing"}
-        </ListingLinkStyled>
+        </ListingLinkStyled> */}
         <article className="video-timer">
           {convertSecondsToHourMinute(String(recordingTime))}
         </article>
