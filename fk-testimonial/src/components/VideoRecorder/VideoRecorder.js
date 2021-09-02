@@ -317,11 +317,9 @@ export const VideoRecorder = () => {
           )}
         </div>
 
-        {nextPreviousButtonsDisplay && (
-          <article className="testimonial-questions-wrapper">
-            <QuestionsCard handleNextPrevClick={handleNextPrevClick} />
-          </article>
-        )}
+        <article className="testimonial-questions-wrapper">
+          <QuestionsCard handleNextPrevClick={handleNextPrevClick} />
+        </article>
       </figure>
       {capturing && (
         <div className="timer-button-container">

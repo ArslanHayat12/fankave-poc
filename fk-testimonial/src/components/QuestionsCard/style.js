@@ -18,6 +18,7 @@ export const QuestionCardStyled = styled.article`
     margin-bottom: 0;
     font-size: 19px;
     font-weight: 500;
+    margin-bottom: 10px;
   }
 
   .question-button {
@@ -38,7 +39,7 @@ export const QuestionCardStyled = styled.article`
   .question-buttons-wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
   }
 
