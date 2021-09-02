@@ -27,6 +27,10 @@ import {
   SET_URL_DURATION,
   THANK_YOU_SCREEN,
   RESET_DATA,
+  SET_QUESTION_URL,
+  RECORD_SCREEN,
+  SET_INDEX,
+  VIDEO_QUESTIONS_SCREEN,
 } from "../../constants";
 import { Loader } from "../../components/LoaderOverlay/Loader";
 import { PreviewScreenStyled } from "./style";
@@ -44,9 +48,12 @@ const PreviewTestimonialScreen = () => {
       clientEmail,
       clientCompany,
       thumbUrl,
+      currentQuestionIndex,
+      questions,
     },
     dispatch,
   } = useContext(TestimonialContext);
+  console.log("url", url);
   const [playVideo, setPlayVideo] = useState(false);
   const [retakeModal, setRetakeModal] = useState(false);
   const videoRef = useRef(null);
@@ -100,48 +107,74 @@ const PreviewTestimonialScreen = () => {
       });
   };
 
+  console.log(
+    "length====================>",
+    questions.length,
+    currentQuestionIndex
+  );
   const generateRequestData = (isApproveAction) => {
-    fetch(url)
-      .then((res) => {
-        console.log(res);
-        return res.blob();
-      })
-      .then((blob) => {
-        const formData = new FormData();
-        formData.append("media", blob);
-
-        formData.append(
-          "type",
-          testimonialType === "video" ? "video" : "audio"
-        );
-
-        formData.append(
-          "story",
-          testimonialType === "video" ? "Video" : "Audio"
-        ); //audio for audio
-
-        formData.append(
-          "author",
-          JSON.stringify({
-            name: clientName,
-            email: clientEmail,
-            company: clientCompany,
-          })
-        );
-        formData.append("isIOS", _iOSDevice);
-        formData.append("hashtags", JSON.stringify(["Testimonial", "POC"]));
-        fetch(thumbUrl)
-          .then((res) => res.blob())
-          .then((thumbUrlBlob) => {
-            formData.append(
-              "thumb",
-              testimonialType === "video"
-                ? thumbUrlBlob
-                : `${window.location.origin}/wave.png`
-            );
-            shareAudioVideoToServer(formData, isApproveAction);
-          });
+    console.log("approve url", url);
+    dispatch({
+      type: SET_QUESTION_URL,
+      payload: { currentQuestionIndex, url, isAnswered: true },
+    });
+    if (currentQuestionIndex <= questions.length - 1) {
+      dispatch({
+        type: SET_INDEX,
+        payload: currentQuestionIndex + 1,
       });
+    }
+    if (currentQuestionIndex < questions.length - 1) {
+      dispatch({
+        type: SET_SCREEN,
+        payload: RECORD_SCREEN,
+      });
+    } else {
+      console.log("video question screen ****");
+      dispatch({
+        type: SET_SCREEN,
+        payload: VIDEO_QUESTIONS_SCREEN,
+      });
+    }
+
+    // fetch(url)
+    //   .then((res) => {
+    //     console.log(res);
+    //     return res.blob();
+    //   })
+    //   .then((blob) => {
+    //     const formData = new FormData();
+    //     formData.append("media", blob);
+    //     formData.append(
+    //       "type",
+    //       testimonialType === "video" ? "video" : "audio"
+    //     );
+    //     formData.append(
+    //       "story",
+    //       testimonialType === "video" ? "Video" : "Audio"
+    //     ); //audio for audio
+    //     formData.append(
+    //       "author",
+    //       JSON.stringify({
+    //         name: clientName,
+    //         email: clientEmail,
+    //         company: clientCompany,
+    //       })
+    //     );
+    //     formData.append("isIOS", _iOSDevice);
+    //     formData.append("hashtags", JSON.stringify(["Testimonial", "POC"]));
+    //     fetch(thumbUrl)
+    //       .then((res) => res.blob())
+    //       .then((thumbUrlBlob) => {
+    //         formData.append(
+    //           "thumb",
+    //           testimonialType === "video"
+    //             ? thumbUrlBlob
+    //             : `${window.location.origin}/wave.png`
+    //         );
+    //         shareAudioVideoToServer(formData, isApproveAction);
+    //       });
+    //   });
   };
 
   const onPlayClick = () => {
@@ -206,8 +239,9 @@ const PreviewTestimonialScreen = () => {
   return (
     <PreviewScreenStyled
       id="fk-preview-testimonial-screen"
-      className={`preview-testimonial-screen${testimonialType === "audio" ? " audio-preview-screen" : ""
-        }`}
+      className={`preview-testimonial-screen${
+        testimonialType === "audio" ? " audio-preview-screen" : ""
+      }`}
     >
       <CrossIcon customClass="cross-icon" onClick={onBack} />
 
@@ -281,8 +315,9 @@ const PreviewTestimonialScreen = () => {
         <ClientDetails />
         <article className="button-wrapper">
           <button
-            className={`approve-button ${isApproveLoading ? "button-clicked" : ""
-              }`}
+            className={`approve-button ${
+              isApproveLoading ? "button-clicked" : ""
+            }`}
             onClick={isApproveLoading ? "" : () => generateRequestData(true)}
           >
             {buttonText}

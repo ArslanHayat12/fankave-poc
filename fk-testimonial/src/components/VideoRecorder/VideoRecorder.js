@@ -27,11 +27,14 @@ import {
   SET_THUMB_URL,
   SET_RECORD_CHUKS,
   VIDEO_QUESTIONS_SCREEN,
+  PREVIEW_SCREEN,
 } from "../../constants";
 import { VideoRecorderStyled, ListingLinkStyled } from "./style";
 
 export const VideoRecorder = () => {
-  const { dispatch } = useContext(TestimonialContext);
+  const { state, dispatch } = useContext(TestimonialContext);
+
+  console.log("questions", state.questions);
   const webcamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const mediaRecorderRef2 = useRef(null);
@@ -43,7 +46,7 @@ export const VideoRecorder = () => {
   const [videoURL, setVideoURl] = useState("");
   const [error, setError] = useState("");
   const [showNotification, setShowNotification] = useState(false);
-  const [isNextClicked, setIsNextClicked] = useState(true);
+  const [isNextClicked, setIsNextClicked] = useState(false);
   const [recordingTime, setTime] = useState(0);
   const recordingTimeRef = useRef();
   recordingTimeRef.current = recordingTime;
@@ -92,26 +95,37 @@ export const VideoRecorder = () => {
         setRecordedChunks((prev) => prev.concat(data));
       }
     },
-    [setRecordedChunks, setSingleRecordedChunks, mediaRecorderRef, singleRecordedChunks, isNextClicked]
+    [
+      setRecordedChunks,
+      setSingleRecordedChunks,
+      mediaRecorderRef,
+      singleRecordedChunks,
+      isNextClicked,
+    ]
   );
   const handleDataAvailableSingle = useCallback(
     ({ data }) => {
       if (data.size > 0) {
         setSingleRecordedChunks((prev) => {
-          return prev.concat(data)
-        })
+          return prev.concat(data);
+        });
         if (mediaRecorderRef2.current.state !== "recording") {
           mediaRecorderRef2.current.start();
         }
-
       }
     },
-    [setRecordedChunks, setSingleRecordedChunks, mediaRecorderRef2, singleRecordedChunks, isNextClicked]
+    [
+      setRecordedChunks,
+      setSingleRecordedChunks,
+      mediaRecorderRef2,
+      singleRecordedChunks,
+      isNextClicked,
+    ]
   );
   const handleStopCaptureClick = useCallback(() => {
-    setIsNextClicked(false)
+    setIsNextClicked(false);
     if (mediaRecorderRef2.current.state !== "inactive") {
-      mediaRecorderRef2.current.requestData()
+      mediaRecorderRef2.current.requestData();
       // mediaRecorderRef2.current.stop();
     }
     mediaRecorderRef.current.stop();
@@ -128,15 +142,19 @@ export const VideoRecorder = () => {
       : setError(err);
   }, []);
 
-  const handleNextPrevClick = useCallback((isPrevious = false) => {
-    setIsNextClicked(true)
-    if (mediaRecorderRef2.current.state !== "inactive") {
-      mediaRecorderRef2.current.requestData()
-      mediaRecorderRef2.current.stop();
-    }
-  }, [mediaRecorderRef2.current?.state]);
+  const handleNextPrevClick = useCallback(
+    (isPrevious = false) => {
+      setIsNextClicked(true);
+      if (mediaRecorderRef2.current.state !== "inactive") {
+        mediaRecorderRef2.current.requestData();
+        mediaRecorderRef2.current.stop();
+      }
+    },
+    [mediaRecorderRef2.current?.state]
+  );
 
   useEffect(() => {
+    console.log("useeffect");
     //webm type video file created
     if (!isNextClicked && recordedChunks.length) {
       let options = { type: "video/webm" };
@@ -157,7 +175,7 @@ export const VideoRecorder = () => {
       } catch {
         url = window.URL.createObjectURL(blob);
       }
-      console.log(url)
+      console.log(url);
       setVideoURl(url);
       dispatch({
         type: SET_URL,
@@ -167,11 +185,18 @@ export const VideoRecorder = () => {
         type: SET_RECORD_CHUKS,
         payload: recordedChunks,
       });
+      if (url) {
+        dispatch({
+          type: SET_SCREEN,
+          payload: PREVIEW_SCREEN,
+        });
+      }
     }
   }, [recordedChunks, isNextClicked, singleRecordedChunks]);
 
-
+  //will be removed in refactoring
   useEffect(() => {
+    console.log("single record");
     //webm type video file created
     if (singleRecordedChunks.length) {
       let options = { type: "video/webm" };
@@ -183,7 +208,7 @@ export const VideoRecorder = () => {
           options = { type: "video/mp4" };
         }
       }
-      const value = [singleRecordedChunks[singleRecordedChunks.length - 1]]
+      const value = [singleRecordedChunks[singleRecordedChunks.length - 1]];
 
       const blob = new Blob(value, options);
 
@@ -203,8 +228,7 @@ export const VideoRecorder = () => {
       //   url2 = window.URL.createObjectURL(blob2);
       // }
 
-      console.log(url)
-
+      console.log(url);
     }
   }, [singleRecordedChunks]);
 
@@ -234,6 +258,7 @@ export const VideoRecorder = () => {
               startRecording: { text: recordText },
               stopRecording: { text: stopText },
             },
+            nextPreviousButtons: { display: nextPreviousButtonsDisplay },
           },
         },
       },
@@ -241,7 +266,6 @@ export const VideoRecorder = () => {
   } = theme;
 
   const goToListing = () => {
-    console.log("============>");
     dispatch({
       type: SET_SCREEN,
       payload: VIDEO_QUESTIONS_SCREEN,
@@ -257,6 +281,9 @@ export const VideoRecorder = () => {
         <ListingLinkStyled onClick={() => goToListing()}>
           {"< Go to Listing"}
         </ListingLinkStyled>
+        <article className="video-timer">
+          {convertSecondsToHourMinute(String(recordingTime))}
+        </article>
         <div className="video-recording-container">
           {!videoURL && (
             <Webcam
@@ -265,10 +292,10 @@ export const VideoRecorder = () => {
                 width: isMobile
                   ? undefined
                   : videoWidth > 400
-                    ? 333
-                    : videoWidth > 360
-                      ? 313
-                      : 298,
+                  ? 333
+                  : videoWidth > 360
+                  ? 313
+                  : 298,
                 height: isMobile ? undefined : videoHeight,
                 facingMode: "user",
               }}
@@ -285,21 +312,19 @@ export const VideoRecorder = () => {
           {error && (
             <NotificationCard
               openModal={error ? true : false}
-            //   handlePermission={allowCameraPermission}
+              //   handlePermission={allowCameraPermission}
             />
           )}
         </div>
 
-        <article className="testimonial-questions-wrapper">
-          <QuestionsCard handleNextPrevClick={handleNextPrevClick} />
-        </article>
+        {nextPreviousButtonsDisplay && (
+          <article className="testimonial-questions-wrapper">
+            <QuestionsCard handleNextPrevClick={handleNextPrevClick} />
+          </article>
+        )}
       </figure>
       {capturing && (
         <div className="timer-button-container">
-          <article className="video-timer">
-            {" "}
-            {convertSecondsToHourMinute(String(recordingTime))}
-          </article>
           <div className="stop-button-container">
             {displayButton ? (
               <button onClick={handleStopCaptureClick} className="text-button">

@@ -25,8 +25,7 @@ export const VideoRecorderStyled = styled.article`
   }
 
   .timer-button-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
     justify-content: center;
     margin: 15px auto 0;
     font-size: 12px;
@@ -34,8 +33,12 @@ export const VideoRecorderStyled = styled.article`
     padding: 0 12px;
   }
 
-  .timer-button-container .video-timer {
-    color: #6d6d6d;
+  .video-timer {
+    position: absolute;
+    z-index: 1;
+    right: 8px;
+    color: #fff;
+    top: 5px;
     font-size: 16px;
   }
 

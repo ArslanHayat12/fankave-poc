@@ -8,29 +8,34 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
   const { state, dispatch } = useContext(TestimonialContext);
   const [pulse, setPulse] = useState(false);
   const theme = useContext(ThemeContext);
-
-  const questionArray =
-    theme.default?.widget?.recordingScreen?.video?.questionDetails || [];
-
+  const questionArray = state.questions;
+  const currentIndex = state.currentQuestionIndex;
+  console.log(
+    "questionArray==============================================",
+    questionArray
+  );
   const gotToPrevQuestion = useCallback(() => {
-    if (state.questionIndex > 0) {
+    if (currentIndex > 0) {
       dispatch({
         type: SET_INDEX,
-        payload: state.questionIndex - 1,
+        payload: currentIndex - 1,
       });
-      handleNextPrevClick(true)
-      handleNextPrevClick(true)
+      handleNextPrevClick(true);
+      handleNextPrevClick(true);
     }
   }, [state]);
 
   const gotToNextQuestion = useCallback(() => {
-    if (state.questionIndex < questionArray.length - 1) {
+    if (currentIndex < questionArray.length - 1) {
       dispatch({
         type: SET_INDEX,
-        payload: state.questionIndex + 1,
+        payload: currentIndex + 1,
       });
-      handleNextPrevClick(false, state.questionIndex < questionArray.length - 1)
-      handleNextPrevClick(false)
+      handleNextPrevClick(
+        false,
+        state.questionIndex < questionArray.length - 1
+      );
+      handleNextPrevClick(false);
     }
   }, [state]);
 
@@ -44,32 +49,34 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
       setPulse(false);
       clearTimeout(timer);
     };
-  }, [state.questionIndex]);
+  }, [currentIndex]);
 
   return (
     <QuestionCardStyled
       className={`question-card ${pulse && "pulse"}`}
       id="fk-question-card"
     >
-      <p className="questions">{questionArray[state.questionIndex].text}</p>
+      <p className="questions">{questionArray[currentIndex].question}</p>
 
       <article className="question-buttons-wrapper">
         <button
-          className={`question-button prev-button${state.questionIndex === 0 ? " disabled" : ""
-            }`}
+          className={`question-button prev-button${
+            state.questionIndex === 0 ? " disabled" : ""
+          }`}
           onClick={state.questionIndex === 0 ? undefined : gotToPrevQuestion}
         >
           <span>&#8249;</span>
           {` Prev`}
         </button>
         <span className="question-count">
-          {state.questionIndex + 1}/{questionArray.length}
+          {currentIndex + 1}/{questionArray.length}
         </span>
         <button
-          className={`question-button next-button${state.questionIndex === questionArray.length - 1 ? " disabled" : ""
-            }`}
+          className={`question-button next-button${
+            state.questionIndex === questionArray.length - 1 ? " disabled" : ""
+          }`}
           onClick={
-            state.questionIndex === questionArray.length - 1
+            currentIndex === questionArray.length - 1
               ? undefined
               : gotToNextQuestion
           }

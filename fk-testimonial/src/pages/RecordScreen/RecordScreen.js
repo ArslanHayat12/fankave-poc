@@ -17,16 +17,13 @@ import { SET_URL_DURATION, RESET_DATA } from "../../constants";
 import { VideoRecorder } from "../../components/VideoRecorder/VideoRecorder";
 
 const RecordScreen = () => {
-  const {
-    state: { type, status },
-    dispatch,
-  } = useContext(TestimonialContext);
+  const { state, dispatch } = useContext(TestimonialContext);
   const [recordingTime, setTime] = useState(0);
   const recordingTimeRef = useRef();
   recordingTimeRef.current = recordingTime;
 
   useInterval(() => {
-    status && setTime(recordingTime + 0.5);
+    state.status && setTime(recordingTime + 0.5);
   }, 500);
 
   const dispatchURLDuration = useCallback(() => {
@@ -49,12 +46,17 @@ const RecordScreen = () => {
     default: {
       widget: {
         recordingScreen: {
-          video: { heading: videoScreenHeading },
+          video: {
+            heading: videoScreenHeading,
+            nextPreviousButtons: { display: nextPreviousButtonsDisplay },
+          },
           audio: { heading: audioScreenHeading },
         },
       },
     },
   } = theme;
+
+  console.log("screen", state.screen);
 
   const onBack = useCallback(() => {
     dispatch({
@@ -80,14 +82,15 @@ const RecordScreen = () => {
             <MicIcon customClass="mic-icon" height="35px" />
           </article>
           <article className="timer">
-            {" "}
             {convertSecondsToHourMinute(String(recordingTime))}
           </article>
 
           <AudioRecorder />
-          <article className="testimonial-questions-wrapper">
-            <QuestionsCard />
-          </article>
+          {nextPreviousButtonsDisplay && (
+            <article className="testimonial-questions-wrapper">
+              <QuestionsCard />
+            </article>
+          )}
         </figure>
       </>
     );
@@ -108,9 +111,9 @@ const RecordScreen = () => {
       </>
     );
   };
-
+  console.log(state.type);
   const RecordingScreen = () => {
-    switch (type) {
+    switch (state.type) {
       case "video":
         return VideoScreen();
 

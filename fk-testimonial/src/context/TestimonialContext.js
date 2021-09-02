@@ -1,3 +1,5 @@
+import React, { useContext } from "react";
+
 import { createContext } from "react";
 import { HOME_SCREEN } from "../constants";
 
@@ -13,7 +15,8 @@ export const initialState = {
   clientCompany: "",
   thumbUrl: null,
   recordedChunks: "",
-  questionIndex: 0,
+  currentQuestionIndex: 0,
+  questions: [],
 };
 
 export const TestimonialContext = createContext({

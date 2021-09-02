@@ -46,6 +46,11 @@ export const CardStyled = styled.article`
   background-color: #fff;
   margin: 10px 0;
 
+  &.disable {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
   .arrow-icon {
     height: 60px;
     width: 60px;

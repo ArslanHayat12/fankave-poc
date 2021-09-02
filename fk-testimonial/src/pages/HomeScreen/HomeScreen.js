@@ -12,7 +12,8 @@ import {
 import { HomeScreenStyled } from "./style";
 
 export const HomeScreen = () => {
-  const { dispatch } = useContext(TestimonialContext);
+  const { state, dispatch } = useContext(TestimonialContext);
+  console.log("screen", state.screen);
 
   const onVideoClick = () => {
     dispatch({

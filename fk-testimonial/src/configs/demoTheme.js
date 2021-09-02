@@ -1,20 +1,8 @@
 const questionDetails = [
-  {
-    text: "What is your name, title and company?",
-    chunkSize: "0.25",
-  },
-  {
-    text: "What challenge did you have?",
-    chunkSize: "0.5",
-  },
-  {
-    text: "What made this partner the obvious choice?",
-    chunkSize: "",
-  },
-  {
-    text: "What were the results?",
-    chunkSize: "",
-  },
+  "What is your name, title and company?",
+  "What challenge did you have?",
+  "What made this partner the obvious choice?",
+  "What were the results?",
 ];
 
 let pathName = window.location.pathname.replaceAll("/", "");
@@ -240,6 +228,9 @@ const demoConfigs = {
               text: "Stop",
             },
           },
+          nextPreviousButtons: {
+            display: false,
+          },
           icon: {
             display: true,
           },
@@ -253,6 +244,7 @@ const demoConfigs = {
               preview: "PREVIEW",
               redo: "RE-DO",
               recordAnswer: "RECORD ANSWER",
+              play: "PLAY",
               background: "#35a4ff",
             },
           },
