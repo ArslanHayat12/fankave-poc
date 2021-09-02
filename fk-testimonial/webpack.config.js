@@ -20,11 +20,7 @@ module.exports = (_, args) => ({
         testimonialPoc: {
             import: "./src/Routes.js",
             filename: `${process.env.WEB_APP_PATH || 'testimonials'}.js`,
-        },
-        sharestoriesPoc: {
-            import: "./src/Routes.js",
-            filename: `${process.env.WEB_APP_PATH || 'sharestories'}.js`,
-        },
+        }
     },
     resolve: {
         extensions: [".jsx", ".js", ".json"],

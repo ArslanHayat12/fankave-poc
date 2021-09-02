@@ -34,13 +34,16 @@ export const VideoRecorder = () => {
   const { dispatch } = useContext(TestimonialContext);
   const webcamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
+  const mediaRecorderRef2 = useRef(null);
 
   const [isStreamInit, setIsStreamInit] = useState(false);
   const [capturing, setCapturing] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
+  const [singleRecordedChunks, setSingleRecordedChunks] = useState([]);
   const [videoURL, setVideoURl] = useState("");
   const [error, setError] = useState("");
   const [showNotification, setShowNotification] = useState(false);
+  const [isNextClicked, setIsNextClicked] = useState(true);
   const [recordingTime, setTime] = useState(0);
   const recordingTimeRef = useRef();
   recordingTimeRef.current = recordingTime;
@@ -71,8 +74,17 @@ export const VideoRecorder = () => {
       "dataavailable",
       handleDataAvailable
     );
+    mediaRecorderRef2.current = new MediaRecorder(
+      webcamRef.current.stream,
+      options
+    );
+    mediaRecorderRef2.current.addEventListener(
+      "dataavailable",
+      handleDataAvailableSingle
+    );
+    mediaRecorderRef2.current.start();
     mediaRecorderRef.current.start();
-  }, [webcamRef, setCapturing, mediaRecorderRef]);
+  }, [webcamRef, setCapturing, mediaRecorderRef, mediaRecorderRef2]);
 
   const handleDataAvailable = useCallback(
     ({ data }) => {
@@ -80,10 +92,28 @@ export const VideoRecorder = () => {
         setRecordedChunks((prev) => prev.concat(data));
       }
     },
-    [setRecordedChunks]
+    [setRecordedChunks, setSingleRecordedChunks, mediaRecorderRef, singleRecordedChunks, isNextClicked]
   );
+  const handleDataAvailableSingle = useCallback(
+    ({ data }) => {
+      if (data.size > 0) {
+        setSingleRecordedChunks((prev) => {
+          return prev.concat(data)
+        })
+        if (mediaRecorderRef2.current.state !== "recording") {
+          mediaRecorderRef2.current.start();
+        }
 
+      }
+    },
+    [setRecordedChunks, setSingleRecordedChunks, mediaRecorderRef2, singleRecordedChunks, isNextClicked]
+  );
   const handleStopCaptureClick = useCallback(() => {
+    setIsNextClicked(false)
+    if (mediaRecorderRef2.current.state !== "inactive") {
+      mediaRecorderRef2.current.requestData()
+      // mediaRecorderRef2.current.stop();
+    }
     mediaRecorderRef.current.stop();
     setCapturing(false);
     dispatch({
@@ -98,9 +128,17 @@ export const VideoRecorder = () => {
       : setError(err);
   }, []);
 
+  const handleNextPrevClick = useCallback((isPrevious = false) => {
+    setIsNextClicked(true)
+    if (mediaRecorderRef2.current.state !== "inactive") {
+      mediaRecorderRef2.current.requestData()
+      mediaRecorderRef2.current.stop();
+    }
+  }, [mediaRecorderRef2.current?.state]);
+
   useEffect(() => {
     //webm type video file created
-    if (recordedChunks.length) {
+    if (!isNextClicked && recordedChunks.length) {
       let options = { type: "video/webm" };
       if (typeof MediaRecorder.isTypeSupported == "function") {
         if (MediaRecorder.isTypeSupported("video/webm")) {
@@ -110,7 +148,7 @@ export const VideoRecorder = () => {
           options = { type: "video/mp4" };
         }
       }
-
+      // console.log(value)
       const blob = new Blob(recordedChunks, options);
 
       let url = window.URL.createObjectURL(blob);
@@ -119,6 +157,7 @@ export const VideoRecorder = () => {
       } catch {
         url = window.URL.createObjectURL(blob);
       }
+      console.log(url)
       setVideoURl(url);
       dispatch({
         type: SET_URL,
@@ -129,7 +168,45 @@ export const VideoRecorder = () => {
         payload: recordedChunks,
       });
     }
-  }, [recordedChunks]);
+  }, [recordedChunks, isNextClicked, singleRecordedChunks]);
+
+
+  useEffect(() => {
+    //webm type video file created
+    if (singleRecordedChunks.length) {
+      let options = { type: "video/webm" };
+      if (typeof MediaRecorder.isTypeSupported == "function") {
+        if (MediaRecorder.isTypeSupported("video/webm")) {
+          options = { type: "video/webm" };
+        } else if (MediaRecorder.isTypeSupported("video/mp4")) {
+          //Safari 14.0.2 has an EXPERIMENTAL version of MediaRecorder enabled by default
+          options = { type: "video/mp4" };
+        }
+      }
+      const value = [singleRecordedChunks[singleRecordedChunks.length - 1]]
+
+      const blob = new Blob(value, options);
+
+      let url = window.URL.createObjectURL(blob);
+      try {
+        url = window.webkitURL.createObjectURL(blob);
+      } catch {
+        url = window.URL.createObjectURL(blob);
+      }
+
+      // const blob2 = new Blob(singleRecordedChunks, options);
+
+      // let url2 = window.URL.createObjectURL(blob2);
+      // try {
+      //   url2 = window.webkitURL.createObjectURL(blob2);
+      // } catch {
+      //   url2 = window.URL.createObjectURL(blob2);
+      // }
+
+      console.log(url)
+
+    }
+  }, [singleRecordedChunks]);
 
   const dispatchURLDuration = useCallback(() => {
     recordingTimeRef &&
@@ -188,10 +265,10 @@ export const VideoRecorder = () => {
                 width: isMobile
                   ? undefined
                   : videoWidth > 400
-                  ? 333
-                  : videoWidth > 360
-                  ? 313
-                  : 298,
+                    ? 333
+                    : videoWidth > 360
+                      ? 313
+                      : 298,
                 height: isMobile ? undefined : videoHeight,
                 facingMode: "user",
               }}
@@ -202,16 +279,19 @@ export const VideoRecorder = () => {
               onUserMediaError={showAccessBlocked}
             />
           )}
+          <video>
+            <source url="blob:http://localhost:5000/0e9d0baf-11ca-46aa-8bd2-da8d0752b5d2" />
+          </video>
           {error && (
             <NotificationCard
               openModal={error ? true : false}
-              //   handlePermission={allowCameraPermission}
+            //   handlePermission={allowCameraPermission}
             />
           )}
         </div>
 
         <article className="testimonial-questions-wrapper">
-          <QuestionsCard />
+          <QuestionsCard handleNextPrevClick={handleNextPrevClick} />
         </article>
       </figure>
       {capturing && (

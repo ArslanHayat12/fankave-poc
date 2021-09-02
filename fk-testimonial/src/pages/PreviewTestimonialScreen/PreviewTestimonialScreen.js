@@ -206,9 +206,8 @@ const PreviewTestimonialScreen = () => {
   return (
     <PreviewScreenStyled
       id="fk-preview-testimonial-screen"
-      className={`preview-testimonial-screen${
-        testimonialType === "audio" ? " audio-preview-screen" : ""
-      }`}
+      className={`preview-testimonial-screen${testimonialType === "audio" ? " audio-preview-screen" : ""
+        }`}
     >
       <CrossIcon customClass="cross-icon" onClick={onBack} />
 
@@ -235,6 +234,7 @@ const PreviewTestimonialScreen = () => {
               onEnded={() => setPlayVideo(false)}
               poster={thumbUrl}
             >
+              {console.log(url)}
               <source src={url} />
             </video>
             <button
@@ -281,9 +281,8 @@ const PreviewTestimonialScreen = () => {
         <ClientDetails />
         <article className="button-wrapper">
           <button
-            className={`approve-button ${
-              isApproveLoading ? "button-clicked" : ""
-            }`}
+            className={`approve-button ${isApproveLoading ? "button-clicked" : ""
+              }`}
             onClick={isApproveLoading ? "" : () => generateRequestData(true)}
           >
             {buttonText}
