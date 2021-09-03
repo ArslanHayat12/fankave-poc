@@ -317,10 +317,10 @@ export const VideoRecorder = () => {
                 width: isMobile
                   ? undefined
                   : videoWidth > 400
-                  ? 333
-                  : videoWidth > 360
-                  ? 313
-                  : 298,
+                    ? 333
+                    : videoWidth > 360
+                      ? 313
+                      : 298,
                 height: isMobile ? undefined : videoHeight,
                 facingMode: "user",
               }}
@@ -337,7 +337,7 @@ export const VideoRecorder = () => {
           {error && (
             <NotificationCard
               openModal={error ? true : false}
-              //   handlePermission={allowCameraPermission}
+            //   handlePermission={allowCameraPermission}
             />
           )}
         </div>
@@ -377,6 +377,7 @@ export const VideoRecorder = () => {
               <button
                 onClick={handleStartCaptureClick}
                 className="record-button"
+                disabled={true}
               >
                 <RecordingIcon customClass="video-play-icon" />
               </button>
