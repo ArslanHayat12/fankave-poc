@@ -5,6 +5,7 @@ import RecordingCard from "../../components/RecordingCard/RecordingCard";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import {
   TESTIMONIAL_SCREEN,
+  SET_QUESTION,
   SET_TYPE,
   SET_SCREEN,
   VIDEO_QUESTIONS_SCREEN,
@@ -14,9 +15,30 @@ import { HomeScreenStyled } from "./style";
 
 export const HomeScreen = () => {
   const { state, dispatch } = useContext(TestimonialContext);
-  console.log("screen", state.questions);
+  const theme = useContext(ThemeContext);
+
+  const {
+    default: {
+      widget: {
+        recordingScreen: {
+          video: { questionDetails },
+        },
+      },
+    },
+  } = theme;
+  console.log(questionDetails)
 
   const onVideoClick = () => {
+    const questions = questionDetails.map((question, index) => ({
+      questionIndex: index,
+      duration: 0,
+      question,
+      thumbUrl: "",
+      url: "",
+      isAnswered: false,
+    }));
+
+    dispatch({ type: SET_QUESTION, payload: questions });
     dispatch({
       type: SET_SCREEN,
       payload: VIDEO_QUESTIONS_SCREEN,
@@ -26,6 +48,7 @@ export const HomeScreen = () => {
       payload: "video",
     });
   };
+
 
   const onAudioClick = () => {
     dispatch({
@@ -60,7 +83,6 @@ export const HomeScreen = () => {
     });
   };
 
-  const theme = useContext(ThemeContext);
 
   const {
     default: {

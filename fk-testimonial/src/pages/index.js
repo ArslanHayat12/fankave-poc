@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from "react";
-import { ThemeContext } from "styled-components";
+import React, { useContext } from "react";
 
 import { HomeScreen } from "./HomeScreen/HomeScreen";
 import RecordScreen from "./RecordScreen/RecordScreen";
@@ -9,7 +8,6 @@ import {
   VIDEO_QUESTIONS_SCREEN,
   RECORD_SCREEN,
   THANK_YOU_SCREEN,
-  SET_QUESTION,
   PREVIEW_SCREEN,
 } from "../constants";
 import { TestimonialContext } from "../context/TestimonialContext";
@@ -17,37 +15,8 @@ import PreviewTestimonialScreen from "./PreviewTestimonialScreen/PreviewTestimon
 
 export const TestimonialApp = () => {
   const {
-    state: { screen, questions },
-    dispatch,
+    state: { screen },
   } = useContext(TestimonialContext);
-
-  const theme = useContext(ThemeContext);
-
-  const {
-    default: {
-      widget: {
-        recordingScreen: {
-          video: { questionDetails },
-        },
-      },
-    },
-  } = theme;
-
-  useEffect(() => {
-    const questions = questionDetails.map((question, index) => ({
-      questionIndex: index,
-      duration: 0,
-      question,
-      thumbUrl: "",
-      url: "",
-      isAnswered: false,
-    }));
-    console.log("useeefeec===", questions);
-
-    dispatch({ type: SET_QUESTION, payload: questions });
-  }, [questionDetails]);
-
-  console.log("index.js");
   return screen === VIDEO_QUESTIONS_SCREEN ? (
     <VideoQuestionScreen />
   ) : screen === THANK_YOU_SCREEN ? (
