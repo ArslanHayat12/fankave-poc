@@ -30,5 +30,6 @@ module.exports = function (app) {
         res.redirect('/v1/api/users?token=' + req.user.token + '&id=' + req.user.id)
     });
     app.post('/v1/api/share-on-linkedin', testimonialService().uploadFile(), testimonialController.sendTextMessageToLinkedIn)
-
+    app.post('/v1/api/transcription', testimonialController.getTranscription)
+    
 };

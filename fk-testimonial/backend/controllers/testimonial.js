@@ -191,6 +191,35 @@ const controller = {
             })
             .catch((data) => { response.send(data) })
 
+    },
+    getTranscription: async function (req, response) {
+        const { filePath, apiURL } = req.body
+
+        async function getAndPublishTranscription(filePath, apiURL) {
+            const fullTranscript = await testimonialservice().handleTranscription(filePath);
+            
+            axios({ 
+                method: 'put', 
+                url: apiURL, 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify({
+                    transcript: fullTranscript
+                }) 
+            }).then(res => {
+
+            }).catch(err => {
+
+            })
+        }
+        
+        if (filePath && apiURL) {
+            getAndPublishTranscription(filePath, apiURL)
+            response.send("Transcription initiated")
+        }else {
+            response.status(400).send({ error : "Bad Data" })
+        }
     }
 
 }
