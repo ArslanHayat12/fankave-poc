@@ -50,6 +50,11 @@
   color: #ffff;
 }
 
+.video-modal {
+  width: 100%;
+  height: 100%;
+}
+
 @media (max-width: 320px) {
   .react-responsive-modal-modal {
     max-width: 248px;

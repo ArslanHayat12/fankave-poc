@@ -7,6 +7,19 @@ export const VideoRecorderStyled = styled.article`
     font-size: 12px;
   }
 
+  .time-left {
+    color: #fff;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    left: 0;
+    right: 0;
+    height: 100%;
+    font-size: 36px;
+  }
+
   .button-container .record-button {
     display: flex;
     background: transparent;

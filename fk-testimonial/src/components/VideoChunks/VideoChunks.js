@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ThemeContext } from "styled-components";
 
 import { TestimonialContext } from "../../context/TestimonialContext";
@@ -11,12 +11,16 @@ import {
   TagStyled,
   ThumnailStyled,
 } from "./style";
+import { ConfirmationModal } from "../../components/ConfirmationModal/ConfirmationModal";
 
 import { ArrowIcon } from "../../assets";
+import Modal from "react-responsive-modal";
 
 const VideoChunks = () => {
   const { state, dispatch } = useContext(TestimonialContext);
   const questions = state.questions;
+
+  const [open, setOpen] = useState(false);
 
   const onVideoClick = (index) => {
     dispatch({
@@ -45,11 +49,24 @@ const VideoChunks = () => {
       },
     },
   } = theme;
-  console.log("questions====================", questions);
+
+  const convertDuration = (urlDuration) => {
+    const secondsToHHMMSS = new Date(urlDuration * 1000)
+      .toISOString()
+      .substr(11, 8);
+    return secondsToHHMMSS;
+  };
+
+  const onCloseModal = () => {
+    return setOpen(false);
+  };
+
   return (
     <VideoChunksWrapperStyled>
       {questions.map((data, index) => (
         <CardStyled
+          key={index}
+          onClick={data.url ? () => setOpen(true) : ""}
           alignCenter={data.isAnswered}
           className={`${
             data.questionIndex > 0 &&
@@ -69,11 +86,8 @@ const VideoChunks = () => {
           </QuestionDetailsStyled>
           {data.isAnswered ? (
             <ThumnailStyled>
-              <span className="time">{data.thumbUrl}</span>
-              <img
-                className="thumbnail"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
-              />
+              <span className="time">{convertDuration(data.urlDuration)}</span>
+              <img className="thumbnail" src={data.thumbUrl} />
             </ThumnailStyled>
           ) : (
             <ArrowIcon
@@ -81,6 +95,26 @@ const VideoChunks = () => {
               onClick={() => onVideoClick(index)}
             />
           )}
+
+          <Modal
+            id="fk-modal"
+            open={open}
+            onClose={onCloseModal}
+            center
+            classNames={{
+              overlay: "customOverlay",
+              modal: "customModal",
+            }}
+          >
+            <video
+              src={index == data.questionIndex && data.url}
+              className="video-modal"
+              controls
+              minWidth="100%"
+              minHeight="100%"
+              id=""
+            />
+          </Modal>
         </CardStyled>
       ))}
       {/* <video

@@ -45,6 +45,7 @@ export const CardStyled = styled.article`
   box-shadow: 0 2px 8px 0 rgb(0 0 0 / 16%);
   background-color: #fff;
   margin: 10px 0;
+  cursor: pointer;
 
   &.disable {
     opacity: 0.5;

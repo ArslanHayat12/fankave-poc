@@ -28,6 +28,7 @@ import {
   SET_RECORD_CHUKS,
   VIDEO_QUESTIONS_SCREEN,
   PREVIEW_SCREEN,
+  SET_QUESTION_THUMB_URL,
 } from "../../constants";
 import { VideoRecorderStyled, ListingLinkStyled } from "./style";
 
@@ -133,6 +134,14 @@ export const VideoRecorder = () => {
     dispatch({
       type: SET_THUMB_URL,
       payload: webcamRef?.current?.getScreenshot(),
+    });
+    dispatch({
+      type: SET_QUESTION_THUMB_URL,
+      payload: {
+        currentQuestionIndex: state.currentQuestionIndex,
+        thumbUrl: webcamRef?.current?.getScreenshot(),
+        urlDuration: recordingTimeRef.current,
+      },
     });
   }, [mediaRecorderRef, webcamRef, setCapturing]);
 
@@ -272,6 +281,21 @@ export const VideoRecorder = () => {
     });
   };
 
+  const [timeLeft, setTimeLeft] = useState(3);
+
+  useInterval(() => {
+    timeLeft > 0 && setTimeLeft(timeLeft - 1);
+  }, 1000);
+
+  useEffect(() => {
+    console.log("timeLeft======", timeLeft);
+    if (timeLeft == 0) {
+      console.log("timeLeft====== true");
+      const startVideo = handleStartCaptureClick();
+      return startVideo;
+    }
+  }, [timeLeft]);
+
   return (
     <VideoRecorderStyled
       className="video-recorder-wrapper"
@@ -281,6 +305,7 @@ export const VideoRecorder = () => {
         {/* <ListingLinkStyled onClick={() => goToListing()}>
           {"< Go to Listing"}
         </ListingLinkStyled> */}
+        {timeLeft !== 0 && <span className="time-left">{timeLeft}</span>}
         <article className="video-timer">
           {convertSecondsToHourMinute(String(recordingTime))}
         </article>

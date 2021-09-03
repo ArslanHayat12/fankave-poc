@@ -53,7 +53,6 @@ const PreviewTestimonialScreen = () => {
     },
     dispatch,
   } = useContext(TestimonialContext);
-  console.log("url", url);
   const [playVideo, setPlayVideo] = useState(false);
   const [retakeModal, setRetakeModal] = useState(false);
   const videoRef = useRef(null);
@@ -107,13 +106,7 @@ const PreviewTestimonialScreen = () => {
       });
   };
 
-  console.log(
-    "length====================>",
-    questions.length,
-    currentQuestionIndex
-  );
   const generateRequestData = (isApproveAction) => {
-    console.log("approve url", url);
     dispatch({
       type: SET_QUESTION_URL,
       payload: { currentQuestionIndex, url, isAnswered: true },
@@ -130,7 +123,6 @@ const PreviewTestimonialScreen = () => {
         payload: RECORD_SCREEN,
       });
     } else {
-      console.log("video question screen ****");
       dispatch({
         type: SET_SCREEN,
         payload: VIDEO_QUESTIONS_SCREEN,

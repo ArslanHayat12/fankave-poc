@@ -8,12 +8,13 @@ import {
   SET_TYPE,
   SET_SCREEN,
   VIDEO_QUESTIONS_SCREEN,
+  RECORD_SCREEN,
 } from "../../constants";
 import { HomeScreenStyled } from "./style";
 
 export const HomeScreen = () => {
   const { state, dispatch } = useContext(TestimonialContext);
-  console.log("screen", state.screen);
+  console.log("screen", state.questions);
 
   const onVideoClick = () => {
     dispatch({
@@ -33,7 +34,7 @@ export const HomeScreen = () => {
     });
     dispatch({
       type: SET_SCREEN,
-      payload: TESTIMONIAL_SCREEN,
+      payload: RECORD_SCREEN,
     });
   };
 
@@ -44,7 +45,7 @@ export const HomeScreen = () => {
     });
     dispatch({
       type: SET_SCREEN,
-      payload: TESTIMONIAL_SCREEN,
+      payload: RECORD_SCREEN,
     });
   };
 
@@ -55,7 +56,7 @@ export const HomeScreen = () => {
     });
     dispatch({
       type: SET_SCREEN,
-      payload: TESTIMONIAL_SCREEN,
+      payload: RECORD_SCREEN,
     });
   };
 
