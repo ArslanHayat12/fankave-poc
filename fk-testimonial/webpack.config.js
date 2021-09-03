@@ -1,26 +1,29 @@
 /** @format */
 
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
 
 module.exports = (_, args) => ({
-    output: {
-        ...(args.mode === "production"
-            ? {
-                publicPath: `${process.env.WEB_APP_HOST}/${process.env.WEB_APP_PATH || 'testimonials'}/`,
-                path: path.resolve(__dirname, "build/static"),
-            }
-            : {
-                publicPath: `/`,
-                path: path.resolve(__dirname, "build/static"),
-            }),
+  output: {
+    ...(args.mode === "production"
+      ? {
+        publicPath: `${process.env.WEB_APP_HOST}/${process.env.WEB_APP_PATH || 'testimonials'}/`,
+        path: path.resolve(__dirname, "build/static"),
+      }
+      : {
+        publicPath: `/`,
+        path: path.resolve(__dirname, "build/static"),
+      }),
+  },
+  target: args.mode === "production" ? undefined : "web",
+  entry: {
+    testimonialPoc: {
+      import: "./src/Routes.js",
+      filename: `${process.env.WEB_APP_PATH || 'testimonials'}.js`,
     },
-    target: args.mode === "production" ? undefined : "web",
-    entry: {
-        testimonialPoc: {
-            import: "./src/Routes.js",
-            filename: `${process.env.WEB_APP_PATH || 'testimonials'}.js`,
-        }
+    sharestoriesPoc: {
+      import: "./src/Routes.js",
+      filename: `${process.env.WEB_APP_PATH || 'sharestories'}.js`,
     },
   },
   resolve: {
@@ -76,4 +79,4 @@ module.exports = (_, args) => ({
       inject: args.mode === "production" ? false : true,
     }),
   ],
-});
+})
