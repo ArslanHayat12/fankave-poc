@@ -15,12 +15,14 @@ import { ConfirmationModal } from "../../components/ConfirmationModal/Confirmati
 
 import { ArrowIcon } from "../../assets";
 import Modal from "react-responsive-modal";
+import VideoModal from "../Modal/VideoModal";
 
 const VideoChunks = () => {
   const { state, dispatch } = useContext(TestimonialContext);
   const questions = state.questions;
 
   const [open, setOpen] = useState(false);
+  const [videoUrl, setVideoUrl] = useState("");
 
   const onVideoClick = (index) => {
     dispatch({
@@ -57,8 +59,9 @@ const VideoChunks = () => {
     return secondsToHHMMSS;
   };
 
-  const onCloseModal = () => {
-    return setOpen(false);
+  const getUrl = (id) => {
+    setOpen(true);
+    return setVideoUrl(questions[id].url);
   };
 
   return (
@@ -66,7 +69,7 @@ const VideoChunks = () => {
       {questions.map((data, index) => (
         <CardStyled
           key={index}
-          onClick={data.url ? () => setOpen(true) : ""}
+          onClick={data.url ? () => getUrl(data.questionIndex) : ""}
           alignCenter={data.isAnswered}
           className={`${
             data.questionIndex > 0 &&
@@ -96,25 +99,7 @@ const VideoChunks = () => {
             />
           )}
 
-          <Modal
-            id="fk-modal"
-            open={open}
-            onClose={onCloseModal}
-            center
-            classNames={{
-              overlay: "customOverlay",
-              modal: "customModal",
-            }}
-          >
-            <video
-              src={index == data.questionIndex && data.url}
-              className="video-modal"
-              controls
-              minWidth="100%"
-              minHeight="100%"
-              id=""
-            />
-          </Modal>
+          <VideoModal open={open} close={() => setOpen(false)} url={videoUrl} />
         </CardStyled>
       ))}
       {/* <video

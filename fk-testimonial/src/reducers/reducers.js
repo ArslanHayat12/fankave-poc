@@ -60,7 +60,6 @@ export const reducer = (state, action) => {
       };
 
     case SET_QUESTION:
-      console.log("SET_QUESTION");
       return {
         ...state,
         questions: action.payload,

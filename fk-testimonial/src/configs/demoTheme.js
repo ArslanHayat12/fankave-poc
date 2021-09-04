@@ -1,8 +1,8 @@
 const questionDetails = [
   "What is your name, title and company?",
   "What challenge did you have?",
-  "What made this partner the obvious choice?",
-  "What were the results?",
+  // "What made this partner the obvious choice?",
+  // "What were the results?",
 ];
 
 let pathName = window.location.pathname.replaceAll("/", "");

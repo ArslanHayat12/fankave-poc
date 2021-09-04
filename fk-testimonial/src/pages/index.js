@@ -42,12 +42,10 @@ export const TestimonialApp = () => {
       url: "",
       isAnswered: false,
     }));
-    console.log("useeefeec===", questions);
 
     dispatch({ type: SET_QUESTION, payload: questions });
   }, [questionDetails]);
 
-  console.log("index.js");
   return screen === VIDEO_QUESTIONS_SCREEN ? (
     <VideoQuestionScreen />
   ) : screen === THANK_YOU_SCREEN ? (

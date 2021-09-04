@@ -4,8 +4,7 @@ import { Modal } from "react-responsive-modal";
 import "./style.css";
 
 export const ConfirmationModal = (props) => {
-  const { title, open, onCloseModal, onAccept, type, url, questionIndex } =
-    props;
+  const { title, open, onCloseModal, onAccept } = props;
   return (
     <Modal
       id="fk-modal"
@@ -17,30 +16,15 @@ export const ConfirmationModal = (props) => {
         modal: "customModal",
       }}
     >
-      {type === "confirmBox" ? (
-        <>
-          <p className="description">
-            Do you want to record a new {title || ""}?
-          </p>
-          <div className="buttons-container">
-            <button className="button accept-button" onClick={onAccept}>
-              Yes
-            </button>
-            <button className="button dismiss-button" onClick={onCloseModal}>
-              No
-            </button>
-          </div>
-        </>
-      ) : (
-        <video
-          src={url}
-          className="video-modal"
-          controls
-          minWidth="100%"
-          minHeight="100%"
-          id=""
-        />
-      )}
+      <p className="description">Do you want to record a new {title || ""}?</p>
+      <div className="buttons-container">
+        <button className="button accept-button" onClick={onAccept}>
+          Yes
+        </button>
+        <button className="button dismiss-button" onClick={onCloseModal}>
+          No
+        </button>
+      </div>
     </Modal>
   );
 };
