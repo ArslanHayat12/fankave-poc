@@ -80,32 +80,41 @@ const PreviewTestimonialScreen = () => {
       },
     },
   } = theme;
-  const shareAudioVideoToServer = (formData, isApproveAction = false) => {
-    setIsApproveLoading(true);
-    fetch(apiRequestURL, {
-      body: formData,
-      method: "POST",
+  const shareVideoChunks = (formData) => {
+    fetch("/v1/api/upload-chunk", {
+        body: formData,
+        method: "POST",
     })
       .then((response) => {
-        setIsApproveLoading(false);
-        // check for error response
-        if (!response.ok) {
-          // get error message from body or default to response status
-          const error = response.status;
-          return Promise.reject(error);
-        }
-        if (isApproveAction) {
-          dispatch({
-            type: SET_SCREEN,
-            payload: THANK_YOU_SCREEN,
-          });
-        }
+        console.log("response: ", response)
       })
-      .catch((err) => {
-        console.log("error", err);
-        alert("Request failed with error code " + err);
-      });
-  };
+  }
+  // const shareAudioVideoToServer = (formData, isApproveAction = false) => {
+  //   setIsApproveLoading(true);
+  //   fetch(apiRequestURL, {
+  //     body: formData,
+  //     method: "POST",
+  //   })
+  //     .then((response) => {
+  //       setIsApproveLoading(false);
+  //       // check for error response
+  //       if (!response.ok) {
+  //         // get error message from body or default to response status
+  //         const error = response.status;
+  //         return Promise.reject(error);
+  //       }
+  //       if (isApproveAction) {
+  //         dispatch({
+  //           type: SET_SCREEN,
+  //           payload: THANK_YOU_SCREEN,
+  //         });
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log("error", err);
+  //       alert("Request failed with error code " + err);
+  //     });
+  // };
 
   console.log(
     "length====================>",
@@ -137,44 +146,54 @@ const PreviewTestimonialScreen = () => {
       });
     }
 
-    // fetch(url)
-    //   .then((res) => {
-    //     console.log(res);
-    //     return res.blob();
-    //   })
-    //   .then((blob) => {
-    //     const formData = new FormData();
-    //     formData.append("media", blob);
-    //     formData.append(
-    //       "type",
-    //       testimonialType === "video" ? "video" : "audio"
-    //     );
-    //     formData.append(
-    //       "story",
-    //       testimonialType === "video" ? "Video" : "Audio"
-    //     ); //audio for audio
-    //     formData.append(
-    //       "author",
-    //       JSON.stringify({
-    //         name: clientName,
-    //         email: clientEmail,
-    //         company: clientCompany,
-    //       })
-    //     );
-    //     formData.append("isIOS", _iOSDevice);
-    //     formData.append("hashtags", JSON.stringify(["Testimonial", "POC"]));
-    //     fetch(thumbUrl)
-    //       .then((res) => res.blob())
-    //       .then((thumbUrlBlob) => {
-    //         formData.append(
-    //           "thumb",
-    //           testimonialType === "video"
-    //             ? thumbUrlBlob
-    //             : `${window.location.origin}/wave.png`
-    //         );
-    //         shareAudioVideoToServer(formData, isApproveAction);
-    //       });
-    //   });
+    fetch(url)
+      .then((res) => {
+        console.log(res);
+        return res.blob();
+      })
+      .then((blob) => {
+        const formData = new FormData();
+        formData.append("media", blob);
+        formData.append("encoding", "7bit")
+        formData.append("mimetype", "video/mp4")
+        // formData.append(
+        //   "type",
+        //   testimonialType === "video" ? "video" : "audio"
+        // );
+        // formData.append(
+        //   "story",
+        //   testimonialType === "video" ? "Video" : "Audio"
+        // ); //audio for audio
+        // formData.append(
+        //   "author",
+        //   JSON.stringify({
+        //     name: clientName,
+        //     email: clientEmail,
+        //     company: clientCompany,
+        //   })
+        // );
+        // formData.append("isIOS", _iOSDevice);
+        // formData.append("hashtags", JSON.stringify(["Testimonial", "POC"]));
+        fetch(thumbUrl)
+          .then((res) => res.blob())
+          .then((thumbUrlBlob) => {
+            // formData.append(
+            //   "thumb",
+            //   testimonialType === "video"
+            //     ? thumbUrlBlob
+            //     : `${window.location.origin}/wave.png`
+            // );
+            if (localStorage.getItem("videoChunksId") === "") {
+              const videoChunksId = `${Math.floor(Math.random() * 10000 + 1)}-${Math.floor(Date.now() / 1000)}`
+              localStorage.setItem("videoChunksId", videoChunksId)
+            }
+        
+            const fileId = localStorage.getItem("videoChunksId")
+            formData.append("id", fileId);
+            // shareAudioVideoToServer(formData, isApproveAction);
+            shareVideoChunks(formData)
+          });
+      });
   };
 
   const onPlayClick = () => {
@@ -239,9 +258,8 @@ const PreviewTestimonialScreen = () => {
   return (
     <PreviewScreenStyled
       id="fk-preview-testimonial-screen"
-      className={`preview-testimonial-screen${
-        testimonialType === "audio" ? " audio-preview-screen" : ""
-      }`}
+      className={`preview-testimonial-screen${testimonialType === "audio" ? " audio-preview-screen" : ""
+        }`}
     >
       <CrossIcon customClass="cross-icon" onClick={onBack} />
 
@@ -315,9 +333,8 @@ const PreviewTestimonialScreen = () => {
         <ClientDetails />
         <article className="button-wrapper">
           <button
-            className={`approve-button ${
-              isApproveLoading ? "button-clicked" : ""
-            }`}
+            className={`approve-button ${isApproveLoading ? "button-clicked" : ""
+              }`}
             onClick={isApproveLoading ? "" : () => generateRequestData(true)}
           >
             {buttonText}

@@ -20,7 +20,9 @@ module.exports = function (app) {
     app.get("/sharestories", testimonialController.initialRedirect);
     app.get("/v1/api/get-token", testimonialController.getToken);
     app.get("/v1/api/get-linkedin-token", testimonialController.getLinkedInToken);
-
+    app.post('/v1/api/merge-video', testimonialController.mergeVideoChunks);
+    app.post('/v1/api/remove-video', testimonialController.removeVideoChunk);
+    app.post('/v1/api/upload-chunk', testimonialService().uploadFile(), testimonialController.addVideoChunk);
     app.get("/v1/api/users", testimonialController.userRedirect);
 
     app.get('/v1/api/linkedin/login', passport.authenticate('linkedin'));

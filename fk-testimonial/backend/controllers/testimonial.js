@@ -5,11 +5,124 @@ const testimonialservice = require('../services/testimonial');
 const axios = require('axios');
 const fs = require("fs")
 const storage = require('node-sessionstorage')
+const child_process = require('child_process');
 
 const linkedInStorage = 'linkedin-auth';
 const twitterStorage = 'twitter-auth';
 
 const controller = {
+    addVideoChunk: async function (req, res) {
+        const fileName = req.file.filename;
+        const outputFileName = fileName.replace(".webm", ".mp4")
+        const fileId = req.body.id;
+        const dir = fileId;
+
+
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir);
+        }
+        const oldPath = fileName
+        const newPath = `${dir}/${fileName}`
+
+        fs.rename(oldPath, newPath, function (err) {
+            if (err) throw err
+            console.log('File moved successfully to path: ' + newPath)
+        })
+
+        hbjs.spawn({ input: newPath, output: newPath.replace(".webm", ".mp4") })
+            .on('error', err => {
+                // invalid user input, no video found etc
+                console.log("error", err)
+            })
+            .on('progress', progress => {
+                console.log(
+                    'Percent complete: %s, ETA: %s',
+                    progress.percentComplete,
+                    progress.eta
+                )
+            }).on('end', async () => {
+                setTimeout(async () => {
+                    fs.appendFile(`${fileId}/chunksList.txt`, `\nfile ${outputFileName}`, function (err) {
+                        if (err) {
+                            res.send("ERROR in writing")
+                        } else {
+                            res.send("File uploaded successfully")
+                        }
+                    })
+                    console.log('Finished processing' + outputFileName);
+                });
+            })
+
+        // fs.renameSync(req.file.path, req.file.path.replace(fileName, 
+        // req.body.id + path.extname(req.file.originalname)));
+        // const start = new Date().getTime()
+        // child_process.execFile('ffmpeg', [
+        //     "-y", "-fflags", '+genpts', "-i",
+        //     fileName,
+        //     "-r", "24", fileName.replace(".webm", "-update.webm")
+        // ], function (error, stdout, stderr) {
+        //     const end = new Date().getTime() - start;
+        //     console.log(end)
+
+        //     if (!fs.existsSync(dir)) {
+        //         fs.mkdirSync(dir);
+        //     }
+        //     const oldPath = fileName
+        //     const newPath = `${dir}/${fileName.replace(".webm", "-update.webm")}`
+
+        //     fs.rename(oldPath, newPath, function (err) {
+        //         if (err) throw err
+        //         console.log('Successfully renamed - AKA moved!')
+        //     })
+
+        //     fs.appendFile(`${fileId}/chunksList.txt`, `\nfile ${fileName.replace(".webm", "-update.webm")}`, function (err) {
+        //         if (err) {
+        //             res.send("ERROR in writing")
+        //         } else {
+        //             res.send("File uploaded successfully")
+        //         }
+        //     })
+
+        // })
+
+    },
+    mergeVideoChunks: async function (req, res) {
+        const fileId = req.body.id;
+        const start = new Date().getTime()
+        child_process.execFile('ffmpeg', [
+            "-y", "-f", 'concat', "-i",
+            `${fileId}/chunksList.txt`, '-c:v',
+            "copy", `${fileId}.mp4`
+        ], function (error, stdout, stderr) {
+            const end = new Date().getTime() - start;
+            console.log(end)
+
+            if (!error) {
+                fs.rmdir(fileId, { recursive: true }, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+                    console.log(`${fileId} is deleted!`);
+                });
+                res.send({
+                    fileName: `${fileId}.mp4`
+                })
+            } else {
+                console.log("error: ", error)
+                res.send("Files merging failed")
+            }
+        })
+    },
+    removeVideoChunk: async function (req, res) {
+        const fileName = req.body.fileName;
+        fs.unlink(`${fileName}`, function (err) {
+            if (err) {
+                throw err
+            } else {
+                res.send("File removed Successfully")
+            }
+        })
+    },
     sendTweet: async function (req, res) {
         const inFilename = req.file.path;
         const outFilename = "video.mp4";
@@ -197,28 +310,28 @@ const controller = {
 
         async function getAndPublishTranscription(filePath, apiURL) {
             const fullTranscript = await testimonialservice().handleTranscription(filePath);
-            
-            axios({ 
-                method: 'put', 
-                url: apiURL, 
+
+            axios({
+                method: 'put',
+                url: apiURL,
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 data: JSON.stringify({
                     transcript: fullTranscript
-                }) 
+                })
             }).then(res => {
 
             }).catch(err => {
 
             })
         }
-        
+
         if (filePath && apiURL) {
             getAndPublishTranscription(filePath, apiURL)
             response.send("Transcription initiated")
-        }else {
-            response.status(400).send({ error : "Bad Data" })
+        } else {
+            response.status(400).send({ error: "Bad Data" })
         }
     }
 
