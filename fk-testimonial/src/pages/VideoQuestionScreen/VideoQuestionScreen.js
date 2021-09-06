@@ -10,7 +10,7 @@ import VideoChunks from "../../components/VideoChunks/VideoChunks";
 export const VideoQuestionScreen = () => {
   const theme = useContext(ThemeContext);
   const {
-    state: { type, status },
+    state: { type, status, questions },
     dispatch,
   } = useContext(TestimonialContext);
 
@@ -29,7 +29,7 @@ export const VideoQuestionScreen = () => {
       type: RESET_DATA,
     });
   }, []);
-
+  console.log("questions", questions);
   return (
     <RecordingScreenStyled className="record-screen" id="fk-record-screen">
       <CrossIcon customClass="cross-icon" onClick={onBack} />

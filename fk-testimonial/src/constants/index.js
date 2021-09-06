@@ -24,3 +24,4 @@ export const SET_INDEX = "Set_INDEX";
 export const SET_RECORD_CHUKS = "SET_RECORD_CHUKS";
 export const SET_QUESTION = "SET_QUESTION";
 export const SET_QUESTION_URL = "SET_QUESTION_URL";
+export const SET_QUESTION_THUMB_URL = "SET_QUESTION_THUMB_URL";

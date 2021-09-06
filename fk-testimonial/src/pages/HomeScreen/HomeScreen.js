@@ -5,17 +5,40 @@ import RecordingCard from "../../components/RecordingCard/RecordingCard";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import {
   TESTIMONIAL_SCREEN,
+  SET_QUESTION,
   SET_TYPE,
   SET_SCREEN,
   VIDEO_QUESTIONS_SCREEN,
+  RECORD_SCREEN,
 } from "../../constants";
 import { HomeScreenStyled } from "./style";
 
 export const HomeScreen = () => {
   const { state, dispatch } = useContext(TestimonialContext);
-  console.log("screen", state.screen);
+  const theme = useContext(ThemeContext);
+
+  const {
+    default: {
+      widget: {
+        recordingScreen: {
+          video: { questionDetails },
+        },
+      },
+    },
+  } = theme;
+  console.log(questionDetails)
 
   const onVideoClick = () => {
+    const questions = questionDetails.map((question, index) => ({
+      questionIndex: index,
+      duration: 0,
+      question,
+      thumbUrl: "",
+      url: "",
+      isAnswered: false,
+    }));
+
+    dispatch({ type: SET_QUESTION, payload: questions });
     dispatch({
       type: SET_SCREEN,
       payload: VIDEO_QUESTIONS_SCREEN,
@@ -26,6 +49,7 @@ export const HomeScreen = () => {
     });
   };
 
+
   const onAudioClick = () => {
     dispatch({
       type: SET_TYPE,
@@ -33,7 +57,7 @@ export const HomeScreen = () => {
     });
     dispatch({
       type: SET_SCREEN,
-      payload: TESTIMONIAL_SCREEN,
+      payload: RECORD_SCREEN,
     });
   };
 
@@ -44,7 +68,7 @@ export const HomeScreen = () => {
     });
     dispatch({
       type: SET_SCREEN,
-      payload: TESTIMONIAL_SCREEN,
+      payload: RECORD_SCREEN,
     });
   };
 
@@ -55,11 +79,10 @@ export const HomeScreen = () => {
     });
     dispatch({
       type: SET_SCREEN,
-      payload: TESTIMONIAL_SCREEN,
+      payload: RECORD_SCREEN,
     });
   };
 
-  const theme = useContext(ThemeContext);
 
   const {
     default: {

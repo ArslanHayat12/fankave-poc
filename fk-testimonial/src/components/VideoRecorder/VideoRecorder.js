@@ -28,13 +28,13 @@ import {
   SET_RECORD_CHUKS,
   VIDEO_QUESTIONS_SCREEN,
   PREVIEW_SCREEN,
+  SET_QUESTION_THUMB_URL,
 } from "../../constants";
 import { VideoRecorderStyled, ListingLinkStyled } from "./style";
 
 export const VideoRecorder = () => {
   const { state, dispatch } = useContext(TestimonialContext);
 
-  console.log("questions", state.questions);
   const webcamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const mediaRecorderRef2 = useRef(null);
@@ -48,6 +48,8 @@ export const VideoRecorder = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [isNextClicked, setIsNextClicked] = useState(false);
   const [recordingTime, setTime] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(3);
+
   const recordingTimeRef = useRef();
   recordingTimeRef.current = recordingTime;
 
@@ -134,6 +136,14 @@ export const VideoRecorder = () => {
       type: SET_THUMB_URL,
       payload: webcamRef?.current?.getScreenshot(),
     });
+    dispatch({
+      type: SET_QUESTION_THUMB_URL,
+      payload: {
+        currentQuestionIndex: state.currentQuestionIndex,
+        thumbUrl: webcamRef?.current?.getScreenshot(),
+        urlDuration: recordingTimeRef.current,
+      },
+    });
   }, [mediaRecorderRef, webcamRef, setCapturing]);
 
   const showAccessBlocked = useCallback((err) => {
@@ -154,7 +164,6 @@ export const VideoRecorder = () => {
   );
 
   useEffect(() => {
-    console.log("useeffect");
     //webm type video file created
     if (!isNextClicked && recordedChunks.length) {
       let options = { type: "video/webm" };
@@ -175,7 +184,6 @@ export const VideoRecorder = () => {
       } catch {
         url = window.URL.createObjectURL(blob);
       }
-      console.log(url);
       setVideoURl(url);
       dispatch({
         type: SET_URL,
@@ -196,7 +204,6 @@ export const VideoRecorder = () => {
 
   //will be removed in refactoring
   useEffect(() => {
-    console.log("single record");
     //webm type video file created
     if (singleRecordedChunks.length) {
       let options = { type: "video/webm" };
@@ -272,6 +279,17 @@ export const VideoRecorder = () => {
     });
   };
 
+  useInterval(() => {
+    timeLeft > 0 && setTimeLeft(timeLeft - 1);
+  }, 1000);
+
+  useEffect(() => {
+    if (timeLeft == 0) {
+      const startVideo = handleStartCaptureClick();
+      return startVideo;
+    }
+  }, [timeLeft]);
+
   return (
     <VideoRecorderStyled
       className="video-recorder-wrapper"
@@ -281,6 +299,7 @@ export const VideoRecorder = () => {
         {/* <ListingLinkStyled onClick={() => goToListing()}>
           {"< Go to Listing"}
         </ListingLinkStyled> */}
+        {timeLeft !== 0 && <span className="time-left">{timeLeft}</span>}
         <article className="video-timer">
           {convertSecondsToHourMinute(String(recordingTime))}
         </article>
@@ -306,9 +325,9 @@ export const VideoRecorder = () => {
               onUserMediaError={showAccessBlocked}
             />
           )}
-          <video>
+          {/* <video>
             <source url="blob:http://localhost:5000/0e9d0baf-11ca-46aa-8bd2-da8d0752b5d2" />
-          </video>
+          </video> */}
           {error && (
             <NotificationCard
               openModal={error ? true : false}
@@ -345,13 +364,17 @@ export const VideoRecorder = () => {
         <div className="button-container">
           {displayButton ? (
             <button onClick={handleStartCaptureClick} className="text-button">
-              <DefaultRecordingIcon customClass="play-icon" /> {recordText}
+              <DefaultRecordingIcon
+                customClass={`play-icon ${timeLeft > 0 && "disable"}`}
+              />{" "}
+              {recordText}
             </button>
           ) : (
             <Tooltip content="Record" placement="right">
               <button
                 onClick={handleStartCaptureClick}
-                className="record-button"
+                className={`record-button ${timeLeft > 0 && "disable-button"}`}
+                disabled={true}
               >
                 <RecordingIcon customClass="video-play-icon" />
               </button>

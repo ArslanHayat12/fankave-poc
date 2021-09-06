@@ -37,8 +37,8 @@ export const WidgetStyled = styled.section`
     border-radius: ${(props) => props.theme.default.widget.borderRadius};
     padding: 28px;
     margin: 15px;
-    scrollbar-width: thin !important;
-    overflow-x: hidden;
+    // scrollbar-width: thin !important;
+    // overflow-x: hidden;
     box-shadow: 1px 5px 110px #bdb1b1;
   }
 
@@ -63,8 +63,8 @@ export const WidgetStyled = styled.section`
     .widget-wrapper {
       /* height: calc(100vh - 174px); */
       height: calc(100vh - 183px);
-      overflow: auto;
-      overflow-x: hidden;
+      // overflow: auto;
+      // overflow-x: hidden;
     }
   }
 
@@ -72,15 +72,15 @@ export const WidgetStyled = styled.section`
     .widget-wrapper {
       /* height: calc(100vh - 158px); */
       height: calc(100vh - 233px);
-      overflow: auto;
-      overflow-x: hidden;
+      // overflow: auto;
+      // overflow-x: hidden;
     }
   }
 
   @media (max-width: 425px) {
     .widget-wrapper {
-      overflow-y: auto;
-      overflow-x: hidden;
+      // overflow-y: auto;
+      // overflow-x: hidden;
       padding: 28px 14px;
     }
 

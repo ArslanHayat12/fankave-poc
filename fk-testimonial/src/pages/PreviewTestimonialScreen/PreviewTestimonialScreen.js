@@ -8,12 +8,7 @@ import React, {
 } from "react";
 import { ThemeContext } from "styled-components";
 import { CustomAudioPlayer } from "../../components/CustomAudioPlayer/CustomAudioPlayer";
-import {
-  PlayFilledIcon,
-  RefreshIcon,
-  CrossIcon,
-  TickIcon,
-} from "../../assets/index";
+import { PlayFilledIcon, RefreshIcon, CrossIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { CustomTooltip } from "../../components/Tooltip/Tooltip";
 import { SoundWave } from "../../components/AudioVisualizers/SoundWave";
@@ -32,8 +27,8 @@ import {
   SET_INDEX,
   VIDEO_QUESTIONS_SCREEN,
 } from "../../constants";
-import { Loader } from "../../components/LoaderOverlay/Loader";
 import { PreviewScreenStyled } from "./style";
+import ApproveTestimonial from "../../components/ApproveTestimonial/ApproveTestimonial";
 
 const PreviewTestimonialScreen = () => {
   const _iOSDevice =
@@ -53,7 +48,6 @@ const PreviewTestimonialScreen = () => {
     },
     dispatch,
   } = useContext(TestimonialContext);
-  console.log("url", url);
   const [playVideo, setPlayVideo] = useState(false);
   const [retakeModal, setRetakeModal] = useState(false);
   const videoRef = useRef(null);
@@ -116,13 +110,7 @@ const PreviewTestimonialScreen = () => {
   //     });
   // };
 
-  console.log(
-    "length====================>",
-    questions.length,
-    currentQuestionIndex
-  );
-  const generateRequestData = (isApproveAction) => {
-    console.log("approve url", url);
+  const approveVideoTestimonial = () => {
     dispatch({
       type: SET_QUESTION_URL,
       payload: { currentQuestionIndex, url, isAnswered: true },
@@ -139,7 +127,6 @@ const PreviewTestimonialScreen = () => {
         payload: RECORD_SCREEN,
       });
     } else {
-      console.log("video question screen ****");
       dispatch({
         type: SET_SCREEN,
         payload: VIDEO_QUESTIONS_SCREEN,
@@ -210,6 +197,10 @@ const PreviewTestimonialScreen = () => {
     dispatch({
       type: SET_URL,
       payload: "",
+    });
+    dispatch({
+      type: SET_SCREEN,
+      payload: RECORD_SCREEN,
     });
   };
 
@@ -286,7 +277,6 @@ const PreviewTestimonialScreen = () => {
               onEnded={() => setPlayVideo(false)}
               poster={thumbUrl}
             >
-              {console.log(url)}
               <source src={url} />
             </video>
             <button
@@ -331,19 +321,21 @@ const PreviewTestimonialScreen = () => {
       )}
       <section className="client-details-wrapper">
         <ClientDetails />
+        {/* <ApproveTestimonial /> */}
         <article className="button-wrapper">
           <button
-            className={`approve-button ${isApproveLoading ? "button-clicked" : ""
-              }`}
-            onClick={isApproveLoading ? "" : () => generateRequestData(true)}
+            className={`approve-button ${
+              isApproveLoading ? "button-clicked" : ""
+            }`}
+            onClick={isApproveLoading ? "" : () => approveVideoTestimonial()}
           >
             {buttonText}
           </button>
         </article>
       </section>
-      <span className="processing-text">
+      {/* <span className="processing-text">
         {isApproveLoading && "Processing ..."}
-      </span>
+      </span> */}
       {testimonialType === "audio" &&
         theme.default.widget.previewScreen.audio.audio.displayWave && (
           <SoundWave />

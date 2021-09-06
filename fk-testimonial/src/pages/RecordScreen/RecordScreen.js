@@ -56,8 +56,6 @@ const RecordScreen = () => {
     },
   } = theme;
 
-  console.log("screen", state.screen);
-
   const onBack = useCallback(() => {
     dispatch({
       type: RESET_DATA,
@@ -111,7 +109,6 @@ const RecordScreen = () => {
       </>
     );
   };
-  console.log(state.type);
   const RecordingScreen = () => {
     switch (state.type) {
       case "video":

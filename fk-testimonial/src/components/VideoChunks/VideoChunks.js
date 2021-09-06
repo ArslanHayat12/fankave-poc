@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
 
 import { TestimonialContext } from "../../context/TestimonialContext";
@@ -13,10 +13,13 @@ import {
 } from "./style";
 
 import { ArrowIcon } from "../../assets";
+import VideoModal from "../Modal/VideoModal";
 
 const VideoChunks = () => {
   const { state, dispatch } = useContext(TestimonialContext);
   const questions = state.questions;
+
+  const [videoUrl, setVideoUrl] = useState("");
 
   const onVideoClick = (index) => {
     dispatch({
@@ -45,11 +48,28 @@ const VideoChunks = () => {
       },
     },
   } = theme;
-  console.log("questions====================", questions);
+
+  const convertDuration = (urlDuration) => {
+    const secondsToHHMMSS = new Date(urlDuration * 1000)
+      .toISOString()
+      .substr(11, 8);
+    return secondsToHHMMSS;
+  };
+
+  const getUrl = (id) => {
+    dispatch({
+      type: SET_INDEX,
+      payload: id,
+    });
+    return setVideoUrl(questions[id].url);
+  };
+
   return (
     <VideoChunksWrapperStyled>
       {questions.map((data, index) => (
         <CardStyled
+          key={index}
+          onClick={data.url ? () => getUrl(data.questionIndex) : ""}
           alignCenter={data.isAnswered}
           className={`${
             data.questionIndex > 0 &&
@@ -57,6 +77,7 @@ const VideoChunks = () => {
             `disable`
           }`}
         >
+          {console.log("current index", state.currentQuestionIndex)}
           <QuestionDetailsStyled>
             <p className="question">{data.question}</p>
             <TagsWrapperStyled>
@@ -69,16 +90,20 @@ const VideoChunks = () => {
           </QuestionDetailsStyled>
           {data.isAnswered ? (
             <ThumnailStyled>
-              <span className="time">{data.thumbUrl}</span>
-              <img
-                className="thumbnail"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
-              />
+              <span className="time">{convertDuration(data.urlDuration)}</span>
+              <img className="thumbnail" src={data.thumbUrl} />
             </ThumnailStyled>
           ) : (
             <ArrowIcon
               customClass="arrow-icon"
               onClick={() => onVideoClick(index)}
+            />
+          )}
+          {videoUrl && data.questionIndex === index && (
+            <VideoModal
+              openModal={true}
+              url={videoUrl}
+              index={data.questionIndex}
             />
           )}
         </CardStyled>

@@ -14,6 +14,7 @@ import {
   SET_RECORD_CHUKS,
   SET_QUESTION,
   SET_QUESTION_URL,
+  SET_QUESTION_THUMB_URL,
 } from "../constants";
 import { initialState } from "../context/TestimonialContext";
 
@@ -65,18 +66,25 @@ export const reducer = (state, action) => {
       };
 
     case SET_QUESTION_URL:
-      console.log(action.payload.url);
       const newArray = [...state.questions];
-      console.log("newArray", newArray);
       newArray[action.payload.currentQuestionIndex].url = action.payload.url;
       newArray[action.payload.currentQuestionIndex].isAnswered =
         action.payload.isAnswered;
-      console.log("action.payload.url", action.payload.url);
       return {
         ...state,
         questions: [...newArray],
       };
 
+    case SET_QUESTION_THUMB_URL:
+      const array = [...state.questions];
+      array[action.payload.currentQuestionIndex].thumbUrl =
+        action.payload.thumbUrl;
+      array[action.payload.currentQuestionIndex].urlDuration =
+        action.payload.urlDuration;
+      return {
+        ...state,
+        questions: [...array],
+      };
     default:
       return state;
   }
