@@ -8,12 +8,7 @@ import React, {
 } from "react";
 import { ThemeContext } from "styled-components";
 import { CustomAudioPlayer } from "../../components/CustomAudioPlayer/CustomAudioPlayer";
-import {
-  PlayFilledIcon,
-  RefreshIcon,
-  CrossIcon,
-  TickIcon,
-} from "../../assets/index";
+import { PlayFilledIcon, RefreshIcon, CrossIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { CustomTooltip } from "../../components/Tooltip/Tooltip";
 import { SoundWave } from "../../components/AudioVisualizers/SoundWave";
@@ -32,8 +27,8 @@ import {
   SET_INDEX,
   VIDEO_QUESTIONS_SCREEN,
 } from "../../constants";
-import { Loader } from "../../components/LoaderOverlay/Loader";
 import { PreviewScreenStyled } from "./style";
+import ApproveTestimonial from "../../components/ApproveTestimonial/ApproveTestimonial";
 
 const PreviewTestimonialScreen = () => {
   const _iOSDevice =
@@ -79,34 +74,34 @@ const PreviewTestimonialScreen = () => {
       },
     },
   } = theme;
-  const shareAudioVideoToServer = (formData, isApproveAction = false) => {
-    setIsApproveLoading(true);
-    fetch(apiRequestURL, {
-      body: formData,
-      method: "POST",
-    })
-      .then((response) => {
-        setIsApproveLoading(false);
-        // check for error response
-        if (!response.ok) {
-          // get error message from body or default to response status
-          const error = response.status;
-          return Promise.reject(error);
-        }
-        if (isApproveAction) {
-          dispatch({
-            type: SET_SCREEN,
-            payload: THANK_YOU_SCREEN,
-          });
-        }
-      })
-      .catch((err) => {
-        console.log("error", err);
-        alert("Request failed with error code " + err);
-      });
-  };
+  // const shareAudioVideoToServer = (formData, isApproveAction = false) => {
+  //   setIsApproveLoading(true);
+  //   fetch(apiRequestURL, {
+  //     body: formData,
+  //     method: "POST",
+  //   })
+  //     .then((response) => {
+  //       setIsApproveLoading(false);
+  //       // check for error response
+  //       if (!response.ok) {
+  //         // get error message from body or default to response status
+  //         const error = response.status;
+  //         return Promise.reject(error);
+  //       }
+  //       if (isApproveAction) {
+  //         dispatch({
+  //           type: SET_SCREEN,
+  //           payload: THANK_YOU_SCREEN,
+  //         });
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log("error", err);
+  //       alert("Request failed with error code " + err);
+  //     });
+  // };
 
-  const generateRequestData = (isApproveAction) => {
+  const approveVideoTestimonial = () => {
     dispatch({
       type: SET_QUESTION_URL,
       payload: { currentQuestionIndex, url, isAnswered: true },
@@ -205,7 +200,6 @@ const PreviewTestimonialScreen = () => {
   };
 
   const AudioPlayer = useMemo(() => {
-    console.log("audio url", url);
     return (
       <CustomAudioPlayer
         ref={audioRef}
@@ -265,7 +259,6 @@ const PreviewTestimonialScreen = () => {
               onEnded={() => setPlayVideo(false)}
               poster={thumbUrl}
             >
-              {console.log(url)}
               <source src={url} />
             </video>
             <button
@@ -310,20 +303,21 @@ const PreviewTestimonialScreen = () => {
       )}
       <section className="client-details-wrapper">
         <ClientDetails />
+        {/* <ApproveTestimonial /> */}
         <article className="button-wrapper">
           <button
             className={`approve-button ${
               isApproveLoading ? "button-clicked" : ""
             }`}
-            onClick={isApproveLoading ? "" : () => generateRequestData(true)}
+            onClick={isApproveLoading ? "" : () => approveVideoTestimonial()}
           >
             {buttonText}
           </button>
         </article>
       </section>
-      <span className="processing-text">
+      {/* <span className="processing-text">
         {isApproveLoading && "Processing ..."}
-      </span>
+      </span> */}
       {testimonialType === "audio" &&
         theme.default.widget.previewScreen.audio.audio.displayWave && (
           <SoundWave />

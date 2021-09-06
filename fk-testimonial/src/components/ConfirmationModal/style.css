@@ -6,6 +6,7 @@
 
 .react-responsive-modal-closeButton {
   outline: none;
+  top: 20px;
 }
 
 .react-responsive-modal-closeButton svg {

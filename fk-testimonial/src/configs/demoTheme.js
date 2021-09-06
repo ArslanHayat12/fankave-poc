@@ -138,7 +138,7 @@ const demoConfigs = {
             borderRadius: "",
             borderColor: "",
             display: {
-              name: true,
+              name: false,
               mail: false,
               company: false,
             },
