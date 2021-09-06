@@ -64,6 +64,10 @@ export const AudioRecorder = () => {
         type: SET_URL,
         payload: url,
       });
+      dispatch({
+        type: SET_SCREEN,
+        payload: PREVIEW_SCREEN,
+      });
     }
   }, [url]);
 
@@ -85,10 +89,6 @@ export const AudioRecorder = () => {
     dispatch({
       type: SET_STATUS,
       payload: false,
-    });
-    dispatch({
-      type: SET_SCREEN,
-      payload: PREVIEW_SCREEN,
     });
     const handleRecordingStop = stopRecording(onStop);
     handleRecordingStop();
