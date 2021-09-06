@@ -184,6 +184,10 @@ const PreviewTestimonialScreen = () => {
       type: SET_URL,
       payload: "",
     });
+    dispatch({
+      type: SET_SCREEN,
+      payload: RECORD_SCREEN,
+    });
   };
 
   const handlePlayAudio = () => {
@@ -201,6 +205,7 @@ const PreviewTestimonialScreen = () => {
   };
 
   const AudioPlayer = useMemo(() => {
+    console.log("audio url", url);
     return (
       <CustomAudioPlayer
         ref={audioRef}

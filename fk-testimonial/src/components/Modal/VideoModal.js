@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Modal } from "react-responsive-modal";
 
 const VideoModal = (props) => {
-  const { open, close, url } = props;
+  const { open, onCloseModal, url } = props;
 
   console.log("open", open);
 
   return (
     <Modal
       open={open}
-      onClose={close}
+      onClose={onCloseModal}
       center
       classNames={{
         overlay: "customOverlay",

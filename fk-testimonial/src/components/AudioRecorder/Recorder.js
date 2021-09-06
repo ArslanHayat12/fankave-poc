@@ -11,7 +11,12 @@ import {
 } from "../../assets";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { useContext } from "react";
-import { SET_URL, SET_STATUS } from "../../constants";
+import {
+  SET_URL,
+  SET_STATUS,
+  SET_SCREEN,
+  PREVIEW_SCREEN,
+} from "../../constants";
 import NotificationCard from "../NotificationCard/NotificationCard";
 import "./style.css";
 
@@ -55,6 +60,7 @@ export const AudioRecorder = () => {
 
   useEffect(() => {
     if (url) {
+      console.log("et url");
       dispatch({
         type: SET_URL,
         payload: url,
@@ -80,6 +86,10 @@ export const AudioRecorder = () => {
     dispatch({
       type: SET_STATUS,
       payload: false,
+    });
+    dispatch({
+      type: SET_SCREEN,
+      payload: PREVIEW_SCREEN,
     });
     const handleRecordingStop = stopRecording(onStop);
     handleRecordingStop();

@@ -11,10 +11,8 @@ import {
   TagStyled,
   ThumnailStyled,
 } from "./style";
-import { ConfirmationModal } from "../../components/ConfirmationModal/ConfirmationModal";
 
 import { ArrowIcon } from "../../assets";
-import Modal from "react-responsive-modal";
 import VideoModal from "../Modal/VideoModal";
 
 const VideoChunks = () => {
@@ -69,7 +67,7 @@ const VideoChunks = () => {
       {questions.map((data, index) => (
         <CardStyled
           key={index}
-          onClick={data.url ? () => getUrl(data.questionIndex) : ""}
+          onClick={() => getUrl(data.questionIndex)}
           alignCenter={data.isAnswered}
           className={`${
             data.questionIndex > 0 &&
@@ -99,7 +97,11 @@ const VideoChunks = () => {
             />
           )}
 
-          <VideoModal open={open} close={() => setOpen(false)} url={videoUrl} />
+          <VideoModal
+            open={open}
+            onCloseModal={() => setOpen(false)}
+            url={videoUrl}
+          />
         </CardStyled>
       ))}
       {/* <video

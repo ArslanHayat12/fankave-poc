@@ -317,10 +317,10 @@ export const VideoRecorder = () => {
                 width: isMobile
                   ? undefined
                   : videoWidth > 400
-                    ? 333
-                    : videoWidth > 360
-                      ? 313
-                      : 298,
+                  ? 333
+                  : videoWidth > 360
+                  ? 313
+                  : 298,
                 height: isMobile ? undefined : videoHeight,
                 facingMode: "user",
               }}
@@ -331,13 +331,13 @@ export const VideoRecorder = () => {
               onUserMediaError={showAccessBlocked}
             />
           )}
-          <video>
+          {/* <video>
             <source url="blob:http://localhost:5000/0e9d0baf-11ca-46aa-8bd2-da8d0752b5d2" />
-          </video>
+          </video> */}
           {error && (
             <NotificationCard
               openModal={error ? true : false}
-            //   handlePermission={allowCameraPermission}
+              //   handlePermission={allowCameraPermission}
             />
           )}
         </div>
