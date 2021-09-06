@@ -1,10 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Modal } from "react-responsive-modal";
 import { TestimonialContext } from "../../context/TestimonialContext";
 
 const VideoModal = (props) => {
-  const { openModal, url, index } = props;
-  const [open, setOpen] = useState(openModal);
+  const { openModal, close, url, index } = props;
 
   const {
     state: { currentQuestionIndex },
@@ -12,17 +11,15 @@ const VideoModal = (props) => {
 
   return currentQuestionIndex === index ? (
     <Modal
-      open={open}
-      onClose={() => {
-        setOpen(false);
-      }}
+      open={openModal}
+      onClose={close}
       center
       classNames={{
         overlay: "customOverlay",
         modal: "customModal",
       }}
     >
-      <video src={url} className="video-modal" controls autoplay id="" />
+      <video src={url} className="video-modal" autoplay="true" controls />
     </Modal>
   ) : (
     ""
