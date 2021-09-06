@@ -85,13 +85,15 @@ const controller = {
         return controller.waitForValue(storagePath, currentTime + 2000, timeout);
     },
     getToken: async function (req, res) {
-        await controller.waitForValue(twitterStorage)
-        const value = await storage.getItem(twitterStorage)
-        res.send(value)
+        // // await controller.waitForValue(twitterStorage)
+        // // const value = await storage.getItem(twitterStorage)
+        // req.session['token']
+        res.send({ token: req.session['token'], tokenSecret: req.session['tokenSecret'] })
     },
     getLinkedInToken: async function (req, res) {
-        await controller.waitForValue(linkedInStorage)
-        res.send(storage.getItem(linkedInStorage))
+        // await controller.waitForValue(linkedInStorage)
+        res.send({ token: req.session['token'], id: req.session['id'] })
+        // res.send(storage.getItem(linkedInStorage))
     },
     userRedirect: function (req, res) {
         res.sendFile(path.join(__dirname, "../../", "close.html"));
@@ -197,28 +199,28 @@ const controller = {
 
         async function getAndPublishTranscription(filePath, apiURL) {
             const fullTranscript = await testimonialservice().handleTranscription(filePath);
-            
-            axios({ 
-                method: 'put', 
-                url: apiURL, 
+
+            axios({
+                method: 'put',
+                url: apiURL,
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 data: JSON.stringify({
                     transcript: fullTranscript
-                }) 
+                })
             }).then(res => {
 
             }).catch(err => {
 
             })
         }
-        
+
         if (filePath && apiURL) {
             getAndPublishTranscription(filePath, apiURL)
             response.send("Transcription initiated")
-        }else {
-            response.status(400).send({ error : "Bad Data" })
+        } else {
+            response.status(400).send({ error: "Bad Data" })
         }
     }
 

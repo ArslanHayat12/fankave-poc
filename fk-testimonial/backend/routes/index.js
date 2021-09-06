@@ -8,6 +8,8 @@ module.exports = function (app) {
     app.get('/v1/api/twitter-callback', passport.authenticate('twitter', {
         failureRedirect: '/'
     }), function (req, res) {
+        req.session['token'] = req.user.token;
+        req.session['tokenSecret'] = req.user.tokenSecret
         res.redirect('/v1/api/users?token=' + req.user.token + '&tokenSecret=' + req.user.tokenSecret)
     })
 
@@ -27,9 +29,11 @@ module.exports = function (app) {
     app.get('/v1/api/linkedin-callback', passport.authenticate('linkedin', {
         failureRedirect: '/'
     }), function (req, res) {
+        req.session['token'] = req.user.token;
+        req.session['id'] = req.user.id
         res.redirect('/v1/api/users?token=' + req.user.token + '&id=' + req.user.id)
     });
     app.post('/v1/api/share-on-linkedin', testimonialService().uploadFile(), testimonialController.sendTextMessageToLinkedIn)
     app.post('/v1/api/transcription', testimonialController.getTranscription)
-    
+
 };
