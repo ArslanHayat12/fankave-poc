@@ -46,6 +46,11 @@ const VideoChunks = () => {
             },
           },
         },
+        previewScreen: {
+          video: {
+            mergeVideo
+          }
+        }
       },
     },
   } = theme;
@@ -116,7 +121,7 @@ const VideoChunks = () => {
           )}
         </CardStyled>
       ))}
-      {state.url && (
+      {state.url && mergeVideo  && (
         <>
           <video
             src={state.url}

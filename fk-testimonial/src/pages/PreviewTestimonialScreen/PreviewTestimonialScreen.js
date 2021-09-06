@@ -29,6 +29,7 @@ import {
 } from "../../constants";
 import { PreviewScreenStyled } from "./style";
 import ApproveTestimonial from "../../components/ApproveTestimonial/ApproveTestimonial";
+import { Loader } from "../../components/LoaderOverlay/Loader";
 
 const PreviewTestimonialScreen = () => {
   const _iOSDevice =
@@ -53,6 +54,8 @@ const PreviewTestimonialScreen = () => {
   const videoRef = useRef(null);
   const audioRef = useRef(null);
   const [isApproveLoading, setIsApproveLoading] = useState(false);
+  const [questionCount, setQuestionCount] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
   const theme = useContext(ThemeContext);
   const apiRequestURL = getPublishAPIRequest(
     window.location.hostname,
@@ -63,6 +66,7 @@ const PreviewTestimonialScreen = () => {
       widget: {
         previewScreen: {
           video: {
+            mergeVideo,
             button: { text: buttonText },
             heading: videoScreenHeading,
           },
@@ -74,47 +78,80 @@ const PreviewTestimonialScreen = () => {
       },
     },
   } = theme;
+  const mergeVideoChunks = () => {
+    const fileId = localStorage.getItem("videoChunksId")
+    fetch("/v1/api/merge-video", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({
+        id: fileId
+      }),
+    })
+      .then((response) => response.json()
+      )
+      .then((data) => {
+        dispatch({
+          type: SET_URL,
+          payload: `http://localhost:5000/${data.fileName}`
+        })
+      })
+  }
+
   const shareVideoChunks = (formData) => {
+    setIsLoading(true)
     fetch("/v1/api/upload-chunk", {
-        body: formData,
-        method: "POST",
+      body: formData,
+      method: "POST",
     })
       .then((response) => {
         console.log("response: ", response)
+        if (!(currentQuestionIndex < questions.length - 1)) {
+          mergeVideoChunks()
+          dispatch({
+            type: SET_SCREEN,
+            payload: VIDEO_QUESTIONS_SCREEN,
+          });
+        }
+        setIsLoading(false)
       })
   }
-  // const shareAudioVideoToServer = (formData, isApproveAction = false) => {
-  //   setIsApproveLoading(true);
-  //   fetch(apiRequestURL, {
-  //     body: formData,
-  //     method: "POST",
-  //   })
-  //     .then((response) => {
-  //       setIsApproveLoading(false);
-  //       // check for error response
-  //       if (!response.ok) {
-  //         // get error message from body or default to response status
-  //         const error = response.status;
-  //         return Promise.reject(error);
-  //       }
-  //       if (isApproveAction) {
-  //         dispatch({
-  //           type: SET_SCREEN,
-  //           payload: THANK_YOU_SCREEN,
-  //         });
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log("error", err);
-  //       alert("Request failed with error code " + err);
-  //     });
-  // };
+  const shareAudioVideoToServer = (formData, isApproveAction = false) => {
+    setIsApproveLoading(true);
+    fetch(apiRequestURL, {
+      body: formData,
+      method: "POST",
+    })
+      .then((response) => {
+        setIsApproveLoading(false);
+        // check for error response
+        if (!response.ok) {
+          // get error message from body or default to response status
+          const error = response.status;
+          return Promise.reject(error);
+        }
+        // if (isApproveAction) {
+          // dispatch({
+          //   type: SET_SCREEN,
+          //   payload: THANK_YOU_SCREEN,
+          // });
+        // }
+      })
+      .catch((err) => {
+        console.log("error", err);
+        alert("Request failed with error code " + err);
+      });
+  };
 
   const approveVideoTestimonial = () => {
     dispatch({
       type: SET_QUESTION_URL,
       payload: { currentQuestionIndex, url, isAnswered: true },
     });
+
     if (currentQuestionIndex <= questions.length - 1) {
       dispatch({
         type: SET_INDEX,
@@ -126,11 +163,6 @@ const PreviewTestimonialScreen = () => {
         type: SET_SCREEN,
         payload: RECORD_SCREEN,
       });
-    } else {
-      dispatch({
-        type: SET_SCREEN,
-        payload: VIDEO_QUESTIONS_SCREEN,
-      });
     }
 
     fetch(url)
@@ -141,8 +173,6 @@ const PreviewTestimonialScreen = () => {
       .then((blob) => {
         const formData = new FormData();
         formData.append("media", blob);
-        formData.append("encoding", "7bit")
-        formData.append("mimetype", "video/mp4")
         // formData.append(
         //   "type",
         //   testimonialType === "video" ? "video" : "audio"
@@ -174,14 +204,16 @@ const PreviewTestimonialScreen = () => {
               const videoChunksId = `${Math.floor(Math.random() * 10000 + 1)}-${Math.floor(Date.now() / 1000)}`
               localStorage.setItem("videoChunksId", videoChunksId)
             }
-        
+
             const fileId = localStorage.getItem("videoChunksId")
             formData.append("id", fileId);
-            // shareAudioVideoToServer(formData, isApproveAction);
-            shareVideoChunks(formData)
+            generateRequestData(true)
+            if(mergeVideo) {
+              shareVideoChunks(formData)
+            }
           });
-      });
-  };
+        });
+      };
 
   const onPlayClick = () => {
     if (!playVideo) {
@@ -245,6 +277,47 @@ const PreviewTestimonialScreen = () => {
       type: RESET_DATA,
     });
   }, []);
+
+  const generateRequestData = (isApproveAction) => {
+    fetch(url)
+      .then((res) => {
+        console.log(res);
+        return res.blob();
+      })
+      .then((blob) => {
+        const formData = new FormData();
+        formData.append("media", blob);
+        formData.append(
+          "type",
+          testimonialType === "video" ? "video" : "audio"
+        );
+        formData.append(
+          "story",
+          testimonialType === "video" ? "Video" : "Audio"
+        ); //audio for audio
+        formData.append(
+          "author",
+          JSON.stringify({
+            name: clientName,
+            email: clientEmail,
+            company: clientCompany,
+          })
+        );
+        formData.append("isIOS", _iOSDevice);
+        formData.append("hashtags", JSON.stringify(["Testimonial", "POC"]));
+        fetch(thumbUrl)
+          .then((res) => res.blob())
+          .then((thumbUrlBlob) => {
+            formData.append(
+              "thumb",
+              testimonialType === "video"
+                ? thumbUrlBlob
+                : `${window.location.origin}/wave.png`
+            );
+            shareAudioVideoToServer(formData, isApproveAction);
+          });
+      });
+  };
 
   return (
     <PreviewScreenStyled
@@ -324,9 +397,8 @@ const PreviewTestimonialScreen = () => {
         {/* <ApproveTestimonial /> */}
         <article className="button-wrapper">
           <button
-            className={`approve-button ${
-              isApproveLoading ? "button-clicked" : ""
-            }`}
+            className={`approve-button ${isApproveLoading ? "button-clicked" : ""
+              }`}
             onClick={isApproveLoading ? "" : () => approveVideoTestimonial()}
           >
             {buttonText}
@@ -340,6 +412,7 @@ const PreviewTestimonialScreen = () => {
         theme.default.widget.previewScreen.audio.audio.displayWave && (
           <SoundWave />
         )}
+      {isLoading && <Loader />}
       {/* {isApproveLoading && <Loader />} */}
     </PreviewScreenStyled>
   );

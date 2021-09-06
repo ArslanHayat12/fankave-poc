@@ -27,6 +27,7 @@ const ApproveTestimonial = () => {
       widget: {
         previewScreen: {
           video: {
+            mergeVideo,
             button: { text: buttonText },
           },
         },
@@ -64,6 +65,25 @@ const ApproveTestimonial = () => {
         console.log("error", err);
         alert("Request failed with error code " + err);
       });
+
+    if(mergeVideo) {
+      const fileId = localStorage.getItem("videoChunksId")
+  
+      fetch("/v1/api/remove-video", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({
+          fileName: `${fileId}.mp4`
+        }),
+      })
+        .then((response) => {
+          console.log("Video deleted!")
+        })
+    }
   };
 
   const generateRequestData = (isApproveAction) => {

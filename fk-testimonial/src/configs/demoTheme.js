@@ -117,6 +117,7 @@ const demoConfigs = {
 
       previewScreen: {
         video: {
+          mergeVideo: true,
           height: "350",
           heading: "Preview Video Testimonial",
           fontSize: "",
