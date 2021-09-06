@@ -27,6 +27,17 @@ export const VideoRecorderStyled = styled.article`
     border: none;
     align-items: center;
     justify-content: center;
+
+    &.disable-button {
+      pointer-event: none;
+      opacity: 0.6;
+      cursor: none;
+    }
+  }
+
+  .record-button .disable-button {
+    pointer-event: none;
+    opacity: 0.6;
   }
 
   .video-recording-container {

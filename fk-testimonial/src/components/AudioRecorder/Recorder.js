@@ -60,7 +60,6 @@ export const AudioRecorder = () => {
 
   useEffect(() => {
     if (url) {
-      console.log("et url");
       dispatch({
         type: SET_URL,
         payload: url,

@@ -35,7 +35,6 @@ import { VideoRecorderStyled, ListingLinkStyled } from "./style";
 export const VideoRecorder = () => {
   const { state, dispatch } = useContext(TestimonialContext);
 
-  console.log("questions", state.questions);
   const webcamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const mediaRecorderRef2 = useRef(null);
@@ -49,6 +48,8 @@ export const VideoRecorder = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [isNextClicked, setIsNextClicked] = useState(false);
   const [recordingTime, setTime] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(3);
+
   const recordingTimeRef = useRef();
   recordingTimeRef.current = recordingTime;
 
@@ -163,7 +164,6 @@ export const VideoRecorder = () => {
   );
 
   useEffect(() => {
-    console.log("useeffect");
     //webm type video file created
     if (!isNextClicked && recordedChunks.length) {
       let options = { type: "video/webm" };
@@ -184,7 +184,6 @@ export const VideoRecorder = () => {
       } catch {
         url = window.URL.createObjectURL(blob);
       }
-      console.log(url);
       setVideoURl(url);
       dispatch({
         type: SET_URL,
@@ -205,7 +204,6 @@ export const VideoRecorder = () => {
 
   //will be removed in refactoring
   useEffect(() => {
-    console.log("single record");
     //webm type video file created
     if (singleRecordedChunks.length) {
       let options = { type: "video/webm" };
@@ -281,16 +279,12 @@ export const VideoRecorder = () => {
     });
   };
 
-  const [timeLeft, setTimeLeft] = useState(3);
-
   useInterval(() => {
     timeLeft > 0 && setTimeLeft(timeLeft - 1);
   }, 1000);
 
   useEffect(() => {
-    console.log("timeLeft======", timeLeft);
     if (timeLeft == 0) {
-      console.log("timeLeft====== true");
       const startVideo = handleStartCaptureClick();
       return startVideo;
     }
@@ -370,13 +364,16 @@ export const VideoRecorder = () => {
         <div className="button-container">
           {displayButton ? (
             <button onClick={handleStartCaptureClick} className="text-button">
-              <DefaultRecordingIcon customClass="play-icon" /> {recordText}
+              <DefaultRecordingIcon
+                customClass={`play-icon ${timeLeft > 0 && "disable"}`}
+              />{" "}
+              {recordText}
             </button>
           ) : (
             <Tooltip content="Record" placement="right">
               <button
                 onClick={handleStartCaptureClick}
-                className="record-button"
+                className={`record-button ${timeLeft > 0 && "disable-button"}`}
                 disabled={true}
               >
                 <RecordingIcon customClass="video-play-icon" />
