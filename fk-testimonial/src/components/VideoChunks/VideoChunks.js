@@ -62,21 +62,23 @@ const VideoChunks = () => {
       type: SET_INDEX,
       payload: id,
     });
-    return setVideoUrl(questions[id].url);
+    setOpen(true);
+    setVideoUrl(questions[id].url);
   };
-
-  useEffect(() => {
-    if (videoUrl) {
-      setOpen(true);
-    }
-  }, [state.currentQuestionIndex]);
 
   return (
     <VideoChunksWrapperStyled>
       {questions.map((data, index) => (
         <CardStyled
           key={index}
-          onClick={data.url ? () => getUrl(data.questionIndex) : ""}
+          onClick={
+            data.url
+              ? (e) => {
+                  e.stopPropagation();
+                  getUrl(index);
+                }
+              : ""
+          }
           alignCenter={data.isAnswered}
           className={`${
             data.questionIndex > 0 &&
@@ -84,7 +86,6 @@ const VideoChunks = () => {
             `disable`
           }`}
         >
-          {console.log("current index", state.currentQuestionIndex)}
           <QuestionDetailsStyled>
             <p className="question">{data.question}</p>
             <TagsWrapperStyled>
@@ -106,16 +107,16 @@ const VideoChunks = () => {
               onClick={() => onVideoClick(index)}
             />
           )}
-          {videoUrl && data.questionIndex === index && (
-            <VideoModal
-              openModal={open}
-              close={() => setOpen(false)}
-              url={videoUrl}
-              index={data.questionIndex}
-            />
-          )}
         </CardStyled>
       ))}
+
+      <VideoModal
+        openModal={open}
+        close={() => setOpen(false)}
+        url={videoUrl}
+        index={state.currentQuestionIndex}
+      />
+
       {state.url && (
         <>
           <video

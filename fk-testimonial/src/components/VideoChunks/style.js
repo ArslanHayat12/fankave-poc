@@ -34,6 +34,7 @@ export const VideoChunksWrapperStyled = styled.section`
   .video-chunk {
     height: 160px;
     background: #000;
+    outline: none;
   }
 `;
 
