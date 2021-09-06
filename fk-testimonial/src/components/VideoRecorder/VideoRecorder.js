@@ -48,7 +48,8 @@ export const VideoRecorder = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [isNextClicked, setIsNextClicked] = useState(false);
   const [recordingTime, setTime] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(3);
+  const [timeLeft, setTimeLeft] = useState(4);
+  const [showTimeLeft, setShowTimeLeft] = useState(false);
 
   const recordingTimeRef = useRef();
   recordingTimeRef.current = recordingTime;
@@ -61,35 +62,41 @@ export const VideoRecorder = () => {
     window.innerWidth > 0 ? window.innerWidth : window.screen.width;
 
   const handleStartCaptureClick = useCallback(() => {
-    setCapturing(true);
-    let options = { mimeType: "video/webm" };
-    if (typeof MediaRecorder.isTypeSupported == "function") {
-      if (MediaRecorder.isTypeSupported("video/webm")) {
-        options = { mimeType: "video/webm" };
-      } else if (MediaRecorder.isTypeSupported("video/mp4")) {
-        //Safari 14.0.2 has an EXPERIMENTAL version of MediaRecorder enabled by default
-        options = { mimeType: "video/mp4" };
+    setShowTimeLeft(true);
+  });
+
+  useEffect(() => {
+    if (timeLeft === 0) {
+      setCapturing(true);
+      let options = { mimeType: "video/webm" };
+      if (typeof MediaRecorder.isTypeSupported == "function") {
+        if (MediaRecorder.isTypeSupported("video/webm")) {
+          options = { mimeType: "video/webm" };
+        } else if (MediaRecorder.isTypeSupported("video/mp4")) {
+          //Safari 14.0.2 has an EXPERIMENTAL version of MediaRecorder enabled by default
+          options = { mimeType: "video/mp4" };
+        }
       }
+      mediaRecorderRef.current = new MediaRecorder(
+        webcamRef.current.stream,
+        options
+      );
+      mediaRecorderRef.current.addEventListener(
+        "dataavailable",
+        handleDataAvailable
+      );
+      mediaRecorderRef2.current = new MediaRecorder(
+        webcamRef.current.stream,
+        options
+      );
+      mediaRecorderRef2.current.addEventListener(
+        "dataavailable",
+        handleDataAvailableSingle
+      );
+      mediaRecorderRef2.current.start();
+      mediaRecorderRef.current.start();
     }
-    mediaRecorderRef.current = new MediaRecorder(
-      webcamRef.current.stream,
-      options
-    );
-    mediaRecorderRef.current.addEventListener(
-      "dataavailable",
-      handleDataAvailable
-    );
-    mediaRecorderRef2.current = new MediaRecorder(
-      webcamRef.current.stream,
-      options
-    );
-    mediaRecorderRef2.current.addEventListener(
-      "dataavailable",
-      handleDataAvailableSingle
-    );
-    mediaRecorderRef2.current.start();
-    mediaRecorderRef.current.start();
-  }, [webcamRef, setCapturing, mediaRecorderRef, mediaRecorderRef2]);
+  }, [webcamRef, setCapturing, mediaRecorderRef, mediaRecorderRef2, timeLeft]);
 
   const handleDataAvailable = useCallback(
     ({ data }) => {
@@ -283,12 +290,12 @@ export const VideoRecorder = () => {
     timeLeft > 0 && setTimeLeft(timeLeft - 1);
   }, 1000);
 
-  useEffect(() => {
-    if (timeLeft == 0) {
-      const startVideo = handleStartCaptureClick();
-      return startVideo;
-    }
-  }, [timeLeft]);
+  // useEffect(() => {
+  //   if (timeLeft == 0) {
+  //     const startVideo = handleStartCaptureClick();
+  //     return startVideo;
+  //   }
+  // }, [timeLeft]);
 
   return (
     <VideoRecorderStyled
@@ -299,7 +306,9 @@ export const VideoRecorder = () => {
         {/* <ListingLinkStyled onClick={() => goToListing()}>
           {"< Go to Listing"}
         </ListingLinkStyled> */}
-        {timeLeft !== 0 && <span className="time-left">{timeLeft}</span>}
+        {showTimeLeft && timeLeft !== 0 && (
+          <span className="time-left">{timeLeft}</span>
+        )}
         <article className="video-timer">
           {convertSecondsToHourMinute(String(recordingTime))}
         </article>
@@ -366,15 +375,14 @@ export const VideoRecorder = () => {
             <button onClick={handleStartCaptureClick} className="text-button">
               <DefaultRecordingIcon
                 customClass={`play-icon ${timeLeft > 0 && "disable"}`}
-              />{" "}
+              />
               {recordText}
             </button>
           ) : (
             <Tooltip content="Record" placement="right">
               <button
                 onClick={handleStartCaptureClick}
-                className={`record-button ${timeLeft > 0 && "disable-button"}`}
-                disabled={true}
+                className={`record-button `}
               >
                 <RecordingIcon customClass="video-play-icon" />
               </button>

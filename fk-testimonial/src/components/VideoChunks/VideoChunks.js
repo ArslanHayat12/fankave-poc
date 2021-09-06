@@ -14,11 +14,12 @@ import {
 
 import { ArrowIcon } from "../../assets";
 import VideoModal from "../Modal/VideoModal";
+import ApproveTestimonial from "../ApproveTestimonial/ApproveTestimonial";
 
 const VideoChunks = () => {
   const { state, dispatch } = useContext(TestimonialContext);
   const questions = state.questions;
-
+  const [open, setOpen] = useState(false);
   const [videoUrl, setVideoUrl] = useState("");
 
   const onVideoClick = (index) => {
@@ -64,6 +65,12 @@ const VideoChunks = () => {
     return setVideoUrl(questions[id].url);
   };
 
+  useEffect(() => {
+    if (videoUrl) {
+      setOpen(true);
+    }
+  }, [state.currentQuestionIndex]);
+
   return (
     <VideoChunksWrapperStyled>
       {questions.map((data, index) => (
@@ -101,21 +108,27 @@ const VideoChunks = () => {
           )}
           {videoUrl && data.questionIndex === index && (
             <VideoModal
-              openModal={true}
+              openModal={open}
+              close={() => setOpen(false)}
               url={videoUrl}
               index={data.questionIndex}
             />
           )}
         </CardStyled>
       ))}
-      {/* <video
-        src="https://firebasestorage.googleapis.com/v0/b/optimum-surface-602.appspot.com/o/6833424291913015343.mp4?alt=media"
-        className="video-chunk"
-        id="fk-bg-video"
-        width="100%"
-        height="100%"
-        controls
-      /> */}
+      {state.url && (
+        <>
+          <video
+            src={state.url}
+            className="video-chunk"
+            id="fk-bg-video"
+            width="100%"
+            height="100%"
+            controls
+          />
+          <ApproveTestimonial />
+        </>
+      )}
     </VideoChunksWrapperStyled>
   );
 };
