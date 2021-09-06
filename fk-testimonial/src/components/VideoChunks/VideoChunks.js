@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
 
 import { TestimonialContext } from "../../context/TestimonialContext";
@@ -19,7 +19,6 @@ const VideoChunks = () => {
   const { state, dispatch } = useContext(TestimonialContext);
   const questions = state.questions;
 
-  const [open, setOpen] = useState(false);
   const [videoUrl, setVideoUrl] = useState("");
 
   const onVideoClick = (index) => {
@@ -58,7 +57,10 @@ const VideoChunks = () => {
   };
 
   const getUrl = (id) => {
-    setOpen(true);
+    dispatch({
+      type: SET_INDEX,
+      payload: id,
+    });
     return setVideoUrl(questions[id].url);
   };
 
@@ -67,7 +69,7 @@ const VideoChunks = () => {
       {questions.map((data, index) => (
         <CardStyled
           key={index}
-          onClick={() => getUrl(data.questionIndex)}
+          onClick={data.url ? () => getUrl(data.questionIndex) : ""}
           alignCenter={data.isAnswered}
           className={`${
             data.questionIndex > 0 &&
@@ -75,6 +77,7 @@ const VideoChunks = () => {
             `disable`
           }`}
         >
+          {console.log("current index", state.currentQuestionIndex)}
           <QuestionDetailsStyled>
             <p className="question">{data.question}</p>
             <TagsWrapperStyled>
@@ -96,12 +99,13 @@ const VideoChunks = () => {
               onClick={() => onVideoClick(index)}
             />
           )}
-
-          <VideoModal
-            open={open}
-            onCloseModal={() => setOpen(false)}
-            url={videoUrl}
-          />
+          {videoUrl && data.questionIndex === index && (
+            <VideoModal
+              openModal={true}
+              url={videoUrl}
+              index={data.questionIndex}
+            />
+          )}
         </CardStyled>
       ))}
       {/* <video

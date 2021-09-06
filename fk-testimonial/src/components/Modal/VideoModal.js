@@ -1,30 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Modal } from "react-responsive-modal";
+import { TestimonialContext } from "../../context/TestimonialContext";
 
 const VideoModal = (props) => {
-  const { open, onCloseModal, url } = props;
+  const { openModal, url, index } = props;
+  const [open, setOpen] = useState(openModal);
 
-  console.log("open", open);
+  const {
+    state: { currentQuestionIndex },
+  } = useContext(TestimonialContext);
 
-  return (
+  return currentQuestionIndex === index ? (
     <Modal
       open={open}
-      onClose={onCloseModal}
+      onClose={() => {
+        setOpen(false);
+      }}
       center
       classNames={{
         overlay: "customOverlay",
         modal: "customModal",
       }}
     >
-      <video
-        src={url}
-        className="video-modal"
-        controls
-        minWidth="100%"
-        minHeight="100%"
-        id=""
-      />
+      <video src={url} className="video-modal" controls autoplay id="" />
     </Modal>
+  ) : (
+    ""
   );
 };
 
