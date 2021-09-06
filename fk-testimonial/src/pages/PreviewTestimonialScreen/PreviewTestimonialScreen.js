@@ -163,6 +163,13 @@ const PreviewTestimonialScreen = () => {
         type: SET_SCREEN,
         payload: RECORD_SCREEN,
       });
+    } else {
+      if(!mergeVideo) {
+        dispatch({
+          type: SET_SCREEN,
+          payload: VIDEO_QUESTIONS_SCREEN,
+        });
+      }
     }
 
     fetch(url)
