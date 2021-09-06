@@ -116,15 +116,19 @@ const VideoChunks = () => {
           )}
         </CardStyled>
       ))}
-      <video
-        src="https://firebasestorage.googleapis.com/v0/b/optimum-surface-602.appspot.com/o/6833424291913015343.mp4?alt=media"
-        className="video-chunk"
-        id="fk-bg-video"
-        width="100%"
-        height="100%"
-        controls
-      />
-      {state.url && <ApproveTestimonial />}
+      {state.url && (
+        <>
+          <video
+            src={state.url}
+            className="video-chunk"
+            id="fk-bg-video"
+            width="100%"
+            height="100%"
+            controls
+          />
+          <ApproveTestimonial />
+        </>
+      )}
     </VideoChunksWrapperStyled>
   );
 };
