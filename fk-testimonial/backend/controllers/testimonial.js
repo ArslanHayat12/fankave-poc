@@ -26,7 +26,7 @@ const controller = {
 
         fs.rename(oldPath, newPath, function (err) {
             if (err) throw err
-            console.log('File moved successfully to path: ' + newPath)
+            console.log(`File moved successfully to path: ${newPath}`)
         })
 
         hbjs.spawn({ input: newPath, output: newPath.replace(".webm", ".mp4") })
