@@ -10,12 +10,12 @@ const methods = (client) => ({
         var storage = multer.diskStorage({
 
             destination: function (req, file, cb) {
-                console.log("file: ", file)
                 cb(null, __dirname + '../../../');
             },
             filename: function (req, file, cb) {
-                console.log("file: ", file)
-                cb(null, file.originalname + '-' + Date.now() + '.webm');
+                const fileType = file.mimetype.split("/").pop()
+                console.log("UPLOADDD fileType: ", file, fileType)
+                cb(null, file.originalname + '-' + Date.now() + `.${fileType}`);
             }
         });
         var upload = multer({ storage: storage });
