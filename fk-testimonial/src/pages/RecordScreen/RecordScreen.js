@@ -4,43 +4,44 @@ import React, {
   useEffect,
   useRef,
   useState,
-} from "react";
-import { ThemeContext } from "styled-components";
-import QuestionsCard from "../../components/QuestionsCard/QuestionsCard";
-import { MicIcon, CrossIcon } from "../../assets/index";
-import { AudioRecorder } from "../../components/AudioRecorder/Recorder";
-import { TestimonialContext } from "../../context/TestimonialContext";
-import { useInterval } from "../../hooks/useInterval";
-import { convertSecondsToHourMinute } from "./../../utils/index";
-import { RecordingScreenStyled } from "./style";
-import { SET_URL_DURATION, RESET_DATA } from "../../constants";
-import { VideoRecorder } from "../../components/VideoRecorder/VideoRecorder";
+} from 'react'
+import { ThemeContext } from 'styled-components'
+import QuestionsCard from '../../components/QuestionsCard/QuestionsCard'
+import { MicIcon, CrossIcon } from '../../assets/index'
+import { AudioRecorder } from '../../components/AudioRecorder/Recorder'
+import { TestimonialContext } from '../../context/TestimonialContext'
+import { useInterval } from '../../hooks/useInterval'
+import { convertSecondsToHourMinute } from './../../utils/index'
+import { RecordingScreenStyled } from './style'
+import { SET_URL_DURATION, RESET_DATA } from '../../constants'
+import { VideoRecorder } from '../../components/VideoRecorder/VideoRecorder'
+import { ImageCapture } from '../../components/ImageCapture/ImageCapture'
 
 const RecordScreen = () => {
-  const { state, dispatch } = useContext(TestimonialContext);
-  const [recordingTime, setTime] = useState(0);
-  const recordingTimeRef = useRef();
-  recordingTimeRef.current = recordingTime;
+  const { state, dispatch } = useContext(TestimonialContext)
+  const [recordingTime, setTime] = useState(0)
+  const recordingTimeRef = useRef()
+  recordingTimeRef.current = recordingTime
 
   useInterval(() => {
-    state.status && setTime(recordingTime + 0.5);
-  }, 500);
+    state.status && setTime(recordingTime + 0.5)
+  }, 500)
 
   const dispatchURLDuration = useCallback(() => {
     recordingTimeRef &&
       dispatch({
         type: SET_URL_DURATION,
         payload: recordingTimeRef.current,
-      });
-  }, [recordingTimeRef]);
+      })
+  }, [recordingTimeRef])
 
   useEffect(() => {
     return () => {
-      dispatchURLDuration();
-    };
-  }, []);
+      dispatchURLDuration()
+    }
+  }, [])
 
-  const theme = useContext(ThemeContext);
+  const theme = useContext(ThemeContext)
 
   const {
     default: {
@@ -54,13 +55,13 @@ const RecordScreen = () => {
         },
       },
     },
-  } = theme;
+  } = theme
 
   const onBack = useCallback(() => {
     dispatch({
       type: RESET_DATA,
-    });
-  }, []);
+    })
+  }, [])
 
   const VideoScreen = () => {
     return (
@@ -68,8 +69,8 @@ const RecordScreen = () => {
         <h2 className="heading">{videoScreenHeading}</h2>
         <VideoRecorder className="video" />
       </>
-    );
-  };
+    )
+  }
 
   const AudioScreen = () => {
     return (
@@ -91,49 +92,45 @@ const RecordScreen = () => {
           )}
         </figure>
       </>
-    );
-  };
+    )
+  }
 
   const CaptureScreen = () => {
-    return (
-      <>
-        <h2 className="heading">Record Image Capture Testimonial</h2>
-      </>
-    );
-  };
+    return <ImageCapture />
+  }
 
   const UploadScreen = () => {
     return (
       <>
         <h2 className="heading">Record Image Upload Testimonial</h2>
       </>
-    );
-  };
+    )
+  }
   const RecordingScreen = () => {
     switch (state.type) {
-      case "video":
-        return VideoScreen();
+      case 'video':
+        return VideoScreen()
 
-      case "audio":
-        return AudioScreen();
+      case 'audio':
+        return AudioScreen()
 
-      case "capture":
-        return CaptureScreen();
+      case 'capture':
+        return CaptureScreen()
 
-      case "upload":
-        return UploadScreen();
+      case 'upload':
+        return UploadScreen()
 
       default:
-        return VideoScreen();
+        return VideoScreen()
     }
-  };
+  }
 
   return (
     <RecordingScreenStyled className="record-screen" id="fk-record-screen">
       <CrossIcon customClass="cross-icon" onClick={onBack} />
       {RecordingScreen()}
     </RecordingScreenStyled>
-  );
-};
+  )
+}
 
-export default RecordScreen;
+export default RecordScreen

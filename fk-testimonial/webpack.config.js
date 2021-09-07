@@ -1,46 +1,44 @@
 /** @format */
 
-const path = require("path")
-const HtmlWebpackPlugin = require("html-webpack-plugin")
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = (_, args) => ({
   output: {
-    ...(args.mode === "production"
+    ...(args.mode === 'production'
       ? {
-        publicPath: `${process.env.WEB_APP_HOST}/${process.env.WEB_APP_PATH || 'testimonials'}/`,
-        path: path.resolve(__dirname, "build/static"),
-      }
+          publicPath: `${process.env.WEB_APP_HOST}/${
+            process.env.WEB_APP_PATH || 'testimonials'
+          }/`,
+          path: path.resolve(__dirname, 'build/static'),
+        }
       : {
-        publicPath: `/`,
-        path: path.resolve(__dirname, "build/static"),
-      }),
+          publicPath: `/`,
+          path: path.resolve(__dirname, 'build/static'),
+        }),
   },
-  target: args.mode === "production" ? undefined : "web",
+  target: args.mode === 'production' ? undefined : 'web',
   entry: {
     testimonialPoc: {
-      import: "./src/Routes.js",
+      import: './src/Routes.js',
       filename: `${process.env.WEB_APP_PATH || 'testimonials'}.js`,
-    },
-    sharestoriesPoc: {
-      import: "./src/Routes.js",
-      filename: `${process.env.WEB_APP_PATH || 'sharestories'}.js`,
     },
   },
   resolve: {
-    extensions: [".jsx", ".js", ".json"],
+    extensions: ['.jsx', '.js', '.json'],
   },
   devServer: {
     disableHostCheck: true,
     port: 5000,
-    host: "0.0.0.0",
+    host: '0.0.0.0',
     headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Headers":
-        "X-Requested-With, content-type, Authorization",
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers':
+        'X-Requested-With, content-type, Authorization',
     },
-    contentBase: [path.join("public")],
-    contentBasePublicPath: "/",
+    contentBase: [path.join('public')],
+    contentBasePublicPath: '/',
     // historyApiFallback: {
     //     rewrites: [
     //         { from: /^\/$/, to: './src/index.html' },
@@ -52,20 +50,20 @@ module.exports = (_, args) => ({
     rules: [
       {
         test: /\.m?js/,
-        type: "javascript/auto",
+        type: 'javascript/auto',
         resolve: {
           fullySpecified: false,
         },
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(ts|tsx|js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           // options: {
           //   presets: ["@babel/preset-react", "@babel/preset-typescript"],
           // },
@@ -75,8 +73,8 @@ module.exports = (_, args) => ({
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./public/index.html",
-      inject: args.mode === "production" ? false : true,
+      template: './public/index.html',
+      inject: args.mode === 'production' ? false : true,
     }),
   ],
 })
