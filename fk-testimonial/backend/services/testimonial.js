@@ -14,7 +14,6 @@ const methods = (client) => ({
             },
             filename: function (req, file, cb) {
                 const fileType = file.mimetype.split("/").pop()
-                console.log("UPLOADDD fileType: ", file, fileType)
                 cb(null, file.originalname + '-' + Date.now() + `.${fileType}`);
             }
         });
