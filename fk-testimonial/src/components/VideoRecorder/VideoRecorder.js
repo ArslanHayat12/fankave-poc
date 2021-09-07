@@ -5,6 +5,8 @@ import React, {
   useEffect,
   useContext,
 } from "react";
+import { SelfieSegmentation } from "@mediapipe/selfie_segmentation"
+import { Camera } from "@mediapipe/camera_utils"
 import { ThemeContext } from "styled-components";
 import Webcam from "react-webcam";
 import { isMobile } from "react-device-detect";
@@ -27,12 +29,18 @@ import {
   SET_RECORD_CHUKS,
 } from "../../constants";
 import { VideoRecorderStyled } from "./style";
+import { Loader } from "../LoaderOverlay/Loader";
 
 export const VideoRecorder = () => {
   const { dispatch } = useContext(TestimonialContext);
   const webcamRef = useRef(null);
+  const canvasRef = useRef(null);
   const mediaRecorderRef = useRef(null);
+  const selfieSegmentationRef = useRef(null)
+  const backgroundImgRef = useRef(null)
 
+  const [isModelLoading, setIsModelLoading] = useState(false)
+  const [filterType, setFilterType] = useState('none')
   const [isStreamInit, setIsStreamInit] = useState(false);
   const [capturing, setCapturing] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
@@ -42,6 +50,8 @@ export const VideoRecorder = () => {
   const [recordingTime, setTime] = useState(0);
   const recordingTimeRef = useRef();
   recordingTimeRef.current = recordingTime;
+
+  const filterTypeRef = useRef(filterType)
 
   useInterval(() => {
     capturing && setTime(recordingTime + 1);
@@ -61,8 +71,13 @@ export const VideoRecorder = () => {
         options = { mimeType: "video/mp4" };
       }
     }
+    const videoStream = selfieSegmentationRef.current ? canvasRef.current.captureStream() : webcamRef.current.stream;
+    if (selfieSegmentationRef.current) {
+      videoStream.addTrack(webcamRef.current.stream.getAudioTracks()[0]);
+      webcamRef.current.video.muted = true
+    }
     mediaRecorderRef.current = new MediaRecorder(
-      webcamRef.current.stream,
+      videoStream,
       options
     );
     mediaRecorderRef.current.addEventListener(
@@ -70,7 +85,7 @@ export const VideoRecorder = () => {
       handleDataAvailable
     );
     mediaRecorderRef.current.start();
-  }, [webcamRef, setCapturing, mediaRecorderRef]);
+  }, [webcamRef, setCapturing, mediaRecorderRef, selfieSegmentationRef]);
 
   const handleDataAvailable = useCallback(
     ({ data }) => {
@@ -86,7 +101,7 @@ export const VideoRecorder = () => {
     setCapturing(false);
     dispatch({
       type: SET_THUMB_URL,
-      payload: webcamRef?.current?.getScreenshot(),
+      payload: selfieSegmentationRef.current ? canvasRef.current.toDataURL("image/webp", 0.92) : webcamRef?.current?.getScreenshot(),
     });
   }, [mediaRecorderRef, webcamRef, setCapturing]);
 
@@ -118,6 +133,7 @@ export const VideoRecorder = () => {
         url = window.URL.createObjectURL(blob);
       }
       setVideoURl(url);
+      console.log(url)
       dispatch({
         type: SET_URL,
         payload: url,
@@ -137,9 +153,14 @@ export const VideoRecorder = () => {
       });
   }, [recordingTimeRef]);
 
+  const cleanUpFunc = () => {
+    selfieSegmentationRef.current && selfieSegmentationRef.current.close()
+  }
+
   useEffect(() => {
     return () => {
       dispatchURLDuration();
+      cleanUpFunc()
     };
   }, []);
 
@@ -155,11 +176,133 @@ export const VideoRecorder = () => {
               startRecording: { text: recordText },
               stopRecording: { text: stopText },
             },
+            virtualBackground
           },
         },
       },
     },
   } = theme;
+
+  const drawStreamOnCanvas = async () => {
+    const videoWidth = webcamRef.current.video.videoWidth
+    const videoHeight = webcamRef.current.video.videoHeight
+
+    canvasRef.current.width = videoWidth
+    canvasRef.current.height = videoHeight
+    const canvasElement = canvasRef.current
+    const canvasCtx = canvasElement.getContext("2d")
+
+    canvasCtx.save()
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height)
+
+    canvasCtx.globalCompositeOperation = "copy"
+    canvasCtx.filter = `none`
+    canvasCtx.drawImage(
+      webcamRef.current.video,
+      0,
+      0,
+      canvasElement.width,
+      canvasElement.height
+    )
+    canvasCtx.restore()
+  }
+
+  const onResults = (results) => {
+    setIsModelLoading(false)
+    const videoWidth = webcamRef.current.video.width
+    const videoHeight = webcamRef.current.video.height
+
+    canvasRef.current.width = videoWidth
+    canvasRef.current.height = videoHeight
+    const canvasElement = canvasRef.current
+    const canvasCtx = canvasElement.getContext("2d")
+
+    canvasCtx.save()
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height)
+
+    canvasCtx.globalCompositeOperation = "copy"
+    canvasCtx.filter = `blur(4px)`
+    canvasCtx.drawImage(
+      results.segmentationMask,
+      0,
+      0,
+      canvasElement.width,
+      canvasElement.height
+    )
+
+    canvasCtx.globalCompositeOperation = "source-in"
+    canvasCtx.filter = "none"
+    canvasCtx.drawImage(
+      results.image,
+      0,
+      0,
+      canvasElement.width,
+      canvasElement.height
+    )
+
+    canvasCtx.globalCompositeOperation = "destination-atop"
+    canvasCtx.filter = filterTypeRef.current === 'virtual' ? "none" : "blur(5px)"
+    canvasCtx.drawImage(
+      filterTypeRef.current === 'virtual' ? backgroundImgRef.current : results.image,
+      0,
+      0,
+      canvasElement.width,
+      canvasElement.height
+    )
+
+    canvasCtx.restore()
+  }
+
+  const loadModel = useCallback(()=> {
+    setIsModelLoading(true)
+    const selfieSegmentation = new SelfieSegmentation({
+      locateFile: (file) => {
+        return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`
+      },
+    })
+    selfieSegmentationRef.current = selfieSegmentation
+    
+    selfieSegmentation.setOptions({
+      modelSelection: 1,
+    })
+
+    selfieSegmentation.onResults(onResults)
+
+    const maskFilterImage = document.createElement("img", {
+      ref: backgroundImgRef,
+    })
+    maskFilterImage.objectFit = "contain"
+    maskFilterImage.onload = function () {
+      backgroundImgRef.current = maskFilterImage
+      webcamRef.current.video.crossOrigin = "anonymous"
+
+      const camera = new Camera(webcamRef.current.video, {
+        onFrame: async () => {
+          if(webcamRef.current) {
+            filterTypeRef.current === 'none' ? await drawStreamOnCanvas() : (
+              await selfieSegmentation.send({
+                image: webcamRef.current.video,
+              }))
+          }
+        },
+        width: webcamRef.current.video.width,
+        height: webcamRef.current.video.height,
+      })
+      camera.start()
+    }
+    maskFilterImage.src = virtualBackground
+  }, [backgroundImgRef, webcamRef, virtualBackground, filterTypeRef])
+
+  const handleChangeFilter = (e)=> {
+    setFilterType(e.target.value)
+    if(!selfieSegmentationRef.current){
+      loadModel()
+    }
+  }
+
+  useEffect(() => {
+    filterTypeRef.current = filterType
+  }, [filterType])
 
   return (
     <VideoRecorderStyled
@@ -169,25 +312,39 @@ export const VideoRecorder = () => {
       <figure className="video-wrapper">
         <div className="video-recording-container">
           {!videoURL && (
-            <Webcam
-              ref={webcamRef}
-              videoConstraints={{
-                width: isMobile
+            <>
+              <Webcam
+                ref={webcamRef}
+                videoConstraints={{
+                  width: isMobile
+                    ? undefined
+                    : videoWidth > 400
+                    ? 333
+                    : videoWidth > 360
+                    ? 313
+                    : 298,
+                  height: isMobile ? undefined : videoHeight,
+                  facingMode: "user",
+                }}
+                width={videoWidth > 400 ? 333 : videoWidth > 360 ? 313 : 298}
+                height={videoHeight}
+                style={{ objectFit: "cover" }}
+                onUserMedia={() => setIsStreamInit(true)}
+                onUserMediaError={showAccessBlocked}
+              />
+              <canvas 
+                ref={canvasRef} 
+                className="output-canvas"
+                width={isMobile
                   ? undefined
                   : videoWidth > 400
-                  ? 333
-                  : videoWidth > 360
-                  ? 313
-                  : 298,
-                height: isMobile ? undefined : videoHeight,
-                facingMode: "user",
-              }}
-              width={videoWidth > 400 ? 333 : videoWidth > 360 ? 313 : 298}
-              height={videoHeight}
-              style={{ objectFit: "cover" }}
-              onUserMedia={() => setIsStreamInit(true)}
-              onUserMediaError={showAccessBlocked}
-            />
+                    ? 333
+                    : videoWidth > 360
+                      ? 313
+                      : 298}
+                height={isMobile ? undefined : videoHeight}
+                />
+            </>
           )}
           {error && (
             <NotificationCard
@@ -201,6 +358,37 @@ export const VideoRecorder = () => {
           <QuestionsCard />
         </article>
       </figure>
+      {isStreamInit && !capturing && (
+        <div className="select-bg">
+          <label>
+            <input
+              type="radio"
+              value="none"
+              checked={filterType === 'none'}
+              onChange={handleChangeFilter}
+            />
+            None
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="blur"
+              checked={filterType === 'blur'}
+              onChange={handleChangeFilter}
+            />
+            Blur Background
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="virtual"
+              checked={filterType === 'virtual'}
+              onChange={handleChangeFilter}
+            />
+            Virtual Background
+          </label>
+        </div>
+      )}
       {capturing && (
         <div className="timer-button-container">
           <article className="video-timer">
@@ -243,6 +431,7 @@ export const VideoRecorder = () => {
           )}
         </div>
       )}
+      {isModelLoading && <Loader/>}
     </VideoRecorderStyled>
   );
 };

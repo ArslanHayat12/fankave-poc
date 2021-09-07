@@ -1882,6 +1882,16 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
+"@mediapipe/camera_utils@^0.3.1620247984":
+  version "0.3.1620247984"
+  resolved "https://registry.yarnpkg.com/@mediapipe/camera_utils/-/camera_utils-0.3.1620247984.tgz#576748af84b3174356acab37671c7ed33d3cb04b"
+  integrity sha512-CQEppbvSfgF5BaiA917+x/xHn8ttietc4+co/7RF98AqgjByGQHKLslog1eE7WekgBXYT/qc4z9F1HrOIfy3yQ==
+
+"@mediapipe/selfie_segmentation@^0.1.1629494320":
+  version "0.1.1629494320"
+  resolved "https://registry.yarnpkg.com/@mediapipe/selfie_segmentation/-/selfie_segmentation-0.1.1629494320.tgz#dfdd0957f849a5a1d60b7044a5af8de752d2e52b"
+  integrity sha512-D3Ap13awSSkP2H+4DQse74H1KwVTN/P2QfdvB0FXL5+9C+uz4YGWB9aRHnBHsbk0ISO9LGJnbDn9iw16WPYTKQ==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"

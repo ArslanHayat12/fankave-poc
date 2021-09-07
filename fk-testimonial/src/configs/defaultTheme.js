@@ -222,6 +222,7 @@ const defaultConfigs = {
           icon: {
             display: true,
           },
+          virtualBackground: `${pathName}/default/clear.jpg`,
         },
         audio: {
           questionsList,

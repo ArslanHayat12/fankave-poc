@@ -13,7 +13,7 @@ export const RecordingScreenStyled = styled.article`
     object-fit: cover;
   }
 
-  video {
+  video, .output-canvas {
     border-radius: 8px;
   }
 

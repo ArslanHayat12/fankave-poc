@@ -236,7 +236,7 @@ body {
     height: 50vh;
   }
 
-  #fk-video-recorder-wrapper video {
+  #fk-video-recorder-wrapper video,  #fk-video-recorder-wrapper canvas {
     height: 50vh;
   }
 }

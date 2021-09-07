@@ -3,9 +3,12 @@
   height: 100%;
   position: absolute;
   top: 0;
-  z-index: 1;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 2;
+  backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(1px);
-  /* backdrop-filter: blur(1px); */
   display: flex;
   align-items: center;
   justify-content: center;

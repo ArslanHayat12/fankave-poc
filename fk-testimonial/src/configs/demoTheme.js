@@ -230,6 +230,7 @@ const demoConfigs = {
           icon: {
             display: true,
           },
+          virtualBackground: `${pathName}/default/clear.jpg`,
         },
         audio: {
           heading: "Record Audio Testimonial",

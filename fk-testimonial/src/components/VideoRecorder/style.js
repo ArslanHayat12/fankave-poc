@@ -16,11 +16,20 @@ export const VideoRecorderStyled = styled.article`
     justify-content: center;
   }
 
+  .output-canvas {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1;
+    object-fit: cover;
+  }
+
   .video-recording-container {
     z-index: 2;
   }
 
-  .video-recording-container video {
+  .video-recording-container video, .video-recording-container canvas {
     width: 100%;
   }
 
@@ -87,6 +96,11 @@ export const VideoRecorderStyled = styled.article`
       width: 20px;
       height: 20px;
     }
+  }
+
+  .select-bg {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
   @media (max-width: 420px) {
