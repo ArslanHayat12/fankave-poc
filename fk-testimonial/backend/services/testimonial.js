@@ -10,10 +10,12 @@ const methods = (client) => ({
         var storage = multer.diskStorage({
 
             destination: function (req, file, cb) {
+                console.log("file: ", file)
                 cb(null, __dirname + '../../../');
             },
             filename: function (req, file, cb) {
-                cb(null, file.originalname + '-' + Date.now() + '.mp4');
+                console.log("file: ", file)
+                cb(null, file.originalname + '-' + Date.now() + '.webm');
             }
         });
         var upload = multer({ storage: storage });

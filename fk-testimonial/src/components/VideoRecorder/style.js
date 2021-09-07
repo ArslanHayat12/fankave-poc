@@ -78,6 +78,7 @@ export const VideoRecorderStyled = styled.article`
   .stop-button-container .stop-button {
     border: none;
     background: transparent;
+    cursor: pointer;
   }
 
   // .stop-button-container .stop-button svg {

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
-
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { SET_SCREEN, SET_INDEX, RECORD_SCREEN } from "../../constants";
 import {
@@ -11,31 +10,25 @@ import {
   TagStyled,
   ThumnailStyled,
 } from "./style";
-
 import { ArrowIcon } from "../../assets";
 import VideoModal from "../Modal/VideoModal";
 import ApproveTestimonial from "../ApproveTestimonial/ApproveTestimonial";
-
 const VideoChunks = () => {
   const { state, dispatch } = useContext(TestimonialContext);
   const questions = state.questions;
   const [open, setOpen] = useState(false);
   const [videoUrl, setVideoUrl] = useState("");
-
   const onVideoClick = (index) => {
     dispatch({
       type: SET_INDEX,
       payload: index,
     });
-
     dispatch({
       type: SET_SCREEN,
       payload: RECORD_SCREEN,
     });
   };
-
   const theme = useContext(ThemeContext);
-
   const {
     default: {
       widget: {
@@ -46,17 +39,20 @@ const VideoChunks = () => {
             },
           },
         },
+        previewScreen: {
+          video: {
+            mergeVideo
+          }
+        }
       },
     },
   } = theme;
-
   const convertDuration = (urlDuration) => {
     const secondsToHHMMSS = new Date(urlDuration * 1000)
       .toISOString()
       .substr(11, 8);
     return secondsToHHMMSS;
   };
-
   const getUrl = (id) => {
     dispatch({
       type: SET_INDEX,
@@ -65,7 +61,6 @@ const VideoChunks = () => {
     setOpen(true);
     setVideoUrl(questions[id].url);
   };
-
   return (
     <VideoChunksWrapperStyled>
       {questions.map((data, index) => (
@@ -109,15 +104,13 @@ const VideoChunks = () => {
           )}
         </CardStyled>
       ))}
-
       <VideoModal
         openModal={open}
         close={() => setOpen(false)}
         url={videoUrl}
         index={state.currentQuestionIndex}
       />
-
-      {state.url && (
+      {state.url && mergeVideo  && (
         <>
           <video
             src={state.url}
@@ -133,5 +126,4 @@ const VideoChunks = () => {
     </VideoChunksWrapperStyled>
   );
 };
-
 export default VideoChunks;
