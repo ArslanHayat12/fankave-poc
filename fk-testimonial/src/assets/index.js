@@ -666,7 +666,7 @@ export const ArrowIcon = (props) => {
           transform="translate(856 382)"
           fill="#fff"
           stroke="#E6E6E6"
-          stroke-width="1"
+          stroke-width="2"
         >
           <rect width="70" height="70" rx="35" stroke="none" />
           <rect x="0.5" y="0.5" width="69" height="69" rx="34.5" fill="none" />

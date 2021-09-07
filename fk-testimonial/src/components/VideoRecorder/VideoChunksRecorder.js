@@ -48,11 +48,12 @@ export const VideoChunksRecorder = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [isNextClicked, setIsNextClicked] = useState(false);
   const [recordingTime, setTime] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(4);
+  const [timeLeft, setTimeLeft] = useState(3);
   const [showTimeLeft, setShowTimeLeft] = useState(false);
 
   const recordingTimeRef = useRef();
   recordingTimeRef.current = recordingTime;
+  const duration = recordingTimeRef.current;
 
   useInterval(() => {
     capturing && setTime(recordingTime + 1);
@@ -287,7 +288,7 @@ export const VideoChunksRecorder = () => {
   };
 
   useInterval(() => {
-    timeLeft > 0 && setTimeLeft(timeLeft - 1);
+    if (showTimeLeft) timeLeft > 0 && setTimeLeft(timeLeft - 1);
   }, 1000);
 
   // useEffect(() => {
@@ -353,13 +354,16 @@ export const VideoChunksRecorder = () => {
         <div className="timer-button-container">
           <div className="stop-button-container">
             {displayButton ? (
-              <button onClick={handleStopCaptureClick} className="text-button">
+              <button
+                onClick={duration > 0 && handleStopCaptureClick}
+                className="text-button"
+              >
                 <DefaultStopIcon customClass="stop-icon" /> {stopText}
               </button>
             ) : (
               <Tooltip content="Stop" placement="right">
                 <button
-                  onClick={handleStopCaptureClick}
+                  onClick={duration > 0 && handleStopCaptureClick}
                   className="stop-button"
                 >
                   <StopIcon />
