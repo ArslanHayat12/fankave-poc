@@ -88,7 +88,6 @@ const ApproveTestimonial = () => {
   const generateRequestData = (isApproveAction) => {
     fetch(url)
       .then((res) => {
-        console.log(res);
         return res.blob();
       })
       .then((blob) => {

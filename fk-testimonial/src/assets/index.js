@@ -39,7 +39,7 @@ export const RecordingIcon = (props) => {
           transform="translate(727 723)"
           fill="transparent"
           stroke="#F55555"
-          stroke-width="1"
+          strokeWidth="1"
         >
           <circle cx="23.5" cy="23.5" r="23.5" stroke="none" />
           <circle cx="23.5" cy="23.5" r="23" fill="none" />
@@ -407,7 +407,7 @@ export const StopIcon = (props) => {
           transform="translate(727 723)"
           fill="transparent"
           stroke="#F55555"
-          stroke-width="1"
+          strokeWidth="1"
         >
           <circle cx="23.5" cy="23.5" r="23.5" stroke="none" />
           <circle cx="23.5" cy="23.5" r="22.5" fill="none" />
@@ -570,8 +570,8 @@ export const CrossIcon = (props) => {
         y2="54.63"
         fill="none"
         stroke="#246eff"
-        stroke-miterlimit="10"
-        stroke-width="4"
+        strokeMiterlimit="10"
+        strokeWidth="4"
       />
       <line
         x1="9.37"
@@ -580,8 +580,8 @@ export const CrossIcon = (props) => {
         y2="9.37"
         fill="none"
         stroke="#246eff"
-        stroke-miterlimit="10"
-        stroke-width="4"
+        strokeMiterlimit="10"
+        strokeWidth="4"
       />
     </svg>
   );
@@ -608,7 +608,7 @@ export const DefaultRecordingIcon = (props) => {
           transform="translate(727 723.108)"
           fill="none"
           stroke="#fff"
-          stroke-width="3"
+          strokeWidth="3"
         >
           <circle cx="17" cy="17" r="17" stroke="none" />
           <circle cx="17" cy="17" r="15.5" fill="none" />
@@ -666,7 +666,7 @@ export const ArrowIcon = (props) => {
           transform="translate(856 382)"
           fill="#fff"
           stroke="#E6E6E6"
-          stroke-width="2"
+          strokeWidth="2"
         >
           <rect width="70" height="70" rx="35" stroke="none" />
           <rect x="0.5" y="0.5" width="69" height="69" rx="34.5" fill="none" />

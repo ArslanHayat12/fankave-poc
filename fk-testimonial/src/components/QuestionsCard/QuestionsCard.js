@@ -64,7 +64,6 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
       className={`question-card ${pulse && "pulse"}`}
       id="fk-question-card"
     >
-      {console.log("state.questionIndex", state.questionIndex)}
       <p className="questions">{questionArray[currentIndex].question}</p>
       <article className="question-buttons-wrapper">
         {nextPreviousButtonsDisplay && (

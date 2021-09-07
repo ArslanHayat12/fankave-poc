@@ -183,7 +183,6 @@ export const VideoChunksRecorder = () => {
           options = { type: "video/mp4" };
         }
       }
-      // console.log(value)
       const blob = new Blob(recordedChunks, options);
 
       let url = window.URL.createObjectURL(blob);
@@ -233,17 +232,6 @@ export const VideoChunksRecorder = () => {
       } catch {
         url = window.URL.createObjectURL(blob);
       }
-
-      // const blob2 = new Blob(singleRecordedChunks, options);
-
-      // let url2 = window.URL.createObjectURL(blob2);
-      // try {
-      //   url2 = window.webkitURL.createObjectURL(blob2);
-      // } catch {
-      //   url2 = window.URL.createObjectURL(blob2);
-      // }
-
-      console.log(url);
     }
   }, [singleRecordedChunks]);
 

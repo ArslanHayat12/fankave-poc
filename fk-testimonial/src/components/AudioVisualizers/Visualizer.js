@@ -27,8 +27,6 @@ export const Visualizer = (props) => {
     },
   } = theme;
 
-  console.log("theme", canvasPrimaryColor);
-
   const cleanUpFunction = useCallback(() => {
     cancelAnimationFrame(frameRef.current);
     analyserRef.current?.disconnect();

@@ -111,7 +111,6 @@ const PreviewTestimonialScreen = () => {
       body: formData,
       method: "POST",
     }).then((response) => {
-      console.log("response: ", response);
       if (!(currentQuestionIndex < questions.length - 1)) {
         mergeVideoChunks();
         dispatch({
@@ -136,12 +135,6 @@ const PreviewTestimonialScreen = () => {
           const error = response.status;
           return Promise.reject(error);
         }
-        // if (isApproveAction) {
-        // dispatch({
-        //   type: SET_SCREEN,
-        //   payload: THANK_YOU_SCREEN,
-        // });
-        // }
       })
       .catch((err) => {
         console.log("error", err);
@@ -177,7 +170,6 @@ const PreviewTestimonialScreen = () => {
 
     fetch(url)
       .then((res) => {
-        console.log(res);
         return res.blob();
       })
       .then((blob) => {
