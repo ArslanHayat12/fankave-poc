@@ -49,7 +49,14 @@ export const VideoRecorderStyled = styled.article`
   }
 
   .timer-button-container {
-    display: flex;
+    display: ${(props) =>
+      props.theme.default.widget.recordingScreen.video.videoChunks.available
+        ? "flex"
+        : "grid"};
+    grid-template-columns: ${(props) =>
+      props.theme.default.widget.recordingScreen.video.videoChunks.available
+        ? "none"
+        : "repeat(3,1fr)"};
     justify-content: center;
     margin: 15px auto 0;
     font-size: 12px;
@@ -140,4 +147,9 @@ export const ListingLinkStyled = styled.span`
   font-size: 12px;
   z-index: 10;
   cursor: pointer;
+`;
+
+export const VideoTimerStyled = styled.article`
+  color: #6d6d6d;
+  font-size: 16px;
 `;

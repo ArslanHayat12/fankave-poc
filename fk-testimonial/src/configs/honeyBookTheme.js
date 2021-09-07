@@ -1,28 +1,10 @@
 const questionDetails = [
-  {
-    text: "What's your name, title, and company name?",
-    chunkSize: "0.25",
-  },
-  {
-    text: "What pain point did you look for HoneyBook to solve?",
-    chunkSize: "0.5",
-  },
-  {
-    text: "Why did you choose HoneyBook over a competitor?",
-    chunkSize: "",
-  },
-  {
-    text: "How are you using HoneyBook today?",
-    chunkSize: "",
-  },
-  {
-    text: "How are you measuring success today?",
-    chunkSize: "",
-  },
-  {
-    text: "How does HoneyBook help you achieve your goals?",
-    chunkSize: "",
-  },
+  "What's your name, title, and company name?",
+  "What pain point did you look for HoneyBook to solve?",
+  "Why did you choose HoneyBook over a competitor?",
+  "How are you using HoneyBook today?",
+  "How are you measuring success today?",
+  "How does HoneyBook help you achieve your goals?",
 ];
 
 let pathName = window.location.pathname.replaceAll("/", "");
