@@ -129,7 +129,7 @@ const ApproveTestimonial = () => {
     <ApproveButtonWrapper>
       <button
         className={`approve-button ${isApproveLoading ? "button-clicked" : ""}`}
-        onClick={isApproveLoading ? "" : () => generateRequestData(true)}
+        onClick={isApproveLoading ? null : () => generateRequestData(true)}
       >
         {buttonText}
       </button>

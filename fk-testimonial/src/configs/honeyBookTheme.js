@@ -10,7 +10,7 @@ const questionDetails = [
 let pathName = window.location.pathname.replaceAll("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
-const defaultConfigs = {
+const honeyBookConfigs = {
   default: {
     topic: "honeybookcustomer",
     customClass: "honeybook-layout",
@@ -300,4 +300,4 @@ const defaultConfigs = {
   },
 };
 
-export default defaultConfigs;
+export default honeyBookConfigs;

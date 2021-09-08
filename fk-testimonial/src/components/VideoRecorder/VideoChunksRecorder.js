@@ -97,6 +97,7 @@ export const VideoChunksRecorder = () => {
       mediaRecorderRef2.current.start();
       mediaRecorderRef.current.start();
     }
+    return function cleanup() {};
   }, [webcamRef, setCapturing, mediaRecorderRef, mediaRecorderRef2, timeLeft]);
 
   const handleDataAvailable = useCallback(
@@ -207,6 +208,7 @@ export const VideoChunksRecorder = () => {
         });
       }
     }
+    return function cleanup() {};
   }, [recordedChunks, isNextClicked, singleRecordedChunks]);
 
   //will be removed in refactoring
@@ -233,6 +235,7 @@ export const VideoChunksRecorder = () => {
         url = window.URL.createObjectURL(blob);
       }
     }
+    return function cleanup() {};
   }, [singleRecordedChunks]);
 
   const dispatchURLDuration = useCallback(() => {
@@ -278,13 +281,6 @@ export const VideoChunksRecorder = () => {
   useInterval(() => {
     if (showTimeLeft) timeLeft > 0 && setTimeLeft(timeLeft - 1);
   }, 1000);
-
-  // useEffect(() => {
-  //   if (timeLeft == 0) {
-  //     const startVideo = handleStartCaptureClick();
-  //     return startVideo;
-  //   }
-  // }, [timeLeft]);
 
   return (
     <VideoRecorderStyled
@@ -343,7 +339,7 @@ export const VideoChunksRecorder = () => {
           <div className="stop-button-container">
             {displayButton ? (
               <button
-                onClick={duration > 0 && handleStopCaptureClick}
+                onClick={duration > 0 ? handleStopCaptureClick : undefined}
                 className="text-button"
               >
                 <DefaultStopIcon customClass="stop-icon" /> {stopText}
@@ -351,7 +347,7 @@ export const VideoChunksRecorder = () => {
             ) : (
               <Tooltip content="Stop" placement="right">
                 <button
-                  onClick={duration > 0 && handleStopCaptureClick}
+                  onClick={duration > 0 ? handleStopCaptureClick : undefined}
                   className="stop-button"
                 >
                   <StopIcon />
