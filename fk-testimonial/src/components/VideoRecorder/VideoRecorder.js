@@ -8,8 +8,9 @@ import React, {
 import { ThemeContext } from "styled-components";
 import Webcam from "react-webcam";
 import { isMobile } from "react-device-detect";
+
 import { TestimonialContext } from "../../context/TestimonialContext";
-import NotificationCard from "../NotificationCard/NotificationCard";
+import { NotificationCard } from "../Modal/NotificationCard/NotificationCard";
 import { CustomTooltip as Tooltip } from "../Tooltip/Tooltip";
 import QuestionsCard from "../QuestionsCard/QuestionsCard";
 import {
@@ -26,7 +27,6 @@ import {
   SET_THUMB_URL,
   SET_RECORD_CHUKS,
   SET_SCREEN,
-  THANK_YOU_SCREEN,
   PREVIEW_SCREEN,
 } from "../../constants";
 import { VideoRecorderStyled, VideoTimerStyled } from "./style";

@@ -20,6 +20,13 @@ export const HomeScreen = () => {
   const {
     default: {
       widget: {
+        homeScreen: {
+          videoBox: { display: displayVideoCard },
+          audioBox: { display: displayAudioCard },
+          imageCaptureBox: { display: displayCaptureCard },
+          imageUploadBox: { display: displayUploadCard },
+          heading,
+        },
         recordingScreen: {
           video: {
             questionDetails,
@@ -54,6 +61,7 @@ export const HomeScreen = () => {
       type: SET_TYPE,
       payload: "audio",
     });
+
     dispatch({
       type: SET_SCREEN,
       payload: RECORD_SCREEN,
@@ -65,6 +73,7 @@ export const HomeScreen = () => {
       type: SET_TYPE,
       payload: "capture",
     });
+
     dispatch({
       type: SET_SCREEN,
       payload: RECORD_SCREEN,
@@ -76,25 +85,12 @@ export const HomeScreen = () => {
       type: SET_TYPE,
       payload: "upload",
     });
+
     dispatch({
       type: SET_SCREEN,
       payload: RECORD_SCREEN,
     });
   };
-
-  const {
-    default: {
-      widget: {
-        homeScreen: {
-          videoBox: { display: displayVideoCard },
-          audioBox: { display: displayAudioCard },
-          imageCaptureBox: { display: displayCaptureCard },
-          imageUploadBox: { display: displayUploadCard },
-          heading,
-        },
-      },
-    },
-  } = theme;
 
   useEffect(() => {
     const questions = questionDetails.map((question, index) => ({

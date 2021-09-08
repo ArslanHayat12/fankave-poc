@@ -1,10 +1,10 @@
 const questionDetails = [
   "What's your name, title, and company name?",
-  "What pain point did you look for HoneyBook to solve?",
-  "Why did you choose HoneyBook over a competitor?",
-  "How are you using HoneyBook today?",
-  "How are you measuring success today?",
-  "How does HoneyBook help you achieve your goals?",
+  // "What pain point did you look for HoneyBook to solve?",
+  // "Why did you choose HoneyBook over a competitor?",
+  // "How are you using HoneyBook today?",
+  // "How are you measuring success today?",
+  // "How does HoneyBook help you achieve your goals?",
 ];
 
 let pathName = window.location.pathname.replaceAll("/", "");

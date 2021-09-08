@@ -17,10 +17,28 @@ export const ThankYouScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [windowTab, setWindowTab] = useState(null);
   const { origin } = getUserConfig("testimonials");
+
   const {
     state: { url, type: testimonialType },
     dispatch,
   } = useContext(TestimonialContext);
+
+  const theme = useContext(ThemeContext);
+  const {
+    default: {
+      widget: {
+        thankyouScreen: {
+          shareIcon: { url: beviShareIcon, display: displayShareIcon },
+          linkedinButton: { display: linkedinIconDisplay },
+          tweetIcon: { url: beviTweetIcon },
+          button: { text, display },
+          heading,
+          subHeading,
+          goBackText,
+        },
+      },
+    },
+  } = theme;
 
   const urlObjectCleanUp = useCallback(() => {
     //let browser discard reference to previous recorded file
@@ -55,6 +73,7 @@ export const ThankYouScreen = () => {
     setErrorMessage("");
     generateRequestData(true, false);
   };
+
   const openLinkedInSiginInTab = () => {
     window.localStorage.removeItem("token");
     const tab = window.open(origin + `/v1/api/linkedin/login`, "_blank");
@@ -62,15 +81,6 @@ export const ThankYouScreen = () => {
     setErrorMessage("");
     generateRequestData(true, true);
   };
-
-  // useWindowEvent("storage", (event) => {
-  //   if (event.key == "token") {
-  //     windowTab && windowTab.close();
-  //     if (window.localStorage.getItem("token")) {
-  //       generateRequestData(true, isLinkedIn);
-  //     }
-  //   }
-  // });
 
   const shareAudioVideoToTwitter = (formData) => {
     setErrorMessage("");
@@ -182,23 +192,6 @@ export const ThankYouScreen = () => {
       });
   };
 
-  const theme = useContext(ThemeContext);
-  const {
-    default: {
-      widget: {
-        thankyouScreen: {
-          shareIcon: { url: beviShareIcon, display: displayShareIcon },
-          linkedinButton: { display: linkedinIconDisplay },
-          tweetIcon: { url: beviTweetIcon },
-          button: { text, display },
-          heading,
-          subHeading,
-          goBackText,
-        },
-      },
-    },
-  } = theme;
-
   return (
     <ThankyouScreenStyled className="thankyou-screen" id="fk-thankyou-screen">
       <h2 className="heading">{heading}</h2>
@@ -206,6 +199,7 @@ export const ThankYouScreen = () => {
       <span className="back-button" onClick={onBack}>
         {goBackText}
       </span>
+
       {testimonialType === "video" && !tweet && !isTweetUploaded && (
         <div className="button-wrapper">
           {displayShareIcon && (
@@ -257,6 +251,7 @@ export const ThankYouScreen = () => {
           )}
         </div>
       )}
+
       {errorMessage && <div className="error">{errorMessage || ""}</div>}
       {isTweetUploaded && (
         <div className="success">Your message has been uploaded.</div>

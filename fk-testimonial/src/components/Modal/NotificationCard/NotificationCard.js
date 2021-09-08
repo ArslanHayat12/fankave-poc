@@ -3,7 +3,7 @@ import "react-responsive-modal/styles.css";
 import "./style.css";
 import { Modal } from "react-responsive-modal";
 
-const NotificationCard = (props) => {
+export const NotificationCard = (props) => {
   const { openModal, handlePermission } = props;
 
   const [open, setOpen] = useState(false);
@@ -40,5 +40,3 @@ const NotificationCard = (props) => {
     </article>
   );
 };
-
-export default NotificationCard;

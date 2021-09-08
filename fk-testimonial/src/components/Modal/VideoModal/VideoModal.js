@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Modal } from "react-responsive-modal";
-import { TestimonialContext } from "../../context/TestimonialContext";
+import { TestimonialContext } from "../../../context/TestimonialContext";
 
-const VideoModal = (props) => {
+export const VideoModal = (props) => {
   const { openModal, close, url, index } = props;
 
   const {
@@ -25,5 +25,3 @@ const VideoModal = (props) => {
     ""
   );
 };
-
-export default VideoModal;

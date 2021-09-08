@@ -12,7 +12,7 @@ import { PlayFilledIcon, RefreshIcon, CrossIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { CustomTooltip } from "../../components/Tooltip/Tooltip";
 import { SoundWave } from "../../components/AudioVisualizers/SoundWave";
-import { ConfirmationModal } from "../../components/ConfirmationModal/ConfirmationModal";
+import { ConfirmationModal } from "../../components/Modal/ConfirmationModal/ConfirmationModal";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { getPublishAPIRequest } from "../../utils/index";
 import {

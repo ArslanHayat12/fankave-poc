@@ -59,6 +59,7 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
       clearTimeout(timer);
     };
   }, [currentIndex]);
+
   return (
     <QuestionCardStyled
       className={`question-card ${pulse && "pulse"}`}

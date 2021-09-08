@@ -9,7 +9,7 @@ import { ThemeContext } from "styled-components";
 import Webcam from "react-webcam";
 import { isMobile } from "react-device-detect";
 import { TestimonialContext } from "../../context/TestimonialContext";
-import NotificationCard from "../NotificationCard/NotificationCard";
+import { NotificationCard } from "../Modal/NotificationCard/NotificationCard";
 import { CustomTooltip as Tooltip } from "../Tooltip/Tooltip";
 import QuestionsCard from "../QuestionsCard/QuestionsCard";
 import {

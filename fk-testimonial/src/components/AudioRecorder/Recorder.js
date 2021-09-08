@@ -17,7 +17,7 @@ import {
   SET_SCREEN,
   PREVIEW_SCREEN,
 } from "../../constants";
-import NotificationCard from "../NotificationCard/NotificationCard";
+import { NotificationCard } from "../Modal/NotificationCard/NotificationCard";
 import "./style.css";
 
 export const AudioRecorder = () => {

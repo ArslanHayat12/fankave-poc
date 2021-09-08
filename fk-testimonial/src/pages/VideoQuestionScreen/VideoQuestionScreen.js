@@ -5,7 +5,7 @@ import { RESET_DATA } from "../../constants";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { RecordingScreenStyled } from "../RecordScreen/style";
 import { CrossIcon } from "../../assets/index";
-import VideoChunks from "../../components/VideoChunks/VideoChunks";
+import VideoQuestionsListing from "../../components/VideoQuestionsListing/VideoQuestionsListing";
 
 export const VideoQuestionScreen = () => {
   const theme = useContext(ThemeContext);
@@ -29,11 +29,12 @@ export const VideoQuestionScreen = () => {
       type: RESET_DATA,
     });
   }, []);
+
   return (
     <RecordingScreenStyled className="record-screen" id="fk-record-screen">
       <CrossIcon customClass="cross-icon" onClick={onBack} />
       <h2 className="heading">{videoScreenHeading}</h2>
-      <VideoChunks />
+      <VideoQuestionsListing />
     </RecordingScreenStyled>
   );
 };
