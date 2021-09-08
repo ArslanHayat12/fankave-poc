@@ -28,6 +28,7 @@ const VideoChunks = () => {
       payload: RECORD_SCREEN,
     });
   };
+
   const theme = useContext(ThemeContext);
   const {
     default: {
@@ -40,10 +41,8 @@ const VideoChunks = () => {
           },
         },
         previewScreen: {
-          video: {
-            mergeVideo
-          }
-        }
+          video: { mergeVideo },
+        },
       },
     },
   } = theme;
@@ -68,11 +67,10 @@ const VideoChunks = () => {
           key={index}
           onClick={
             data.url
-              ? (e) => {
-                  e.stopPropagation();
+              ? () => {
                   getUrl(index);
                 }
-              : ""
+              : () => onVideoClick(index)
           }
           alignCenter={data.isAnswered}
           className={`${
@@ -110,7 +108,7 @@ const VideoChunks = () => {
         url={videoUrl}
         index={state.currentQuestionIndex}
       />
-      {state.url && mergeVideo  && (
+      {state.url && mergeVideo && (
         <>
           <video
             src={state.url}

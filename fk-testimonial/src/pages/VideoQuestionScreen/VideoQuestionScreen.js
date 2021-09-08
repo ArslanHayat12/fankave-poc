@@ -29,7 +29,6 @@ export const VideoQuestionScreen = () => {
       type: RESET_DATA,
     });
   }, []);
-  console.log("questions", questions);
   return (
     <RecordingScreenStyled className="record-screen" id="fk-record-screen">
       <CrossIcon customClass="cross-icon" onClick={onBack} />

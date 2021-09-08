@@ -59,7 +59,6 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
       clearTimeout(timer);
     };
   }, [currentIndex]);
-
   return (
     <QuestionCardStyled
       className={`question-card ${pulse && "pulse"}`}
@@ -69,8 +68,8 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
       <article className="question-buttons-wrapper">
         {nextPreviousButtonsDisplay && (
           <button
-            className={`question-button prev-button${
-              state.questionIndex === 0 ? " disabled" : ""
+            className={`question-button prev-button ${
+              currentIndex === 0 ? "disabled" : ""
             }`}
             onClick={state.questionIndex === 0 ? undefined : gotToPrevQuestion}
           >
@@ -84,9 +83,7 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
         {nextPreviousButtonsDisplay && (
           <button
             className={`question-button next-button${
-              state.questionIndex === questionArray.length - 1
-                ? " disabled"
-                : ""
+              currentIndex === questionArray.length - 1 ? " disabled" : ""
             }`}
             onClick={
               currentIndex === questionArray.length - 1

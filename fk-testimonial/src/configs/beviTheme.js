@@ -2,30 +2,17 @@ let pathName = window.location.pathname.replaceAll("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
 const questionDetails = [
-  {
-    text: "What is your name and title?",
-    chunkSize: "0.25",
-  },
-  {
-    text: "What team do you report into?",
-    chunkSize: "0.5",
-  },
-  {
-    text: "How long have you been working at Bevi?",
-    chunkSize: "",
-  },
-  {
-    text: "What excites you most about working at Bevi every day?",
-    chunkSize: "",
-  },
-  {
-    text: "How would you describe the Bevi company culture?",
-    chunkSize: "",
-  },
-  {
-    text: "Why would you recommend Bevi as a great place to work?",
-    chunkSize: "",
-  },
+  "What is your name and title?",
+
+  "What team do you report into?",
+
+  "How long have you been working at Bevi?",
+
+  "What excites you most about working at Bevi every day?",
+
+  "How would you describe the Bevi company culture?",
+
+  "Why would you recommend Bevi as a great place to work?",
 ];
 
 const beviBookConfigs = {

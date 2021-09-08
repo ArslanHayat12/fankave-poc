@@ -15,6 +15,7 @@ import { convertSecondsToHourMinute } from "./../../utils/index";
 import { RecordingScreenStyled } from "./style";
 import { SET_URL_DURATION, RESET_DATA } from "../../constants";
 import { VideoRecorder } from "../../components/VideoRecorder/VideoRecorder";
+import { VideoChunksRecorder } from "../../components/VideoRecorder/VideoChunksRecorder";
 
 const RecordScreen = () => {
   const { state, dispatch } = useContext(TestimonialContext);
@@ -49,6 +50,7 @@ const RecordScreen = () => {
           video: {
             heading: videoScreenHeading,
             nextPreviousButtons: { display: nextPreviousButtonsDisplay },
+            videoChunks: { available: recordChunks },
           },
           audio: { heading: audioScreenHeading },
         },
@@ -66,7 +68,11 @@ const RecordScreen = () => {
     return (
       <>
         <h2 className="heading">{videoScreenHeading}</h2>
-        <VideoRecorder className="video" />
+        {recordChunks ? (
+          <VideoChunksRecorder />
+        ) : (
+          <VideoRecorder className="video" />
+        )}
       </>
     );
   };
@@ -109,6 +115,7 @@ const RecordScreen = () => {
       </>
     );
   };
+
   const RecordingScreen = () => {
     switch (state.type) {
       case "video":

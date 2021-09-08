@@ -78,7 +78,6 @@ export const ThankYouScreen = () => {
     fetch(origin + "/v1/api/get-token")
       .then((r) => r.json())
       .then((text) => {
-        console.log(text);
         fetch(origin + "/v1/api/tweet", {
           body: formData,
           method: "POST",

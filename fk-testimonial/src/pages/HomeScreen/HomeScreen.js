@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ThemeContext } from "styled-components";
 
 import RecordingCard from "../../components/RecordingCard/RecordingCard";
@@ -21,34 +21,33 @@ export const HomeScreen = () => {
     default: {
       widget: {
         recordingScreen: {
-          video: { questionDetails },
+          video: {
+            questionDetails,
+            videoChunks: { available: videoChunks },
+          },
         },
       },
     },
   } = theme;
-  console.log(questionDetails)
 
   const onVideoClick = () => {
-    const questions = questionDetails.map((question, index) => ({
-      questionIndex: index,
-      duration: 0,
-      question,
-      thumbUrl: "",
-      url: "",
-      isAnswered: false,
-    }));
+    if (videoChunks) {
+      dispatch({
+        type: SET_SCREEN,
+        payload: VIDEO_QUESTIONS_SCREEN,
+      });
+    } else {
+      dispatch({
+        type: SET_SCREEN,
+        payload: RECORD_SCREEN,
+      });
+    }
 
-    dispatch({ type: SET_QUESTION, payload: questions });
-    dispatch({
-      type: SET_SCREEN,
-      payload: VIDEO_QUESTIONS_SCREEN,
-    });
     dispatch({
       type: SET_TYPE,
       payload: "video",
     });
   };
-
 
   const onAudioClick = () => {
     dispatch({
@@ -83,7 +82,6 @@ export const HomeScreen = () => {
     });
   };
 
-
   const {
     default: {
       widget: {
@@ -97,6 +95,18 @@ export const HomeScreen = () => {
       },
     },
   } = theme;
+
+  useEffect(() => {
+    const questions = questionDetails.map((question, index) => ({
+      questionIndex: index,
+      duration: 0,
+      question,
+      thumbUrl: "",
+      url: "",
+      isAnswered: false,
+    }));
+    dispatch({ type: SET_QUESTION, payload: questions });
+  }, []);
 
   return (
     <HomeScreenStyled id="fk-home-screen">

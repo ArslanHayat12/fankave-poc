@@ -37,13 +37,21 @@ export const QuestionCardStyled = styled.article`
   }
 
   .question-buttons-wrapper {
-    display: flex;
+    display: ${(props) =>
+      props.theme.default.widget.recordingScreen.video.videoChunks.available
+        ? "flex"
+        : "grid"};
+    grid-template-columns: ${(props) =>
+      props.theme.default.widget.recordingScreen.video.videoChunks.available
+        ? "none"
+        : "repeat(3,1fr)"};
     align-items: center;
     justify-content: center;
     width: 100%;
   }
 
   .question-count {
+    text-align: center;
     font-size: 12px;
     color: #35a4ff;
   }
