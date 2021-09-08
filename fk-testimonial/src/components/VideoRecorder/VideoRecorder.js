@@ -207,7 +207,7 @@ export const VideoRecorder = () => {
       </figure>
       {capturing && (
         <div className="timer-button-container">
-          <VideoTimerStyled>
+          <VideoTimerStyled id="fk-timer">
             {convertSecondsToHourMinute(String(recordingTime))}
           </VideoTimerStyled>
           <div className="stop-button-container">

@@ -28,7 +28,6 @@ const VideoChunks = () => {
       payload: RECORD_SCREEN,
     });
   };
-
   const theme = useContext(ThemeContext);
   const {
     default: {

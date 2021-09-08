@@ -9,12 +9,12 @@ body {
 #testimonials {
   height: 100%;
 }
-#fk-record-screen .cross-icon line{
-stroke: #fff;
-}
-#fk-preview-testimonial-screen .cross-icon line{
+#fk-record-screen .cross-icon line {
   stroke: #fff;
-  }
+}
+#fk-preview-testimonial-screen .cross-icon line {
+  stroke: #fff;
+}
 #fk-preview-testimonial-screen .video {
   z-index: 100;
 }
@@ -35,7 +35,7 @@ stroke: #fff;
   max-width: 240px;
   text-align: center;
   margin: auto;
-  color:#fff
+  color: #fff;
 }
 
 #fk-footer {
@@ -44,9 +44,9 @@ stroke: #fff;
   right: 15px;
 }
 
-#fk-thankyou-screen .back-button{
-color:#fff;
-text-decoration: underline;
+#fk-thankyou-screen .back-button {
+  color: #fff;
+  text-decoration: underline;
 }
 
 #fk-page-wrapper {
@@ -70,10 +70,9 @@ text-decoration: underline;
   z-index: 10;
 }
 
-#fk-record-screen .heading{
-  color:#fff
+#fk-record-screen .heading {
+  color: #fff;
 }
-
 
 #fk-preview-testimonial-screen {
   height: 100%;
@@ -110,12 +109,12 @@ text-decoration: underline;
   padding: 1px; */
 }
 
-#fk-preview-testimonial-screen .heading{
-color:#fff
+#fk-preview-testimonial-screen .heading {
+  color: #fff;
 }
 
-#fk-video-recorder-wrapper .video-timer{
-  color:#fff
+#fk-video-recorder-wrapper .video-timer {
+  color: #fff;
 }
 
 #fk-client-details-wrapper input {
@@ -155,7 +154,7 @@ color:#fff
   height: 24px;
   width: 15px;
 }
- #fk-header .main-logo {
+#fk-header .main-logo {
   margin: 0px;
 }
 
@@ -163,28 +162,32 @@ color:#fff
   background: #ffffff59;
 }
 
-#fk-thankyou-screen .heading{
-  color:#fff
+#fk-thankyou-screen .heading {
+  color: #fff;
 }
 
-#fk-preview-testimonial-screen .processing-text{
-color: #fff;
+#fk-preview-testimonial-screen .processing-text {
+  color: #fff;
 }
 
 #fk-thankyou-screen .description {
-  color:#fff
+  color: #fff;
 }
 
-#fk-record-screen .timer{
-color:#fff
+#fk-record-screen .timer {
+  color: #fff;
 }
 
 #fk-page-wrapper .background-image {
   object-fit: cover;
 }
 
+#fk-timer {
+  color: #fff;
+}
+
 @media (min-width: 1920px) {
-  #fk-widget-wrapper .widget-gif{
+  #fk-widget-wrapper .widget-gif {
     height: unset;
   }
 
@@ -201,7 +204,6 @@ color:#fff
   #fk-header {
     padding: 8px;
   }
-
 
   #fk-home-screen {
     margin-bottom: 70px;
@@ -231,10 +233,8 @@ color:#fff
 
   #fk-thankyou-screen .description {
     font-size: 18px;
-    color:#fff
+    color: #fff;
   }
-
- 
 
   #fk-thankyou-screen {
     min-height: 400px;
@@ -340,7 +340,6 @@ color:#fff
 
   #fk-page-wrapper .background-image {
     height: 100%;
-   
   }
 
   #fk-header .main-logo {
@@ -352,15 +351,14 @@ color:#fff
   }
 }
 
-@media (min-width:360px) and (max-width:399px){
-  #fk-widget-wrapper .widget-gif{
+@media (min-width: 360px) and (max-width: 399px) {
+  #fk-widget-wrapper .widget-gif {
     height: 80.5vh;
   }
 }
 
 @media (min-width: 375px) and (max-width: 416px) {
-
-  #fk-widget-wrapper .widget-gif{
+  #fk-widget-wrapper .widget-gif {
     height: 67.85vh;
   }
 
@@ -392,8 +390,7 @@ color:#fff
 }
 
 @media (min-width: 400px) and (max-width: 420px) {
-
-  #fk-widget-wrapper .widget-gif{
+  #fk-widget-wrapper .widget-gif {
     height: 69.7vh;
   }
 
@@ -422,10 +419,9 @@ color:#fff
 }
 
 @media (max-width: 320px) {
-  #fk-widget-wrapper .widget-gif{
+  #fk-widget-wrapper .widget-gif {
     height: 78vh;
   }
-
 
   #fk-widget-wrapper {
     height: 73vh;
@@ -443,7 +439,7 @@ color:#fff
     height: 45vh;
   }
 
-  #fk-header .sub-text{
-font-size: 12px;
+  #fk-header .sub-text {
+    font-size: 12px;
   }
 }

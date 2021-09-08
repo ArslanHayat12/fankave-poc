@@ -67,7 +67,7 @@ const defaultConfigs = {
           icon: `${pathName}/honeybook/camera.png`,
           text: "RECORD VIDEO",
           borderRadius: "18px",
-          background: "red",
+          background: "transparent",
           border: "solid 2px transparent",
           iconColor: "",
           iconSize: "",
@@ -246,7 +246,7 @@ const defaultConfigs = {
           micIcon: {
             stroke: "#86a6e3",
             background: "#5e91f3",
-            canvasPrimaryColor: "#5e91f3",
+            canvasPrimaryColor: "#88abf0",
             canvasSecondaryColor: "#88abf0",
           },
         },

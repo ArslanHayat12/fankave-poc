@@ -230,14 +230,14 @@ const demoConfigs = {
             },
           },
           nextPreviousButtons: {
-            display: false,
+            display: true,
           },
           icon: {
             display: true,
           },
 
           videoChunks: {
-            available: true,
+            available: false,
             thumbnail: {
               width: "70px",
             },
