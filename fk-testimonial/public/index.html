@@ -1,105 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Web site created using create-react-app" />
+    <title>React App</title>
+  </head>
 
-  <title>React App</title>
-</head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
 
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script>
+      var userConfigs = {
+        "dev.bevi.fankave.com": {
+          ctag: "bevi",
+          origin: "https://dev.bevi.fankave.com",
+          title: "Bevi Dev",
+        },
+        "bevi.fankave.com": {
+          ctag: "bevi",
+          origin: "https://bevi.fankave.com",
+          title: "Bevi Prod",
+        },
+        "postal.fankave.com": {
+          ctag: "postal",
+          origin: "https://postal.fankave.com",
+          title: "Postal Prod",
+        },
+        "demo.fankave.com": {
+          ctag: "demo",
+          origin: "https://demo.fankave.com",
+          title: "Demo Prod",
+        },
+        "honeybook.fankave.com": {
+          ctag: "honeybook",
+          origin: "https://honeybook.fankave.com",
+          title: "Honeybook Prod",
+        },
+        "prove.fankave.com": {
+          ctag: "prove",
+          origin: "https://prove.fankave.com",
+          title: "Prove Prod",
+        },
+        "dev.olympics.fankave.com": {
+          ctag: "demo",
+          origin: "https://dev.olympics.fankave.com",
+          title: "Dev",
+        },
+        localhost: {
+          ctag: "sprout",
+          // origin is the url where web-app project is running e.g localhost:3000
+          origin: "http://localhost:5000",
+          title: "Localhost",
+        },
+        default: {
+          ctag: "bevi",
+          origin: "https://dev.olympics.fankave.com",
+          title: "Dev",
+        },
+      };
+      self.window.userConfig =
+        userConfigs[window.location.hostname] || userConfigs["default"];
+      self.window.ctag =
+        userConfigs[window.location.hostname].ctag ||
+        userConfigs["default"].ctag;
+      document.title =
+        userConfigs[window.location.hostname].title ||
+        userConfigs["default"].title;
+    </script>
+    <script>
+      function loadDoc() {
+        const type = window.self.ctag;
+        const pathName = window.location.pathname.replaceAll("/", "");
+        const filePath =
+          window.location.hostname === "localhost" ? "/" : `/${pathName}/`;
+        // Create new link element
+        var scr = document.createElement("script");
 
-  <script>
-    var userConfigs = {
-      "dev.bevi.fankave.com": {
-        ctag: "bevi",
-        origin: "https://dev.bevi.fankave.com",
-        title: "Bevi Dev",
-      },
-      "bevi.fankave.com": {
-        ctag: "bevi",
-        origin: "https://bevi.fankave.com",
-        title: "Bevi Prod",
-      },
-      "postal.fankave.com": {
-        ctag: "postal",
-        origin: "https://postal.fankave.com",
-        title: "Postal Prod",
-      },
-      "demo.fankave.com": {
-        ctag: "demo",
-        origin: "https://demo.fankave.com",
-        title: "Demo Prod",
-      },
-      "honeybook.fankave.com": {
-        ctag: "honeybook",
-        origin: "https://honeybook.fankave.com",
-        title: "Honeybook Prod",
-      },
-      "prove.fankave.com": {
-        ctag: "prove",
-        origin: "https://prove.fankave.com",
-        title: "Prove Prod",
-      },
-      "dev.olympics.fankave.com": {
-        ctag: "demo",
-        origin: "https://dev.olympics.fankave.com",
-        title: "Dev",
-      },
-      localhost: {
-        ctag: "demo",
-        // origin is the url where web-app project is running e.g localhost:3000
-        origin: "http://localhost:5000",
-        title: "Localhost",
-      },
-      default: {
-        ctag: "bevi",
-        origin: "https://dev.olympics.fankave.com",
-        title: "Dev",
-      },
-    };
-    self.window.userConfig =
-      userConfigs[window.location.hostname] || userConfigs["default"];
-    self.window.ctag =
-      userConfigs[window.location.hostname].ctag ||
-      userConfigs["default"].ctag;
-    document.title =
-      userConfigs[window.location.hostname].title ||
-      userConfigs["default"].title;
-  </script>
-  <script>
-    function loadDoc() {
-      const type = window.self.ctag;
-      const pathName = window.location.pathname.replaceAll("/", "");
-      const filePath = window.location.hostname === "localhost" ? "/" : `/${pathName}/`
-      // Create new link element
-      var scr = document.createElement('script');
+        const link = document.createElement("link");
+        link.setAttribute("rel", "stylesheet");
+        link.setAttribute(
+          "href",
+          `${filePath}${window.self.ctag}/${window.self.ctag}.css`
+        );
 
-      const link = document.createElement("link");
-      link.setAttribute("rel", "stylesheet");
-      link.setAttribute(
-        "href",
-        `${filePath}${window.self.ctag}/${window.self.ctag}.css`
-      );
-
-      // Append to the `head` element
-      if (pathName) {
-        scr.setAttribute('src', `${filePath}${pathName}.js`);
-        document.body.appendChild(scr);
+        // Append to the `head` element
+        if (pathName) {
+          scr.setAttribute("src", `${filePath}${pathName}.js`);
+          document.body.appendChild(scr);
+        }
+        document.head.appendChild(link);
       }
-      document.head.appendChild(link);
+      loadDoc();
+    </script>
 
-    }
-    loadDoc();
-  </script>
-
-  <div id="root"></div>
-  <div id="testimonials"></div>
-
-</body>
-
+    <div id="root"></div>
+    <div id="testimonials"></div>
+  </body>
 </html>
