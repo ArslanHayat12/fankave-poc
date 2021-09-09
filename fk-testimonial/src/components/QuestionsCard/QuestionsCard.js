@@ -17,6 +17,7 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
         recordingScreen: {
           video: {
             nextPreviousButtons: { display: nextPreviousButtonsDisplay },
+            videoChunks: { available: chunksAvailable },
           },
         },
       },
@@ -24,13 +25,13 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
   } = theme;
 
   const gotToPrevQuestion = useCallback(() => {
+    console.log("currentIndex", currentIndex);
     if (currentIndex > 0) {
       dispatch({
         type: SET_INDEX,
         payload: currentIndex - 1,
       });
-      handleNextPrevClick(true);
-      handleNextPrevClick(true);
+      chunksAvailable && handleNextPrevClick(true);
     }
   }, [state]);
 
@@ -40,11 +41,12 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
         type: SET_INDEX,
         payload: currentIndex + 1,
       });
-      handleNextPrevClick(
-        false,
-        state.questionIndex < questionArray.length - 1
-      );
-      handleNextPrevClick(false);
+      chunksAvailable &&
+        handleNextPrevClick(
+          false,
+          state.questionIndex < questionArray.length - 1
+        );
+      chunksAvailable && handleNextPrevClick(false);
     }
   }, [state]);
 
