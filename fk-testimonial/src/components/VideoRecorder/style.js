@@ -68,7 +68,6 @@ export const VideoRecorderStyled = styled.article`
     position: absolute;
     z-index: 1;
     color: #fff;
-    top: 5px;
     font-size: 16px;
 
     margin: auto;
@@ -76,6 +75,16 @@ export const VideoRecorderStyled = styled.article`
     right: 0;
     display: flex;
     justify-content: center;
+  }
+
+  .recording-circle {
+    position: relative;
+    height: 10px;
+    width: 10px;
+    background: red;
+    border-radius: 100%;
+    top: 4px;
+    margin-right: 4px;
   }
 
   .timer-button-container .stop-button-container {

@@ -90,11 +90,10 @@ const RecordScreen = () => {
           </article>
 
           <AudioRecorder />
-          {nextPreviousButtonsDisplay && (
-            <article className="testimonial-questions-wrapper">
-              <QuestionsCard />
-            </article>
-          )}
+
+          <article className="testimonial-questions-wrapper">
+            <QuestionsCard />
+          </article>
         </figure>
       </>
     );

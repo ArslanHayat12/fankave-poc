@@ -60,12 +60,8 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
     };
   }, [currentIndex]);
 
-  return (
-    <QuestionCardStyled
-      className={`question-card ${pulse && "pulse"}`}
-      id="fk-question-card"
-    >
-      <p className="questions">{questionArray[currentIndex].question}</p>
+  const VideoQuestionCard = () => {
+    return (
       <article className="question-buttons-wrapper">
         {nextPreviousButtonsDisplay && (
           <button
@@ -97,6 +93,55 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
           </button>
         )}
       </article>
+    );
+  };
+
+  const AudioQuestionCard = () => {
+    return (
+      <article className="audio-question-buttons-wrapper">
+        <button
+          className={`question-button prev-button ${
+            currentIndex === 0 ? "disabled" : ""
+          }`}
+          onClick={state.questionIndex === 0 ? undefined : gotToPrevQuestion}
+        >
+          <span>&#8249;</span>
+          {` Prev`}
+        </button>
+        <span className="question-count">
+          {currentIndex + 1}/{questionArray.length}
+        </span>
+        <button
+          className={`question-button next-button${
+            currentIndex === questionArray.length - 1 ? " disabled" : ""
+          }`}
+          onClick={
+            currentIndex === questionArray.length - 1
+              ? undefined
+              : gotToNextQuestion
+          }
+        >
+          {`Next `}
+          <span>&#8250;</span>
+        </button>
+      </article>
+    );
+  };
+
+  return (
+    <QuestionCardStyled
+      className={`question-card ${pulse && "pulse"}`}
+      id="fk-question-card"
+    >
+      <p className="questions">{questionArray[currentIndex].question}</p>
+
+      {state.type === "video" ? (
+        <article className="question-buttons-wrapper">
+          <VideoQuestionCard />
+        </article>
+      ) : (
+        <AudioQuestionCard />
+      )}
     </QuestionCardStyled>
   );
 };

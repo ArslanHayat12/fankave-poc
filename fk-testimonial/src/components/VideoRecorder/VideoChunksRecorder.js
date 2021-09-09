@@ -294,9 +294,7 @@ export const VideoChunksRecorder = () => {
         {showTimeLeft && timeLeft !== 0 && (
           <span className="time-left">{timeLeft}</span>
         )}
-        <article className="video-timer">
-          {convertSecondsToHourMinute(String(recordingTime))}
-        </article>
+
         <div className="video-recording-container">
           {!videoURL && (
             <Webcam
@@ -331,7 +329,14 @@ export const VideoChunksRecorder = () => {
         </div>
 
         <article className="testimonial-questions-wrapper">
-          <QuestionsCard handleNextPrevClick={handleNextPrevClick} />
+          <article className="video-timer">
+            <span className="recording-circle"></span>{" "}
+            {convertSecondsToHourMinute(String(recordingTime))}
+          </article>
+          <QuestionsCard
+            handleNextPrevClick={handleNextPrevClick}
+            timer={convertSecondsToHourMinute(String(recordingTime))}
+          />
         </article>
       </figure>
       {capturing && (

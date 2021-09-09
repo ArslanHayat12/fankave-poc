@@ -1,17 +1,17 @@
 const questionDetails = [
   "What is your name, title and company?",
   "What challenge did you have?",
-  "What made this partner the obvious choice?",
-  "What were the results?",
+  // "What made this partner the obvious choice?",
+  // "What were the results?",
 ];
 
 let pathName = window.location.pathname.replaceAll("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
-const demoConfigs = {
+const sproutConfigs = {
   default: {
-    topic: "demostories",
-    customClass: "demo-layout",
+    topic: "sproutstories",
+    customClass: "sprout-layout",
     onPageLoad: {
       video: {
         url: `${pathName}/honeybook/honeybook.mp4`,
@@ -51,16 +51,17 @@ const demoConfigs = {
       },
       logo: {
         position: "",
-        url: `${pathName}/demo/postal-logo.png`,
+        url: `${pathName}/sprout/sprout.png`,
         height: "40px",
       },
       mainHeadingText: "",
       fontSize: "",
       fontColor: "",
-
+      flowType: "no-listing", // lisitng | default
       homeScreen: {
-        cardStyle: "columns", // columns | rows
+        cardStyle: "rows", // columns | rows
         heading: "Select one to record your testimonial",
+
         videoBox: {
           display: true,
           type: "video",
@@ -88,7 +89,7 @@ const demoConfigs = {
           fontSize: "",
         },
         imageCaptureBox: {
-          display: true,
+          display: false,
           type: "imageCapture",
           icon: `${pathName}/demo/upload.png`,
           text: "CAPTURE IMAGE",
@@ -101,7 +102,7 @@ const demoConfigs = {
           fontSize: "",
         },
         imageUploadBox: {
-          display: true,
+          display: false,
           type: "imageUpload",
           icon: `${pathName}/demo/upload.png`,
           text: "UPLOAD IMAGE",
@@ -122,7 +123,9 @@ const demoConfigs = {
           heading: "Preview Video Testimonial",
           fontSize: "",
           fontColor: "",
-          video: {},
+          video: {
+            borderRadius: "0",
+          },
           input: {
             placeholders: {
               name: "Name (optional)",
@@ -151,9 +154,9 @@ const demoConfigs = {
             fontWeight: "500",
             color: "#fff",
             textTransform: "uppercase",
-            borderRadius: "40px",
+            borderRadius: "0",
             height: "33px",
-            width: "110px",
+            width: "100%",
             placement: "center",
           },
 
@@ -230,7 +233,7 @@ const demoConfigs = {
             },
           },
           questionCard: {
-            background: "",
+            background: "#35a4ff",
           },
           nextPreviousButtons: {
             display: false,
@@ -266,7 +269,7 @@ const demoConfigs = {
             },
           },
           questionCard: {
-            background: "",
+            background: "#35a4ff",
           },
           nextPreviousButtons: {
             display: true,
@@ -291,7 +294,7 @@ const demoConfigs = {
           url: `${pathName}/demo/share-icon.png`,
           bgColor: "transparent",
           height: "95px",
-          display: true,
+          display: false,
         },
         tweetIcon: {
           borderRadius: "none",
@@ -334,4 +337,4 @@ const demoConfigs = {
   },
 };
 
-export default demoConfigs;
+export default sproutConfigs;

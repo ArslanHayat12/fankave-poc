@@ -42,12 +42,30 @@ export const QuestionCardStyled = styled.article`
         ? "flex"
         : "grid"};
     grid-template-columns: ${(props) =>
-      props.theme.default.widget.recordingScreen.video.videoChunks.available
+      props.theme.default.widget.recordingScreen.video.videoChunks.available &&
+      !props.theme.default.widget.recordingScreen.audio.nextPreviousButtons
+        .display
         ? "none"
         : "repeat(3,1fr)"};
     align-items: center;
     justify-content: center;
     width: 100%;
+    background: ${(props) =>
+      props.theme.default.widget.recordingScreen.video.questionCard.background};
+  }
+
+  .audio-question-buttons-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: ${(props) =>
+      props.theme.default.widget.recordingScreen.video.questionCard.background};
+  }
+
+  .audio-question-buttons-wrapper .question-button {
+    color: #fff;
   }
 
   .question-count {

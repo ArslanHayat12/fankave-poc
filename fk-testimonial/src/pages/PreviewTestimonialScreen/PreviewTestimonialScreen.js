@@ -64,6 +64,7 @@ const PreviewTestimonialScreen = () => {
   const {
     default: {
       widget: {
+        flowType,
         previewScreen: {
           video: {
             mergeVideo,
@@ -83,6 +84,7 @@ const PreviewTestimonialScreen = () => {
       },
     },
   } = theme;
+
   const mergeVideoChunks = () => {
     const fileId = localStorage.getItem("videoChunksId");
     fetch("/v1/api/merge-video", {
@@ -161,10 +163,17 @@ const PreviewTestimonialScreen = () => {
       });
     } else {
       if (!mergeVideo) {
-        dispatch({
-          type: SET_SCREEN,
-          payload: VIDEO_QUESTIONS_SCREEN,
-        });
+        if (flowType === "no-listing") {
+          dispatch({
+            type: SET_SCREEN,
+            payload: THANK_YOU_SCREEN,
+          });
+        } else {
+          dispatch({
+            type: SET_SCREEN,
+            payload: VIDEO_QUESTIONS_SCREEN,
+          });
+        }
       }
     }
 
@@ -403,8 +412,8 @@ const PreviewTestimonialScreen = () => {
           <article className="button-wrapper">
             <button
               className={`approve-button ${
-                isApproveLoading ? "button-clicked" : ""
-              }`}
+                testimonialType === "audio" && "audio-approve-button"
+              }${isApproveLoading ? "button-clicked" : ""}`}
               onClick={isApproveLoading ? "" : () => approveVideoTestimonial()}
             >
               {buttonText}
@@ -414,15 +423,12 @@ const PreviewTestimonialScreen = () => {
           <ApproveTestimonial />
         )}
       </section>
-      {/* <span className="processing-text">
-        {isApproveLoading && "Processing ..."}
-      </span> */}
+
       {testimonialType === "audio" &&
         theme.default.widget.previewScreen.audio.audio.displayWave && (
           <SoundWave />
         )}
       {isLoading && <Loader />}
-      {/* {isApproveLoading && <Loader />} */}
     </PreviewScreenStyled>
   );
 };

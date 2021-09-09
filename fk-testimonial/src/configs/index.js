@@ -6,6 +6,7 @@ import demoConfigs from "./demoTheme";
 import postalConfigs from "./postalTheme";
 import honeyBookConfigs from "./honeyBookTheme";
 import proveConfigs from "./proveTheme";
+import sproutConfigs from "./sproutTheme";
 
 const overwriteMerge = (destinationArray, sourceArray, options) => sourceArray;
 
@@ -33,6 +34,12 @@ const theme = () => {
       return deepmerge(demoConfigs, proveConfigs, {
         arrayMerge: overwriteMerge,
       });
+    case "sprout":
+      return deepmerge(demoConfigs, sproutConfigs, {
+        arrayMerge: overwriteMerge,
+      });
+    default:
+      return demoConfigs;
   }
 };
 

@@ -39,7 +39,9 @@ export const PreviewScreenStyled = styled.article`
     position: relative;
     margin: 15px 0 0;
     border: 1px solid #c9c9c9;
-    border-radius: 8px;
+    border-radius: ${(props) =>
+      props.theme.default.widget.previewScreen.video.video.borderRadius ||
+      "8"}px !important;
     /* height: 325px; */
     height: ${(props) =>
       props.theme.default.widget.previewScreen.video.height}px;
@@ -63,7 +65,9 @@ export const PreviewScreenStyled = styled.article`
     position: relative;
     width: 100%;
     height: 100%;
-    border-radius: 8px;
+    border-radius: ${(props) =>
+      props.theme.default.widget.previewScreen.video.video.borderRadius ||
+      "8"}px !important;
     object-fit: cover;
   }
 
@@ -91,25 +95,59 @@ export const PreviewScreenStyled = styled.article`
   .approve-button {
     font-family: "Poppins", sans-serif;
     background-color: ${(props) =>
-      props.theme.default.widget.previewScreen.video.button.backgroundColor};
+      props.theme.default.widget.previewScreen.video.button
+        .backgroundColor} !important;
     color: ${(props) =>
-      props.theme.default.widget.previewScreen.video.button.color};
+      props.theme.default.widget.previewScreen.video.button.color} !important;
     text-transform: ${(props) =>
-      props.theme.default.widget.previewScreen.video.button.textTransform};
+      props.theme.default.widget.previewScreen.video.button
+        .textTransform} !important;
     width: ${(props) =>
-      props.theme.default.widget.previewScreen.video.button.width};
+      props.theme.default.widget.previewScreen.video.button.width} !important;
     height: ${(props) =>
-      props.theme.default.widget.previewScreen.video.button.height};
+      props.theme.default.widget.previewScreen.video.button.height} !important;
     font-size: ${(props) =>
-      props.theme.default.widget.previewScreen.video.button.fontSize};
+      props.theme.default.widget.previewScreen.video.button
+        .fontSize} !important;
     font-weight: ${(props) =>
-      props.theme.default.widget.previewScreen.video.button.fontWeight};
+      props.theme.default.widget.previewScreen.video.button
+        .fontWeight} !important;
     border-radius: ${(props) =>
-      props.theme.default.widget.previewScreen.video.button.borderRadius};
+      props.theme.default.widget.previewScreen.video.button
+        .borderRadius} !important;
     outline: none;
     border: none;
     cursor: pointer;
     margin-right: 3px;
+  }
+
+  .audio-approve-button {
+    background-color: ${(props) =>
+      props.theme.default.widget.previewScreen.audio.button
+        .backgroundColor} !important;
+    color: ${(props) =>
+      props.theme.default.widget.previewScreen.audio.button.color} !important;
+    text-transform: ${(props) =>
+      props.theme.default.widget.previewScreen.audio.button
+        .textTransform} !important;
+    width: ${(props) =>
+      props.theme.default.widget.previewScreen.audio.button.width} !important;
+    height: ${(props) =>
+      props.theme.default.widget.previewScreen.audio.button.height} !important;
+    font-size: ${(props) =>
+      props.theme.default.widget.previewScreen.audio.button
+        .fontSize} !important;
+    font-weight: ${(props) =>
+      props.theme.default.widget.previewScreen.audio.button
+        .fontWeight} !important;
+    border-radius: ${(props) =>
+      props.theme.default.widget.previewScreen.audio.button
+        .borderRadius} !important;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 3px;
+    margin-top: 10px;
   }
 
   .button-wrapper {

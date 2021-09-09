@@ -20,6 +20,7 @@ export const HomeScreen = () => {
   const {
     default: {
       widget: {
+        flowType,
         homeScreen: {
           videoBox: { display: displayVideoCard },
           audioBox: { display: displayAudioCard },
@@ -39,10 +40,17 @@ export const HomeScreen = () => {
 
   const onVideoClick = () => {
     if (videoChunks) {
-      dispatch({
-        type: SET_SCREEN,
-        payload: VIDEO_QUESTIONS_SCREEN,
-      });
+      if (flowType === "no-listing") {
+        dispatch({
+          type: SET_SCREEN,
+          payload: RECORD_SCREEN,
+        });
+      } else {
+        dispatch({
+          type: SET_SCREEN,
+          payload: VIDEO_QUESTIONS_SCREEN,
+        });
+      }
     } else {
       dispatch({
         type: SET_SCREEN,
