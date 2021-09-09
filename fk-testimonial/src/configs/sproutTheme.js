@@ -125,6 +125,7 @@ const sproutConfigs = {
           fontColor: "",
           video: {
             borderRadius: "0",
+            border: "none",
           },
           input: {
             placeholders: {
@@ -148,7 +149,7 @@ const sproutConfigs = {
             },
           },
           button: {
-            backgroundColor: "#5089ed",
+            backgroundColor: "#35a4ff",
             text: "Approve",
             fontSize: "14px",
             fontWeight: "500",
@@ -178,7 +179,7 @@ const sproutConfigs = {
               borderRadius: "20px",
             },
             button: {
-              backgroundColor: "#4dbbe5",
+              backgroundColor: "#35a4ff",
               text: "Approve",
               fontSize: "14px",
               fontWeight: "500",
@@ -201,7 +202,7 @@ const sproutConfigs = {
             },
           },
           button: {
-            backgroundColor: "#5089ed",
+            backgroundColor: "#35a4ff",
             text: "Approve",
             fontSize: "14px",
             fontWeight: "500",
@@ -222,6 +223,7 @@ const sproutConfigs = {
         video: {
           heading: "Record Video Testimonial",
           height: "550",
+          border: "none",
           questionDetails,
           button: {
             display: false,

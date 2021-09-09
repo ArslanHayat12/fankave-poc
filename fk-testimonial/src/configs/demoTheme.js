@@ -122,7 +122,10 @@ const demoConfigs = {
           heading: "Preview Video Testimonial",
           fontSize: "",
           fontColor: "",
-          video: {},
+          video: {
+            borderRadius: "0",
+            border: "1px solid rgb(201, 201, 201)",
+          },
           input: {
             placeholders: {
               name: "Name (optional)",
@@ -219,6 +222,7 @@ const demoConfigs = {
         video: {
           heading: "Record Video Testimonial",
           height: "550",
+          border: "1px solid rgb(201, 201, 201)",
           questionDetails,
           button: {
             display: false,

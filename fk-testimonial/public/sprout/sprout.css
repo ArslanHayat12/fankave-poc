@@ -126,7 +126,7 @@ body {
 
 #fk-question-card .question-count {
   color: #fff;
-  height: 30px;
+  height: 33px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -149,7 +149,7 @@ body {
 }
 
 #fk-preview-testimonial-screen .video-wrapper {
-  height: 50vh;
+  height: 48.5vh;
 }
 
 #fk-client-details-wrapper .client-name-wrapper {
@@ -256,11 +256,11 @@ body {
   }
 
   #fk-video-recorder-wrapper .video-wrapper {
-    height: 50vh;
+    height: 53vh;
   }
 
   #fk-video-recorder-wrapper video {
-    height: 50vh;
+    height: 53vh;
   }
 }
 
@@ -301,7 +301,7 @@ body {
   }
 
   #fk-footer img {
-    height: 30px;
+    height: 25px;
   }
 
   #fk-widget-wrapper {

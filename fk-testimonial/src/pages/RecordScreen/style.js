@@ -35,7 +35,8 @@ export const RecordingScreenStyled = styled.article`
     height: ${(props) =>
       props.theme.default.widget.recordingScreen.video.height}px;
     margin: 15px 0 0;
-    border: 1px solid #c9c9c9;
+    border: ${(props) =>
+      props.theme.default.widget.recordingScreen.video.border};
     border-radius: 8px;
   }
 

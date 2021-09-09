@@ -38,7 +38,8 @@ export const PreviewScreenStyled = styled.article`
   .video-wrapper {
     position: relative;
     margin: 15px 0 0;
-    border: 1px solid #c9c9c9;
+    border: ${(props) =>
+      props.theme.default.widget.previewScreen.video.video.border};
     border-radius: ${(props) =>
       props.theme.default.widget.previewScreen.video.video.borderRadius ||
       "8"}px !important;
@@ -217,6 +218,7 @@ export const PreviewScreenStyled = styled.article`
     padding: 15px;
     height: 120px;
     margin-top: 20px;
+    margin-bottom: 10px;
 
     &:after {
       content: "";

@@ -6,10 +6,6 @@ export const QuestionCardStyled = styled.article`
   align-items: center;
   width: 100%;
 
-  &.pulse {
-    animation: pulse 1s linear;
-  }
-
   .questions {
     width: 90%;
     text-align: center;
@@ -62,6 +58,7 @@ export const QuestionCardStyled = styled.article`
     width: 100%;
     background: ${(props) =>
       props.theme.default.widget.recordingScreen.video.questionCard.background};
+    border-radius: 0 0 8px 8px;
   }
 
   .audio-question-buttons-wrapper .question-button {
