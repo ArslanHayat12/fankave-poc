@@ -4,19 +4,17 @@ import PreviewTestimonialScreen from "../PreviewTestimonialScreen/PreviewTestimo
 import { TestimonialContext } from "../../context/TestimonialContext";
 
 export const TestimonialScreen = () => {
-  const { state: { type, url } } = useContext(TestimonialContext);
+  const {
+    state: { type, url },
+  } = useContext(TestimonialContext);
 
-  return (
+  return !url ? (
     <>
-      {!url ? (
-        <>
-          <RecordScreen />
-        </>
-      ) : (
-        <>
-          <PreviewTestimonialScreen />
-        </>
-      )}
+      <RecordScreen />
+    </>
+  ) : (
+    <>
+      <PreviewTestimonialScreen />
     </>
   );
 };

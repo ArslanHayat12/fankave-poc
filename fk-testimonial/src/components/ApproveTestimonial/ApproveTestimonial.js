@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { getPublishAPIRequest } from "../../utils/index";
 import { ThemeContext } from "styled-components";
-import { SET_SCREEN, THANK_YOU_SCREEN } from "../../constants";
+import { HOME_SCREEN, SET_SCREEN, THANK_YOU_SCREEN } from "../../constants";
 import { ApproveButtonWrapper } from "./style";
 
 const ApproveTestimonial = () => {
@@ -66,9 +66,9 @@ const ApproveTestimonial = () => {
         alert("Request failed with error code " + err);
       });
 
-    if(mergeVideo) {
-      const fileId = localStorage.getItem("videoChunksId")
-  
+    if (mergeVideo) {
+      const fileId = localStorage.getItem("videoChunksId");
+
       fetch("/v1/api/remove-video", {
         method: "POST",
         headers: {
@@ -77,19 +77,17 @@ const ApproveTestimonial = () => {
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify({
-          fileName: `${fileId}.mp4`
+          fileName: `${fileId}.mp4`,
         }),
-      })
-        .then((response) => {
-          console.log("Video deleted!")
-        })
+      }).then((response) => {
+        console.log("Video deleted!");
+      });
     }
   };
 
   const generateRequestData = (isApproveAction) => {
     fetch(url)
       .then((res) => {
-        console.log(res);
         return res.blob();
       })
       .then((blob) => {
@@ -131,7 +129,7 @@ const ApproveTestimonial = () => {
     <ApproveButtonWrapper>
       <button
         className={`approve-button ${isApproveLoading ? "button-clicked" : ""}`}
-        onClick={isApproveLoading ? "" : () => generateRequestData(true)}
+        onClick={isApproveLoading ? null : () => generateRequestData(true)}
       >
         {buttonText}
       </button>

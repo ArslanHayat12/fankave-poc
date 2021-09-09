@@ -12,7 +12,7 @@ import { PlayFilledIcon, RefreshIcon, CrossIcon } from "../../assets/index";
 import ClientDetails from "../../components/ClientDetails/ClientDetails";
 import { CustomTooltip } from "../../components/Tooltip/Tooltip";
 import { SoundWave } from "../../components/AudioVisualizers/SoundWave";
-import { ConfirmationModal } from "../../components/ConfirmationModal/ConfirmationModal";
+import { ConfirmationModal } from "../../components/Modal/ConfirmationModal/ConfirmationModal";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { getPublishAPIRequest } from "../../utils/index";
 import {
@@ -54,8 +54,8 @@ const PreviewTestimonialScreen = () => {
   const videoRef = useRef(null);
   const audioRef = useRef(null);
   const [isApproveLoading, setIsApproveLoading] = useState(false);
-  const [questionCount, setQuestionCount] = useState(0)
-  const [isLoading, setIsLoading] = useState(false)
+  const [questionCount, setQuestionCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const theme = useContext(ThemeContext);
   const apiRequestURL = getPublishAPIRequest(
     window.location.hostname,
@@ -75,11 +75,16 @@ const PreviewTestimonialScreen = () => {
             heading: audioScreenHeading,
           },
         },
+        recordingScreen: {
+          video: {
+            videoChunks: { available: displayChunks },
+          },
+        },
       },
     },
   } = theme;
   const mergeVideoChunks = () => {
-    const fileId = localStorage.getItem("videoChunksId")
+    const fileId = localStorage.getItem("videoChunksId");
     fetch("/v1/api/merge-video", {
       method: "POST",
       headers: {
@@ -88,37 +93,34 @@ const PreviewTestimonialScreen = () => {
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify({
-        id: fileId
+        id: fileId,
       }),
     })
-      .then((response) => response.json()
-      )
+      .then((response) => response.json())
       .then((data) => {
         dispatch({
           type: SET_URL,
-          payload: `http://localhost:5000/${data.fileName}`
-        })
-      })
-  }
+          payload: `http://localhost:5000/${data.fileName}`,
+        });
+      });
+  };
 
   const shareVideoChunks = (formData) => {
-    setIsLoading(true)
+    setIsLoading(true);
     fetch("/v1/api/upload-chunk", {
       body: formData,
       method: "POST",
-    })
-      .then((response) => {
-        console.log("response: ", response)
-        if (!(currentQuestionIndex < questions.length - 1)) {
-          mergeVideoChunks()
-          dispatch({
-            type: SET_SCREEN,
-            payload: VIDEO_QUESTIONS_SCREEN,
-          });
-        }
-        setIsLoading(false)
-      })
-  }
+    }).then((response) => {
+      if (!(currentQuestionIndex < questions.length - 1)) {
+        mergeVideoChunks();
+        dispatch({
+          type: SET_SCREEN,
+          payload: VIDEO_QUESTIONS_SCREEN,
+        });
+      }
+      setIsLoading(false);
+    });
+  };
   const shareAudioVideoToServer = (formData, isApproveAction = false) => {
     setIsApproveLoading(true);
     fetch(apiRequestURL, {
@@ -133,12 +135,6 @@ const PreviewTestimonialScreen = () => {
           const error = response.status;
           return Promise.reject(error);
         }
-        // if (isApproveAction) {
-          // dispatch({
-          //   type: SET_SCREEN,
-          //   payload: THANK_YOU_SCREEN,
-          // });
-        // }
       })
       .catch((err) => {
         console.log("error", err);
@@ -164,7 +160,7 @@ const PreviewTestimonialScreen = () => {
         payload: RECORD_SCREEN,
       });
     } else {
-      if(!mergeVideo) {
+      if (!mergeVideo) {
         dispatch({
           type: SET_SCREEN,
           payload: VIDEO_QUESTIONS_SCREEN,
@@ -174,7 +170,6 @@ const PreviewTestimonialScreen = () => {
 
     fetch(url)
       .then((res) => {
-        console.log(res);
         return res.blob();
       })
       .then((blob) => {
@@ -208,19 +203,21 @@ const PreviewTestimonialScreen = () => {
             //     : `${window.location.origin}/wave.png`
             // );
             if (localStorage.getItem("videoChunksId") === "") {
-              const videoChunksId = `${Math.floor(Math.random() * 10000 + 1)}-${Math.floor(Date.now() / 1000)}`
-              localStorage.setItem("videoChunksId", videoChunksId)
+              const videoChunksId = `${Math.floor(
+                Math.random() * 10000 + 1
+              )}-${Math.floor(Date.now() / 1000)}`;
+              localStorage.setItem("videoChunksId", videoChunksId);
             }
 
-            const fileId = localStorage.getItem("videoChunksId")
+            const fileId = localStorage.getItem("videoChunksId");
             formData.append("id", fileId);
-            generateRequestData(true)
-            if(mergeVideo) {
-              shareVideoChunks(formData)
+            generateRequestData(true);
+            if (mergeVideo) {
+              shareVideoChunks(formData);
             }
           });
-        });
-      };
+      });
+  };
 
   const onPlayClick = () => {
     if (!playVideo) {
@@ -329,8 +326,9 @@ const PreviewTestimonialScreen = () => {
   return (
     <PreviewScreenStyled
       id="fk-preview-testimonial-screen"
-      className={`preview-testimonial-screen${testimonialType === "audio" ? " audio-preview-screen" : ""
-        }`}
+      className={`preview-testimonial-screen${
+        testimonialType === "audio" ? " audio-preview-screen" : ""
+      }`}
     >
       <CrossIcon customClass="cross-icon" onClick={onBack} />
 
@@ -401,16 +399,20 @@ const PreviewTestimonialScreen = () => {
       )}
       <section className="client-details-wrapper">
         <ClientDetails />
-        {/* <ApproveTestimonial /> */}
-        <article className="button-wrapper">
-          <button
-            className={`approve-button ${isApproveLoading ? "button-clicked" : ""
+        {displayChunks ? (
+          <article className="button-wrapper">
+            <button
+              className={`approve-button ${
+                isApproveLoading ? "button-clicked" : ""
               }`}
-            onClick={isApproveLoading ? "" : () => approveVideoTestimonial()}
-          >
-            {buttonText}
-          </button>
-        </article>
+              onClick={isApproveLoading ? "" : () => approveVideoTestimonial()}
+            >
+              {buttonText}
+            </button>
+          </article>
+        ) : (
+          <ApproveTestimonial />
+        )}
       </section>
       {/* <span className="processing-text">
         {isApproveLoading && "Processing ..."}

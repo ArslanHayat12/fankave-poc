@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ThemeContext } from "styled-components";
 
 import RecordingCard from "../../components/RecordingCard/RecordingCard";
@@ -20,41 +20,48 @@ export const HomeScreen = () => {
   const {
     default: {
       widget: {
+        homeScreen: {
+          videoBox: { display: displayVideoCard },
+          audioBox: { display: displayAudioCard },
+          imageCaptureBox: { display: displayCaptureCard },
+          imageUploadBox: { display: displayUploadCard },
+          heading,
+        },
         recordingScreen: {
-          video: { questionDetails },
+          video: {
+            questionDetails,
+            videoChunks: { available: videoChunks },
+          },
         },
       },
     },
   } = theme;
-  console.log(questionDetails)
 
   const onVideoClick = () => {
-    const questions = questionDetails.map((question, index) => ({
-      questionIndex: index,
-      duration: 0,
-      question,
-      thumbUrl: "",
-      url: "",
-      isAnswered: false,
-    }));
+    if (videoChunks) {
+      dispatch({
+        type: SET_SCREEN,
+        payload: VIDEO_QUESTIONS_SCREEN,
+      });
+    } else {
+      dispatch({
+        type: SET_SCREEN,
+        payload: RECORD_SCREEN,
+      });
+    }
 
-    dispatch({ type: SET_QUESTION, payload: questions });
-    dispatch({
-      type: SET_SCREEN,
-      payload: VIDEO_QUESTIONS_SCREEN,
-    });
     dispatch({
       type: SET_TYPE,
       payload: "video",
     });
   };
 
-
   const onAudioClick = () => {
     dispatch({
       type: SET_TYPE,
       payload: "audio",
     });
+
     dispatch({
       type: SET_SCREEN,
       payload: RECORD_SCREEN,
@@ -66,6 +73,7 @@ export const HomeScreen = () => {
       type: SET_TYPE,
       payload: "capture",
     });
+
     dispatch({
       type: SET_SCREEN,
       payload: RECORD_SCREEN,
@@ -77,26 +85,24 @@ export const HomeScreen = () => {
       type: SET_TYPE,
       payload: "upload",
     });
+
     dispatch({
       type: SET_SCREEN,
       payload: RECORD_SCREEN,
     });
   };
 
-
-  const {
-    default: {
-      widget: {
-        homeScreen: {
-          videoBox: { display: displayVideoCard },
-          audioBox: { display: displayAudioCard },
-          imageCaptureBox: { display: displayCaptureCard },
-          imageUploadBox: { display: displayUploadCard },
-          heading,
-        },
-      },
-    },
-  } = theme;
+  useEffect(() => {
+    const questions = questionDetails.map((question, index) => ({
+      questionIndex: index,
+      duration: 0,
+      question,
+      thumbUrl: "",
+      url: "",
+      isAnswered: false,
+    }));
+    dispatch({ type: SET_QUESTION, payload: questions });
+  }, []);
 
   return (
     <HomeScreenStyled id="fk-home-screen">

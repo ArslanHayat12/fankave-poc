@@ -23,5 +23,6 @@ export const ApproveButtonWrapper = styled.article`
     border: none;
     cursor: pointer;
     margin-right: 3px;
+    margin-top: 10px;
   }
 `;

@@ -1,34 +1,16 @@
 const questionDetails = [
-  {
-    text: "What's your name, title, and company name?",
-    chunkSize: "0.25",
-  },
-  {
-    text: "What pain point did you look for HoneyBook to solve?",
-    chunkSize: "0.5",
-  },
-  {
-    text: "Why did you choose HoneyBook over a competitor?",
-    chunkSize: "",
-  },
-  {
-    text: "How are you using HoneyBook today?",
-    chunkSize: "",
-  },
-  {
-    text: "How are you measuring success today?",
-    chunkSize: "",
-  },
-  {
-    text: "How does HoneyBook help you achieve your goals?",
-    chunkSize: "",
-  },
+  "What's your name, title, and company name?",
+  "What pain point did you look for HoneyBook to solve?",
+  "Why did you choose HoneyBook over a competitor?",
+  "How are you using HoneyBook today?",
+  "How are you measuring success today?",
+  "How does HoneyBook help you achieve your goals?",
 ];
 
 let pathName = window.location.pathname.replaceAll("/", "");
 pathName = pathName ? `/${pathName}` : "";
 
-const defaultConfigs = {
+const honeyBookConfigs = {
   default: {
     topic: "honeybookcustomer",
     customClass: "honeybook-layout",
@@ -85,7 +67,7 @@ const defaultConfigs = {
           icon: `${pathName}/honeybook/camera.png`,
           text: "RECORD VIDEO",
           borderRadius: "18px",
-          background: "red",
+          background: "transparent",
           border: "solid 2px transparent",
           iconColor: "",
           iconSize: "",
@@ -264,7 +246,7 @@ const defaultConfigs = {
           micIcon: {
             stroke: "#86a6e3",
             background: "#5e91f3",
-            canvasPrimaryColor: "#5e91f3",
+            canvasPrimaryColor: "#88abf0",
             canvasSecondaryColor: "#88abf0",
           },
         },
@@ -318,4 +300,4 @@ const defaultConfigs = {
   },
 };
 
-export default defaultConfigs;
+export default honeyBookConfigs;

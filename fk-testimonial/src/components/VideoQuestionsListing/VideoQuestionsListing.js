@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { ThemeContext } from "styled-components";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import { SET_SCREEN, SET_INDEX, RECORD_SCREEN } from "../../constants";
@@ -11,24 +11,16 @@ import {
   ThumnailStyled,
 } from "./style";
 import { ArrowIcon } from "../../assets";
-import VideoModal from "../Modal/VideoModal";
+import { VideoModal } from "../Modal/VideoModal/VideoModal";
 import ApproveTestimonial from "../ApproveTestimonial/ApproveTestimonial";
-const VideoChunks = () => {
+
+const VideoQuestionsListing = () => {
   const { state, dispatch } = useContext(TestimonialContext);
   const questions = state.questions;
   const [open, setOpen] = useState(false);
   const [videoUrl, setVideoUrl] = useState("");
-  const onVideoClick = (index) => {
-    dispatch({
-      type: SET_INDEX,
-      payload: index,
-    });
-    dispatch({
-      type: SET_SCREEN,
-      payload: RECORD_SCREEN,
-    });
-  };
   const theme = useContext(ThemeContext);
+
   const {
     default: {
       widget: {
@@ -40,20 +32,31 @@ const VideoChunks = () => {
           },
         },
         previewScreen: {
-          video: {
-            mergeVideo
-          }
-        }
+          video: { mergeVideo },
+        },
       },
     },
   } = theme;
+
+  const handleCardClick = (index) => {
+    dispatch({
+      type: SET_INDEX,
+      payload: index,
+    });
+    dispatch({
+      type: SET_SCREEN,
+      payload: RECORD_SCREEN,
+    });
+  };
+
   const convertDuration = (urlDuration) => {
     const secondsToHHMMSS = new Date(urlDuration * 1000)
       .toISOString()
       .substr(11, 8);
     return secondsToHHMMSS;
   };
-  const getUrl = (id) => {
+
+  const setVideoChunkUrl = (id) => {
     dispatch({
       type: SET_INDEX,
       payload: id,
@@ -61,6 +64,7 @@ const VideoChunks = () => {
     setOpen(true);
     setVideoUrl(questions[id].url);
   };
+
   return (
     <VideoChunksWrapperStyled>
       {questions.map((data, index) => (
@@ -68,11 +72,10 @@ const VideoChunks = () => {
           key={index}
           onClick={
             data.url
-              ? (e) => {
-                  e.stopPropagation();
-                  getUrl(index);
+              ? () => {
+                  setVideoChunkUrl(index);
                 }
-              : ""
+              : () => handleCardClick(index)
           }
           alignCenter={data.isAnswered}
           className={`${
@@ -97,10 +100,7 @@ const VideoChunks = () => {
               <img className="thumbnail" src={data.thumbUrl} />
             </ThumnailStyled>
           ) : (
-            <ArrowIcon
-              customClass="arrow-icon"
-              onClick={() => onVideoClick(index)}
-            />
+            <ArrowIcon customClass="arrow-icon" />
           )}
         </CardStyled>
       ))}
@@ -110,7 +110,7 @@ const VideoChunks = () => {
         url={videoUrl}
         index={state.currentQuestionIndex}
       />
-      {state.url && mergeVideo  && (
+      {state.url && mergeVideo && (
         <>
           <video
             src={state.url}
@@ -126,4 +126,4 @@ const VideoChunks = () => {
     </VideoChunksWrapperStyled>
   );
 };
-export default VideoChunks;
+export default VideoQuestionsListing;

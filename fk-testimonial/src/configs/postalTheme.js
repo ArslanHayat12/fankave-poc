@@ -1,28 +1,15 @@
 const questionDetails = [
-  {
-    text: "What's your name, title, and company name?",
-    chunkSize: "0.25",
-  },
-  {
-    text: "What pain point did you look for Postal to solve?",
-    chunkSize: "0.5",
-  },
-  {
-    text: "Why did you choose Postal over a competitor?",
-    chunkSize: "",
-  },
-  {
-    text: "How are you using Postal today?",
-    chunkSize: "",
-  },
-  {
-    text: "How are you measuring success today?",
-    chunkSize: "",
-  },
-  {
-    text: "How does Postal help you achieve your goals?",
-    chunkSize: "",
-  },
+  "What's your name, title, and company name?",
+
+  "What pain point did you look for Postal to solve?",
+
+  "Why did you choose Postal over a competitor?",
+
+  "How are you using Postal today?",
+
+  "How are you measuring success today?",
+
+  "How does Postal help you achieve your goals?",
 ];
 let pathName = window.location.pathname.replaceAll("/", "");
 pathName = pathName ? `/${pathName}` : "";
