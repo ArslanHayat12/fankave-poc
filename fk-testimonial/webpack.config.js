@@ -56,6 +56,17 @@ module.exports = (_, args) => ({
         },
       },
       {
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
+      },
+      {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },

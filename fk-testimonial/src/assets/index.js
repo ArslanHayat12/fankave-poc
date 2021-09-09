@@ -1,7 +1,14 @@
-import React from "react";
+import React from 'react'
+
+import ImageCaptureIcon from './images/upload.png'
+import ImageUploadIcon from './images/upload.png'
+import VideoCaptureIcon from './images/camera.png'
+import videoTestimonialIcon from './images/camera.png'
+import AudioCaptureIcon from './images/mic.png'
+import audioTestimonialIcon from './images/mic.png'
 
 export const PencilIcon = (props) => {
-  const { customClass } = props;
+  const { customClass } = props
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -20,11 +27,11 @@ export const PencilIcon = (props) => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}
 
 export const RecordingIcon = (props) => {
-  const { customClass } = props;
+  const { customClass } = props
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -55,11 +62,11 @@ export const RecordingIcon = (props) => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}
 
 export const PauseIcon = (props) => {
-  const { customClass } = props;
+  const { customClass } = props
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -87,8 +94,8 @@ export const PauseIcon = (props) => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}
 
 export const CameraIcon = () => {
   return (
@@ -164,11 +171,11 @@ export const CameraIcon = () => {
         fill="#09f"
       />
     </svg>
-  );
-};
+  )
+}
 
 export const MicIcon = (props) => {
-  const { customClass, height = "65.906" } = props;
+  const { customClass, height = '65.906' } = props
 
   return (
     <svg
@@ -343,11 +350,11 @@ export const MicIcon = (props) => {
         </g>
       </g>
     </svg>
-  );
-};
+  )
+}
 
 export const PlayIcon = (props) => {
-  const { customClass } = props;
+  const { customClass } = props
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -364,8 +371,8 @@ export const PlayIcon = (props) => {
         fill="#fff"
       />
     </svg>
-  );
-};
+  )
+}
 
 export const PlayFilledIcon = () => {
   return (
@@ -387,11 +394,11 @@ export const PlayFilledIcon = () => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}
 
 export const StopIcon = (props) => {
-  const { customClass } = props;
+  const { customClass } = props
 
   return (
     <svg
@@ -423,11 +430,11 @@ export const StopIcon = (props) => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}
 
 export const RefreshIcon = (props) => {
-  const { customClass } = props;
+  const { customClass } = props
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -442,11 +449,11 @@ export const RefreshIcon = (props) => {
         transform="translate(0 -13.767)"
       />
     </svg>
-  );
-};
+  )
+}
 
 export const DownloadIcon = (props) => {
-  const { customClass } = props;
+  const { customClass } = props
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -478,11 +485,11 @@ export const DownloadIcon = (props) => {
         </g>
       </g>
     </svg>
-  );
-};
+  )
+}
 
 export const DeleteIcon = (props) => {
-  const { customClass } = props;
+  const { customClass } = props
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -497,11 +504,11 @@ export const DeleteIcon = (props) => {
         d="M1.572 20.941A3.111 3.111 0 0 0 4.714 24h12.572a3.112 3.112 0 0 0 3.143-3.059V6.118H1.572zM22 1.529h-5.5L14.929 0H7.071L5.5 1.529H0v3.059h22z"
       />
     </svg>
-  );
-};
+  )
+}
 
 export const MenuIcon = (props) => {
-  const { customClass } = props;
+  const { customClass } = props
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -517,11 +524,11 @@ export const MenuIcon = (props) => {
         transform="translate(-0.396 -0.78)"
       />
     </svg>
-  );
-};
+  )
+}
 
 export const TickIcon = (props) => {
-  const { customClass } = props;
+  const { customClass } = props
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -536,8 +543,8 @@ export const TickIcon = (props) => {
         transform="translate(-0.001 -0.001)"
       />
     </svg>
-  );
-};
+  )
+}
 
 export const ShareIcon = () => {
   return (
@@ -550,11 +557,11 @@ export const ShareIcon = () => {
     >
       <path d="M 23 3 A 4 4 0 0 0 19 7 A 4 4 0 0 0 19.09375 7.8359375 L 10.011719 12.376953 A 4 4 0 0 0 7 11 A 4 4 0 0 0 3 15 A 4 4 0 0 0 7 19 A 4 4 0 0 0 10.013672 17.625 L 19.089844 22.164062 A 4 4 0 0 0 19 23 A 4 4 0 0 0 23 27 A 4 4 0 0 0 27 23 A 4 4 0 0 0 23 19 A 4 4 0 0 0 19.986328 20.375 L 10.910156 15.835938 A 4 4 0 0 0 11 15 A 4 4 0 0 0 10.90625 14.166016 L 19.988281 9.625 A 4 4 0 0 0 23 11 A 4 4 0 0 0 27 7 A 4 4 0 0 0 23 3 z" />
     </svg>
-  );
-};
+  )
+}
 
 export const CrossIcon = (props) => {
-  const { customClass, onClick } = props;
+  const { customClass, onClick } = props
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -584,11 +591,11 @@ export const CrossIcon = (props) => {
         stroke-width="4"
       />
     </svg>
-  );
-};
+  )
+}
 
 export const DefaultRecordingIcon = (props) => {
-  const { customClass } = props;
+  const { customClass } = props
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -624,11 +631,11 @@ export const DefaultRecordingIcon = (props) => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}
 
 export const DefaultStopIcon = (props) => {
-  const { customClass } = props;
+  const { customClass } = props
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -646,11 +653,11 @@ export const DefaultStopIcon = (props) => {
         fill="#fff"
       />
     </svg>
-  );
-};
+  )
+}
 
 export const ArrowIcon = (props) => {
-  const { customClass, onClick } = props;
+  const { customClass, onClick } = props
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -680,5 +687,14 @@ export const ArrowIcon = (props) => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}
+
+export const StaticAssets = {
+  ImageCaptureIcon,
+  ImageUploadIcon,
+  AudioCaptureIcon,
+  audioTestimonialIcon,
+  VideoCaptureIcon,
+  videoTestimonialIcon,
+}

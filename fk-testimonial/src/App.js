@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react'
 
-import PageWrapper from "./components/PageWrapper/PageWrapper";
-import Widget from "./components/Widget/Widget";
+import { Layout } from './components/Layout/Layout'
+import Widget from './components/Widget/Widget'
 
-import themeConfigs from "./configs";
-import ThemeProvider from "./theme/ThemeProvider";
+import themeConfigs from './configs'
+import ThemeProvider from './theme/ThemeProvider'
 
-import "./App.css";
+import './App.css'
 
 function App() {
   //context wrapping
   return (
     <ThemeProvider styledTheme={themeConfigs}>
-      <PageWrapper children={<Widget />}></PageWrapper>
+      <Layout children={<Widget />}></Layout>
     </ThemeProvider>
-  );
+  )
 }
 
-export default App;
+export default App

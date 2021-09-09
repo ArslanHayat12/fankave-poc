@@ -1,15 +1,21 @@
-import React from "react";
-import { HeaderStyled } from "./style";
+import React from 'react'
 
 const Header = (props) => {
-  const { mainLogoSrc, subLogoSrc, subLogoText } = props;
+  const { logo, heading } = props
   return (
-    <HeaderStyled className="header-wrapper" id="fk-header">
-      {mainLogoSrc && <img src={mainLogoSrc} className="main-logo" />}
-      {subLogoSrc && <img src={subLogoSrc} className="sub-logo" />}
-      {subLogoText && <p className="sub-text">{subLogoText}</p>}
-    </HeaderStyled>
-  );
-};
+    <section className="fk-header">
+      {logo && (
+        <div className="fk-logo">
+          <img className="fk-logo-image" src={logo} alt="logo" />
+        </div>
+      )}
+      {heading && (
+        <div className="fk-heading">
+          <p className="fk-heading-text">{heading}</p>
+        </div>
+      )}
+    </section>
+  )
+}
 
-export default Header;
+export default Header

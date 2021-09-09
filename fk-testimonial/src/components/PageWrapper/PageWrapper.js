@@ -1,23 +1,24 @@
-import React, { useContext, useState, useEffect } from "react";
-import { ThemeContext } from "styled-components";
+import React, { useContext, useState, useEffect } from 'react'
+import { ThemeContext } from 'styled-components'
 
-import Header from "./../Header/Header";
-import Footer from "./../Footer/Footer";
-import { PageWrapperStyled } from "./style";
+import Header from './../Header/Header'
+import Footer from './../Footer/Footer'
+import { PageWrapperStyled } from './style'
 
-import { BackgroundVideo } from "../BackgroundVideo/BackgroundVideo";
-import themeConfigs from "../../configs";
+import { BackgroundVideo } from '../BackgroundVideo/BackgroundVideo'
+import themeConfigs from '../../configs'
 
 function PageWrapper(props) {
-  const { children } = props;
-  const theme = useContext(ThemeContext);
+  const { children } = props
+  const theme = useContext(ThemeContext)
+  console.log('theme: ', theme)
   const [displayVideo, setDisplayVideo] = useState(
     theme.default.onPageLoad.video.display
-  );
+  )
 
   const {
     default: {
-      customClass = "",
+      customClass = '',
       background: { type, url: backgroundUrl },
       pageLayout: {
         header: { position, mainLogoUrl, subLogoUrl, subLogoText },
@@ -27,14 +28,14 @@ function PageWrapper(props) {
         video: { url: backgroundVideoUrl },
       },
     },
-  } = themeConfigs;
+  } = themeConfigs
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setDisplayVideo(false);
-    }, 5000);
-    return () => clearTimeout(timer);
-  });
+      setDisplayVideo(false)
+    }, 5000)
+    return () => clearTimeout(timer)
+  })
 
   return (
     <>
@@ -43,7 +44,7 @@ function PageWrapper(props) {
           <p className="not-supported-text">
             Unfortunately, this browser does not support the web technology that
             powers this app. We recommend desktop Chrome or Firefox.
-          </p>{" "}
+          </p>{' '}
           <div className="not-supported-container"></div>
         </>
       )}
@@ -51,7 +52,7 @@ function PageWrapper(props) {
         <BackgroundVideo url={backgroundVideoUrl} />
       ) : (
         <PageWrapperStyled className={customClass} id="fk-page-wrapper">
-          {type === "video" ? (
+          {type === 'video' ? (
             <BackgroundVideo url={backgroundUrl} />
           ) : (
             <img src={backgroundUrl} className="background-image" />
@@ -72,7 +73,7 @@ function PageWrapper(props) {
         </PageWrapperStyled>
       )}
     </>
-  );
+  )
 }
 
-export default PageWrapper;
+export default PageWrapper

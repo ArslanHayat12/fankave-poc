@@ -2,9 +2,11 @@ import React from 'react'
 
 export const Preview = ({
   image,
+  formMeta,
   onApprove = () => {},
   onReProcess = () => {},
 }) => {
+  console.log('form: ', formMeta)
   return (
     <>
       <div className="image-container">

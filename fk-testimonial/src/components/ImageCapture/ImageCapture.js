@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useState } from 'react'
+import React, { useReducer } from 'react'
 import { Preview } from '../Preview/Preview'
 import { Capture } from './Capture'
 import { ImageProcessor } from './ImageProcessor'
@@ -24,23 +24,26 @@ const widgetConfigs = {
   },
   form: {
     user: {
-      viewable: true,
-      editable: true,
+      enabled: true,
       name: true,
       username: false,
       email: false,
     },
     text: {
-      viewable: true,
-      editable: true,
+      enabled: true,
       limit: 280,
-      placeholder: '',
+      placeholder: 'Your Story...',
     },
     hastages: {
-      viewable: true,
-      editable: true,
+      enabled: true,
       limit: 5,
+      options: ['CiscoFuture', 'CiscoImpact', 'MyImpact'],
     },
+  },
+  sharing: {
+    enabled: true,
+    twitter: true,
+    linkedIn: true,
   },
 }
 
@@ -53,8 +56,10 @@ const reducer = (state, action) => {
       }
     case 'reset':
       return {
+        approvedImage: null,
         rawImage: null,
         processedImage: null,
+        videoConstraints: null,
       }
     default:
       return state
@@ -62,7 +67,7 @@ const reducer = (state, action) => {
 }
 
 export const ImageCapture = () => {
-  const [{ processedImage, image, videoConstraints }, dispatch] = useReducer(
+  const [{ processedImage, rawImage, videoConstraints }, dispatch] = useReducer(
     reducer,
     initialState
   )
@@ -71,7 +76,7 @@ export const ImageCapture = () => {
     dispatch({
       type: 'set',
       payload: {
-        image: src,
+        rawImage: src,
         videoConstraints: constraints,
         ...(widgetConfigs.processing.post ? {} : { processedImage: src }),
       },
@@ -89,7 +94,7 @@ export const ImageCapture = () => {
     dispatch({
       type: 'set',
       payload: {
-        image: null,
+        rawImage: null,
         videoConstraints: null,
         processedImage: null,
       },
@@ -113,19 +118,20 @@ export const ImageCapture = () => {
   }
   return (
     <>
-      <h2 className="heading">{widgetConfigs.heading}</h2>
+      <h2 className="fk-heading">{widgetConfigs.heading}</h2>
       {processedImage ? (
         <ImagePreviewStyled className="preview-area">
           <Preview
-            image={image}
+            image={rawImage}
+            formMeta={widgetConfigs.form}
             onApprove={handleApprove}
             onReProcess={handleReProcess}
           />
         </ImagePreviewStyled>
-      ) : image ? (
+      ) : rawImage ? (
         <ImageProcessorWrapperStyled className="processing-area">
           <ImageProcessor
-            image={image}
+            image={rawImage}
             videoConstraints={videoConstraints}
             onContinue={handleContinue}
             onReTake={handleRetake}
