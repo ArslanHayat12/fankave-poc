@@ -26,6 +26,10 @@ body {
   width: 100%;
 }
 
+#fk-question-card .question-buttons-wrapper {
+  border-radius: 0 0 7px 7px;
+}
+
 #fk-home-screen .description {
   max-width: 240px;
   text-align: center;

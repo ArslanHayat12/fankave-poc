@@ -297,25 +297,37 @@ export const VideoChunksRecorder = () => {
 
         <div className="video-recording-container">
           {!videoURL && (
-            <Webcam
-              ref={webcamRef}
-              videoConstraints={{
-                width: isMobile
-                  ? undefined
-                  : videoWidth > 400
-                  ? 333
-                  : videoWidth > 360
-                  ? 313
-                  : 298,
-                height: isMobile ? undefined : videoHeight,
-                facingMode: "user",
-              }}
-              width={videoWidth > 400 ? 333 : videoWidth > 360 ? 313 : 298}
-              height={videoHeight}
-              style={{ objectFit: "cover" }}
-              onUserMedia={() => setIsStreamInit(true)}
-              onUserMediaError={showAccessBlocked}
-            />
+            <>
+              <Webcam
+                ref={webcamRef}
+                videoConstraints={{
+                  width: isMobile
+                    ? undefined
+                    : videoWidth > 400
+                    ? 333
+                    : videoWidth > 360
+                    ? 313
+                    : 298,
+                  height: isMobile ? undefined : videoHeight,
+                  facingMode: "user",
+                }}
+                width={videoWidth > 400 ? 333 : videoWidth > 360 ? 313 : 298}
+                height={videoHeight}
+                style={{ objectFit: "cover" }}
+                onUserMedia={() => setIsStreamInit(true)}
+                onUserMediaError={showAccessBlocked}
+              />
+              <article className="testimonial-questions-wrapper">
+                <article className="video-timer">
+                  <span className="recording-circle"></span>{" "}
+                  {convertSecondsToHourMinute(String(recordingTime))}
+                </article>
+                <QuestionsCard
+                  handleNextPrevClick={handleNextPrevClick}
+                  timer={convertSecondsToHourMinute(String(recordingTime))}
+                />
+              </article>
+            </>
           )}
           {/* <video>
             <source url="blob:http://localhost:5000/0e9d0baf-11ca-46aa-8bd2-da8d0752b5d2" />
@@ -327,17 +339,6 @@ export const VideoChunksRecorder = () => {
             />
           )}
         </div>
-
-        <article className="testimonial-questions-wrapper">
-          <article className="video-timer">
-            <span className="recording-circle"></span>{" "}
-            {convertSecondsToHourMinute(String(recordingTime))}
-          </article>
-          <QuestionsCard
-            handleNextPrevClick={handleNextPrevClick}
-            timer={convertSecondsToHourMinute(String(recordingTime))}
-          />
-        </article>
       </figure>
       {capturing && (
         <div className="timer-button-container">

@@ -135,13 +135,7 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
     >
       <p className="questions">{questionArray[currentIndex].question}</p>
 
-      {state.type === "video" ? (
-        <article className="question-buttons-wrapper">
-          <VideoQuestionCard />
-        </article>
-      ) : (
-        <AudioQuestionCard />
-      )}
+      {state.type === "video" ? <VideoQuestionCard /> : <AudioQuestionCard />}
     </QuestionCardStyled>
   );
 };
