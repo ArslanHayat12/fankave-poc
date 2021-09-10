@@ -124,7 +124,7 @@ const sproutConfigs = {
           fontSize: "",
           fontColor: "",
           video: {
-            borderRadius: "0",
+            borderRadius: "8",
             border: "none",
           },
           input: {
@@ -155,9 +155,9 @@ const sproutConfigs = {
             fontWeight: "500",
             color: "#fff",
             textTransform: "uppercase",
-            borderRadius: "0",
+            borderRadius: "40px",
             height: "33px",
-            width: "100%",
+            width: "110px",
             placement: "center",
           },
 
@@ -223,7 +223,7 @@ const sproutConfigs = {
         video: {
           heading: "Record Video Testimonial",
           height: "550",
-          border: "none",
+          border: "1px solid rgb(201, 201, 201)",
           questionDetails,
           button: {
             display: false,
@@ -235,7 +235,7 @@ const sproutConfigs = {
             },
           },
           questionCard: {
-            background: "#35a4ff",
+            background: "",
           },
           nextPreviousButtons: {
             display: false,
@@ -271,7 +271,7 @@ const sproutConfigs = {
             },
           },
           questionCard: {
-            background: "#35a4ff",
+            background: "",
           },
           nextPreviousButtons: {
             display: true,

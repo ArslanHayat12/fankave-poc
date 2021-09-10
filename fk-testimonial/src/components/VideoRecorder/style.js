@@ -69,7 +69,7 @@ export const VideoRecorderStyled = styled.article`
     z-index: 1;
     color: #fff;
     font-size: 16px;
-
+    top: 5px;
     margin: auto;
     left: 0;
     right: 0;

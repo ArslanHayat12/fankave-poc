@@ -124,10 +124,6 @@ body {
   margin: 0;
 }
 
-#fk-video-recorder-wrapper .video-timer {
-  position: relative;
-}
-
 #fk-question-card .question-count {
   color: #fff;
   height: 33px;
@@ -178,7 +174,10 @@ body {
   font-size: 75px;
 }
 
-.button-wrapper {
+#fk-preview-testimonial-screen .button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 @media (min-width: 1920px) {

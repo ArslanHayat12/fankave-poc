@@ -6,7 +6,6 @@ import { QuestionCardStyled } from "./style";
 
 const QuestionsCard = ({ handleNextPrevClick }) => {
   const { state, dispatch } = useContext(TestimonialContext);
-  const [pulse, setPulse] = useState(false);
   const theme = useContext(ThemeContext);
   const questionArray = state.questions;
   const currentIndex = state.currentQuestionIndex;
@@ -25,7 +24,7 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
   } = theme;
 
   const gotToPrevQuestion = useCallback(() => {
-    console.log("currentIndex", currentIndex);
+    console.log("prev", currentIndex);
     if (currentIndex > 0) {
       dispatch({
         type: SET_INDEX,
@@ -36,6 +35,7 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
   }, [state]);
 
   const gotToNextQuestion = useCallback(() => {
+    console.log("next", currentIndex);
     if (currentIndex < questionArray.length - 1) {
       dispatch({
         type: SET_INDEX,
@@ -49,18 +49,6 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
       chunksAvailable && handleNextPrevClick(false);
     }
   }, [state]);
-
-  useEffect(() => {
-    setPulse(true);
-
-    const timer = setTimeout(() => {
-      setPulse(false);
-    }, 1000);
-    return () => {
-      setPulse(false);
-      clearTimeout(timer);
-    };
-  }, [currentIndex]);
 
   const VideoQuestionCard = () => {
     return (
@@ -131,10 +119,7 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
   };
 
   return (
-    <QuestionCardStyled
-      className={`question-card ${pulse && "pulse"}`}
-      id="fk-question-card"
-    >
+    <QuestionCardStyled className={`question-card`} id="fk-question-card">
       <p className="questions">{questionArray[currentIndex].question}</p>
 
       {state.type === "video" ? <VideoQuestionCard /> : <AudioQuestionCard />}
