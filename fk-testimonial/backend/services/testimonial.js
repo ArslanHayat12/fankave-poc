@@ -129,35 +129,36 @@ const methods = (client) => ({
             // There is only one annotation_result since only
             // one video is processed.
             const annotationResults = operationResult.annotationResults[0];
-            const fullTranscript = []
+            let fullTranscript = ''
 
             for (const speechTranscription of annotationResults.speechTranscriptions) {
                 // The number of alternatives for each transcription is limited by
                 // SpeechTranscriptionConfig.max_alternatives.
                 // Each alternative is a different possible transcription
                 // and has its own confidence score.
-                console.log(speechTranscription)
-                for (const alternative of speechTranscription.alternatives) {
-                    const transcriptedSentence = {
-                        transcript: alternative.transcript,
-                        confidence: alternative.confidence
-                    }
-                    fullTranscript.push(transcriptedSentence)
-
-                }
+                const alternatives = speechTranscription.alternatives || []
+                const confidenceArray = alternatives.map(function(alternative) { 
+                    return alternative.confidence; 
+                })
+                const alternativeIndex = methods().getIndexOfMaxConfidence(confidenceArray)
+                fullTranscript = fullTranscript.concat(' ', alternatives[alternativeIndex].transcript)
             }
             return fullTranscript
         }
 
         return await analyzeVideoTranscript(gcsUri)
     },
-    getIdFromPath = (url = "") => {
+    getIdFromPath: (url = "") => {
         const fileName = url.split("/");
         if (fileName.length) {
             const id = fileName[fileName.length - 1].replace(".mp4", "");
             return id;
         }
         return "";
+    },
+    getIndexOfMaxConfidence: (confidenceArray) => {
+        const indexOfMaxValue = confidenceArray.indexOf(Math.max(...confidenceArray));
+        return indexOfMaxValue || 0
     }
 
 })

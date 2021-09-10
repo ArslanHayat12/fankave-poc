@@ -308,29 +308,35 @@ const controller = {
 
     },
     getTranscription: async function (req, response) {
-        const { filePath, apiURL } = req.body
+        const { videoUrl } = req.body
+        const apiURL = 'https://dev.api.fankave.com/v1.0/cms/content/social'
 
         async function getAndPublishTranscription(filePath, apiURL) {
             const fullTranscript = await testimonialservice().handleTranscription(filePath);
 
+            const id = await testimonialservice().getIdFromPath(videoUrl)
+            console.log(id, fullTranscript)
             axios({
-                method: 'put',
+                method: 'patch',
                 url: apiURL,
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                data: JSON.stringify({
-                    transcript: fullTranscript
-                })
+                data: JSON.stringify([
+                    {
+                        id,
+                        "caption": fullTranscript
+                    }
+                ])
             }).then(res => {
-
+                console.log(res)
             }).catch(err => {
-
+                console.log(err)
             })
         }
 
-        if (filePath && apiURL) {
-            getAndPublishTranscription(filePath, apiURL)
+        if (videoUrl) {
+            getAndPublishTranscription(videoUrl, apiURL)
             response.send("Transcription initiated")
         } else {
             response.status(400).send({ error: "Bad Data" })
