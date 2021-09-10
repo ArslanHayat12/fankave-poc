@@ -6,8 +6,6 @@ import React, {
   useContext,
 } from "react";
 import { ThemeContext } from "styled-components";
-import Webcam from "react-webcam";
-import { isMobile } from "react-device-detect";
 import { TestimonialContext } from "../../context/TestimonialContext";
 import NotificationCard from "../NotificationCard/NotificationCard";
 import { CustomTooltip as Tooltip } from "../Tooltip/Tooltip";
@@ -31,149 +29,95 @@ import {
   SET_QUESTION_THUMB_URL,
 } from "../../constants";
 import { VideoRecorderStyled, ListingLinkStyled } from "./style";
+import { getLines } from "./utils";
+import { VideoPlayer } from "../VideoPlayer/VideoPlayer";
 
 export const VideoChunksRecorder = () => {
   const { state, dispatch } = useContext(TestimonialContext);
 
   const webcamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
-  const mediaRecorderRef2 = useRef(null);
+  const canvasRef = useRef(null)
 
   const [isStreamInit, setIsStreamInit] = useState(false);
   const [capturing, setCapturing] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
-  const [singleRecordedChunks, setSingleRecordedChunks] = useState([]);
+  const [canvasRecordedChunks, setCanvasRecordedChunks] = useState([]);
   const [videoURL, setVideoURl] = useState("");
   const [error, setError] = useState("");
-  const [showNotification, setShowNotification] = useState(false);
   const [isNextClicked, setIsNextClicked] = useState(false);
   const [recordingTime, setTime] = useState(0);
   const [timeLeft, setTimeLeft] = useState(3);
   const [showTimeLeft, setShowTimeLeft] = useState(false);
-
+  const [currentQuestion, setCurrentQuestion] = useState("")
+  console.log("isStreamInit: ", isStreamInit, capturing, canvasRecordedChunks)
   const recordingTimeRef = useRef();
   recordingTimeRef.current = recordingTime;
   const duration = recordingTimeRef.current;
+
+  const tempCanvas = document.createElement("canvas")
+  tempCanvas.setAttribute("width", 333)
+  tempCanvas.setAttribute("height", 550)
+  const tempCanvasContext = tempCanvas.getContext("2d")
 
   useInterval(() => {
     capturing && setTime(recordingTime + 1);
   }, 1000);
 
-  const videoWidth =
-    window.innerWidth > 0 ? window.innerWidth : window.screen.width;
-
   const handleStartCaptureClick = useCallback(() => {
     setShowTimeLeft(true);
-  });
+    setCapturing(true);
+    captureCanvasVideo()
+    webcamRef.current.video.muted = true
+  },[webcamRef]);
 
   useEffect(() => {
-    if (timeLeft === 0) {
-      setCapturing(true);
-      let options = { mimeType: "video/webm" };
-      if (typeof MediaRecorder.isTypeSupported == "function") {
-        if (MediaRecorder.isTypeSupported("video/webm")) {
-          options = { mimeType: "video/webm" };
-        } else if (MediaRecorder.isTypeSupported("video/mp4")) {
-          //Safari 14.0.2 has an EXPERIMENTAL version of MediaRecorder enabled by default
-          options = { mimeType: "video/mp4" };
-        }
-      }
-      mediaRecorderRef.current = new MediaRecorder(
-        webcamRef.current.stream,
-        options
-      );
-      mediaRecorderRef.current.addEventListener(
-        "dataavailable",
-        handleDataAvailable
-      );
-      mediaRecorderRef2.current = new MediaRecorder(
-        webcamRef.current.stream,
-        options
-      );
-      mediaRecorderRef2.current.addEventListener(
-        "dataavailable",
-        handleDataAvailableSingle
-      );
-      mediaRecorderRef2.current.start();
-      mediaRecorderRef.current.start();
-    }
-  }, [webcamRef, setCapturing, mediaRecorderRef, mediaRecorderRef2, timeLeft]);
+    console.log("canvasRef: ", canvasRef.current.stream)
+    // if (timeLeft === 0) {
+    //   setCapturing(true);
+    //   let options = { mimeType: "video/webm" };
+    //   if (typeof MediaRecorder.isTypeSupported == "function") {
+    //     if (MediaRecorder.isTypeSupported("video/webm")) {
+    //       options = { mimeType: "video/webm" };
+    //     } else if (MediaRecorder.isTypeSupported("video/mp4")) {
+    //       //Safari 14.0.2 has an EXPERIMENTAL version of MediaRecorder enabled by default
+    //       options = { mimeType: "video/mp4" };
+    //     }
+    //   }
+    //   mediaRecorderRef.current = new MediaRecorder(
+    //     webcamRef.current.stream,
+    //     options
+    //   );
+    //   mediaRecorderRef.current.addEventListener(
+    //     "dataavailable",
+    //     handleDataAvailable
+    //   );
+    //   mediaRecorderRef.current.start();
+    // }
+  }, [webcamRef, setCapturing, mediaRecorderRef, timeLeft]);
 
-  const handleDataAvailable = useCallback(
-    ({ data }) => {
-      if (data.size > 0) {
-        setRecordedChunks((prev) => prev.concat(data));
-      }
-    },
-    [
-      setRecordedChunks,
-      setSingleRecordedChunks,
-      mediaRecorderRef,
-      singleRecordedChunks,
-      isNextClicked,
-    ]
-  );
-  const handleDataAvailableSingle = useCallback(
-    ({ data }) => {
-      if (data.size > 0) {
-        setSingleRecordedChunks((prev) => {
-          return prev.concat(data);
-        });
-        if (mediaRecorderRef2.current.state !== "recording") {
-          mediaRecorderRef2.current.start();
-        }
-      }
-    },
-    [
-      setRecordedChunks,
-      setSingleRecordedChunks,
-      mediaRecorderRef2,
-      singleRecordedChunks,
-      isNextClicked,
-    ]
-  );
   const handleStopCaptureClick = useCallback(() => {
     setIsNextClicked(false);
-    if (mediaRecorderRef2.current.state !== "inactive") {
-      mediaRecorderRef2.current.requestData();
-      // mediaRecorderRef2.current.stop();
-    }
     mediaRecorderRef.current.stop();
     setCapturing(false);
     dispatch({
       type: SET_THUMB_URL,
-      payload: webcamRef?.current?.getScreenshot(),
+      payload: canvasRef?.current?.getScreenshot(),
     });
     dispatch({
       type: SET_QUESTION_THUMB_URL,
       payload: {
         currentQuestionIndex: state.currentQuestionIndex,
-        thumbUrl: webcamRef?.current?.getScreenshot(),
+        thumbUrl: canvasRef?.current?.getScreenshot(),
         urlDuration: recordingTimeRef.current,
       },
     });
-  }, [mediaRecorderRef, webcamRef, setCapturing]);
+  }, [mediaRecorderRef, canvasRef, setCapturing]);
 
-  const showAccessBlocked = useCallback((err) => {
-    typeof err === "object"
-      ? setError("Access Blocked") && setShowNotification(true)
-      : setError(err);
-  }, []);
-
-  const handleNextPrevClick = useCallback(
-    (isPrevious = false) => {
-      setIsNextClicked(true);
-      if (mediaRecorderRef2.current.state !== "inactive") {
-        mediaRecorderRef2.current.requestData();
-        mediaRecorderRef2.current.stop();
-      }
-    },
-    [mediaRecorderRef2.current?.state]
-  );
 
   useEffect(() => {
     //webm type video file created
-    if (!isNextClicked && recordedChunks.length) {
+    if (!isNextClicked && canvasRecordedChunks.length) {
       let options = { type: "video/webm" };
       if (typeof MediaRecorder.isTypeSupported == "function") {
         if (MediaRecorder.isTypeSupported("video/webm")) {
@@ -183,7 +127,7 @@ export const VideoChunksRecorder = () => {
           options = { type: "video/mp4" };
         }
       }
-      const blob = new Blob(recordedChunks, options);
+      const blob = new Blob(canvasRecordedChunks, options);
 
       let url = window.URL.createObjectURL(blob);
       try {
@@ -198,7 +142,7 @@ export const VideoChunksRecorder = () => {
       });
       dispatch({
         type: SET_RECORD_CHUKS,
-        payload: recordedChunks,
+        payload: canvasRecordedChunks,
       });
       if (url) {
         dispatch({
@@ -207,33 +151,7 @@ export const VideoChunksRecorder = () => {
         });
       }
     }
-  }, [recordedChunks, isNextClicked, singleRecordedChunks]);
-
-  //will be removed in refactoring
-  useEffect(() => {
-    //webm type video file created
-    if (singleRecordedChunks.length) {
-      let options = { type: "video/webm" };
-      if (typeof MediaRecorder.isTypeSupported == "function") {
-        if (MediaRecorder.isTypeSupported("video/webm")) {
-          options = { type: "video/webm" };
-        } else if (MediaRecorder.isTypeSupported("video/mp4")) {
-          //Safari 14.0.2 has an EXPERIMENTAL version of MediaRecorder enabled by default
-          options = { type: "video/mp4" };
-        }
-      }
-      const value = [singleRecordedChunks[singleRecordedChunks.length - 1]];
-
-      const blob = new Blob(value, options);
-
-      let url = window.URL.createObjectURL(blob);
-      try {
-        url = window.webkitURL.createObjectURL(blob);
-      } catch {
-        url = window.URL.createObjectURL(blob);
-      }
-    }
-  }, [singleRecordedChunks]);
+  }, [canvasRecordedChunks, isNextClicked]);
 
   const dispatchURLDuration = useCallback(() => {
     recordingTimeRef &&
@@ -279,12 +197,61 @@ export const VideoChunksRecorder = () => {
     if (showTimeLeft) timeLeft > 0 && setTimeLeft(timeLeft - 1);
   }, 1000);
 
-  // useEffect(() => {
-  //   if (timeLeft == 0) {
-  //     const startVideo = handleStartCaptureClick();
-  //     return startVideo;
-  //   }
-  // }, [timeLeft]);
+  const computeFrames = useCallback(() => {
+    // alert("WORKINg")
+    const canvasContext = canvasRef.current.getContext("2d")
+    tempCanvasContext.drawImage(webcamRef?.current?.video, 0, 0, webcamRef?.current?.video.width, webcamRef?.current?.video.height)
+    tempCanvasContext.fillStyle = "#fff"
+    tempCanvasContext.textAlign = "center"
+    tempCanvasContext.font = 'normal normal 500 19px "Poppins"'
+
+    const currentQuestionSplitted = getLines(tempCanvasContext, currentQuestion, 300).reverse()
+    const lineHeight = 40
+    currentQuestionSplitted.map((data, index) => {
+      tempCanvasContext.fillText(data, (webcamRef?.current?.video.width / 2), webcamRef?.current?.video.height - (lineHeight + ((index + 1) * 30)))
+    })
+
+    const frame = tempCanvasContext.getImageData(0, 0, webcamRef?.current?.video.width, webcamRef?.current?.video.height)
+    canvasContext.putImageData(frame, 0, 0)
+
+    requestAnimationFrame(computeFrames, 0)
+  }, [currentQuestion, canvasRef, webcamRef])
+
+  const captureCanvasVideo = () => {
+    const videoStream = canvasRef.current?.captureStream(30);
+    videoStream.addTrack(webcamRef.current.stream.getAudioTracks()[0]);
+    mediaRecorderRef.current = new MediaRecorder(
+      videoStream
+    )
+
+    mediaRecorderRef.current.onstop = function (e) {
+      var blob = new Blob(canvasRecordedChunks, { 'type': 'video/mp4' });
+      setCanvasRecordedChunks([])
+      var videoURL = URL.createObjectURL(blob);
+      outputVideoRef.current.src = videoURL;
+    };
+
+    mediaRecorderRef.current.onpause = function (e) {
+      setIsPausedVideo(true)
+      // mediaRecorderRef.current.requestData()
+    }
+
+    mediaRecorderRef.current.onresume = function () {
+      setIsPausedVideo(false)
+    }
+
+    mediaRecorderRef.current.ondataavailable = function (e) {
+      setCanvasRecordedChunks([...canvasRecordedChunks, e.data]);
+    };
+
+    mediaRecorderRef.current.start()
+  }
+
+  useEffect(() => {
+    webcamRef?.current?.video.play()
+    webcamRef?.current?.video.addEventListener("play", computeFrames())
+    // computeFrames()
+  }, [currentQuestion])
 
   return (
     <VideoRecorderStyled
@@ -303,25 +270,7 @@ export const VideoChunksRecorder = () => {
         </article>
         <div className="video-recording-container">
           {!videoURL && (
-            <Webcam
-              ref={webcamRef}
-              videoConstraints={{
-                width: isMobile
-                  ? undefined
-                  : videoWidth > 400
-                  ? 333
-                  : videoWidth > 360
-                  ? 313
-                  : 298,
-                height: isMobile ? undefined : videoHeight,
-                facingMode: "user",
-              }}
-              width={videoWidth > 400 ? 333 : videoWidth > 360 ? 313 : 298}
-              height={videoHeight}
-              style={{ objectFit: "cover" }}
-              onUserMedia={() => setIsStreamInit(true)}
-              onUserMediaError={showAccessBlocked}
-            />
+            <VideoPlayer setIsStreamInit={setIsStreamInit} setError={setError} videoHeight={videoHeight} canvasRef={canvasRef} webcamRef={webcamRef} />
           )}
           {/* <video>
             <source url="blob:http://localhost:5000/0e9d0baf-11ca-46aa-8bd2-da8d0752b5d2" />
@@ -329,13 +278,13 @@ export const VideoChunksRecorder = () => {
           {error && (
             <NotificationCard
               openModal={error ? true : false}
-              //   handlePermission={allowCameraPermission}
+            //   handlePermission={allowCameraPermission}
             />
           )}
         </div>
 
         <article className="testimonial-questions-wrapper">
-          <QuestionsCard handleNextPrevClick={handleNextPrevClick} />
+          <QuestionsCard setCurrentQuestion={setCurrentQuestion} />
         </article>
       </figure>
       {capturing && (

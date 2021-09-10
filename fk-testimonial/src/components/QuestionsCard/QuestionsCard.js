@@ -4,7 +4,7 @@ import { TestimonialContext } from "../../context/TestimonialContext";
 import { SET_INDEX } from "../../constants";
 import { QuestionCardStyled } from "./style";
 
-const QuestionsCard = ({ handleNextPrevClick }) => {
+const QuestionsCard = ({setCurrentQuestion}) => {
   const { state, dispatch } = useContext(TestimonialContext);
   const [pulse, setPulse] = useState(false);
   const theme = useContext(ThemeContext);
@@ -23,14 +23,16 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
     },
   } = theme;
 
+  useEffect(() => {
+    setCurrentQuestion(questionArray[currentIndex].question)
+  },[currentIndex, questionArray])
+
   const gotToPrevQuestion = useCallback(() => {
     if (currentIndex > 0) {
       dispatch({
         type: SET_INDEX,
         payload: currentIndex - 1,
       });
-      handleNextPrevClick(true);
-      handleNextPrevClick(true);
     }
   }, [state]);
 
@@ -40,11 +42,6 @@ const QuestionsCard = ({ handleNextPrevClick }) => {
         type: SET_INDEX,
         payload: currentIndex + 1,
       });
-      handleNextPrevClick(
-        false,
-        state.questionIndex < questionArray.length - 1
-      );
-      handleNextPrevClick(false);
     }
   }, [state]);
 
