@@ -295,7 +295,7 @@ export const VideoChunksRecorder = () => {
           <span className="time-left">{timeLeft}</span>
         )}
         <article className="video-timer">
-          <span className="recording-circle"></span>{" "}
+          {/* <span className="recording-circle"></span>{" "} */}
           {convertSecondsToHourMinute(String(recordingTime))}
         </article>
         <div className="video-recording-container">
