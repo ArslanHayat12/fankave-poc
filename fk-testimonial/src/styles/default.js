@@ -60,6 +60,7 @@ export const LayoutStyled = css`
     display: grid;
     grid-template-columns: auto 1fr;
     grid-gap: 20px;
+    background: ${({ theme }) => theme?.brand?.pallete?.secondary || 'white'};
     .fk-logo {
       width: 100%;
       height: 40px;
@@ -73,6 +74,7 @@ export const LayoutStyled = css`
       }
     }
     .fk-heading {
+      color: ${({ theme }) => theme?.brand?.pallete?.text || 'black'};
       font-size: 20px;
     }
   }
@@ -83,6 +85,16 @@ export const LayoutStyled = css`
     position: relative;
     z-index: 0;
     min-height: 560px;
+    ${({ theme }) => {
+      const { type = '', value } = theme?.brand?.background
+      if (type === 'color') {
+        return `background: ${value};`
+      }
+      if (type === 'image') {
+        return `background: url(${value}) center center/cover no-repeat;`
+      }
+      return 'background: white;'
+    }};
     .fk-widget-wrapper {
       position: relative;
       display: grid;
@@ -91,7 +103,18 @@ export const LayoutStyled = css`
       padding: 20px;
       margin: 20px;
       border-radius: 10px;
-      border: 1px solid black;
+      ${({ theme }) => {
+        const { type = '', value } = theme?.brand?.widgetsBackground
+        if (type === 'color') {
+          return `background: ${value};`
+        }
+        if (type === 'image') {
+          return `background: url(${value}) center center/cover no-repeat;`
+        }
+        return 'background: white;'
+      }}
+      border: 1px solid ${({ theme }) =>
+        theme?.brand?.pallete?.text || 'black'};
       .fk-home-screen {
         display: grid;
         grid-row-gap: 20px;
@@ -100,6 +123,7 @@ export const LayoutStyled = css`
         .fk-screen-description {
           font-size: 20px;
           font-weight: 500;
+          color: ${({ theme }) => theme?.brand?.pallete?.text || 'black'};
         }
         .fk-widget-icons {
           display: grid;
@@ -149,6 +173,7 @@ export const LayoutStyled = css`
               }
             }
             .fk-widget-icon-text {
+              color: ${({ theme }) => theme?.brand?.pallete?.text || 'black'};
               font-size: 12px;
             }
           }
@@ -177,6 +202,7 @@ export const LayoutStyled = css`
     display: grid;
     grid-template-columns: auto 1fr;
     grid-gap: 20px;
+    background: ${({ theme }) => theme?.brand?.pallete?.secondary || 'white'};
     .fk-logo {
       width: 100%;
       height: 40px;
@@ -191,6 +217,7 @@ export const LayoutStyled = css`
     }
     .fk-heading {
       font-size: 20px;
+      color: ${({ theme }) => theme?.brand?.pallete?.text || 'black'};
     }
   }
 `

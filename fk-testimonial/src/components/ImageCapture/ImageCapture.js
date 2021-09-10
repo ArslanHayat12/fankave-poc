@@ -1,4 +1,6 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useContext } from 'react'
+import { ThemeContext } from 'styled-components'
+
 import { Preview } from '../Preview/Preview'
 import { Capture } from './Capture'
 import { ImageProcessor } from './ImageProcessor'
@@ -14,37 +16,6 @@ const initialState = {
   rawImage: null,
   processedImage: null,
   videoConstraints: null,
-}
-
-const widgetConfigs = {
-  heading: 'Record Image Capture Testimonial',
-  processing: {
-    pre: false,
-    post: true,
-  },
-  form: {
-    user: {
-      enabled: true,
-      name: true,
-      username: false,
-      email: false,
-    },
-    text: {
-      enabled: true,
-      limit: 280,
-      placeholder: 'Your Story...',
-    },
-    hastages: {
-      enabled: true,
-      limit: 5,
-      options: ['CiscoFuture', 'CiscoImpact', 'MyImpact'],
-    },
-  },
-  sharing: {
-    enabled: true,
-    twitter: true,
-    linkedIn: true,
-  },
 }
 
 const reducer = (state, action) => {
@@ -67,6 +38,11 @@ const reducer = (state, action) => {
 }
 
 export const ImageCapture = () => {
+  const theme = useContext(ThemeContext)
+  const {
+    widgets: { imageCapture, form, sharing, enableDownload },
+  } = theme
+  const { post, pre } = imageCapture.processing
   const [{ processedImage, rawImage, videoConstraints }, dispatch] = useReducer(
     reducer,
     initialState
@@ -78,7 +54,7 @@ export const ImageCapture = () => {
       payload: {
         rawImage: src,
         videoConstraints: constraints,
-        ...(widgetConfigs.processing.post ? {} : { processedImage: src }),
+        ...(post.enabled ? {} : { processedImage: src }),
       },
     })
   }
@@ -118,12 +94,12 @@ export const ImageCapture = () => {
   }
   return (
     <>
-      <h2 className="fk-heading">{widgetConfigs.heading}</h2>
+      <h2 className="fk-heading">{imageCapture.label || 'Capture Image'}</h2>
       {processedImage ? (
         <ImagePreviewStyled className="preview-area">
           <Preview
             image={rawImage}
-            formMeta={widgetConfigs.form}
+            formMeta={form}
             onApprove={handleApprove}
             onReProcess={handleReProcess}
           />
@@ -133,16 +109,14 @@ export const ImageCapture = () => {
           <ImageProcessor
             image={rawImage}
             videoConstraints={videoConstraints}
+            filters={post}
             onContinue={handleContinue}
             onReTake={handleRetake}
           />
         </ImageProcessorWrapperStyled>
       ) : (
         <ImageCaptureWrapperStyled className="capture-area">
-          <Capture
-            onCapture={handleCapture}
-            enableFilters={widgetConfigs.processing.pre}
-          />
+          <Capture onCapture={handleCapture} enableFilters={pre} />
         </ImageCaptureWrapperStyled>
       )}
     </>
