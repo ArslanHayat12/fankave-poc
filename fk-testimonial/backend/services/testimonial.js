@@ -97,7 +97,7 @@ const methods = (client) => ({
             }, 5000)
         fs.unlinkSync(filePath)
     },
-    handleTranscription: async function(gcsUri) {
+    handleTranscription: async function (gcsUri) {
         // Imports the Google Cloud Video Intelligence library
         const videoIntelligence = require('@google-cloud/video-intelligence');
 
@@ -138,18 +138,27 @@ const methods = (client) => ({
                 // and has its own confidence score.
                 console.log(speechTranscription)
                 for (const alternative of speechTranscription.alternatives) {
-                    const transcriptedSentence = { 
-                        transcript: alternative.transcript, 
-                        confidence: alternative.confidence 
+                    const transcriptedSentence = {
+                        transcript: alternative.transcript,
+                        confidence: alternative.confidence
                     }
                     fullTranscript.push(transcriptedSentence)
-                    
+
                 }
             }
             return fullTranscript
         }
 
         return await analyzeVideoTranscript(gcsUri)
+    },
+    getIdFromPath = (url = "") => {
+        const fileName = url.split("/");
+        if (fileName.length) {
+            const id = fileName[fileName.length - 1].replace(".mp4", "");
+            return id;
+        }
+        return "";
     }
+
 })
 module.exports = methods
