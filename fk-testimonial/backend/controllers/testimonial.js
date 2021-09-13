@@ -349,36 +349,38 @@ const controller = {
         async function getAndPublishTranscription(videoUrl, apiURL) {
             const id = await testimonialservice().getIdFromPath(videoUrl).replaceAll("?alt=media", "")
             await testimonialservice().createfileIfNotExists(id + ".mp4").then(() => {
-                const file = fs.createWriteStream(id + ".mp4");
-                https.get(videoUrl, async response => {
-                    var stream = response.pipe(file);
-                    stream.on("finish", async function () {
-                        child_process.execFile('ffmpeg', [
-                            "-y", "-i",
-                            id + ".mp4", id + ".mp3"
-                        ], async function (error, stdout, stderr) {
+                await testimonialservice().createfileIfNotExists(id + ".mp3").then(() => {
+                    const file = fs.createWriteStream(id + ".mp4");
+                    https.get(videoUrl, async response => {
+                        var stream = response.pipe(file);
+                        stream.on("finish", async function () {
+                            child_process.execFile('ffmpeg', [
+                                "-y", "-i",
+                                id + ".mp4", id + ".mp3"
+                            ], async function (error, stdout, stderr) {
 
-                            const fullTranscript = await testimonialservice().handleTranscription(`./${id}.mp3`);
-                            console.log(fullTranscript)
-                            axios({
-                                method: 'patch',
-                                url: apiURL,
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                data: JSON.stringify([
-                                    {
-                                        id,
-                                        "caption": fullTranscript
-                                    }
-                                ])
-                            }).then(res => {
-                                console.log(res)
-                            }).catch(err => {
-                                console.log(err)
+                                const fullTranscript = await testimonialservice().handleTranscription(`./${id}.mp3`);
+                                console.log(fullTranscript)
+                                axios({
+                                    method: 'patch',
+                                    url: apiURL,
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    data: JSON.stringify([
+                                        {
+                                            id,
+                                            "caption": fullTranscript
+                                        }
+                                    ])
+                                }).then(res => {
+                                    console.log(res)
+                                }).catch(err => {
+                                    console.log(err)
+                                })
+                                fs.unlinkSync(`./${id}.mp3`)
+                                fs.unlinkSync(`./${id}.mp4`)
                             })
-                            fs.unlinkSync(`./${id}.mp3`)
-                            fs.unlinkSync(`./${id}.mp4`)
                         })
                     })
                 })
