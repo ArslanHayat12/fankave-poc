@@ -345,6 +345,7 @@ const controller = {
     },
     getTranscription: async function (req, response) {
         const { videoUrl } = req.body
+        console.log("Initiated with", videoUrl)
         const apiURL = 'https://dev.api.fankave.com/v1.0/cms/content/social'
         async function getAndPublishTranscription(videoUrl, apiURL) {
             const id = await testimonialservice().getIdFromPath(videoUrl).replaceAll("?alt=media", "")
@@ -361,23 +362,23 @@ const controller = {
 
                                 const fullTranscript = await testimonialservice().handleTranscription(`./${id}.mp3`);
                                 console.log(fullTranscript)
-                                // axios({
-                                //     method: 'patch',
-                                //     url: apiURL,
-                                //     headers: {
-                                //         'Content-Type': 'application/json'
-                                //     },
-                                //     data: JSON.stringify([
-                                //         {
-                                //             id,
-                                //             "caption": fullTranscript
-                                //         }
-                                //     ])
-                                // }).then(res => {
-                                //     console.log(res)
-                                // }).catch(err => {
-                                //     console.log(err)
-                                // })
+                                axios({
+                                    method: 'patch',
+                                    url: apiURL,
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    data: JSON.stringify([
+                                        {
+                                            id,
+                                            "caption": fullTranscript
+                                        }
+                                    ])
+                                }).then(res => {
+                                    console.log(res)
+                                }).catch(err => {
+                                    console.log(err)
+                                })
                                 fs.unlinkSync(`./${id}.mp3`)
                                 fs.unlinkSync(`./${id}.mp4`)
                             })
