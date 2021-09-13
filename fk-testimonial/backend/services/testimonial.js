@@ -156,6 +156,7 @@ const methods = (client) => ({
             content: fs.readFileSync(path).toString('base64'),
         };
         const config = {
+            encoding: 'MP3',
             sampleRateHertz: 48000,
             languageCode: 'en-US',
             model: "video",
