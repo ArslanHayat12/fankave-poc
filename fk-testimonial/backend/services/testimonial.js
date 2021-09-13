@@ -1,6 +1,8 @@
 
 const fs = require("fs")
 const multer = require("multer");
+// Imports the Google Cloud client library
+const speech = require('@google-cloud/speech');
 
 
 
@@ -97,7 +99,7 @@ const methods = (client) => ({
             }, 5000)
         fs.unlinkSync(filePath)
     },
-    handleTranscription: async function (gcsUri) {
+    handleVideoIntelligenceTranscription: async function (gcsUri) {
         // Imports the Google Cloud Video Intelligence library
         const videoIntelligence = require('@google-cloud/video-intelligence');
 
@@ -137,8 +139,8 @@ const methods = (client) => ({
                 // Each alternative is a different possible transcription
                 // and has its own confidence score.
                 const alternatives = speechTranscription.alternatives || []
-                const confidenceArray = alternatives.map(function(alternative) { 
-                    return alternative.confidence; 
+                const confidenceArray = alternatives.map(function (alternative) {
+                    return alternative.confidence;
                 })
                 const alternativeIndex = methods().getIndexOfMaxConfidence(confidenceArray)
                 fullTranscript = fullTranscript.concat(' ', alternatives[alternativeIndex].transcript)
@@ -147,6 +149,32 @@ const methods = (client) => ({
         }
 
         return await analyzeVideoTranscript(gcsUri)
+    },
+    handleTranscription: async function (path) {
+        const client = new speech.SpeechClient();
+        const video = {
+            content: fs.readFileSync(path).toString('base64'),
+        };
+        const config = {
+            sampleRateHertz: 48000,
+            languageCode: 'en-US',
+            model: "video",
+            enableSeparateRecognitionPerChannel: true,
+            useEnhanced: true
+        };
+        const requests = {
+            config: config,
+            audio: video,
+        };
+        // Detects speech in the audio file. This creates a recognition job that you
+        // can wait for now, or get its result later.
+        const [operation] = await client.longRunningRecognize(requests);
+
+        // Get a Promise representation of the final result of the job
+        const [response] = await operation.promise();
+        return response.results
+            .map(result => result.alternatives[0].transcript)
+            .join('\n');
     },
     getIdFromPath: (url = "") => {
         const fileName = url.split("/");
@@ -159,7 +187,15 @@ const methods = (client) => ({
     getIndexOfMaxConfidence: (confidenceArray) => {
         const indexOfMaxValue = confidenceArray.indexOf(Math.max(...confidenceArray));
         return indexOfMaxValue || 0
+    },
+    createfileIfNotExists: (file) => {
+        return new Promise((resolve) => {
+            fs.access(file, fs.constants.F_OK, (err) => {
+                err ? resolve(false) : resolve(true)
+            });
+        })
     }
+
 
 })
 module.exports = methods

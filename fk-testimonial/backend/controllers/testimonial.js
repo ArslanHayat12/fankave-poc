@@ -6,6 +6,7 @@ const axios = require('axios');
 const fs = require("fs")
 const storage = require('node-sessionstorage')
 const child_process = require('child_process');
+const https = require("https");
 
 const linkedInStorage = 'linkedin-auth';
 const twitterStorage = 'twitter-auth';
@@ -307,7 +308,7 @@ const controller = {
             .catch((data) => { response.send(data) })
 
     },
-    getTranscription: async function (req, response) {
+    getVideoIntelligenceTranscription: async function (req, response) {
         const { videoUrl } = req.body
         const apiURL = 'https://dev.api.fankave.com/v1.0/cms/content/social'
 
@@ -341,7 +342,57 @@ const controller = {
         } else {
             response.status(400).send({ error: "Bad Data" })
         }
+    },
+    getTranscription: async function (req, response) {
+        const { videoUrl } = req.body
+        const apiURL = 'https://dev.api.fankave.com/v1.0/cms/content/social'
+        async function getAndPublishTranscription(videoUrl, apiURL) {
+            const id = await testimonialservice().getIdFromPath(videoUrl).replaceAll("?alt=media", "")
+            await testimonialservice().createfileIfNotExists(id + ".mp4").then(() => {
+                const file = fs.createWriteStream(id + ".mp4");
+                https.get(videoUrl, async response => {
+                    var stream = response.pipe(file);
+                    stream.on("finish", async function () {
+                        child_process.execFile('ffmpeg', [
+                            "-y", "-i",
+                            id + ".mp4", id + ".mp3"
+                        ], async function (error, stdout, stderr) {
+
+                            const fullTranscript = await testimonialservice().handleTranscription(`./${id}.mp3`);
+                            console.log(fullTranscript)
+                            axios({
+                                method: 'patch',
+                                url: apiURL,
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                data: JSON.stringify([
+                                    {
+                                        id,
+                                        "caption": fullTranscript
+                                    }
+                                ])
+                            }).then(res => {
+                                console.log(res)
+                            }).catch(err => {
+                                console.log(err)
+                            })
+                            fs.unlinkSync(`./${id}.mp3`)
+                            fs.unlinkSync(`./${id}.mp4`)
+                        })
+                    })
+                })
+            })
+        }
+        if (videoUrl) {
+            getAndPublishTranscription(videoUrl, apiURL)
+            response.send("Transcription initiated")
+        } else {
+            response.status(400).send({ error: "Bad Data" })
+        }
+
     }
+
 
 }
 module.exports = controller;
