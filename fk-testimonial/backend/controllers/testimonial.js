@@ -363,23 +363,23 @@ const controller = {
                             ], async function (error, stdout, stderr) {
                                 const fullTranscript = await testimonialservice().handleTranscription(`./${id}.mp3`);
                                 console.log("Transcription:", fullTranscript)
-                                // axios({
-                                //     method: 'patch',
-                                //     url: apiURL,
-                                //     headers: {
-                                //         'Content-Type': 'application/json'
-                                //     },
-                                //     data: JSON.stringify([
-                                //         {
-                                //             id,
-                                //             "caption": fullTranscript
-                                //         }
-                                //     ])
-                                // }).then(res => {
-                                //     console.log("Posted")
-                                // }).catch(err => {
-                                //     console.log(err)
-                                // })
+                                axios({
+                                    method: 'patch',
+                                    url: apiURL,
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    data: JSON.stringify([
+                                        {
+                                            id,
+                                            "caption": fullTranscript
+                                        }
+                                    ])
+                                }).then(res => {
+                                    console.log("Posted")
+                                }).catch(err => {
+                                    console.log(err)
+                                })
                                 fs.unlinkSync(`./${id}.mp3`)
                                 fs.unlinkSync(`./${id}.mp4`)
                             })
