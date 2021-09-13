@@ -351,17 +351,18 @@ const controller = {
             const id = await testimonialservice().getIdFromPath(videoUrl).replaceAll("?alt=media", "")
             await testimonialservice().createfileIfNotExists(id + ".mp4").then(async () => {
                 await testimonialservice().createfileIfNotExists(id + ".mp3").then(async () => {
+                    const fileMp3 = fs.createWriteStream(id + ".mp3");
                     const file = fs.createWriteStream(id + ".mp4");
                     https.get(videoUrl, async response => {
-                        var stream = response.pipe(file);
+                        let streamfileMp3 = response.pipe(fileMp3);
+                        let stream = response.pipe(file);
                         stream.on("finish", async function () {
                             child_process.execFile('ffmpeg', [
                                 "-y", "-i",
                                 id + ".mp4", id + ".mp3"
                             ], async function (error, stdout, stderr) {
-
                                 const fullTranscript = await testimonialservice().handleTranscription(`./${id}.mp3`);
-                                console.log(fullTranscript)
+                                console.log("Transcription:", fullTranscript)
                                 axios({
                                     method: 'patch',
                                     url: apiURL,
