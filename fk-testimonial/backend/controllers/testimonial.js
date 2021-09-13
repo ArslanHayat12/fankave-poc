@@ -348,7 +348,7 @@ const controller = {
         console.log("Initiated with", videoUrl)
         const apiURL = 'https://dev.api.fankave.com/v1.0/cms/content/social'
         async function getAndPublishTranscription(videoUrl, apiURL) {
-            const id = await testimonialservice().getIdFromPath(videoUrl).replaceAll("?alt=media", "")
+            const id = await testimonialservice().getIdFromPath(videoUrl).replace("?alt=media", "")
             await testimonialservice().createfileIfNotExists(id + ".mp4").then(async () => {
                 await testimonialservice().createfileIfNotExists(id + ".mp3").then(async () => {
                     const fileMp3 = fs.createWriteStream(id + ".mp3");
@@ -376,7 +376,7 @@ const controller = {
                                         }
                                     ])
                                 }).then(res => {
-                                    console.log(res)
+                                    console.log("Posted")
                                 }).catch(err => {
                                     console.log(err)
                                 })
