@@ -346,55 +346,54 @@ const controller = {
     getTranscription: async function (req, response) {
         const { videoUrl } = req.body
         console.log("Initiated with", videoUrl)
-        // const apiURL = 'https://dev.api.fankave.com/v1.0/cms/content/social'
-        // async function getAndPublishTranscription(videoUrl, apiURL) {
-        //     const id = await testimonialservice().getIdFromPath(videoUrl).replace("?alt=media", "")
-        //     await testimonialservice().createfileIfNotExists(id + ".mp4").then(async () => {
-        //         await testimonialservice().createfileIfNotExists(id + ".mp3").then(async () => {
-        //             const fileMp3 = fs.createWriteStream(id + ".mp3");
-        //             const file = fs.createWriteStream(id + ".mp4");
-        //             https.get(videoUrl, async response => {
-        //                 let streamfileMp3 = response.pipe(fileMp3);
-        //                 let stream = response.pipe(file);
-        //                 stream.on("finish", async function () {
-        //                     child_process.execFile('ffmpeg', [
-        //                         "-y", "-i",
-        //                         id + ".mp4", id + ".mp3"
-        //                     ], async function (error, stdout, stderr) {
-        //                         const fullTranscript = await testimonialservice().handleTranscription(`./${id}.mp3`);
-        //                         console.log("Transcription:", fullTranscript)
-        //                         // axios({
-        //                         //     method: 'patch',
-        //                         //     url: apiURL,
-        //                         //     headers: {
-        //                         //         'Content-Type': 'application/json'
-        //                         //     },
-        //                         //     data: JSON.stringify([
-        //                         //         {
-        //                         //             id,
-        //                         //             "caption": fullTranscript
-        //                         //         }
-        //                         //     ])
-        //                         // }).then(res => {
-        //                         //     console.log("Posted")
-        //                         // }).catch(err => {
-        //                         //     console.log(err)
-        //                         // })
-        //                         fs.unlinkSync(`./${id}.mp3`)
-        //                         fs.unlinkSync(`./${id}.mp4`)
-        //                     })
-        //                 })
-        //             })
-        //         })
-        //     })
-        // }
-        // if (videoUrl) {
-        //     getAndPublishTranscription(videoUrl, apiURL)
-        //     response.send("Transcription initiated")
-        // } else {
-        //     response.status(400).send({ error: "Bad Data" })
-        // }
-        response.status(200).send({ message: "Transcription under implementation" })
+        const apiURL = 'https://dev.api.fankave.com/v1.0/cms/content/social'
+        async function getAndPublishTranscription(videoUrl, apiURL) {
+            const id = await testimonialservice().getIdFromPath(videoUrl).replace("?alt=media", "")
+            await testimonialservice().createfileIfNotExists(id + ".mp4").then(async () => {
+                await testimonialservice().createfileIfNotExists(id + ".mp3").then(async () => {
+                    const fileMp3 = fs.createWriteStream(id + ".mp3");
+                    const file = fs.createWriteStream(id + ".mp4");
+                    https.get(videoUrl, async response => {
+                        let streamfileMp3 = response.pipe(fileMp3);
+                        let stream = response.pipe(file);
+                        stream.on("finish", async function () {
+                            child_process.execFile('ffmpeg', [
+                                "-y", "-i",
+                                id + ".mp4", id + ".mp3"
+                            ], async function (error, stdout, stderr) {
+                                const fullTranscript = await testimonialservice().handleTranscription(`./${id}.mp3`);
+                                console.log("Transcription:", fullTranscript)
+                                // axios({
+                                //     method: 'patch',
+                                //     url: apiURL,
+                                //     headers: {
+                                //         'Content-Type': 'application/json'
+                                //     },
+                                //     data: JSON.stringify([
+                                //         {
+                                //             id,
+                                //             "caption": fullTranscript
+                                //         }
+                                //     ])
+                                // }).then(res => {
+                                //     console.log("Posted")
+                                // }).catch(err => {
+                                //     console.log(err)
+                                // })
+                                fs.unlinkSync(`./${id}.mp3`)
+                                fs.unlinkSync(`./${id}.mp4`)
+                            })
+                        })
+                    })
+                })
+            })
+        }
+        if (videoUrl) {
+            getAndPublishTranscription(videoUrl, apiURL)
+            response.send("Transcription initiated")
+        } else {
+            response.status(400).send({ error: "Bad Data" })
+        }
 
     }
 
