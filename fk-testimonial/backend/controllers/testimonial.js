@@ -350,7 +350,7 @@ const controller = {
         async function getAndPublishTranscription(videoUrl, apiURL) {
             const id = await testimonialservice().getIdFromPath(videoUrl).replaceAll("?alt=media", "")
             await testimonialservice().createfileIfNotExists(id + ".mp4").then(async () => {
-                await testimonialservice().createfileIfNotExists(id + ".mp3").then(() => {
+                await testimonialservice().createfileIfNotExists(id + ".mp3").then(async () => {
                     const file = fs.createWriteStream(id + ".mp4");
                     https.get(videoUrl, async response => {
                         var stream = response.pipe(file);
