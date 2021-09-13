@@ -173,6 +173,7 @@ const methods = (client) => ({
 
         // Get a Promise representation of the final result of the job
         const [response] = await operation.promise();
+        console.log(response.results)
         return response.results
             .map(result => result.alternatives[0].transcript)
             .join('\n');
