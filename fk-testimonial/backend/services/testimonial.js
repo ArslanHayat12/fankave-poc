@@ -181,7 +181,8 @@ const methods = (client) => ({
     getIdFromPath: (url = "") => {
         const fileName = url.split("/");
         if (fileName.length) {
-            const id = fileName[fileName.length - 1].replace(".mp4", "");
+            let id = fileName[fileName.length - 1].replace(".mp4", "");
+            id = id.replace(".mp3", "");
             return id;
         }
         return "";
