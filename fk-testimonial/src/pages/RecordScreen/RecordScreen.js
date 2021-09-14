@@ -1,45 +1,20 @@
 import React, {
   useCallback,
   useContext,
-  useEffect,
-  useRef,
-  useState,
 } from "react";
 import { ThemeContext } from "styled-components";
 import QuestionsCard from "../../components/QuestionsCard/QuestionsCard";
 import { MicIcon, CrossIcon } from "../../assets/index";
 import { AudioRecorder } from "../../components/AudioRecorder/Recorder";
 import { TestimonialContext } from "../../context/TestimonialContext";
-import { useInterval } from "../../hooks/useInterval";
-import { convertSecondsToHourMinute } from "./../../utils/index";
 import { RecordingScreenStyled } from "./style";
-import { SET_URL_DURATION, RESET_DATA } from "../../constants";
+import { RESET_DATA } from "../../constants";
 import { VideoRecorder } from "../../components/VideoRecorder/VideoRecorder";
 import { VideoChunksRecorder } from "../../components/VideoRecorder/VideoChunksRecorder";
+import { Timer } from "./Timer";
 
 const RecordScreen = () => {
   const { state, dispatch } = useContext(TestimonialContext);
-  const [recordingTime, setTime] = useState(0);
-  const recordingTimeRef = useRef();
-  recordingTimeRef.current = recordingTime;
-
-  useInterval(() => {
-    state.status && setTime(recordingTime + 0.5);
-  }, 500);
-
-  const dispatchURLDuration = useCallback(() => {
-    recordingTimeRef &&
-      dispatch({
-        type: SET_URL_DURATION,
-        payload: recordingTimeRef.current,
-      });
-  }, [recordingTimeRef]);
-
-  useEffect(() => {
-    return () => {
-      dispatchURLDuration();
-    };
-  }, []);
 
   const theme = useContext(ThemeContext);
 
@@ -49,7 +24,6 @@ const RecordScreen = () => {
         recordingScreen: {
           video: {
             heading: videoScreenHeading,
-            nextPreviousButtons: { display: nextPreviousButtonsDisplay },
             videoChunks: { available: recordChunks },
           },
           audio: { heading: audioScreenHeading },
@@ -85,9 +59,7 @@ const RecordScreen = () => {
           <article className="mic-wrapper">
             <MicIcon customClass="mic-icon" height="35px" />
           </article>
-          <article className="timer">
-            {convertSecondsToHourMinute(String(recordingTime))}
-          </article>
+          <Timer/>
 
           <AudioRecorder />
 
