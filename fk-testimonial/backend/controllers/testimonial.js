@@ -347,49 +347,61 @@ const controller = {
         const { videoUrl } = req.body
         console.log("Initiated with", videoUrl)
         const apiURL = 'https://dev.api.fankave.com/v1.0/cms/content/social'
-        async function getAndPublishTranscription(videoUrl, apiURL) {
-            const id = await testimonialservice().getIdFromPath(videoUrl).replace("?alt=media", "")
-            await testimonialservice().createfileIfNotExists(id + ".mp4").then(async () => {
-                await testimonialservice().createfileIfNotExists(id + ".mp3").then(async () => {
-                    const fileMp3 = fs.createWriteStream(id + ".mp3");
-                    const file = fs.createWriteStream(id + ".mp4");
-                    https.get(videoUrl, async response => {
-                        let streamfileMp3 = response.pipe(fileMp3);
-                        let stream = response.pipe(file);
-                        stream.on("finish", async function () {
+
+        async function publishTranscription(id, isVideo = false) {
+            const fullTranscript = await testimonialservice().handleTranscription(`./${id}.mp3`);
+            console.log("Transcription:", fullTranscript)
+            axios({
+                method: 'patch',
+                url: apiURL,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify([
+                    {
+                        id,
+                        "caption": fullTranscript
+                    }
+                ])
+            }).then(res => {
+                console.log("Posted")
+            }).catch(err => {
+                console.log(err)
+            })
+            fs.unlinkSync(`./${id}.mp3`)
+            isVideo && fs.unlinkSync(`./${id}.mp4`)
+        }
+
+        function createFileAndStream(id, isVideo) {
+            testimonialservice().createfileIfNotExists(id + ".mp3").then(async () => {
+                const fileMp3 = isVideo? fs.createWriteStream(id + ".mp3") : null
+                const file = isVideo ? fs.createWriteStream(id + ".mp4") : fs.createWriteStream(id + ".mp3");
+                https.get(videoUrl, async response => {
+                    let streamfileMp3 = isVideo ? response.pipe(fileMp3) : null;
+                    let stream = response.pipe(file);
+                    stream.on("finish", async function () {
+                        isVideo ? 
                             child_process.execFile('ffmpeg', [
                                 "-y", "-i",
                                 id + ".mp4", id + ".mp3"
                             ], async function (error, stdout, stderr) {
-                                const fullTranscript = await testimonialservice().handleTranscription(`./${id}.mp3`);
-                                console.log("Transcription:", fullTranscript)
-                                axios({
-                                    method: 'patch',
-                                    url: apiURL,
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                    data: JSON.stringify([
-                                        {
-                                            id,
-                                            "caption": fullTranscript
-                                        }
-                                    ])
-                                }).then(res => {
-                                    console.log("Posted")
-                                }).catch(err => {
-                                    console.log(err)
-                                })
-                                fs.unlinkSync(`./${id}.mp3`)
-                                fs.unlinkSync(`./${id}.mp4`)
-                            })
-                        })
+                                publishTranscription(id, true)
+                            }) : publishTranscription(id)
                     })
                 })
             })
         }
+
+        async function getAndPublishTranscription(videoUrl) {
+            const isVideo = videoUrl.includes('.mp4')
+            const id = await testimonialservice().getIdFromPath(videoUrl).replace("?alt=media", "")
+            isVideo ? await testimonialservice().createfileIfNotExists(id + ".mp4").then(async () => {
+                await createFileAndStream(id, isVideo)
+            }) : await createFileAndStream(id, isVideo)
+        }
+
         if (videoUrl) {
-            getAndPublishTranscription(videoUrl, apiURL)
+            getAndPublishTranscription(videoUrl)
             response.send("Transcription initiated")
         } else {
             response.status(400).send({ error: "Bad Data" })
