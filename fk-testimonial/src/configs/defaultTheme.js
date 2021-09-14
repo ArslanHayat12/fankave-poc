@@ -13,6 +13,7 @@ const defaultConfigs = {
   topic: 'demostories',
   customClass: 'fk-demo',
   experience: 'demo',
+  heading: 'Content Creation',
   logo: 'https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_5e317c0b2adce12b3d9782717441342c/fankave.png',
   brand: {
     pallete: {
@@ -76,6 +77,12 @@ const defaultConfigs = {
       twitter: true,
       linkedIn: true,
     },
+    processing: {
+      post: {
+        enabled: true,
+      },
+      pre: false,
+    },
     imageCapture: {
       enabled: true,
       icon: ImageCaptureIcon,
@@ -96,9 +103,6 @@ const defaultConfigs = {
     },
     imageUpload: {
       enabled: true,
-      processing: {
-        post: true,
-      },
       icon: ImageUploadIcon,
       label: 'Upload Image',
     },

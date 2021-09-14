@@ -7,6 +7,27 @@ import videoTestimonialIcon from './images/camera.png'
 import AudioCaptureIcon from './images/mic.png'
 import audioTestimonialIcon from './images/mic.png'
 
+import st1 from './images/stickers/01.png'
+import st2 from './images/stickers/02.png'
+import st3 from './images/stickers/03.png'
+import st4 from './images/stickers/04.png'
+import st5 from './images/stickers/05.png'
+import st6 from './images/stickers/06.png'
+import st7 from './images/stickers/07.png'
+import st8 from './images/stickers/08.png'
+import st9 from './images/stickers/09.png'
+
+import bg1 from './images/bgs/01.jpg'
+import bg2 from './images/bgs/02.jpg'
+import bg3 from './images/bgs/03.jpg'
+import bg4 from './images/bgs/04.jpg'
+import bg5 from './images/bgs/05.jpg'
+import bg6 from './images/bgs/06.jpg'
+
+const stickers = [st1, st2, st3, st4, st5, st6, st7, st8, st9]
+
+const backgrounds = [bg1, bg2, bg3, bg4, bg5, bg6]
+
 export const PencilIcon = (props) => {
   const { customClass } = props
   return (
@@ -46,7 +67,7 @@ export const RecordingIcon = (props) => {
           transform="translate(727 723)"
           fill="transparent"
           stroke="#F55555"
-          stroke-width="1"
+          strokeWidth="1"
         >
           <circle cx="23.5" cy="23.5" r="23.5" stroke="none" />
           <circle cx="23.5" cy="23.5" r="23" fill="none" />
@@ -414,7 +435,7 @@ export const StopIcon = (props) => {
           transform="translate(727 723)"
           fill="transparent"
           stroke="#F55555"
-          stroke-width="1"
+          strokeWidth="1"
         >
           <circle cx="23.5" cy="23.5" r="23.5" stroke="none" />
           <circle cx="23.5" cy="23.5" r="22.5" fill="none" />
@@ -577,8 +598,8 @@ export const CrossIcon = (props) => {
         y2="54.63"
         fill="none"
         stroke="#246eff"
-        stroke-miterlimit="10"
-        stroke-width="4"
+        strokeMiterlimit="10"
+        strokeWidth="4"
       />
       <line
         x1="9.37"
@@ -587,8 +608,8 @@ export const CrossIcon = (props) => {
         y2="9.37"
         fill="none"
         stroke="#246eff"
-        stroke-miterlimit="10"
-        stroke-width="4"
+        strokeMiterlimit="10"
+        strokeWidth="4"
       />
     </svg>
   )
@@ -615,7 +636,7 @@ export const DefaultRecordingIcon = (props) => {
           transform="translate(727 723.108)"
           fill="none"
           stroke="#fff"
-          stroke-width="3"
+          strokeWidth="3"
         >
           <circle cx="17" cy="17" r="17" stroke="none" />
           <circle cx="17" cy="17" r="15.5" fill="none" />
@@ -673,7 +694,7 @@ export const ArrowIcon = (props) => {
           transform="translate(856 382)"
           fill="#fff"
           stroke="#E6E6E6"
-          stroke-width="1"
+          strokeWidth="1"
         >
           <rect width="70" height="70" rx="35" stroke="none" />
           <rect x="0.5" y="0.5" width="69" height="69" rx="34.5" fill="none" />
@@ -688,6 +709,11 @@ export const ArrowIcon = (props) => {
       </g>
     </svg>
   )
+}
+
+export const filters = {
+  stickers,
+  backgrounds,
 }
 
 export const StaticAssets = {

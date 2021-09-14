@@ -5,12 +5,6 @@ import { Preview } from '../Preview/Preview'
 import { Capture } from './Capture'
 import { ImageProcessor } from './ImageProcessor'
 
-import {
-  ImageCaptureWrapperStyled,
-  ImageProcessorWrapperStyled,
-  ImagePreviewStyled,
-} from './style'
-
 const initialState = {
   approvedImage: null,
   rawImage: null,
@@ -40,14 +34,13 @@ const reducer = (state, action) => {
 export const ImageCapture = () => {
   const theme = useContext(ThemeContext)
   const {
-    widgets: { imageCapture, form, sharing, enableDownload },
+    widgets: { imageCapture, form, sharing, enableDownload, processing },
   } = theme
-  const { post, pre } = imageCapture.processing
+  const { post, pre } = processing
   const [{ processedImage, rawImage, videoConstraints }, dispatch] = useReducer(
     reducer,
     initialState
   )
-
   const handleCapture = (src, constraints) => {
     dispatch({
       type: 'set',
@@ -96,28 +89,24 @@ export const ImageCapture = () => {
     <>
       <h2 className="fk-heading">{imageCapture.label || 'Capture Image'}</h2>
       {processedImage ? (
-        <ImagePreviewStyled className="preview-area">
-          <Preview
-            image={rawImage}
-            formMeta={form}
-            onApprove={handleApprove}
-            onReProcess={handleReProcess}
-          />
-        </ImagePreviewStyled>
+        <Preview
+          type="image"
+          meta={{ videoConstraints }}
+          src={processedImage}
+          formMeta={form}
+          onApprove={handleApprove}
+          onReProcess={handleReProcess}
+        />
       ) : rawImage ? (
-        <ImageProcessorWrapperStyled className="processing-area">
-          <ImageProcessor
-            image={rawImage}
-            videoConstraints={videoConstraints}
-            filters={post}
-            onContinue={handleContinue}
-            onReTake={handleRetake}
-          />
-        </ImageProcessorWrapperStyled>
+        <ImageProcessor
+          image={rawImage}
+          videoConstraints={videoConstraints}
+          filters={post}
+          onContinue={handleContinue}
+          onReTake={handleRetake}
+        />
       ) : (
-        <ImageCaptureWrapperStyled className="capture-area">
-          <Capture onCapture={handleCapture} enableFilters={pre} />
-        </ImageCaptureWrapperStyled>
+        <Capture onCapture={handleCapture} enableFilters={pre} />
       )}
     </>
   )
