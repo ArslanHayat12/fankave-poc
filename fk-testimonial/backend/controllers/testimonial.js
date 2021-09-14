@@ -14,10 +14,10 @@ const twitterStorage = 'twitter-auth';
 const controller = {
     addVideoChunk: async function (req, res) {
         const fileName = req.file.filename;
-        const outputFileName = fileName.replace(".webm", ".mp4")
+        const fileType = fileName.split(".").pop()
+        const outputFileName = fileName.replace(/webm/g, "mp4")
         const fileId = req.body.id;
         const dir = fileId;
-
 
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir);
@@ -30,29 +30,40 @@ const controller = {
             console.log(`File moved successfully to path: ${newPath}`)
         })
 
-        hbjs.spawn({ input: newPath, output: newPath.replace(".webm", ".mp4") })
-            .on('error', err => {
-                // invalid user input, no video found etc
-                console.log("error", err)
+        if (fileType !== "mp4") {
+            hbjs.spawn({ input: newPath, output: newPath.replace(/webm/g, "mp4") })
+                .on('error', err => {
+                    // invalid user input, no video found etc
+                    console.log("error", err)
+                })
+                .on('progress', progress => {
+                    console.log(
+                        'Percent complete: %s, ETA: %s',
+                        progress.percentComplete,
+                        progress.eta
+                    )
+                }).on('end', async () => {
+                    setTimeout(async () => {
+                        fs.appendFile(`${fileId}/chunksList.txt`, `\nfile ${outputFileName}`, function (err) {
+                            if (err) {
+                                res.send("ERROR in writing")
+                            } else {
+                                res.send("File uploaded successfully")
+                            }
+                        })
+                        console.log('Finished processing' + outputFileName);
+                    });
+                })
+
+        } else {
+            fs.appendFile(`${fileId}/chunksList.txt`, `\nfile ${fileName}`, function (err) {
+                if (err) {
+                    res.send("ERROR in writing")
+                } else {
+                    res.send("File uploaded successfully")
+                }
             })
-            .on('progress', progress => {
-                console.log(
-                    'Percent complete: %s, ETA: %s',
-                    progress.percentComplete,
-                    progress.eta
-                )
-            }).on('end', async () => {
-                setTimeout(async () => {
-                    fs.appendFile(`${fileId}/chunksList.txt`, `\nfile ${outputFileName}`, function (err) {
-                        if (err) {
-                            res.send("ERROR in writing")
-                        } else {
-                            res.send("File uploaded successfully")
-                        }
-                    })
-                    console.log('Finished processing' + outputFileName);
-                });
-            })
+        }
 
         // fs.renameSync(req.file.path, req.file.path.replace(fileName, 
         // req.body.id + path.extname(req.file.originalname)));
