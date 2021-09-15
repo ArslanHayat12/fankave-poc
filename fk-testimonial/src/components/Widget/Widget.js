@@ -1,29 +1,34 @@
-import React, { useReducer, useMemo, useContext } from 'react'
+import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 
 import { HomeScreen } from '../HomeScreen/HomeScreen'
-import {
-  TestimonialContext,
-  initialState,
-} from './../../context/TestimonialContext'
-import { reducer } from './../../reducers/reducers'
 import Footer from './../Footer/Footer'
+import { styles } from '../../styles'
 
 function Widget() {
-  const [state, dispatch] = useReducer(reducer, initialState)
-  const value = useMemo(() => ({ state, dispatch }), [state, dispatch])
   const theme = useContext(ThemeContext)
+  const { logo = '', experience = 'demo', customClass = 'fk-demo' } = theme
 
-  const { logo = '' } = theme
+  const PageWrapper = styles[experience] || styles.demo
   return (
-    <TestimonialContext.Provider value={value}>
-      <section className="fk-widget-container" id="fk-widget-container">
+    <>
+      {!(window.MediaRecorder || window.webkitMediaRecorder) && (
+        <>
+          <p className="fk-not-supported-text">
+            Unfortunately, this browser does not support the web technology that
+            powers this app. We recommend desktop Chrome or Firefox.
+          </p>{' '}
+          <div className="fk-not-supported-container"></div>
+        </>
+      )}
+
+      <PageWrapper className={customClass} id={customClass}>
         <article className="fk-widget-wrapper" id="fk-widget-wrapper">
           <HomeScreen />
           {logo && <Footer logo={logo} />}
         </article>
-      </section>
-    </TestimonialContext.Provider>
+      </PageWrapper>
+    </>
   )
 }
 

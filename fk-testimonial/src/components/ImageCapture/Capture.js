@@ -96,7 +96,7 @@ export const Capture = ({ onCapture, enableFilters = false }) => {
   }
 
   return (
-    <>
+    <article className="fk-image-capture-wrapper">
       {error ? (
         <div className="camera-error">{error}</div>
       ) : (
@@ -142,6 +142,6 @@ export const Capture = ({ onCapture, enableFilters = false }) => {
           <RecordingIcon />
         </button>
       ) : null}
-    </>
+    </article>
   )
 }

@@ -68,6 +68,7 @@ export const HomeScreen = () => {
   const theme = useContext(ThemeContext)
 
   const {
+    heading,
     widgets: {
       imageCapture: {
         enabled: imageCaptureEnabled = false,
@@ -107,7 +108,7 @@ export const HomeScreen = () => {
   if (screen === 'home') {
     return (
       <article className="fk-home-screen" id="fk-home-screen">
-        <p className="fk-screen-description">Be Back Here</p>
+        <p className="fk-screen-description">{heading}</p>
         <article className="fk-widget-icons">
           {size > 0 ? (
             <>
