@@ -54,6 +54,11 @@ const getGridAreas = (widgets) => {
   }
   return ['', '1fr', '1fr']
 }
+
+const ImageUploadStyled = css`
+  
+`
+
 export const LayoutStyled = css`
   position: relative;
   .fk-header {
@@ -182,6 +187,9 @@ export const LayoutStyled = css`
       .fk-widget-screen {
         display: grid;
         justify-content: center;
+
+        ${ImageUploadStyled};
+
         .fk-cross-icon {
           height: 15px;
           position: absolute;
