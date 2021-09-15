@@ -224,38 +224,32 @@ const VideoPreviewStyled = css`
 `
 
 export const LayoutStyled = css`
+  display: grid;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  .fk-header {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-gap: 20px;
-    background: ${({ theme }) => theme?.brand?.pallete?.secondary || 'white'};
-    .fk-logo {
-      width: 100%;
-      height: 40px;
-      display: grid;
-      padding: 10px;
-      align-self: center;
-      .fk-logo-image {
-        object-fit: contain;
-        width: inherit;
-        height: inherit;
-      }
+  z-index: 0;
+  min-height: 560px;
+  ${({ theme }) => {
+    const { type = '', value } = theme?.brand?.background
+    if (type === 'color') {
+      return `background: ${value};`
     }
-    .fk-heading {
-      color: ${({ theme }) => theme?.brand?.pallete?.text || 'black'};
-      font-size: 20px;
+    if (type === 'image') {
+      return `background: url(${value}) center center/cover no-repeat;`
     }
-  }
-  .fk-widget-container {
-    display: grid;
-    justify-content: center;
-    align-items: center;
+    return 'background: white;'
+  }};
+  .fk-widget-wrapper {
     position: relative;
-    z-index: 0;
-    min-height: 560px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    width: 320px;
     ${({ theme }) => {
-      const { type = '', value } = theme?.brand?.background
+      const { type = '', value } = theme?.brand?.widgetsBackground
       if (type === 'color') {
         return `background: ${value};`
       }
@@ -263,149 +257,166 @@ export const LayoutStyled = css`
         return `background: url(${value}) center center/cover no-repeat;`
       }
       return 'background: white;'
-    }};
-    .fk-widget-wrapper {
-      position: relative;
-      align-items: center;
+    }}
+    border: 1px solid ${({ theme }) => theme?.brand?.pallete?.text || 'black'};
+    .fk-home-screen {
+      display: grid;
+      grid-row-gap: 20px;
+      z-index: 1;
       justify-content: center;
-      padding: 20px;
-      margin: 20px;
-      border-radius: 10px;
-      width: 320px;
-      ${({ theme }) => {
-        const { type = '', value } = theme?.brand?.widgetsBackground
-        if (type === 'color') {
-          return `background: ${value};`
-        }
-        if (type === 'image') {
-          return `background: url(${value}) center center/cover no-repeat;`
-        }
-        return 'background: white;'
-      }}
-      border: 1px solid ${({ theme }) =>
-        theme?.brand?.pallete?.text || 'black'};
-      .fk-home-screen {
+      .fk-screen-description {
+        font-size: 20px;
+        font-weight: 500;
+        color: ${({ theme }) => theme?.brand?.pallete?.text || 'black'};
+      }
+      .fk-widget-icons {
         display: grid;
-        grid-row-gap: 20px;
-        z-index: 1;
-        justify-content: center;
-        .fk-screen-description {
-          font-size: 20px;
-          font-weight: 500;
-          color: ${({ theme }) => theme?.brand?.pallete?.text || 'black'};
-        }
-        .fk-widget-icons {
+        grid-gap: 10px;
+        grid-template-areas: ${({ theme }) =>
+          getGridAreas(theme?.widgets || {})[0]};
+        grid-template-columns: ${({ theme }) =>
+          getGridAreas(theme?.widgets || {})[1]};
+        grid-template-rows: ${({ theme }) =>
+          getGridAreas(theme?.widgets || {})[2]};
+        .fk-widget-icon {
           display: grid;
-          grid-gap: 10px;
-          grid-template-areas: ${({ theme }) =>
-            getGridAreas(theme?.widgets || {})[0]};
-          grid-template-columns: ${({ theme }) =>
-            getGridAreas(theme?.widgets || {})[1]};
-          grid-template-rows: ${({ theme }) =>
-            getGridAreas(theme?.widgets || {})[2]};
-          .fk-widget-icon {
+          align-self: center;
+          justify-content: center;
+          border: 1px solid black;
+          border-radius: 10px;
+          padding: 10px;
+          cursor: pointer;
+          &.fk-video-capture-icon {
+            grid-area: video-capture;
+          }
+          &.fk-video-testimonial-icon {
+            grid-area: video-testimonial;
+          }
+          &.fk-image-capture-icon {
+            grid-area: image-capture;
+          }
+          &.fk-image-upload-icon {
+            grid-area: image-upload;
+          }
+          &.fk-audio-capture-icon {
+            grid-area: audio-capture;
+          }
+          &.fk-audio-testimonial-icon {
+            grid-area: audio-testimonial;
+          }
+          .fk-widget-icon-image {
+            width: 40px;
+            height: 40px;
             display: grid;
             align-self: center;
-            justify-content: center;
-            border: 1px solid black;
-            border-radius: 10px;
-            padding: 10px;
-            cursor: pointer;
-            &.fk-video-capture-icon {
-              grid-area: video-capture;
+            width: 100%;
+            img {
+              width: inherit;
+              height: inherit;
+              object-fit: contain;
             }
-            &.fk-video-testimonial-icon {
-              grid-area: video-testimonial;
-            }
-            &.fk-image-capture-icon {
-              grid-area: image-capture;
-            }
-            &.fk-image-upload-icon {
-              grid-area: image-upload;
-            }
-            &.fk-audio-capture-icon {
-              grid-area: audio-capture;
-            }
-            &.fk-audio-testimonial-icon {
-              grid-area: audio-testimonial;
-            }
-            .fk-widget-icon-image {
-              width: 40px;
-              height: 40px;
-              display: grid;
-              align-self: center;
-              width: 100%;
-              img {
-                width: inherit;
-                height: inherit;
-                object-fit: contain;
-              }
-            }
-            .fk-widget-icon-text {
-              color: ${({ theme }) => theme?.brand?.pallete?.text || 'black'};
-              font-size: 12px;
-            }
+          }
+          .fk-widget-icon-text {
+            color: ${({ theme }) => theme?.brand?.pallete?.text || 'black'};
+            font-size: 12px;
           }
         }
       }
-      .fk-widget-screen {
+    }
+    .fk-widget-screen {
+      justify-content: center;
+      .fk-heading {
+        display: grid;
         justify-content: center;
-        .fk-heading {
-          display: grid;
-          justify-content: center;
-        }
-        .fk-image-capture-wrapper {
-          overflow: hidden;
-          ${ImageCaptureWrapperStyled}
-        }
-        .fk-video-capture-wrapper {
-          overflow: hidden;
-          ${VideoCaptureWrapperStyled}
-        }
-        .fk-image-processing-wrapper {
-          overflow: hidden;
-          ${ImageProcessorWrapperStyled}
-        }
-        .fk-image-preview-wrapper {
-          overflow: hidden;
-          ${ImagePreviewStyled}
-        }
-        .fk-cross-icon {
-          height: 15px;
-          position: absolute;
-          right: 10px;
-          top: 10px;
-          cursor: pointer;
-          z-index: 1;
-        }
       }
-      .fk-footer {
-        background: none;
-        grid-template-columns: auto;
+      .fk-image-capture-wrapper {
+        overflow: hidden;
+        ${ImageCaptureWrapperStyled}
+      }
+      .fk-video-capture-wrapper {
+        overflow: hidden;
+        ${VideoCaptureWrapperStyled}
+      }
+      .fk-image-processing-wrapper {
+        overflow: hidden;
+        ${ImageProcessorWrapperStyled}
+      }
+      .fk-image-preview-wrapper {
+        overflow: hidden;
+        ${ImagePreviewStyled}
+      }
+      .fk-cross-icon {
+        height: 15px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        z-index: 1;
+      }
+    }
+    .fk-footer {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 20px;
+      background: ${({ theme }) => theme?.brand?.pallete?.secondary || 'white'};
+      .fk-logo {
+        height: 40px;
+        display: grid;
+        padding: 10px;
         justify-content: end;
+        .fk-logo-image {
+          object-fit: contain;
+          width: inherit;
+          height: inherit;
+        }
       }
     }
   }
-  .fk-footer {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-gap: 20px;
-    background: ${({ theme }) => theme?.brand?.pallete?.secondary || 'white'};
-    .fk-logo {
-      width: 100%;
-      height: 40px;
-      display: grid;
-      padding: 10px;
-      align-self: center;
-      .fk-logo-image {
-        object-fit: contain;
-        width: inherit;
-        height: inherit;
-      }
-    }
-    .fk-heading {
-      font-size: 20px;
-      color: ${({ theme }) => theme?.brand?.pallete?.text || 'black'};
-    }
+
+  .fk-tag-input {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 48px;
+    border-radius: 6px;
+  }
+
+  .fk-tags {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+  }
+
+  .fk-tag {
+    width: auto;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 0 8px;
+    font-size: 14px;
+    list-style: none;
+    border-radius: 6px;
+    margin: 0 8px 8px 0;
+    background: grey;
+  }
+
+  .fk-tag-title {
+    margin-top: 3px;
+  }
+
+  .fk-tag-close-icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    font-size: 14px;
+    margin-left: 8px;
+    color: #fff;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
   }
 `

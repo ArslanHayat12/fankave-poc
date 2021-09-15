@@ -5,7 +5,6 @@ import { convertSecondsToHourMinute } from './../../utils'
 import { RecordingIcon, StopIcon } from '../../assets'
 
 export const Capture = ({ onCapture }) => {
-  // const { dispatch } = useContext(TestimonialContext);
   const webcamRef = useRef(null)
   const mediaRecorderRef = useRef(null)
   const cameraWrapper = React.useRef(null)
@@ -49,9 +48,6 @@ export const Capture = ({ onCapture }) => {
   )
 
   const handleStartCaptureClick = useCallback(() => {
-    // console.log('handlestartcapturing');
-    // setStartOverlay(true);
-    // setTimeout(() => setCapturing(true), 3800);
     setCapturing(true)
     let options = { mimeType: 'video/webm' }
     if (typeof MediaRecorder.isTypeSupported == 'function') {
@@ -76,7 +72,6 @@ export const Capture = ({ onCapture }) => {
   const handleStopCaptureClick = useCallback(() => {
     mediaRecorderRef.current.stop()
     setCapturing(false)
-    // console.log('screenshot', webcamRef?.current?.getScreenshot())
     setThumbUri(webcamRef?.current?.getScreenshot())
   }, [mediaRecorderRef, webcamRef, setCapturing])
 
@@ -85,7 +80,6 @@ export const Capture = ({ onCapture }) => {
       setError(
         'Please Allow Camera & Mic Permission and Refresh page to continue'
       )
-      // props.setError('Please Allow Camera Permission to Continue')
     } else {
       setError(
         'Please Allow Camera & Mic Permission and Refresh page to continue'
@@ -138,25 +132,10 @@ export const Capture = ({ onCapture }) => {
         url = window.URL.createObjectURL(blob)
       }
       setVideoURl(url)
-      // console.log('video url', url);
       onCapture(url, thumbUri, recordingTime, videoConstraints)
     }
     // eslint-disable-next-line
   }, [recordedChunks])
-
-  const dispatchURLDuration = useCallback(() => {
-    // recordingTimeRef && recordingTimeRef.current
-    //   console.log('recoding timer fre', recordingTimeRef.current);
-    // eslint-disable-next-line
-  }, [recordingTimeRef])
-
-  useEffect(() => {
-    // console.log(isMobile);
-    return () => {
-      dispatchURLDuration()
-    }
-    // eslint-disable-next-line
-  }, [])
 
   return (
     <article className="fk-video-capture-wrapper">

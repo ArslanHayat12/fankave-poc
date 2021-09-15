@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { StoryForm } from './StoryForm'
+
 export const Preview = ({
   src,
   type,
@@ -27,6 +29,7 @@ export const Preview = ({
           <>audio</>
         )}
       </div>
+      <StoryForm formMeta={formMeta} />
       <div className="actions">
         <button className="back" onClick={() => onReProcess()}>
           Back

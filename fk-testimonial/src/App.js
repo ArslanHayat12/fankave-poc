@@ -12,7 +12,7 @@ function App() {
   //context wrapping
   return (
     <ThemeProvider styledTheme={themeConfigs}>
-      <Layout children={<Widget />}></Layout>
+      <Widget />
     </ThemeProvider>
   )
 }

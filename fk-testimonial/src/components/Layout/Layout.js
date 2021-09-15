@@ -11,22 +11,7 @@ export const Layout = (props) => {
   const theme = useContext(ThemeContext)
   console.log('theme: ', theme)
 
-  const {
-    experience = 'demo',
-    customClass = 'fk-demo',
-    layout: {
-      header: {
-        enabled: headerEnabled = false,
-        logo: headerLogo = '',
-        heading: headerText = '',
-      },
-      footer: {
-        enabled: footerEnabled = false,
-        logo: footerLogo = '',
-        heading: footerText = '',
-      },
-    },
-  } = theme
+  const { experience = 'demo', customClass = 'fk-demo' } = theme
 
   const PageWrapper = styles[experience] || styles.demo
 
