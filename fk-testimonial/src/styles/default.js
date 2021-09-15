@@ -55,6 +55,10 @@ const getGridAreas = (widgets) => {
   return ['', '1fr', '1fr']
 }
 
+const ImageUploadStyled = css`
+  
+`
+
 const ImageCaptureWrapperStyled = css`
   display: grid;
   grid-gap: 10px;
@@ -329,6 +333,9 @@ export const LayoutStyled = css`
         display: grid;
         justify-content: center;
       }
+
+      ${ImageUploadStyled};
+
       .fk-image-capture-wrapper {
         overflow: hidden;
         ${ImageCaptureWrapperStyled}
