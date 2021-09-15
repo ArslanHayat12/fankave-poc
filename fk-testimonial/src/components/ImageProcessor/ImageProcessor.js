@@ -5,7 +5,7 @@ import { StickerSelect } from '../AddBgAndStickers/AddBgAndStickers'
 export const ImageProcessor = ({
   image,
   videoConstraints,
-  filters,
+  filters = {},
   onContinue = () => {},
   onReTake = () => {},
 }) => {

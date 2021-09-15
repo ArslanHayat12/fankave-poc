@@ -3,7 +3,7 @@ import { ThemeContext } from 'styled-components'
 
 import { Preview } from '../Preview/Preview'
 import { Capture } from './Capture'
-import { ImageProcessor } from './ImageProcessor'
+import { ImageProcessor } from '../ImageProcessor/ImageProcessor'
 
 const initialState = {
   approvedImage: null,

@@ -55,9 +55,7 @@ const getGridAreas = (widgets) => {
   return ['', '1fr', '1fr']
 }
 
-const ImageUploadStyled = css`
-  
-`
+const ImageUploadStyled = css``
 
 const ImageCaptureWrapperStyled = css`
   display: grid;
@@ -98,6 +96,17 @@ const ImageCaptureWrapperStyled = css`
   .camera-error {
     .error {
     }
+  }
+`
+
+const ImageUploadWrapperStyled = css`
+  .fk-image-upload-container {
+    height: 150px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b1b1b1;
   }
 `
 
@@ -343,6 +352,10 @@ export const LayoutStyled = css`
       .fk-video-capture-wrapper {
         overflow: hidden;
         ${VideoCaptureWrapperStyled}
+      }
+      .fk-image-upload-wrapper {
+        overflow: hidden;
+        ${ImageUploadWrapperStyled}
       }
       .fk-image-processing-wrapper {
         overflow: hidden;

@@ -1,8 +1,10 @@
-import React, { useState, useReducer, useRef, useEffect } from 'react'
+import React, { useState, useReducer, useContext, useEffect } from 'react'
+import { ThemeContext } from 'styled-components'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+
 import { Container } from '../DragDropInput/Container'
-import { ImageProcessor } from '../ImageCapture/ImageProcessor'
+import { ImageProcessor } from '../ImageProcessor/ImageProcessor'
 
 import { Preview } from '../Preview/Preview'
 
@@ -43,40 +45,47 @@ const reducer = (state, action) => {
 }
 
 export const ImageUpload = () => {
-
+  const theme = useContext(ThemeContext)
+  const {
+    widgets: { imageUpload, form, sharing, enableDownload, processing },
+  } = theme
+  const { post, pre } = processing
   const [image, setImage] = useState(null)
 
-  const [{ rawImage, processedImage, approvedImage }, dispatch] = useReducer(reducer,
-    initialState)
+  const [{ rawImage, processedImage, approvedImage }, dispatch] = useReducer(
+    reducer,
+    initialState
+  )
 
   const handleReUploadImage = () => {
     dispatch({
-      type: "reset"
+      type: 'reset',
     })
   }
 
   const handleBackToProcessing = () => {
     dispatch({
-      type: "reset"
+      type: 'reset',
     })
     dispatch({
-      type: "set_raw",
-      payload: image
+      type: 'set_raw',
+      payload: image,
     })
   }
 
   const handleContinueRawImage = (src) => {
+    console.log('asdas', src)
     dispatch({
-      type: "set_processed",
-      payload: src
+      type: 'set_processed',
+      payload: src,
     })
   }
 
   const handleApprove = (src) => {
-    console.log("src: ", src)
+    console.log('src: ', src)
     dispatch({
-      type: "approve_image",
-      payload: src
+      type: 'approve_image',
+      payload: src,
     })
   }
 
@@ -96,34 +105,46 @@ export const ImageUpload = () => {
 
   useEffect(() => {
     dispatch({
-      type: "set_raw",
-      payload: image
+      type: 'set_raw',
+      payload: image,
     })
+    if (!post.enabled) {
+      dispatch({
+        type: 'set_processed',
+        payload: src,
+      })
+    }
   }, [image])
 
   return (
     <>
-      <h2 className="fk-heading">Image Upload</h2>
-      {
-        processedImage ? (
-          <>
-            <Preview
-              image={processedImage}
-              onApprove={handleApprove}
-              onReProcess={handleBackToProcessing}
-            />
-          </>
-        ) : rawImage ? (
-          <ImageProcessor image={rawImage} onContinue={handleContinueRawImage} onReTake={handleReUploadImage} />
-        ) : (
-          <>
-            <DndProvider backend={HTML5Backend}>
-              <Container setDroppedFiles={setImage} />
-            </DndProvider>
-            {/* <input type="file" onChange={handleImageUpload} /> */}
-          </>
-        )
-      }
+      <h2 className="fk-heading">{imageUpload.label}</h2>
+      {processedImage ? (
+        <>
+          <Preview
+            src={processedImage}
+            formMeta={form}
+            meta={{ videoConstraints: { width: 300, height: 500 } }}
+            type="image"
+            onApprove={handleApprove}
+            onReProcess={handleBackToProcessing}
+          />
+        </>
+      ) : rawImage ? (
+        <ImageProcessor
+          image={rawImage}
+          videoConstraints={{ width: 300, height: 500 }}
+          onContinue={handleContinueRawImage}
+          onReTake={handleReUploadImage}
+        />
+      ) : (
+        <div className="fk-image-upload-wrapper">
+          <DndProvider backend={HTML5Backend}>
+            <Container setDroppedFiles={setImage} />
+          </DndProvider>
+          {/* <input type="file" onChange={handleImageUpload} /> */}
+        </div>
+      )}
     </>
   )
 }
