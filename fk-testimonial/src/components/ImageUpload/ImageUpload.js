@@ -1,120 +1,121 @@
-import React, { useState, useReducer, useContext, useEffect } from 'react'
-import { ThemeContext } from 'styled-components'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import React, { useState, useReducer, useContext, useEffect } from "react";
+import { ThemeContext } from "styled-components";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
-import { Container } from '../DragDropInput/Container'
-import { ImageProcessor } from '../ImageProcessor/ImageProcessor'
+import { Container } from "../DragDropInput/Container";
+import { ImageProcessor } from "../ImageProcessor/ImageProcessor";
 
-import { Preview } from '../Preview/Preview'
+import { Preview } from "../Preview/Preview";
+import { UploadFile } from "./UploadFile";
 
 const initialState = {
   approvedImage: null,
   rawImage: null,
   processedImage: null,
-}
+};
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'set_raw':
+    case "set_raw":
       return {
         ...state,
         rawImage: action.payload,
-      }
+      };
 
-    case 'set_processed':
+    case "set_processed":
       return {
         ...state,
         processedImage: action.payload,
-      }
+      };
 
-    case 'approve_image':
+    case "approve_image":
       return {
         ...state,
         approvedImage: action.payload,
-      }
-    case 'reset':
+      };
+    case "reset":
       return {
         approvedImage: null,
         rawImage: null,
         processedImage: null,
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const ImageUpload = () => {
-  const theme = useContext(ThemeContext)
+  const theme = useContext(ThemeContext);
   const {
     widgets: { imageUpload, form, sharing, enableDownload, processing },
-  } = theme
-  const { post, pre } = processing
-  const [image, setImage] = useState(null)
+  } = theme;
+  const { post, pre } = processing;
+  const [image, setImage] = useState(null);
 
   const [{ rawImage, processedImage, approvedImage }, dispatch] = useReducer(
     reducer,
     initialState
-  )
+  );
 
   const handleReUploadImage = () => {
     dispatch({
-      type: 'reset',
-    })
-  }
+      type: "reset",
+    });
+  };
 
   const handleBackToProcessing = () => {
     dispatch({
-      type: 'reset',
-    })
+      type: "reset",
+    });
     dispatch({
-      type: 'set_raw',
+      type: "set_raw",
       payload: image,
-    })
-  }
+    });
+  };
 
   const handleContinueRawImage = (src) => {
-    console.log('asdas', src)
+    console.log("asdas", src);
     dispatch({
-      type: 'set_processed',
+      type: "set_processed",
       payload: src,
-    })
-  }
+    });
+  };
 
   const handleApprove = (src) => {
-    console.log('src: ', src)
+    console.log("src: ", src);
     dispatch({
-      type: 'approve_image',
+      type: "approve_image",
       payload: src,
-    })
-  }
+    });
+  };
 
-  // const handleImageUpload = (event) => {
-  //   if (event.target.files && event.target.files[0]) {
-  //     let img = event.target.files[0]
+  const handleImageUpload = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      let img = event.target.files[0];
 
-  //     console.log("img: ", img)
+      console.log("img: ", img);
 
-  //     setImage(URL.createObjectURL(img))
-  //     dispatch({
-  //       type: "set_raw",
-  //       payload: URL.createObjectURL(img)
-  //     })
-  //   }
-  // }
+      setImage(URL.createObjectURL(img));
+      dispatch({
+        type: "set_raw",
+        payload: URL.createObjectURL(img),
+      });
+    }
+  };
 
   useEffect(() => {
     dispatch({
-      type: 'set_raw',
+      type: "set_raw",
       payload: image,
-    })
+    });
     if (!post.enabled) {
       dispatch({
-        type: 'set_processed',
+        type: "set_processed",
         payload: src,
-      })
+      });
     }
-  }, [image])
+  }, [image]);
 
   return (
     <>
@@ -138,13 +139,8 @@ export const ImageUpload = () => {
           onReTake={handleReUploadImage}
         />
       ) : (
-        <div className="fk-image-upload-wrapper">
-          <DndProvider backend={HTML5Backend}>
-            <Container setDroppedFiles={setImage} />
-          </DndProvider>
-          {/* <input type="file" onChange={handleImageUpload} /> */}
-        </div>
+        <UploadFile handleImageUpload={handleImageUpload} setImage={setImage} />
       )}
     </>
-  )
-}
+  );
+};

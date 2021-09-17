@@ -3,6 +3,7 @@ import Webcam from 'react-webcam'
 import { useInterval } from './../../hooks/useInterval'
 import { convertSecondsToHourMinute } from './../../utils'
 import { RecordingIcon, StopIcon } from '../../assets'
+import { VideoCaptureStyled } from './style'
 
 export const Capture = ({ onCapture }) => {
   const webcamRef = useRef(null)
@@ -138,7 +139,7 @@ export const Capture = ({ onCapture }) => {
   }, [recordedChunks])
 
   return (
-    <article className="fk-video-capture-wrapper">
+    <VideoCaptureStyled className="fk-video-capture-wrapper">
       {error ? (
         <div className="camera-error">{error}</div>
       ) : (
@@ -178,6 +179,6 @@ export const Capture = ({ onCapture }) => {
           <RecordingIcon />
         </button>
       )}
-    </article>
+    </VideoCaptureStyled>
   )
 }

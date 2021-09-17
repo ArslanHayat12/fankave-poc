@@ -52,10 +52,7 @@ export const ImageProcessorWrapperStyled = styled.article`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
-    .continue {
-    }
-    .back {
-    }
+    margin-top: 20px;
   }
 `
 
@@ -69,9 +66,6 @@ export const ImagePreviewStyled = styled.article`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
-    .continue {
-    }
-    .back {
-    }
+    margin-top: 20px;
   }
 `

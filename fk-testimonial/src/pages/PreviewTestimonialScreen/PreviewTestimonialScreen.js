@@ -404,7 +404,7 @@ const PreviewTestimonialScreen = () => {
         {/* <ApproveTestimonial /> */}
         <article className="button-wrapper">
           <button
-            className={`approve-button ${isApproveLoading ? "button-clicked" : ""
+            className={`fk-approve-button ${isApproveLoading ? "fk-button-clicked" : ""
               }`}
             onClick={isApproveLoading ? "" : () => approveVideoTestimonial()}
           >

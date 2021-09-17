@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { TargetBox } from './TargetBox';
-export const Container = ({setDroppedFiles}) => {
+export const Container = ({setDroppedFiles, handleFileChange}) => {
     const handleFileDrop = useCallback((item) => {
         if (item) {
             const files = item.files;
@@ -8,6 +8,6 @@ export const Container = ({setDroppedFiles}) => {
         }
     }, [setDroppedFiles]);
     return (<>
-			<TargetBox onDrop={handleFileDrop}/>
+			<TargetBox handleFileChange={handleFileChange} onDrop={handleFileDrop}/>
 		</>);
 };

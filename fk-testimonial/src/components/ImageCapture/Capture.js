@@ -3,6 +3,7 @@ import Webcam from 'react-webcam'
 
 import { getCanvasImageSize } from '../../utils'
 import { RecordingIcon } from '../../assets'
+import { CaptureStyled } from "./style"
 
 export const Capture = ({ onCapture, enableFilters = false }) => {
   const webcamRef = React.useRef(null)
@@ -96,7 +97,7 @@ export const Capture = ({ onCapture, enableFilters = false }) => {
   }
 
   return (
-    <article className="fk-image-capture-wrapper">
+    <CaptureStyled className="fk-image-capture-wrapper">
       {error ? (
         <div className="camera-error">{error}</div>
       ) : (
@@ -142,6 +143,6 @@ export const Capture = ({ onCapture, enableFilters = false }) => {
           <RecordingIcon />
         </button>
       ) : null}
-    </article>
+    </CaptureStyled>
   )
 }

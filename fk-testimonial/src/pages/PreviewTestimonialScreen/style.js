@@ -18,7 +18,7 @@ export const PreviewScreenStyled = styled.article`
 
   .client-details-wrapper {
   }
-  .processing-text {
+  .fk-processing-text {
     left: 10px;
     position: relative;
     top: 8px;
@@ -88,7 +88,7 @@ export const PreviewScreenStyled = styled.article`
     height: 10px;
   }
 
-  .approve-button {
+  .fk-approve-button {
     font-family: "Poppins", sans-serif;
     background-color: ${(props) =>
       props.theme.default.widget.previewScreen.video.button.backgroundColor};
@@ -273,7 +273,7 @@ export const PreviewScreenStyled = styled.article`
     font-size: 14px;
   }
 
-  .button-clicked {
+  .fk-button-clicked {
     background: #a7c0ec;
     cursor: not-allowed;
   }

@@ -8,6 +8,7 @@ import { ImageUpload } from '../ImageUpload/ImageUpload'
 import { VideoTestimonial } from '../VideoTestimonial/VideoTestimonial'
 import { AudioTestimonial } from '../AudioTestimonial/AudioTestimonial'
 import { CrossIcon } from '../../assets'
+import { HomeScreenStyled } from './style'
 
 const initialState = {
   screen: 'home',
@@ -107,7 +108,7 @@ export const HomeScreen = () => {
   }
   if (screen === 'home') {
     return (
-      <article className="fk-home-screen" id="fk-home-screen">
+      <HomeScreenStyled className="fk-home-screen" id="fk-home-screen">
         <p className="fk-screen-description">{heading}</p>
         <article className="fk-widget-icons">
           {size > 0 ? (
@@ -165,7 +166,7 @@ export const HomeScreen = () => {
             <>No Widget Enabled</>
           )}
         </article>
-      </article>
+      </HomeScreenStyled>
     )
   }
   const Widget = getWidgetComponent(screen)

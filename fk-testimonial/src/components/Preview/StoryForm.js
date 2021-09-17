@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react'
 import { Form, Formik, FormikHelpers } from 'formik'
 
 import { InputBox, TextArea, TagInput } from '../FormFields'
+import { StoryFormStyled } from './style'
 
 const getInitialValues = (values) => {
   const { name, email, username, story, hashtags } = values
@@ -41,13 +42,13 @@ export const StoryForm = forwardRef((props, ref) => {
       //   onSubmit={handleSaveEdit}
     >
       {() => (
-        <Form className="fk-story-form">
+        <StoryFormStyled className="fk-story-form-wrapper">
           {userEnabled && (
             <div className="fk-user-form">
               {name && (
                 <InputBox
                   name="name"
-                  className="fk-name"
+                  className="fk-input fk-name"
                   id="fk-name"
                   placeholder="Enter Full Name"
                   color="primary"
@@ -57,7 +58,7 @@ export const StoryForm = forwardRef((props, ref) => {
               {username && (
                 <InputBox
                   name="username"
-                  className="fk-username"
+                  className="fk-input fk-username"
                   id="fk-username"
                   placeholder="Enter Username"
                   type="text"
@@ -66,7 +67,7 @@ export const StoryForm = forwardRef((props, ref) => {
               {email && (
                 <InputBox
                   name="email"
-                  className="fk-email"
+                  className="fk-input fk-email"
                   id="fk-email"
                   placeholder="Enter Email"
                   type="text"
@@ -95,7 +96,7 @@ export const StoryForm = forwardRef((props, ref) => {
               limit={hashtagsLimit}
             />
           )}
-        </Form>
+        </StoryFormStyled>
       )}
     </Formik>
   )

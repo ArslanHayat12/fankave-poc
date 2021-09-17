@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { StoryForm } from './StoryForm'
+import { PreviewStyled } from './style'
 
 export const Preview = ({
   src,
@@ -12,7 +13,7 @@ export const Preview = ({
 }) => {
   const { videoConstraints } = meta
   return (
-    <article className="fk-image-preview-wrapper">
+    <PreviewStyled className="fk-image-preview-wrapper">
       <div className="image-container">
         {type === 'image' ? (
           <img src={src} alt="processed-image" />
@@ -31,13 +32,13 @@ export const Preview = ({
       </div>
       <StoryForm formMeta={formMeta} />
       <div className="actions">
-        <button className="back" onClick={() => onReProcess()}>
+        <button className="fk-filled-button" onClick={() => onReProcess()}>
           Back
         </button>
-        <button className="continue" onClick={() => onApprove(src)}>
+        <button className="fk-filled-button" onClick={() => onApprove(src)}>
           Continue
         </button>
       </div>
-    </article>
+    </PreviewStyled>
   )
 }

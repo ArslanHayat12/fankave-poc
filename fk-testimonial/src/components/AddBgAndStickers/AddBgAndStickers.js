@@ -6,8 +6,10 @@ import corner from '../../assets/images/corner.png'
 import deleteIcon from '../../assets/images/delete.png'
 import rotate from '../../assets/images/rotate.png'
 import scale from '../../assets/images/scale.png'
+import { AddBgAndStickersStyled } from "./style"
 
 import { filters } from '../../assets'
+import { Loader } from '../LoaderOverlay/Loader'
 
 const toDataURLPromise = (url) =>
   fetch(url)
@@ -95,11 +97,13 @@ export const StickerSelect = (props) => {
   const fabricCanvas = useRef(null)
   const photoCanvas = useRef(null)
   const backgroundCache = useRef(null)
+
   // const [originalImage, setOriginalImage] = useState(null);
   const [currentBackground, setCurrentBackground] = useState(-1)
   // eslint-disable-next-line
   const [objectCount, setObjectCount] = useState(0)
   const [loading, setLoading] = useState(false)
+  const [currentTab, setCurrentTab] = useState("stickers")
 
   const setBackground = (photoImage, width, height, options) => {
     // console.log('setBackground', photoImage._element.currentSrc)
@@ -438,17 +442,18 @@ export const StickerSelect = (props) => {
     // eslint-disable-next-line
   }, [props.hideControls])
 
+  console.log("loading: ", loading)
   return (
-    <div className="sticker-container">
+    <AddBgAndStickersStyled className="fk-sticker-container">
       <div className={`spinner ${loading ? 'show' : 'hide'}`}></div>
       <div
-        className="canvas-container"
+        className="fk-canvas-container"
         style={{ height: props.videoConstraints.height }}
       >
         <canvas
           width={videoConstraints.width || canvasConstraints.width}
           height={videoConstraints.height || canvasConstraints.height}
-          className="fabric"
+          className="fk-fabric"
           id="fabricCanvas"
         />
         <canvas
@@ -458,40 +463,61 @@ export const StickerSelect = (props) => {
           id="imageCanvas"
         />
       </div>
-      <div className="select-sticker-container">
-        <div className="heading">Add Stickers</div>
-        <div className="stickers-preview">
-          <div className="sticker clear" onClick={() => removeAllSticker()}>
-            <i className="icon-fk icon-fk-cancel-circle"></i>
-            Clear All
-          </div>
-          {stickers.map((sticker, index) => (
-            <div
-              className="sticker"
-              key={sticker}
-              onClick={() => handleStickerAdd(index)}
-              style={{ backgroundImage: `url(${sticker})` }}
-            ></div>
-          ))}
-        </div>
+
+      <div className="fk-tabs-wrapper">
+        <span className={`fk-tab ${currentTab === "stickers" ? "fk-active" : ""}`} onClick={() => setCurrentTab("stickers")}>Add Stickers</span>
+        <span className={`fk-tab ${currentTab === "backgrounds" ? "fk-active" : ""}`} onClick={() => setCurrentTab("backgrounds")}>Add Background</span>
       </div>
-      <div className="select-bg-container">
-        <div className="heading">Add Background</div>
-        <div className="bgs-preview">
-          <div className="bg clear" onClick={() => handleChangeBackground(-1)}>
-            <i className="icon-fk icon-fk-cancel-circle"></i>
-            Clear
+
+      {
+        currentTab === "stickers" && (
+          <div className="select-sticker-container">
+            {/* <div className="heading">Add Stickers</div> */}
+            <div className="fk-stickers-preview">
+              <div className="sticker clear" onClick={() => removeAllSticker()}>
+                <i className="icon-fk icon-fk-cancel-circle"></i>
+                Clear All
+              </div>
+              {stickers.map((sticker, index) => (
+                <div
+                  className="fk-sticker"
+                  key={sticker}
+                  onClick={() => handleStickerAdd(index)}
+                  style={{ backgroundImage: `url(${sticker})` }}
+                ></div>
+              ))}
+            </div>
           </div>
-          {backgrounds.map((bg, index) => (
-            <div
-              className="bg"
-              key={bg}
-              onClick={() => handleChangeBackground(index)}
-              style={{ backgroundImage: `url(${bg})` }}
-            ></div>
-          ))}
-        </div>
-      </div>
-    </div>
+        )
+      }
+
+      {
+        currentTab === "backgrounds" && (
+          <div className="fk-select-bg-container">
+            {/* <div className="heading">Add Background</div> */}
+            <div className="fk-bgs-preview">
+              <div className="fk-bg clear" onClick={() => handleChangeBackground(-1)}>
+                <i className="icon-fk icon-fk-cancel-circle"></i>
+                Clear
+              </div>
+              {backgrounds.map((bg, index) => (
+                <div
+                  className="fk-bg"
+                  key={bg}
+                  onClick={() => handleChangeBackground(index)}
+                  style={{ backgroundImage: `url(${bg})` }}
+                ></div>
+              ))}
+            </div>
+
+            {
+              loading && (
+                <Loader />
+              )
+            }
+          </div>
+        )
+      }
+    </AddBgAndStickersStyled>
   )
 }

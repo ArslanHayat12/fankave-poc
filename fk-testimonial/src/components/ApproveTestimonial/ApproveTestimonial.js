@@ -128,14 +128,14 @@ const ApproveTestimonial = () => {
   };
 
   return (
-    <ApproveButtonWrapper>
+    <ApproveButtonWrapper className="fk-approve-button-wrapper">
       <button
-        className={`approve-button ${isApproveLoading ? "button-clicked" : ""}`}
+        className={`fk-approve-button ${isApproveLoading ? "fk-button-clicked" : ""}`}
         onClick={isApproveLoading ? "" : () => generateRequestData(true)}
       >
         {buttonText}
       </button>
-      <span className="processing-text">
+      <span className="fk-processing-text">
         {isApproveLoading && "Processing ..."}
       </span>
     </ApproveButtonWrapper>

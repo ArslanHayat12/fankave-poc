@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ApproveButtonWrapper = styled.article`
-  .approve-button {
+  .fk-approve-button {
     font-family: "Poppins", sans-serif;
     background-color: ${(props) =>
       props.theme.default.widget.previewScreen.video.button.backgroundColor};

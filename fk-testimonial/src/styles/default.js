@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-const getGridAreas = (widgets) => {
+export const getGridAreas = (widgets) => {
   const {
     imageCapture: { enabled: imageCaptureEnabled = false },
     videoCapture: { enabled: videoCaptureEnabled = false },
@@ -55,170 +55,6 @@ const getGridAreas = (widgets) => {
   return ['', '1fr', '1fr']
 }
 
-const ImageUploadStyled = css``
-
-const ImageCaptureWrapperStyled = css`
-  display: grid;
-  grid-gap: 10px;
-  position: relative;
-  .image-capture {
-    width: 100%;
-    height: 375px;
-  }
-  .capture-canvas {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  .capture-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    font-size: 50px;
-  }
-
-  .capture-button {
-    background: transparent;
-    border: none;
-    width: 50px;
-    padding: 0;
-    justify-self: center;
-    cursor: pointer;
-  }
-
-  .pre-capture-filters {
-  }
-
-  .camera-error {
-    .error {
-    }
-  }
-`
-
-const ImageUploadWrapperStyled = css`
-  .fk-image-upload-container {
-    height: 150px;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #b1b1b1;
-  }
-`
-
-const ImageProcessorWrapperStyled = css`
-  display: grid;
-  position: relative;
-  .image-container {
-    overflow: hidden;
-    .stickers-preview,
-    .bgs-preview {
-      display: flex;
-      grid-gap: 5px;
-    }
-    .sticker,
-    .bg {
-      width: 70px;
-      height: 70px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center center;
-      border: 1px solid white;
-      background-color: black;
-    }
-  }
-  .actions {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
-    .continue {
-    }
-    .back {
-    }
-  }
-`
-
-const ImagePreviewStyled = css`
-  display: grid;
-  position: relative;
-  .image-container {
-  }
-  .actions {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
-    .continue {
-    }
-    .back {
-    }
-  }
-`
-
-const VideoCaptureWrapperStyled = css`
-  display: grid;
-  grid-gap: 10px;
-  position: relative;
-  .video-capture {
-    width: 100%;
-    height: 375px;
-  }
-  .capture-canvas {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  .capture-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    font-size: 50px;
-  }
-
-  .capture-button {
-    background: transparent;
-    border: none;
-    width: 50px;
-    padding: 0;
-    justify-self: center;
-    cursor: pointer;
-  }
-
-  .timer-overlay {
-    position: absolute;
-    color: white;
-    justify-self: center;
-    top: 0;
-    right: 0;
-  }
-
-  .stop-button {
-    background: transparent;
-    border: none;
-    width: 50px;
-    padding: 0;
-    justify-self: center;
-    cursor: pointer;
-  }
-
-  .pre-capture-filters {
-  }
-
-  .camera-error {
-    .error {
-    }
-  }
-`
-
 const VideoPreviewStyled = css`
   display: grid;
   position: relative;
@@ -272,99 +108,14 @@ export const LayoutStyled = css`
       return 'background: white;'
     }}
     border: 1px solid ${({ theme }) => theme?.brand?.pallete?.text || 'black'};
-    .fk-home-screen {
-      display: grid;
-      grid-row-gap: 20px;
-      z-index: 1;
-      justify-content: center;
-      .fk-screen-description {
-        font-size: 20px;
-        font-weight: 500;
-        color: ${({ theme }) => theme?.brand?.pallete?.text || 'black'};
-      }
-      .fk-widget-icons {
-        display: grid;
-        grid-gap: 10px;
-        grid-template-areas: ${({ theme }) =>
-          getGridAreas(theme?.widgets || {})[0]};
-        grid-template-columns: ${({ theme }) =>
-          getGridAreas(theme?.widgets || {})[1]};
-        grid-template-rows: ${({ theme }) =>
-          getGridAreas(theme?.widgets || {})[2]};
-        .fk-widget-icon {
-          display: grid;
-          align-self: center;
-          justify-content: center;
-          border: 1px solid black;
-          border-radius: 10px;
-          padding: 10px;
-          cursor: pointer;
-          &.fk-video-capture-icon {
-            grid-area: video-capture;
-          }
-          &.fk-video-testimonial-icon {
-            grid-area: video-testimonial;
-          }
-          &.fk-image-capture-icon {
-            grid-area: image-capture;
-          }
-          &.fk-image-upload-icon {
-            grid-area: image-upload;
-          }
-          &.fk-audio-capture-icon {
-            grid-area: audio-capture;
-          }
-          &.fk-audio-testimonial-icon {
-            grid-area: audio-testimonial;
-          }
-          .fk-widget-icon-image {
-            width: 40px;
-            height: 40px;
-            display: grid;
-            align-self: center;
-            width: 100%;
-            img {
-              width: inherit;
-              height: inherit;
-              object-fit: contain;
-            }
-          }
-          .fk-widget-icon-text {
-            color: ${({ theme }) => theme?.brand?.pallete?.text || 'black'};
-            font-size: 12px;
-          }
-        }
-      }
-    }
+    
     .fk-widget-screen {
       justify-content: center;
       .fk-heading {
         display: grid;
         justify-content: center;
       }
-
-      ${ImageUploadStyled};
-
-      .fk-image-capture-wrapper {
-        overflow: hidden;
-        ${ImageCaptureWrapperStyled}
-      }
-      .fk-video-capture-wrapper {
-        overflow: hidden;
-        ${VideoCaptureWrapperStyled}
-      }
-      .fk-image-upload-wrapper {
-        overflow: hidden;
-        ${ImageUploadWrapperStyled}
-      }
-      .fk-image-processing-wrapper {
-        overflow: hidden;
-        ${ImageProcessorWrapperStyled}
-      }
-      .fk-image-preview-wrapper {
-        overflow: hidden;
-        ${ImagePreviewStyled}
-      }
+      
       .fk-cross-icon {
         height: 15px;
         position: absolute;
@@ -409,7 +160,6 @@ export const LayoutStyled = css`
 
   .fk-tag {
     width: auto;
-    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -422,21 +172,13 @@ export const LayoutStyled = css`
     background: grey;
   }
 
-  .fk-tag-title {
-    margin-top: 3px;
-  }
-
   .fk-tag-close-icon {
     display: block;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
+    line-height: 20px;
     text-align: center;
-    font-size: 14px;
-    margin-left: 8px;
+    font-size: 12px;
+    margin-left: 4px;
     color: #fff;
-    border-radius: 50%;
-    background: transparent;
     cursor: pointer;
   }
 `

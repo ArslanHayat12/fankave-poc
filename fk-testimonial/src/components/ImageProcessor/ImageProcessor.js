@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import { StickerSelect } from '../AddBgAndStickers/AddBgAndStickers'
+import { ImageProcessorStyled } from './style'
 
 export const ImageProcessor = ({
   image,
@@ -20,7 +21,7 @@ export const ImageProcessor = ({
     }
   }
   return (
-    <article className="fk-image-processing-wrapper">
+    <ImageProcessorStyled className="fk-image-processing-wrapper">
       <div className="image-container">
         <StickerSelect
           photo={image}
@@ -31,11 +32,11 @@ export const ImageProcessor = ({
         />
       </div>
       <div className="actions">
-        <button className="back" onClick={() => onReTake()}>
+        <button className="fk-filled-button" onClick={() => onReTake()}>
           Re-Take
         </button>
         <button
-          className="continue"
+          className="fk-filled-button"
           onClick={() => {
             setHideControls(true)
             setTimeout(() => {
@@ -46,6 +47,6 @@ export const ImageProcessor = ({
           Continue
         </button>
       </div>
-    </article>
+    </ImageProcessorStyled>
   )
 }
