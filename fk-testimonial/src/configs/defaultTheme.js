@@ -7,6 +7,8 @@ const {
   audioTestimonialIcon,
   VideoCaptureIcon,
   videoTestimonialIcon,
+  TwitterIcon,
+  LinkedInIcon,
 } = StaticAssets
 
 const defaultConfigs = {
@@ -62,8 +64,14 @@ const defaultConfigs = {
     },
     sharing: {
       enabled: true,
-      twitter: true,
-      linkedIn: true,
+      twitter: {
+        enabled: true,
+        icon: TwitterIcon,
+      },
+      linkedIn: {
+        enabled: true,
+        icon: LinkedInIcon,
+      },
     },
     processing: {
       post: {
