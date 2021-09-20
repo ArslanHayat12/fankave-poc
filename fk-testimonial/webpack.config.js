@@ -5,17 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = (_, args) => ({
   output: {
-    ...(args.mode === 'production'
-      ? {
-          publicPath: `${process.env.WEB_APP_HOST}/${
-            process.env.WEB_APP_PATH || 'testimonials'
-          }/`,
-          path: path.resolve(__dirname, 'build/static'),
-        }
-      : {
-          publicPath: `/`,
-          path: path.resolve(__dirname, 'build/static'),
-        }),
+    publicPath: `/`,
+    path: path.resolve(__dirname, 'build'),
   },
   target: args.mode === 'production' ? undefined : 'web',
   entry: {
@@ -85,7 +76,6 @@ module.exports = (_, args) => ({
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      inject: args.mode === 'production' ? false : true,
     }),
   ],
 })

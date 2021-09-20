@@ -2,6 +2,7 @@ import React, { useReducer, useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 
 import { Preview } from '../Preview/Preview'
+import { Review } from '../Review/Review'
 import { Capture } from './Capture'
 
 const initialState = {
@@ -33,8 +34,10 @@ export const VideoCapture = () => {
   const {
     widgets: { videoCapture, form, sharing, enableDownload },
   } = theme
-  const [{ rawVideo, thumb, duration, videoConstraints }, dispatch] =
-    useReducer(reducer, initialState)
+  const [
+    { rawVideo, thumb, duration, videoConstraints, approvedVideo },
+    dispatch,
+  ] = useReducer(reducer, initialState)
   const handleCapture = (src, thumb, duration, constraints) => {
     dispatch({
       type: 'set',
@@ -69,7 +72,17 @@ export const VideoCapture = () => {
   return (
     <>
       <h2 className="fk-heading">{videoCapture.label || 'Capture Video'}</h2>
-      {rawVideo ? (
+      {approvedVideo ? (
+        <Review
+          src={approvedVideo}
+          type="video"
+          meta={{ thumbUrl: thumb }}
+          options={{
+            enableDownload,
+            sharing,
+          }}
+        />
+      ) : rawVideo ? (
         <Preview
           type={'video'}
           src={rawVideo}

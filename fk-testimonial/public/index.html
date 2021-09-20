@@ -30,29 +30,11 @@
     self.window.userConfig =
       userConfigs[window.location.hostname] || userConfigs["default"];
     self.window.ctag =
-      userConfigs[window.location.hostname].ctag ||
+      userConfigs[window.location.hostname]?.ctag ||
       userConfigs["default"].ctag;
     document.title =
-      userConfigs[window.location.hostname].title ||
+      userConfigs[window.location.hostname]?.title ||
       userConfigs["default"].title;
-  </script>
-  <script>
-    function loadDoc() {
-      const type = window.self.ctag;
-      const pathName = window.location.pathname.replaceAll("/", "");
-      const filePath = window.location.hostname === "localhost" ? "/" : `/${pathName}/`
-      // Create new link element
-      var scr = document.createElement('script');
-
-
-      // Append to the `head` element
-      if (pathName) {
-        scr.setAttribute('src', `${filePath}${pathName}.js`);
-        document.body.appendChild(scr);
-      }
-
-    }
-    loadDoc();
   </script>
 
   <div id="fk-creation"></div>

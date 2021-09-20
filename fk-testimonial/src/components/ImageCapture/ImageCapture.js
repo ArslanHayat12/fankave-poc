@@ -2,6 +2,7 @@ import React, { useReducer, useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 
 import { Preview } from '../Preview/Preview'
+import { Review } from '../Review/Review'
 import { Capture } from './Capture'
 import { ImageProcessor } from '../ImageProcessor/ImageProcessor'
 
@@ -37,10 +38,10 @@ export const ImageCapture = () => {
     widgets: { imageCapture, form, sharing, enableDownload, processing },
   } = theme
   const { post, pre } = processing
-  const [{ processedImage, rawImage, videoConstraints }, dispatch] = useReducer(
-    reducer,
-    initialState
-  )
+  const [
+    { processedImage, approvedImage, rawImage, videoConstraints },
+    dispatch,
+  ] = useReducer(reducer, initialState)
   const handleCapture = (src, constraints) => {
     dispatch({
       type: 'set',
@@ -88,7 +89,16 @@ export const ImageCapture = () => {
   return (
     <>
       <h2 className="fk-heading">{imageCapture.label || 'Capture Image'}</h2>
-      {processedImage ? (
+      {approvedImage ? (
+        <Review
+          src={approvedImage}
+          type="image"
+          options={{
+            enableDownload,
+            sharing,
+          }}
+        />
+      ) : processedImage ? (
         <Preview
           type="image"
           meta={{ videoConstraints }}
