@@ -52,7 +52,7 @@
   "scripts": {
     "start": "react-scripts start",
     "test": "react-scripts test",
-    "build": "webpack --mode production && cp server.js build/server.js && cp -r public/* build/static",
+    "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
     "eject": "react-scripts eject",
     "start:live": "webpack-dev-server --open --mode development --liveReload"
