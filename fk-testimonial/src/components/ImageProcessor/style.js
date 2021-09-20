@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SlimScrollStyle } from "../../styles/common";
 
 export const ImageProcessorStyled = styled.article`
   overflow: hidden;
@@ -6,11 +7,21 @@ export const ImageProcessorStyled = styled.article`
   position: relative;
   .image-container {
     overflow: hidden;
+
     .fk-stickers-preview,
     .fk-bgs-preview {
+      ${SlimScrollStyle};
+
+      padding-bottom: 10px;
       display: flex;
       grid-gap: 5px;
     }
+
+    .fk-sticker-wrapper {
+      background: #fff;
+      padding: 15px 10px;
+    }
+
     .fk-sticker,
     .fk-bg {
       width: 70px;
@@ -20,6 +31,9 @@ export const ImageProcessorStyled = styled.article`
       background-position: center center;
       border: 1px solid white;
       background-color: black;
+      flex-basis: 70px;
+      flex-grow: 0;
+      flex-shrink: 0;
     }
   }
   .actions {

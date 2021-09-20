@@ -1,35 +1,35 @@
-import React from 'react'
+import React from "react";
 
-import ImageCaptureIcon from './images/upload.png'
-import ImageUploadIcon from './images/upload.png'
-import VideoCaptureIcon from './images/camera.png'
-import videoTestimonialIcon from './images/camera.png'
-import AudioCaptureIcon from './images/mic.png'
-import audioTestimonialIcon from './images/mic.png'
+import ImageCaptureIcon from "./images/upload.png";
+import ImageUploadIcon from "./images/upload.png";
+import VideoCaptureIcon from "./images/camera.png";
+import videoTestimonialIcon from "./images/camera.png";
+import AudioCaptureIcon from "./images/mic.png";
+import audioTestimonialIcon from "./images/mic.png";
 
-import st1 from './images/stickers/01.png'
-import st2 from './images/stickers/02.png'
-import st3 from './images/stickers/03.png'
-import st4 from './images/stickers/04.png'
-import st5 from './images/stickers/05.png'
-import st6 from './images/stickers/06.png'
-import st7 from './images/stickers/07.png'
-import st8 from './images/stickers/08.png'
-import st9 from './images/stickers/09.png'
+import st1 from "./images/stickers/01.png";
+import st2 from "./images/stickers/02.png";
+import st3 from "./images/stickers/03.png";
+import st4 from "./images/stickers/04.png";
+import st5 from "./images/stickers/05.png";
+import st6 from "./images/stickers/06.png";
+import st7 from "./images/stickers/07.png";
+import st8 from "./images/stickers/08.png";
+import st9 from "./images/stickers/09.png";
 
-import bg1 from './images/bgs/01.jpg'
-import bg2 from './images/bgs/02.jpg'
-import bg3 from './images/bgs/03.jpg'
-import bg4 from './images/bgs/04.jpg'
-import bg5 from './images/bgs/05.jpg'
-import bg6 from './images/bgs/06.jpg'
+import bg1 from "./images/bgs/01.jpg";
+import bg2 from "./images/bgs/02.jpg";
+import bg3 from "./images/bgs/03.jpg";
+import bg4 from "./images/bgs/04.jpg";
+import bg5 from "./images/bgs/05.jpg";
+import bg6 from "./images/bgs/06.jpg";
 
-const stickers = [st1, st2, st3, st4, st5, st6, st7, st8, st9]
+const stickers = [st1, st2, st3, st4, st5, st6, st7, st8, st9];
 
-const backgrounds = [bg1, bg2, bg3, bg4, bg5, bg6]
+const backgrounds = [bg1, bg2, bg3, bg4, bg5, bg6];
 
 export const PencilIcon = (props) => {
-  const { customClass } = props
+  const { customClass } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -48,11 +48,11 @@ export const PencilIcon = (props) => {
         />
       </g>
     </svg>
-  )
-}
+  );
+};
 
 export const RecordingIcon = (props) => {
-  const { customClass } = props
+  const { customClass } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -83,11 +83,11 @@ export const RecordingIcon = (props) => {
         />
       </g>
     </svg>
-  )
-}
+  );
+};
 
 export const PauseIcon = (props) => {
-  const { customClass } = props
+  const { customClass } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -115,8 +115,8 @@ export const PauseIcon = (props) => {
         />
       </g>
     </svg>
-  )
-}
+  );
+};
 
 export const CameraIcon = () => {
   return (
@@ -192,11 +192,11 @@ export const CameraIcon = () => {
         fill="#09f"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const MicIcon = (props) => {
-  const { customClass, height = '65.906' } = props
+  const { customClass, height = "65.906" } = props;
 
   return (
     <svg
@@ -371,11 +371,11 @@ export const MicIcon = (props) => {
         </g>
       </g>
     </svg>
-  )
-}
+  );
+};
 
 export const PlayIcon = (props) => {
-  const { customClass } = props
+  const { customClass } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -392,8 +392,8 @@ export const PlayIcon = (props) => {
         fill="#fff"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const PlayFilledIcon = () => {
   return (
@@ -415,11 +415,11 @@ export const PlayFilledIcon = () => {
         />
       </g>
     </svg>
-  )
-}
+  );
+};
 
 export const StopIcon = (props) => {
-  const { customClass } = props
+  const { customClass } = props;
 
   return (
     <svg
@@ -451,11 +451,11 @@ export const StopIcon = (props) => {
         />
       </g>
     </svg>
-  )
-}
+  );
+};
 
 export const RefreshIcon = (props) => {
-  const { customClass } = props
+  const { customClass } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -470,11 +470,11 @@ export const RefreshIcon = (props) => {
         transform="translate(0 -13.767)"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const DownloadIcon = (props) => {
-  const { customClass } = props
+  const { customClass } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -506,11 +506,11 @@ export const DownloadIcon = (props) => {
         </g>
       </g>
     </svg>
-  )
-}
+  );
+};
 
 export const DeleteIcon = (props) => {
-  const { customClass } = props
+  const { customClass } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -525,11 +525,11 @@ export const DeleteIcon = (props) => {
         d="M1.572 20.941A3.111 3.111 0 0 0 4.714 24h12.572a3.112 3.112 0 0 0 3.143-3.059V6.118H1.572zM22 1.529h-5.5L14.929 0H7.071L5.5 1.529H0v3.059h22z"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const MenuIcon = (props) => {
-  const { customClass } = props
+  const { customClass } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -545,11 +545,11 @@ export const MenuIcon = (props) => {
         transform="translate(-0.396 -0.78)"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const TickIcon = (props) => {
-  const { customClass } = props
+  const { customClass } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -564,8 +564,8 @@ export const TickIcon = (props) => {
         transform="translate(-0.001 -0.001)"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const ShareIcon = () => {
   return (
@@ -578,11 +578,11 @@ export const ShareIcon = () => {
     >
       <path d="M 23 3 A 4 4 0 0 0 19 7 A 4 4 0 0 0 19.09375 7.8359375 L 10.011719 12.376953 A 4 4 0 0 0 7 11 A 4 4 0 0 0 3 15 A 4 4 0 0 0 7 19 A 4 4 0 0 0 10.013672 17.625 L 19.089844 22.164062 A 4 4 0 0 0 19 23 A 4 4 0 0 0 23 27 A 4 4 0 0 0 27 23 A 4 4 0 0 0 23 19 A 4 4 0 0 0 19.986328 20.375 L 10.910156 15.835938 A 4 4 0 0 0 11 15 A 4 4 0 0 0 10.90625 14.166016 L 19.988281 9.625 A 4 4 0 0 0 23 11 A 4 4 0 0 0 27 7 A 4 4 0 0 0 23 3 z" />
     </svg>
-  )
-}
+  );
+};
 
 export const CrossIcon = (props) => {
-  const { customClass, onClick } = props
+  const { customClass, onClick } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -612,11 +612,11 @@ export const CrossIcon = (props) => {
         strokeWidth="4"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const DefaultRecordingIcon = (props) => {
-  const { customClass } = props
+  const { customClass } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -652,11 +652,11 @@ export const DefaultRecordingIcon = (props) => {
         />
       </g>
     </svg>
-  )
-}
+  );
+};
 
 export const DefaultStopIcon = (props) => {
-  const { customClass } = props
+  const { customClass } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -674,11 +674,11 @@ export const DefaultStopIcon = (props) => {
         fill="#fff"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const ArrowIcon = (props) => {
-  const { customClass, onClick } = props
+  const { customClass, onClick } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -708,13 +708,37 @@ export const ArrowIcon = (props) => {
         />
       </g>
     </svg>
-  )
-}
+  );
+};
+
+export const NotAllowedIcon = () => (
+  <svg
+    version="1.1"
+    id="Capa_1"
+    xmlns="http://www.w3.org/2000/svg"
+    x="0px"
+    y="0px"
+    width="20px"
+    height="20px"
+    viewBox="0 0 55.704 55.703"
+    enableBackground="new 0 0 55.704 55.703"
+  >
+    <g>
+      <path
+        d="M27.852,0C19.905,0,12.743,3.363,7.664,8.72C7.628,8.751,7.583,8.762,7.549,8.796C7.495,8.85,7.476,8.922,7.426,8.98
+		C2.833,13.949,0,20.568,0,27.852c0,15.357,12.493,27.851,27.851,27.851c15.356,0,27.851-12.494,27.851-27.851
+		C55.703,12.494,43.208,0,27.852,0z M4.489,27.851c0-5.315,1.805-10.207,4.806-14.138l32.691,32.694
+		c-3.93,3.001-8.819,4.806-14.135,4.806C14.969,51.213,4.489,40.732,4.489,27.851z M45.282,43.352l-32.933-32.93
+		c4.13-3.678,9.551-5.934,15.503-5.934c12.881,0,23.362,10.48,23.362,23.363C51.213,33.803,48.958,39.225,45.282,43.352z"
+      />
+    </g>
+  </svg>
+);
 
 export const filters = {
   stickers,
   backgrounds,
-}
+};
 
 export const StaticAssets = {
   ImageCaptureIcon,
@@ -723,4 +747,4 @@ export const StaticAssets = {
   audioTestimonialIcon,
   VideoCaptureIcon,
   videoTestimonialIcon,
-}
+};

@@ -8,8 +8,9 @@ import rotate from '../../assets/images/rotate.png'
 import scale from '../../assets/images/scale.png'
 import { AddBgAndStickersStyled } from "./style"
 
-import { filters } from '../../assets'
+import { filters, NotAllowedIcon } from '../../assets'
 import { Loader } from '../LoaderOverlay/Loader'
+import { ClearButtonStyled } from '../../styles/common'
 
 const toDataURLPromise = (url) =>
   fetch(url)
@@ -474,10 +475,10 @@ export const StickerSelect = (props) => {
           <div className="select-sticker-container">
             {/* <div className="heading">Add Stickers</div> */}
             <div className="fk-stickers-preview">
-              <div className="sticker clear" onClick={() => removeAllSticker()}>
+              <ClearButtonStyled className="fk-sticker-wrapper fk-clear" onClick={() => removeAllSticker()}>
                 <i className="icon-fk icon-fk-cancel-circle"></i>
-                Clear All
-              </div>
+                <NotAllowedIcon />
+              </ClearButtonStyled>
               {stickers.map((sticker, index) => (
                 <div
                   className="fk-sticker"
@@ -496,10 +497,10 @@ export const StickerSelect = (props) => {
           <div className="fk-select-bg-container">
             {/* <div className="heading">Add Background</div> */}
             <div className="fk-bgs-preview">
-              <div className="fk-bg clear" onClick={() => handleChangeBackground(-1)}>
+              <ClearButtonStyled className="fk-bg fk-clear" onClick={() => handleChangeBackground(-1)}>
                 <i className="icon-fk icon-fk-cancel-circle"></i>
-                Clear
-              </div>
+                <NotAllowedIcon />
+              </ClearButtonStyled>
               {backgrounds.map((bg, index) => (
                 <div
                   className="fk-bg"
