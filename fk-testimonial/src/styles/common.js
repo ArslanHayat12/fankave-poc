@@ -5,7 +5,10 @@ export const ClearButtonStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
+  width: 70px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  
   svg {
     fill: #ff0000;
   }

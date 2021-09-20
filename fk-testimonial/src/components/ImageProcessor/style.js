@@ -20,6 +20,7 @@ export const ImageProcessorStyled = styled.article`
     .fk-sticker-wrapper {
       background: #fff;
       padding: 15px 10px;
+      box-sizing: border-box;
     }
 
     .fk-sticker,

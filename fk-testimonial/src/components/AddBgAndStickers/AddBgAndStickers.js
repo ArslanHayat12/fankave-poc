@@ -497,7 +497,7 @@ export const StickerSelect = (props) => {
           <div className="fk-select-bg-container">
             {/* <div className="heading">Add Background</div> */}
             <div className="fk-bgs-preview">
-              <ClearButtonStyled className="fk-bg fk-clear" onClick={() => handleChangeBackground(-1)}>
+              <ClearButtonStyled className="fk-clear" onClick={() => handleChangeBackground(-1)}>
                 <i className="icon-fk icon-fk-cancel-circle"></i>
                 <NotAllowedIcon />
               </ClearButtonStyled>
