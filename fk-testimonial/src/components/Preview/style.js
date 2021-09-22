@@ -1,5 +1,5 @@
-import { Form } from "formik";
-import styled from "styled-components";
+import { Form } from 'formik'
+import styled from 'styled-components'
 
 export const PreviewStyled = styled.article`
   overflow: hidden;
@@ -14,7 +14,7 @@ export const PreviewStyled = styled.article`
     grid-gap: 10px;
     margin-top: 20px;
   }
-`;
+`
 
 export const StoryFormStyled = styled(Form)`
   background: #fff;
@@ -31,17 +31,27 @@ export const StoryFormStyled = styled(Form)`
     width: 100%;
   }
 
+  .fk-input-error {
+    color: red;
+    font-size: 10px;
+  }
+
   .fk-input {
     padding: 15px 20px;
     border: 1px solid #d3d3d3;
     outline: none;
+    &.fk-error {
+      border: 1px solid red;
+      &::placeholder {
+        color: red;
+      }
+    }
   }
 
   .fk-story-form {
     width: 100%;
 
     .fk-story {
-      border: 1px solid #d3d3d3;
       outline: none;
       resize: none;
       width: 100%;
@@ -69,4 +79,4 @@ export const StoryFormStyled = styled(Form)`
       height: unset;
     }
   }
-`;
+`

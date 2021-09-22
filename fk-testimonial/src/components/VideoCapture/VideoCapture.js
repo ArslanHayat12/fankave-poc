@@ -76,7 +76,7 @@ export const VideoCapture = () => {
         <Review
           src={approvedVideo}
           type="video"
-          meta={{ thumbUrl: thumb }}
+          meta={{ thumbUrl: thumb, videoConstraints }}
           options={{
             enableDownload,
             sharing,

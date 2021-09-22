@@ -12,7 +12,7 @@ const {
 } = StaticAssets
 
 const defaultConfigs = {
-  topic: 'demostories',
+  topic: 'testimonialmvp',
   customClass: 'fk-demo',
   experience: 'demo',
   heading: 'Content Creation',
@@ -48,7 +48,7 @@ const defaultConfigs = {
       user: {
         enabled: true,
         name: true,
-        username: true,
+        username: false,
         email: true,
       },
       text: {
