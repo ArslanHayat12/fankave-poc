@@ -75,7 +75,7 @@ export const Review = ({
       formData.append('media', new Blob([response.data]))
       formData.append('type', type)
       formData.append('tweetMessage', '')
-      platform === 'linkedin'
+      platform === 'linkedIn'
         ? shareOnLinkedIn(formData)
         : shareOnTwitter(formData)
     })
