@@ -85,7 +85,7 @@ export const StoryForm = forwardRef((props, ref) => {
       onSubmit={({ name, username, email, story, hashtags }, formHelpers) => {
         formHelpers.validateForm().then(() => {
           const formData = new FormData()
-          formData.append('story', story)
+          story && formData.append('story', story)
           formData.append('hashtags', JSON.stringify(hashtags))
           formData.append(
             'author',
