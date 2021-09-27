@@ -183,16 +183,16 @@ export const Review = ({
       <div className="fk-message">
         <p className="fk-message-text">Thank you</p>
       </div>
-      {sharingEnabled && type !== 'audio' && (
+      {sharingEnabled && (
         <div className="fk-share-area">
-          {twitterEnabled && (
+          {twitterEnabled && type !== 'audio' && (
             <div
               className="fk-share-button fk-twitter-share"
               style={{ backgroundImage: `url(${twitterIcon})` }}
               onClick={() => openTwitterSignInTab()}
             />
           )}
-          {linkedInEnabled && (
+          {linkedInEnabled && type !== 'audio' && (
             <div
               className="fk-share-button fk-linkedIn-share"
               style={{ backgroundImage: `url(${linkedInIcon})` }}

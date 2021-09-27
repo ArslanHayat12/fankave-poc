@@ -70,7 +70,7 @@ const defaultConfigs = {
         icon: TwitterIcon,
       },
       slack: {
-        enabled: true,
+        enabled: false,
         icon: SlackIcon,
       },
       linkedIn: {
