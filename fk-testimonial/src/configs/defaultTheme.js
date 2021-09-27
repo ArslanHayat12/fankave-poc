@@ -9,6 +9,7 @@ const {
   videoTestimonialIcon,
   TwitterIcon,
   LinkedInIcon,
+  SlackIcon,
 } = StaticAssets
 
 const defaultConfigs = {
@@ -67,6 +68,10 @@ const defaultConfigs = {
       twitter: {
         enabled: true,
         icon: TwitterIcon,
+      },
+      slack: {
+        enabled: true,
+        icon: SlackIcon,
       },
       linkedIn: {
         enabled: true,

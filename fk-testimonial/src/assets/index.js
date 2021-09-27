@@ -9,6 +9,7 @@ import audioTestimonialIcon from './images/mic.png'
 
 import LinkedInIcon from './images/LinkedInIcon.png'
 import TwitterIcon from './images/TwitterIcon.png'
+import SlackIcon from './images/SlackIcon.png'
 import AudioIcon from './images/audio-icon.png'
 
 import st1 from './images/stickers/01.png'
@@ -753,5 +754,6 @@ export const StaticAssets = {
   videoTestimonialIcon,
   LinkedInIcon,
   TwitterIcon,
+  SlackIcon,
   AudioIcon,
 }

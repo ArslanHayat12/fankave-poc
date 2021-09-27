@@ -26,6 +26,7 @@ export const Preview = ({
   }
 
   const handleSubmit = async (formData) => {
+    return onApprove(src)
     setLoading(true)
     formData.append('type', type)
     let thumbSrc = null
