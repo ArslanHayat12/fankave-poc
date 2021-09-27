@@ -14,7 +14,7 @@ const getSession = () => {
 }
 
 let platform = ''
-const origin = 'http://localhost:8084/api'
+const origin = 'https://api.fankave.com/sharesocial'
 export const Review = ({
   src,
   type,
