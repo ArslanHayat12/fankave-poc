@@ -15,17 +15,21 @@ export const Visualizer = (props) => {
 
   const theme = useContext(ThemeContext);
 
-  const {
-    default: {
-      widget: {
-        recordingScreen: {
-          audio: {
-            micIcon: { canvasPrimaryColor, canvasSecondaryColor, stroke },
-          },
-        },
-      },
-    },
-  } = theme;
+  // const {
+  //   default: {
+  //     widget: {
+  //       recordingScreen: {
+  //         audio: {
+  //           micIcon: { canvasPrimaryColor, canvasSecondaryColor, stroke },
+  //         },
+  //       },
+  //     },
+  //   },
+  // } = theme;
+
+  const canvasPrimaryColor = "#add8e6";
+  const canvasSecondaryColor = "#93cbde";
+  const stroke = "#90d4ff";
 
   console.log("theme", canvasPrimaryColor);
 

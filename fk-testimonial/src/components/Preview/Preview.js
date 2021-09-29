@@ -1,23 +1,24 @@
-import React from 'react'
+import React from "react";
+import { CustomAudioPlayer } from "../CustomAudioPlayer/CustomAudioPlayer";
 
-import { StoryForm } from './StoryForm'
-import { PreviewStyled } from './style'
+import { StoryForm } from "./StoryForm";
+import { PreviewStyled } from "./style";
 
 export const Preview = ({
   src,
   type,
-  meta,
+  meta = { vodeoContraints: "" },
   formMeta,
   onApprove = () => {},
   onReProcess = () => {},
 }) => {
-  const { videoConstraints } = meta
+  const { videoConstraints } = meta;
   return (
     <PreviewStyled className="fk-image-preview-wrapper">
       <div className="image-container">
-        {type === 'image' ? (
+        {type === "image" ? (
           <img src={src} alt="processed-image" />
-        ) : type === 'video' ? (
+        ) : type === "video" ? (
           <video
             width={videoConstraints.width}
             height={videoConstraints.height}
@@ -27,7 +28,11 @@ export const Preview = ({
             Your browser does not support the video tag.
           </video>
         ) : (
-          <>audio</>
+          <CustomAudioPlayer
+            ref={meta.audioRef}
+            streamUrl={meta.url}
+            urlDuration={meta.duration}
+          />
         )}
       </div>
       <StoryForm formMeta={formMeta} />
@@ -40,5 +45,5 @@ export const Preview = ({
         </button>
       </div>
     </PreviewStyled>
-  )
-}
+  );
+};
