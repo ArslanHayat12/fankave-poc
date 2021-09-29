@@ -93,8 +93,6 @@ export const StickerSelect = (props) => {
     videoConstraints,
   } = props
 
-  const canvasConstraints = videoConstraints
-
   const fabricCanvas = useRef(null)
   const photoCanvas = useRef(null)
   const backgroundCache = useRef(null)
@@ -289,10 +287,8 @@ export const StickerSelect = (props) => {
       () => {
         // console.log('image onload width and height', image.width, image.height, image)
         photoCanvas.current = document.createElement('canvas')
-        photoCanvas.current.width =
-          videoConstraints.width || canvasConstraints.width
-        photoCanvas.current.height =
-          videoConstraints.height || canvasConstraints.height
+        photoCanvas.current.width = videoConstraints.width
+        photoCanvas.current.height = videoConstraints.height
 
         const ctx = photoCanvas.current.getContext('2d')
         // ctx.translate(image.width, 0);
@@ -450,14 +446,14 @@ export const StickerSelect = (props) => {
         style={{ height: props.videoConstraints.height }}
       >
         <canvas
-          width={videoConstraints.width || canvasConstraints.width}
-          height={videoConstraints.height || canvasConstraints.height}
+          width={videoConstraints.width}
+          height={videoConstraints.height}
           className="fk-fabric"
           id="fabricCanvas"
         />
         <canvas
-          width={videoConstraints.width || canvasConstraints.width}
-          height={videoConstraints.height || canvasConstraints.height}
+          width={videoConstraints.width}
+          height={videoConstraints.height}
           className="canvas"
           id="imageCanvas"
         />

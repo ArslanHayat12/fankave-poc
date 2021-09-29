@@ -6,6 +6,14 @@ import { ReviewStyled } from './style'
 
 import { StaticAssets } from '../../assets'
 
+const getSession = () => {
+  const id = localStorage.getItem('id')
+  const token = localStorage.getItem('token')
+  const tokenSecret = localStorage.getItem('tokenSecret')
+  return { id, tokenSecret, token }
+}
+
+let platform = ''
 const origin = 'https://api.fankave.com/sharesocial'
 export const Review = ({
   src,
@@ -20,10 +28,10 @@ export const Review = ({
     },
   },
 }) => {
+  const baseUrl = window.location.origin.toString()
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
-  const [sessionId, setSessionId] = useState('')
   const { thumbUrl } = meta
   const {
     enableDownload,
@@ -31,6 +39,7 @@ export const Review = ({
       enabled: sharingEnabled,
       twitter: { enabled: twitterEnabled, icon: twitterIcon },
       linkedIn: { enabled: linkedInEnabled, icon: linkedInIcon },
+      slack: { enabled: slackEnabled, icon: slackIcon },
     },
   } = options
 
@@ -53,16 +62,22 @@ export const Review = ({
     })
   }
 
-  const openTwitterSiginInTab = () => {
-    window.open(origin + `/twitter/login/` + sessionId, '_blank')
+  const openTwitterSignInTab = () => {
     setErrorMessage('')
-    src && generateRequestData(type, 'twitter')
+    platform = 'twitter'
+    window.open(origin + `/twitter/login?url=${baseUrl}`, '_blank')
   }
 
-  const openLinkedInSiginInTab = (type) => {
-    window.open(origin + `/linkedin/login/` + sessionId, '_blank')
+  const openLinkedInSignInTab = () => {
     setErrorMessage('')
-    src && generateRequestData(type, 'linkedIn')
+    platform = 'linkedIn'
+    window.open(origin + `/linkedin/login?url=${baseUrl}`, '_blank')
+  }
+
+  const openSlackSignInTab = () => {
+    setErrorMessage('')
+    platform = 'slack'
+    window.open(origin + `/slack/login?url=${baseUrl}`, '_blank')
   }
 
   const generateRequestData = (type, platform) => {
@@ -72,12 +87,18 @@ export const Review = ({
       responseType: 'blob', // important
     }).then((response) => {
       const formData = new FormData()
-      formData.append('media', new Blob([response.data]))
       formData.append('type', type)
+      formData.append('media', new Blob([response.data]))
       formData.append('tweetMessage', '')
-      platform === 'linkedin'
-        ? shareOnLinkedIn(formData)
-        : shareOnTwitter(formData)
+      if (platform === 'linkedIn') {
+        return shareOnLinkedIn(formData)
+      }
+      if (platform === 'twitter') {
+        return shareOnTwitter(formData)
+      }
+      if (platform === 'slack') {
+        shareOnSlack(formData)
+      }
     })
   }
 
@@ -85,101 +106,104 @@ export const Review = ({
     setErrorMessage('')
     setMessage('')
     setLoading(true)
+
+    const { token = '', tokenSecret = '', id = '' } = getSession()
     axios({
-      url: origin + '/get-linkedin-token/' + sessionId, //your url
-      method: 'GET',
-      responseType: 'json', // important
+      method: 'post',
+      url: origin + '/share-on-linkedin',
+      data: formData,
+      headers: {
+        Authorization: token,
+        tokenSecret: tokenSecret,
+        id: id,
+      },
     })
-      .then((response) => {
-        const { token, tokenSecret, id } = response?.data
-        axios({
-          method: 'post',
-          url: origin + '/share-on-linkedin/' + sessionId,
-          data: formData,
-          headers: {
-            Authorization: token,
-            tokenSecret: tokenSecret,
-            id: id,
-          },
-        })
-          .then(() => {
-            setLoading(false)
-            return setMessage('Posted On Linkedin')
-          })
-          .catch((err) => {
-            setLoading(false)
-            return setErrorMessage('Request failed with error code ' + err)
-          })
-      })
-      .catch(() => {
+      .then(() => {
         setLoading(false)
-        setErrorMessage('Tried With Invalid Token')
+        return setMessage('Posted On Linkedin')
       })
+      .catch((err) => {
+        setLoading(false)
+        return setErrorMessage('Request failed with error code ' + err)
+      })
+    platform = ''
   }
 
   const shareOnTwitter = (formData) => {
     setErrorMessage('')
     setMessage('')
     setLoading(true)
+    const { token = '', tokenSecret = '', id = '' } = getSession()
     axios({
-      url: origin + '/get-token/' + sessionId, //your url
-      method: 'GET',
-      responseType: 'json', // important
+      method: 'post',
+      url: origin + '/tweet',
+      data: formData,
+      headers: {
+        Authorization: token,
+        tokenSecret: tokenSecret,
+        id: id,
+      },
     })
-      .then((response) => {
-        const { token, tokenSecret, id } = response?.data
-        axios({
-          method: 'post',
-          url: origin + '/tweet/' + sessionId,
-          data: formData,
-          headers: {
-            Authorization: token,
-            tokenSecret: tokenSecret,
-            id: id,
-          },
-        })
-          .then(() => {
-            setLoading(false)
-            return setMessage('Posted On Twitter')
-          })
-          .catch((err) => {
-            setLoading(false)
-            return setErrorMessage('Request failed with error code ' + err)
-          })
-      })
-      .catch(() => {
+      .then(() => {
         setLoading(false)
-        setErrorMessage('Tried With Invalid Token')
+        return setMessage('Posted On Twitter')
       })
+      .catch((err) => {
+        setLoading(false)
+        return setErrorMessage('Request failed with error code ' + err)
+      })
+    platform = ''
+  }
+
+  const shareOnSlack = (formData) => {}
+
+  const handleSessionChange = (event) => {
+    const { token, tokenSecret, id } = getSession()
+    if (
+      event.key === 'tokenSecret' &&
+      typeof event.newValue === 'string' &&
+      typeof token === 'string' &&
+      typeof tokenSecret === 'string' &&
+      typeof id === 'string' &&
+      token
+    ) {
+      src && generateRequestData(type, platform)
+    }
+    event.preventDefault()
   }
 
   useEffect(() => {
-    axios({
-      url: origin + '/user/session', //your url
-      method: 'GET',
-      responseType: 'json', // important
-    }).then((response) => setSessionId(response?.data?.sessionId))
+    window.addEventListener('storage', handleSessionChange)
+    return () => {
+      window.removeEventListener('storage', handleSessionChange)
+    }
   }, [])
-
   return (
     <ReviewStyled className="fk-review" id="fk-review">
       <div className="fk-message">
         <p className="fk-message-text">Thank you</p>
       </div>
-      {sharingEnabled && type !== 'audio' && (
+      {sharingEnabled && (
         <div className="fk-share-area">
-          {twitterEnabled && (
+          {twitterEnabled && type !== 'audio' && (
             <div
               className="fk-share-button fk-twitter-share"
               style={{ backgroundImage: `url(${twitterIcon})` }}
-              onClick={() => openTwitterSiginInTab()}
+              onClick={() => openTwitterSignInTab()}
             />
           )}
-          {linkedInEnabled && type !== 'video' && (
+          {linkedInEnabled && type !== 'audio' && (
             <div
               className="fk-share-button fk-linkedIn-share"
               style={{ backgroundImage: `url(${linkedInIcon})` }}
-              onClick={() => openLinkedInSiginInTab()}
+              onClick={() => openLinkedInSignInTab()}
+            />
+          )}
+          {slackEnabled && (
+            <div
+              className="fk-share-button fk-slack-share"
+              style={{ backgroundImage: `url(${slackIcon})` }}
+              onClick={() => openSlackSignInTab()}
             />
           )}
         </div>

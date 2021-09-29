@@ -9,10 +9,11 @@ const {
   videoTestimonialIcon,
   TwitterIcon,
   LinkedInIcon,
+  SlackIcon,
 } = StaticAssets
 
 const defaultConfigs = {
-  topic: 'demostories',
+  topic: 'testimonialmvp',
   customClass: 'fk-demo',
   experience: 'demo',
   heading: 'Content Creation',
@@ -48,7 +49,7 @@ const defaultConfigs = {
       user: {
         enabled: true,
         name: true,
-        username: true,
+        username: false,
         email: true,
       },
       text: {
@@ -67,6 +68,10 @@ const defaultConfigs = {
       twitter: {
         enabled: true,
         icon: TwitterIcon,
+      },
+      slack: {
+        enabled: false,
+        icon: SlackIcon,
       },
       linkedIn: {
         enabled: true,

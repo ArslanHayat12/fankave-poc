@@ -2,39 +2,43 @@ import React, { useState } from 'react'
 import { useField } from 'formik'
 
 export const InputBox = (props) => {
-  const [field] = useField(props)
-
+  const [field, meta] = useField(props)
   return (
     <input
-      className={`fk-input ${props.className}`}
       name={field.name}
       value={field.value}
       onBlur={field.onBlur}
       onChange={field.onChange}
       placeholder={props.placeholder}
+      style={{}}
       {...props}
+      className={`fk-input ${props.className} ${
+        Boolean(meta.touched && meta.error) ? 'fk-error' : ''
+      }`}
     />
   )
 }
 
 export const TextArea = (props) => {
-  const [field] = useField(props)
+  const [field, meta] = useField(props)
 
   return (
     <textarea
-      className={`fk-input ${props.className}`}
       name={field.name}
       value={field.value}
       onBlur={field.onBlur}
       onChange={field.onChange}
       placeholder={props.placeholder}
       {...props}
+      className={`fk-input ${props.className} ${
+        Boolean(meta.touched && meta.error) ? 'fk-error' : ''
+      }`}
     />
   )
 }
 
 export const TagInput = (props) => {
-  const [field, { error }, { setValue, setError, setTouched }] = useField(props)
+  const [field, meta, { setValue, setTouched }] = useField(props)
   const removeTagData = (indexToRemove) => {
     setValue([
       ...(field.value || []).filter((_, index) => index !== indexToRemove),
@@ -64,7 +68,10 @@ export const TagInput = (props) => {
       <input
         disabled={field?.value?.length === props.limit}
         type="text"
-        className="fk-input fk-tags-input"
+        className={`fk-input fk-tags-input ${
+          Boolean(meta.touched && meta.error) ? 'fk-error' : ''
+        }`}
+        onBlur={() => setTouched(true)}
         onKeyUp={(event) =>
           event.key === 'Enter' || event.key === ' ' ? addTagData(event) : null
         }

@@ -47,7 +47,8 @@
     "style-loader": "^3.2.1",
     "twitter": "^1.7.1",
     "web-vitals": "^1.0.1",
-    "webpack": "5.0.0"
+    "webpack": "5.0.0",
+    "yup": "^0.32.9"
   },
   "scripts": {
     "start": "react-scripts start",
