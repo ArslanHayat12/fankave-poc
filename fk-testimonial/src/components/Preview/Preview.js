@@ -2,7 +2,7 @@ import React, { useRef, useState, useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import axios from 'axios'
 
-import { CustomAudioPlayer } from "../CustomAudioPlayer/CustomAudioPlayer";
+import { CustomAudioPlayer } from '../CustomAudioPlayer/CustomAudioPlayer'
 import { StoryForm } from './StoryForm'
 import { PreviewStyled } from './style'
 import { Loader } from '../LoaderOverlay/Loader'
@@ -10,14 +10,15 @@ import { Loader } from '../LoaderOverlay/Loader'
 export const Preview = ({
   src,
   type,
-  meta = { vodeoContraints: "" },
+  meta = { vodeoContraints: '' },
   formMeta,
   onApprove = () => {},
   onReProcess = () => {},
 }) => {
   const [loading, setLoading] = useState(false)
   const theme = useContext(ThemeContext)
-  const { topic = 'testimonialmvp' } = theme
+  const { topic = 'testimonialmvp', origin = 'https://dev.api.fankave.com' } =
+    theme
   const { thumb, videoConstraints } = meta
   const formRef = useRef(null)
   const handleApprove = () => {
@@ -60,7 +61,7 @@ export const Preview = ({
       )
     }
     return axios({
-      url: `https://dev.api.fankave.com/cmsx/stories/${topic}/publish`, //your url
+      url: `${origin}/cmsx/stories/${topic}/publish`, //your url
       method: 'POST',
       data: formData,
     })
@@ -73,9 +74,9 @@ export const Preview = ({
   return (
     <PreviewStyled className="fk-image-preview-wrapper">
       <div className="image-container">
-        {type === "image" ? (
+        {type === 'image' ? (
           <img src={src} alt="processed-image" />
-        ) : type === "video" ? (
+        ) : type === 'video' ? (
           <video
             width={videoConstraints.width}
             height={videoConstraints.height}
@@ -103,5 +104,5 @@ export const Preview = ({
       </div>
       {loading && <Loader />}
     </PreviewStyled>
-  );
-};
+  )
+}

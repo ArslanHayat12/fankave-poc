@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { ThemeContext } from 'styled-components'
 import axios from 'axios'
 
 import { Loader } from '../LoaderOverlay/Loader'
@@ -14,7 +15,6 @@ const getSession = () => {
 }
 
 let platform = ''
-const origin = 'https://api.fankave.com/sharesocial'
 export const Review = ({
   src,
   type,
@@ -32,6 +32,11 @@ export const Review = ({
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
+
+  const { origin: remote = 'https://dev.api.fankave.com' } = theme
+
+  const origin = 'https://api.fankave.com/sharesocial'
+  const theme = useContext(ThemeContext)
   const { thumbUrl } = meta
   const {
     enableDownload,

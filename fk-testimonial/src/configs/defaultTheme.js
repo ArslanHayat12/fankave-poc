@@ -17,6 +17,7 @@ const defaultConfigs = {
   customClass: 'fk-demo',
   experience: 'demo',
   heading: 'Content Creation',
+  origin: 'https:/dev.api.fankave.com',
   logo: 'https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_5e317c0b2adce12b3d9782717441342c/fankave.png',
   brand: {
     pallete: {
