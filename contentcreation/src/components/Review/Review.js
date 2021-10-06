@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import axios from 'axios'
 
@@ -33,10 +33,10 @@ export const Review = ({
   const [message, setMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
 
+  const theme = useContext(ThemeContext)
   const { origin: remote = 'https://dev.api.fankave.com' } = theme
 
   const origin = 'https://api.fankave.com/sharesocial'
-  const theme = useContext(ThemeContext)
   const { thumbUrl } = meta
   const {
     enableDownload,

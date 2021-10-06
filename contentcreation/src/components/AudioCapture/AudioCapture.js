@@ -1,10 +1,7 @@
 import React, { useReducer, useRef } from "react";
 import { useContext } from "react";
-import { useState } from "react/cjs/react.development";
 import { ThemeContext } from "styled-components";
-import { MicIcon } from "../../assets";
 
-import { AudioRecorder } from "../AudioRecorder/Recorder";
 import { AudioRecording } from "../AudioRecording/AudioRecording";
 import { Preview } from "../Preview/Preview";
 import { AudioCaptureStyled } from "./styled";

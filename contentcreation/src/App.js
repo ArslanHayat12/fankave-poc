@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { Layout } from './components/Layout/Layout'
 import Widget from './components/Widget/Widget'
 
 import themeConfigs from './configs'
