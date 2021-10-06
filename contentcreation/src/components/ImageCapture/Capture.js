@@ -139,7 +139,7 @@ export const Capture = ({ onCapture, enableFilters = false }) => {
         <div className="pre-capture-filters"></div>
       ) : null}
       {!error ? (
-        <button className="capture-button" onClick={startCapture}>
+        <button className="fk-capture-button" onClick={startCapture}>
           <RecordingIcon />
         </button>
       ) : null}

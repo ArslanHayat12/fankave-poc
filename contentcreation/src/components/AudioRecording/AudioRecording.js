@@ -93,23 +93,19 @@ export const AudioRecording = ({ handleAudioStop }) => {
 
   const CurrentButton = useMemo(() => {
     return (
-      <article className="buttons-wrapper">
+      <>
         {status === "init" || status === "idle" ? (
-          <CustomTooltip content="Record" placement="bottom">
-            <button className="recording-button" onClick={playButtonHandle}>
-              <RecordingIcon customClass="play-icon" />
-            </button>
-          </CustomTooltip>
+          <button className="fk-capture-button" onClick={playButtonHandle}>
+            <RecordingIcon customClass="play-icon" />
+          </button>
         ) : null}
 
         {status === "recording" || status === "paused" ? (
-          <CustomTooltip content="Stop" placement="bottom">
-            <button className="stop-recording-button" onClick={handleStopClick}>
-              <StopIcon customClass="stop-icon" />
-            </button>
-          </CustomTooltip>
+          <button className="fk-capture-button" onClick={handleStopClick}>
+            <StopIcon customClass="stop-icon" />
+          </button>
         ) : null}
-      </article>
+      </>
     );
   }, [status]);
   return (

@@ -24,15 +24,6 @@ export const ImageCaptureWrapperStyled = styled.article`
     font-size: 50px;
   }
 
-  .capture-button {
-    background: transparent;
-    border: none;
-    width: 50px;
-    padding: 0;
-    justify-self: center;
-    cursor: pointer;
-  }
-
   .pre-capture-filters {
   }
 

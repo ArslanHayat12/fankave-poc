@@ -181,4 +181,14 @@ export const LayoutStyled = css`
     color: #fff;
     cursor: pointer;
   }
+
+
+  .fk-capture-button {
+    background: transparent;
+    border: none;
+    width: 50px;
+    padding: 0;
+    justify-self: center;
+    cursor: pointer;
+  }
 `

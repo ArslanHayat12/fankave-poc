@@ -175,7 +175,7 @@ export const Capture = ({ onCapture }) => {
         </>
       )}
       {isStreamInit && !capturing && (
-        <button className="capture-button" onClick={startCapture}>
+        <button className="fk-capture-button" onClick={startCapture}>
           <RecordingIcon />
         </button>
       )}

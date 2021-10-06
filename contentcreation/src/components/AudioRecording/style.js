@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const AudioRecordingStyled = styled.div`
+  display: grid;
+
   .fk-mic-wrapper {
     height: 250px;
     display: flex;
